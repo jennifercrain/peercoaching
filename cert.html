@@ -1,0 +1,408 @@
+
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificate Generator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+    
+    .elegant-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    
+    .certificate-border {
+      background: linear-gradient(135deg, #002855 0%, #0070F0 50%, #46B1EF 100%);
+      padding: 8px;
+    }
+    
+    .certificate-inner-border {
+      border: 3px solid #002855;
+      background: white;
+    }
+    
+    .corner-accent {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .ribbon {
+      background: linear-gradient(135deg, #97E152 0%, #46B1EF 100%);
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-fade-in {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    
+    .shimmer-bg {
+      background: linear-gradient(90deg, #002855 0%, #0070F0 25%, #46B1EF 50%, #0070F0 75%, #002855 100%);
+      background-size: 200% 100%;
+      animation: shimmer 3s linear infinite;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full" style="background-color: #F1F1F1; font-family: Arial, sans-serif;">
+  <div id="app-container" class="h-full w-full overflow-auto"><!-- Name Entry Form -->
+   <div id="form-view" class="min-h-full flex items-center justify-center p-6">
+    <div class="w-full max-w-md">
+     <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+      <div class="shimmer-bg h-2"></div>
+      <div class="p-8">
+       <div class="text-center mb-8">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, #002855, #0070F0);">
+         <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+         </svg>
+        </div>
+        <h1 class="text-2xl font-bold mb-2" style="color: #002855;">Congratulations!</h1>
+        <p class="text-gray-600">You've completed the training. Enter your name to generate your certificate.</p>
+       </div>
+       <form id="name-form" class="space-y-6">
+        <div><label for="participant-name" class="block text-sm font-semibold mb-2" style="color: #002855;">Your Full Name</label> <input type="text" id="participant-name" placeholder="Enter your full name" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:outline-none transition-all duration-300" style="font-family: Arial, sans-serif;" onfocus="this.style.borderColor='#0070F0'; this.style.boxShadow='0 0 0 3px rgba(0,112,240,0.1)';" onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='none';">
+        </div><button type="submit" class="w-full py-4 rounded-lg text-white font-bold text-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg" style="background: linear-gradient(135deg, #002855, #0070F0);"> Generate My Certificate 🎉 </button>
+       </form>
+      </div>
+     </div>
+    </div>
+   </div><!-- Certificate View -->
+   <div id="certificate-view" class="hidden min-h-full p-4 sm:p-6">
+    <div class="max-w-4xl mx-auto"><!-- Certificate -->
+     <div id="certificate" class="certificate-border rounded-lg shadow-2xl animate-fade-in">
+      <div class="certificate-inner-border p-6 sm:p-10 relative"><!-- Corner Accents -->
+       <svg class="corner-accent absolute top-4 left-4" viewbox="0 0 60 60"><path d="M0 60 L0 20 Q0 0 20 0 L60 0" fill="none" stroke="#97E152" stroke-width="3" /> <circle cx="8" cy="8" r="4" fill="#0070F0" />
+       </svg>
+       <svg class="corner-accent absolute top-4 right-4" viewbox="0 0 60 60" style="transform: scaleX(-1)"><path d="M0 60 L0 20 Q0 0 20 0 L60 0" fill="none" stroke="#97E152" stroke-width="3" /> <circle cx="8" cy="8" r="4" fill="#0070F0" />
+       </svg>
+       <svg class="corner-accent absolute bottom-4 left-4" viewbox="0 0 60 60" style="transform: scaleY(-1)"><path d="M0 60 L0 20 Q0 0 20 0 L60 0" fill="none" stroke="#97E152" stroke-width="3" /> <circle cx="8" cy="8" r="4" fill="#0070F0" />
+       </svg>
+       <svg class="corner-accent absolute bottom-4 right-4" viewbox="0 0 60 60" style="transform: scale(-1)"><path d="M0 60 L0 20 Q0 0 20 0 L60 0" fill="none" stroke="#97E152" stroke-width="3" /> <circle cx="8" cy="8" r="4" fill="#0070F0" />
+       </svg><!-- Certificate Content -->
+       <div class="text-center py-8"><!-- Logo/Badge -->
+        <div class="flex justify-center mb-6">
+         <div class="relative">
+          <div class="w-24 h-24 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, #002855, #0070F0);">
+           <svg class="w-14 h-14 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+           </svg>
+          </div>
+          <div class="absolute -bottom-2 -right-2 w-10 h-10 rounded-full flex items-center justify-center" style="background: #97E152;">
+           <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+           </svg>
+          </div>
+         </div>
+        </div>
+        <p class="text-sm tracking-[0.3em] uppercase mb-2" style="color: #46B1EF;">This is to certify that</p>
+        <h2 id="recipient-name" class="elegant-name text-4xl sm:text-5xl my-4" style="color: #002855;">John Doe</h2>
+        <div class="w-64 h-0.5 mx-auto my-4" style="background: linear-gradient(90deg, transparent, #0070F0, transparent);"></div>
+        <p class="text-gray-600 mb-4">has successfully completed</p>
+        <h1 id="cert-title" class="text-2xl sm:text-3xl font-bold mb-2" style="color: #002855;">Certificate of Completion</h1>
+        <div class="ribbon inline-block px-6 py-2 rounded-full text-white font-semibold my-4"><span id="cert-course">Peer Coach Intern New Hire Training</span>
+        </div>
+        <p class="text-gray-500 text-sm mt-6" id="completion-date">Completed on January 1, 2024</p>
+       </div>
+      </div>
+     </div><!-- Download Button -->
+     <div class="flex justify-center mt-6"><button id="download-btn" class="px-8 py-4 rounded-lg text-white font-semibold text-lg transition-all duration-300 hover:shadow-lg flex items-center gap-2" style="background: linear-gradient(135deg, #97E152, #46B1EF);">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+       </svg> Download Certificate </button>
+     </div><!-- Download Status -->
+     <p id="download-status" class="text-center mt-4 text-gray-600 hidden"></p>
+    </div>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      certificate_title: 'Certificate of Completion',
+      course_name: 'Peer Coach Intern New Hire Training'
+    };
+
+    let currentName = '';
+
+    async function onConfigChange(config) {
+      const certTitle = document.getElementById('cert-title');
+      const certCourse = document.getElementById('cert-course');
+      
+      if (certTitle) {
+        certTitle.textContent = config.certificate_title || defaultConfig.certificate_title;
+      }
+      if (certCourse) {
+        certCourse.textContent = config.course_name || defaultConfig.course_name;
+      }
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ['certificate_title', config.certificate_title || defaultConfig.certificate_title],
+        ['course_name', config.course_name || defaultConfig.course_name]
+      ]);
+    }
+
+    // Initialize SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+
+    // DOM Elements
+    const formView = document.getElementById('form-view');
+    const certificateView = document.getElementById('certificate-view');
+    const nameForm = document.getElementById('name-form');
+    const participantNameInput = document.getElementById('participant-name');
+    const recipientNameDisplay = document.getElementById('recipient-name');
+    const completionDate = document.getElementById('completion-date');
+    const downloadBtn = document.getElementById('download-btn');
+    const downloadStatus = document.getElementById('download-status');
+
+    // Format date
+    function formatDate(date) {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      return date.toLocaleDateString('en-US', options);
+    }
+
+    // Show certificate
+    function showCertificate(name) {
+      currentName = name;
+      recipientNameDisplay.textContent = name;
+      completionDate.textContent = `Completed on ${formatDate(new Date())}`;
+      
+      formView.classList.add('hidden');
+      certificateView.classList.remove('hidden');
+      
+      // Re-trigger animation
+      const certificate = document.getElementById('certificate');
+      certificate.classList.remove('animate-fade-in');
+      void certificate.offsetWidth;
+      certificate.classList.add('animate-fade-in');
+    }
+
+    // Show form
+    function showForm() {
+      certificateView.classList.add('hidden');
+      formView.classList.remove('hidden');
+      participantNameInput.value = '';
+      participantNameInput.focus();
+    }
+
+    // Download certificate as image
+    function downloadCertificate() {
+      downloadStatus.textContent = 'Generating your certificate...';
+      downloadStatus.classList.remove('hidden');
+      downloadBtn.disabled = true;
+      downloadBtn.style.opacity = '0.7';
+      
+      try {
+        // Create canvas
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const scale = 2;
+        
+        // Set canvas dimensions
+        canvas.width = 1200 * scale;
+        canvas.height = 850 * scale;
+        ctx.scale(scale, scale);
+        
+        // Background
+        ctx.fillStyle = '#F1F1F1';
+        ctx.fillRect(0, 0, 1200, 850);
+        
+        // Outer gradient border (simplified)
+        const borderGradient = ctx.createLinearGradient(50, 50, 1150, 800);
+        borderGradient.addColorStop(0, '#002855');
+        borderGradient.addColorStop(0.5, '#0070F0');
+        borderGradient.addColorStop(1, '#46B1EF');
+        ctx.fillStyle = borderGradient;
+        ctx.fillRect(50, 50, 1100, 750);
+        
+        // White inner
+        ctx.fillStyle = 'white';
+        ctx.fillRect(58, 58, 1084, 734);
+        
+        // Inner border
+        ctx.strokeStyle = '#002855';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(61, 61, 1078, 728);
+        
+        // Corner accents
+        ctx.strokeStyle = '#97E152';
+        ctx.lineWidth = 3;
+        [
+          [[80, 120], [80, 80], [120, 80]],
+          [[1120, 80], [1080, 80], [1080, 120]],
+          [[80, 730], [80, 770], [120, 770]],
+          [[1120, 770], [1080, 770], [1080, 730]]
+        ].forEach(points => {
+          ctx.beginPath();
+          ctx.moveTo(points[0][0], points[0][1]);
+          ctx.lineTo(points[1][0], points[1][1]);
+          ctx.lineTo(points[2][0], points[2][1]);
+          ctx.stroke();
+        });
+        
+        // Corner dots
+        ctx.fillStyle = '#0070F0';
+        [[88, 88], [1112, 88], [88, 762], [1112, 762]].forEach(pos => {
+          ctx.beginPath();
+          ctx.arc(pos[0], pos[1], 4, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        
+        // Badge
+        ctx.fillStyle = '#002855';
+        ctx.beginPath();
+        ctx.arc(600, 180, 40, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Star in badge (simplified)
+        ctx.fillStyle = 'white';
+        ctx.beginPath();
+        for (let i = 0; i < 5; i++) {
+          const angle = (i * 4 * Math.PI) / 5 - Math.PI / 2;
+          const x = 600 + Math.cos(angle) * (i % 2 === 0 ? 25 : 12);
+          const y = 180 + Math.sin(angle) * (i % 2 === 0 ? 25 : 12);
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.fill();
+        
+        // Checkmark badge
+        ctx.fillStyle = '#97E152';
+        ctx.beginPath();
+        ctx.arc(635, 205, 18, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 3;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.beginPath();
+        ctx.moveTo(628, 205);
+        ctx.lineTo(633, 210);
+        ctx.lineTo(642, 200);
+        ctx.stroke();
+        
+        // Text
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        // Top text
+        ctx.fillStyle = '#46B1EF';
+        ctx.font = '12px Arial';
+        ctx.fillText('T H I S   I S   T O   C E R T I F Y   T H A T', 600, 250);
+        
+        // Name
+        ctx.fillStyle = '#002855';
+        ctx.font = 'bold 64px Arial';
+        ctx.fillText(currentName, 600, 320);
+        
+        // Line under name
+        const lineGradient = ctx.createLinearGradient(400, 335, 800, 335);
+        lineGradient.addColorStop(0, 'rgba(0,112,240,0)');
+        lineGradient.addColorStop(0.5, '#0070F0');
+        lineGradient.addColorStop(1, 'rgba(0,112,240,0)');
+        ctx.fillStyle = lineGradient;
+        ctx.fillRect(400, 335, 400, 2);
+        
+        // Subtitle
+        ctx.fillStyle = '#666';
+        ctx.font = '16px Arial';
+        ctx.fillText('has successfully completed', 600, 375);
+        
+        // Certificate title
+        const certTitle = window.elementSdk?.config?.certificate_title || defaultConfig.certificate_title;
+        ctx.fillStyle = '#002855';
+        ctx.font = 'bold 32px Arial';
+        ctx.fillText(certTitle, 600, 420);
+        
+        // Ribbon
+        const ribbonGradient = ctx.createLinearGradient(300, 445, 900, 495);
+        ribbonGradient.addColorStop(0, '#97E152');
+        ribbonGradient.addColorStop(1, '#46B1EF');
+        ctx.fillStyle = ribbonGradient;
+        ctx.fillRect(300, 445, 600, 50);
+        
+        // Course name
+        const courseName = window.elementSdk?.config?.course_name || defaultConfig.course_name;
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 18px Arial';
+        ctx.fillText(courseName, 600, 470);
+        
+        // Date
+        ctx.fillStyle = '#999';
+        ctx.font = '14px Arial';
+        ctx.fillText(completionDate.textContent, 600, 540);
+        
+        // Convert to data URL and download immediately
+        const dataURL = canvas.toDataURL('image/png', 1.0);
+        const link = document.createElement('a');
+        link.download = `Certificate-${currentName.replace(/\s+/g, '-')}.png`;
+        link.href = dataURL;
+        link.click();
+        
+        downloadStatus.textContent = '✓ Certificate downloaded successfully!';
+        downloadStatus.style.color = '#97E152';
+        
+        setTimeout(() => {
+          downloadStatus.classList.add('hidden');
+          downloadStatus.style.color = '';
+        }, 3000);
+        
+        downloadBtn.disabled = false;
+        downloadBtn.style.opacity = '1';
+        
+      } catch (error) {
+        console.error('Download error:', error);
+        downloadStatus.textContent = 'Download failed: ' + error.message;
+        downloadStatus.style.color = '#ef4444';
+        downloadBtn.disabled = false;
+        downloadBtn.style.opacity = '1';
+      }
+    }
+
+    // Event Listeners
+    nameForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = participantNameInput.value.trim();
+      if (name) {
+        showCertificate(name);
+      }
+    });
+
+    downloadBtn.addEventListener('click', downloadCertificate);
+
+    // Initial setup
+    completionDate.textContent = `Completed on ${formatDate(new Date())}`;
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c2a045a8544205e',t:'MTc2OTE5OTg5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
