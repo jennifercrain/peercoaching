@@ -1,0 +1,394 @@
+
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting Questions Simulation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+      font-family: 'Source Sans Pro', Arial, sans-serif;
+    }
+    
+    .scenario-card {
+      transition: all 0.3s ease;
+    }
+    
+    .scenario-card:hover {
+      transform: translateY(-2px);
+    }
+    
+    .response-option {
+      transition: all 0.2s ease;
+    }
+    
+    .response-option:hover:not(:disabled) {
+      transform: scale(1.01);
+    }
+    
+    .feedback-enter {
+      animation: slideIn 0.4s ease-out;
+    }
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .pulse-glow {
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0, 112, 240, 0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(0, 112, 240, 0); }
+    }
+    
+    .progress-step {
+      transition: all 0.3s ease;
+    }
+    
+    .step-connector {
+      transition: background-color 0.5s ease;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app-wrapper" class="h-full w-full overflow-auto" style="background-color: #F1F1F1;"><!-- Header -->
+   <header class="py-6 px-6" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%);">
+    <div class="max-w-4xl mx-auto">
+     <h1 id="main-title" class="text-2xl md:text-3xl font-bold text-white text-center">Redirecting Questions</h1>
+     <p id="intro-text" class="text-center mt-2 text-blue-100 text-sm md:text-base">Practice staying engaged while guiding students to the right resources</p>
+    </div>
+   </header><!-- Main Content -->
+   <main class="max-w-4xl mx-auto px-4 py-8"><!-- Progress Indicator -->
+    <div id="progress-container" class="mb-8">
+     <div class="flex items-center justify-center gap-2">
+      <div id="step-1" class="progress-step w-10 h-10 rounded-full flex items-center justify-center font-bold text-white" style="background-color: #0070F0;">
+       1
+      </div>
+      <div id="connector-1" class="step-connector h-1 w-12 rounded" style="background-color: #ddd;"></div>
+      <div id="step-2" class="progress-step w-10 h-10 rounded-full flex items-center justify-center font-bold" style="background-color: #ddd; color: #666;">
+       2
+      </div>
+      <div id="connector-2" class="step-connector h-1 w-12 rounded" style="background-color: #ddd;"></div>
+      <div id="step-3" class="progress-step w-10 h-10 rounded-full flex items-center justify-center font-bold" style="background-color: #ddd; color: #666;">
+       3
+      </div>
+      <div id="connector-3" class="step-connector h-1 w-12 rounded" style="background-color: #ddd;"></div>
+      <div id="step-4" class="progress-step w-10 h-10 rounded-full flex items-center justify-center font-bold" style="background-color: #ddd; color: #666;">
+       4
+      </div>
+     </div>
+     <p id="progress-label" class="text-center mt-3 text-sm font-semibold" style="color: #002855;">Scenario 1 of 4</p>
+    </div><!-- Scenario Container -->
+    <div id="scenario-container" class="scenario-card bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-6"><!-- Student Avatar & Message -->
+     <div class="flex gap-4 mb-6">
+      <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl" style="background-color: #46B1EF;">
+       👤
+      </div>
+      <div class="flex-1">
+       <p class="text-xs font-semibold uppercase tracking-wide mb-1" style="color: #0070F0;">Student Question</p>
+       <div id="student-question" class="bg-gray-50 rounded-xl p-4 border-l-4" style="border-color: #46B1EF;">
+        <p class="text-gray-800 leading-relaxed">"Can you explain what the reading meant about supply and demand equilibrium? I don't get it."</p>
+       </div>
+      </div>
+     </div><!-- Context Badge -->
+     <div id="context-badge" class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium mb-6" style="background-color: #e8f4fd; color: #002855;"><span>📍</span> <span id="context-text">Live Study Session</span>
+     </div><!-- Response Options -->
+     <div id="response-options" class="space-y-3">
+      <p class="text-sm font-semibold mb-3" style="color: #002855;">How would you respond?</p><button class="response-option w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-blue-400 bg-white" data-response="0"> <span class="text-gray-700">"That's covered in your course materials. You should review those."</span> </button> <button class="response-option w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-blue-400 bg-white" data-response="1"> <span class="text-gray-700">"Let's pause and see how others are approaching this. Who else has questions about this concept?"</span> </button> <button class="response-option w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-blue-400 bg-white" data-response="2"> <span class="text-gray-700">"I can't help with content questions. Ask your instructor."</span> </button> <button class="response-option w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-blue-400 bg-white" data-response="3"> <span class="text-gray-700">"Supply and demand equilibrium is where the two curves meet on the graph."</span> </button>
+     </div><!-- Feedback Container (Hidden Initially) -->
+     <div id="feedback-container" class="hidden mt-6"></div>
+    </div><!-- Key Principles Card -->
+    <div id="principles-card" class="bg-white rounded-2xl shadow-lg p-6 border-t-4" style="border-color: #97E152;">
+     <h3 class="font-bold text-lg mb-4 flex items-center gap-2" style="color: #002855;"><span style="color: #97E152;">💡</span> Remember the Core Principle</h3>
+     <div class="grid md:grid-cols-2 gap-4 text-sm">
+      <div class="p-4 rounded-xl" style="background-color: #f0fdf4;">
+       <p class="font-semibold mb-2" style="color: #166534;">Redirecting IS:</p>
+       <ul class="space-y-1 text-gray-700">
+        <li>✓ Remaining fully engaged</li>
+        <li>✓ Helping make sense of confusion</li>
+        <li>✓ Coaching resource location</li>
+        <li>✓ Supporting question formation</li>
+       </ul>
+      </div>
+      <div class="p-4 rounded-xl" style="background-color: #fef2f2;">
+       <p class="font-semibold mb-2" style="color: #dc2626;">Redirecting is NOT:</p>
+       <ul class="space-y-1 text-gray-700">
+        <li>✗ Dismissing the question</li>
+        <li>✗ Avoiding the conversation</li>
+        <li>✗ Withdrawing support</li>
+        <li>✗ Giving up on the student</li>
+       </ul>
+      </div>
+     </div>
+    </div><!-- Results Screen (Hidden Initially) -->
+    <div id="results-screen" class="hidden bg-white rounded-2xl shadow-lg p-8 text-center">
+     <div class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center text-4xl" style="background-color: #97E152;">
+      🎉
+     </div>
+     <h2 class="text-2xl font-bold mb-2" style="color: #002855;">Simulation Complete!</h2>
+     <p id="results-score" class="text-lg mb-6" style="color: #0070F0;">You scored 3 out of 4</p>
+     <div id="results-summary" class="text-left bg-gray-50 rounded-xl p-6 mb-6">
+      <h3 class="font-bold mb-4" style="color: #002855;">Key Takeaways:</h3>
+      <ul class="space-y-2 text-gray-700">
+       <li>• <strong>Stay engaged</strong> – Never abandon a content question</li>
+       <li>• <strong>Redirect to group first</strong> – In live sessions, open to shared thinking</li>
+       <li>• <strong>Guide to resources</strong> – Help locate, don't just point</li>
+       <li>• <strong>Support question formation</strong> – Help clarify before sending to instructor</li>
+      </ul>
+     </div><button id="restart-btn" class="px-8 py-3 rounded-full font-semibold text-white transition-all hover:opacity-90" style="background-color: #0070F0;"> Try Again </button>
+    </div>
+   </main>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: "Redirecting Questions",
+      intro_text: "Practice staying engaged while guiding students to the right resources",
+      primary_color: "#002855",
+      accent_color: "#0070F0",
+      success_color: "#97E152",
+      highlight_color: "#46B1EF",
+      background_color: "#F1F1F1"
+    };
+
+    const scenarios = [
+      {
+        context: "Live Study Session",
+        question: "Can you explain what the reading meant about supply and demand equilibrium? I don't get it.",
+        options: [
+          { text: "That's covered in your course materials. You should review those.", correct: false, feedback: "This dismisses the student without support. You're telling them where the answer is but not helping them engage with it." },
+          { text: "Let's pause and see how others are approaching this. Who else has questions about this concept?", correct: true, feedback: "Perfect! In live events, redirect to the group first. This keeps the student supported and reduces isolation while opening shared thinking." },
+          { text: "I can't help with content questions. Ask your instructor.", correct: false, feedback: "This abandons the student. While the boundary is correct, you're withdrawing support rather than guiding them forward." },
+          { text: "Supply and demand equilibrium is where the two curves meet on the graph.", correct: false, feedback: "As a peer coach, you don't provide content instruction. This crosses the role boundary, even with good intentions." }
+        ],
+        correctIndex: 1
+      },
+      {
+        context: "One-on-One Coaching",
+        question: "I'm so confused about the assignment rubric. What does 'demonstrates critical analysis' actually mean?",
+        options: [
+          { text: "Let's look at the rubric together. What part of it connects to your question, and what examples do you see in your course materials?", correct: true, feedback: "Excellent! You're staying engaged and helping them locate the relevant section while coaching them to interpret it themselves." },
+          { text: "Critical analysis means thinking deeply about the topic and questioning assumptions.", correct: false, feedback: "You're providing content interpretation. Instead, guide them to find how their course defines and demonstrates this." },
+          { text: "That's a great question for your Course Instructor. Send them an email.", correct: false, feedback: "This redirects without support. You should help them clarify their confusion and form a clear question first." },
+          { text: "I'm not sure either. The rubric can be confusing.", correct: false, feedback: "This withdraws support and doesn't help the student move forward. Stay engaged and guide their process." }
+        ],
+        correctIndex: 0
+      },
+      {
+        context: "Virtual Office Hours",
+        question: "My instructor said my thesis was too broad. What should I write instead?",
+        options: [
+          { text: "Try focusing on just one aspect of your topic instead of the whole thing.", correct: false, feedback: "This provides academic guidance that should come from their instructor. You're crossing into content territory." },
+          { text: "Let's pin down exactly what you want to ask your instructor. How would you describe this confusion in one or two clear sentences?", correct: true, feedback: "Great choice! You're helping them clarify their confusion and form a clear question to bring to their instructor with a plan." },
+          { text: "I can't tell you what to write. That's something only your instructor can help with.", correct: false, feedback: "While the boundary is correct, you're disengaging. Help them prepare to have that conversation effectively." },
+          { text: "What did your instructor say exactly? Maybe they gave you hints.", correct: false, feedback: "This is close but passive. Actively help them clarify their question and prepare for the instructor conversation." }
+        ],
+        correctIndex: 1
+      },
+      {
+        context: "Group Study Session",
+        question: "I don't understand how to calculate the standard deviation. Can you walk me through it?",
+        options: [
+          { text: "Sure! First you find the mean, then calculate the variance, then take the square root.", correct: false, feedback: "This provides direct instruction. As a peer coach, you don't teach content – you guide students to resources." },
+          { text: "That's a math question – I can't help with that. Try YouTube or your textbook.", correct: false, feedback: "This dismisses and disengages. You can still support them without providing the instruction yourself." },
+          { text: "Let's figure out where this shows up in your course. What section or video covers this, and how have you been studying it so far?", correct: true, feedback: "Perfect! You're staying engaged by helping them locate resources and reflect on their study approach without providing the instruction." },
+          { text: "Does anyone else in the group know how to do standard deviation?", correct: false, feedback: "While involving the group is good, asking them to provide instruction crosses a boundary. Redirect to course resources instead." }
+        ],
+        correctIndex: 2
+      }
+    ];
+
+    let currentScenario = 0;
+    let score = 0;
+    let config = { ...defaultConfig };
+
+    function updateProgress() {
+      for (let i = 1; i <= 4; i++) {
+        const step = document.getElementById(`step-${i}`);
+        const connector = document.getElementById(`connector-${i}`);
+        
+        if (i < currentScenario + 1) {
+          step.style.backgroundColor = config.success_color;
+          step.style.color = '#fff';
+          if (connector) connector.style.backgroundColor = config.success_color;
+        } else if (i === currentScenario + 1) {
+          step.style.backgroundColor = config.accent_color;
+          step.style.color = '#fff';
+          step.classList.add('pulse-glow');
+        } else {
+          step.style.backgroundColor = '#ddd';
+          step.style.color = '#666';
+          step.classList.remove('pulse-glow');
+        }
+      }
+      document.getElementById('progress-label').textContent = `Scenario ${currentScenario + 1} of ${scenarios.length}`;
+    }
+
+    function loadScenario(index) {
+      const scenario = scenarios[index];
+      document.getElementById('student-question').innerHTML = `<p class="text-gray-800 leading-relaxed">"${scenario.question}"</p>`;
+      document.getElementById('context-text').textContent = scenario.context;
+      
+      const optionsContainer = document.getElementById('response-options');
+      optionsContainer.innerHTML = `<p class="text-sm font-semibold mb-3" style="color: ${config.primary_color};">How would you respond?</p>`;
+      
+      scenario.options.forEach((option, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'response-option w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-blue-400 bg-white';
+        btn.dataset.response = idx;
+        btn.innerHTML = `<span class="text-gray-700">"${option.text}"</span>`;
+        btn.addEventListener('click', () => handleResponse(idx));
+        optionsContainer.appendChild(btn);
+      });
+      
+      document.getElementById('feedback-container').classList.add('hidden');
+      document.getElementById('feedback-container').innerHTML = '';
+      updateProgress();
+    }
+
+    function handleResponse(selectedIndex) {
+      const scenario = scenarios[currentScenario];
+      const isCorrect = selectedIndex === scenario.correctIndex;
+      
+      if (isCorrect) score++;
+      
+      const buttons = document.querySelectorAll('.response-option');
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        btn.classList.remove('hover:border-blue-400');
+        
+        if (idx === scenario.correctIndex) {
+          btn.style.borderColor = config.success_color;
+          btn.style.backgroundColor = '#f0fdf4';
+        } else if (idx === selectedIndex && !isCorrect) {
+          btn.style.borderColor = '#dc2626';
+          btn.style.backgroundColor = '#fef2f2';
+        }
+      });
+      
+      const feedbackContainer = document.getElementById('feedback-container');
+      feedbackContainer.classList.remove('hidden');
+      feedbackContainer.innerHTML = `
+        <div class="feedback-enter p-5 rounded-xl ${isCorrect ? 'bg-green-50 border-l-4' : 'bg-red-50 border-l-4'}" style="border-color: ${isCorrect ? config.success_color : '#dc2626'};">
+          <div class="flex items-start gap-3">
+            <span class="text-2xl">${isCorrect ? '✅' : '❌'}</span>
+            <div>
+              <p class="font-bold mb-1" style="color: ${isCorrect ? '#166534' : '#dc2626'};">${isCorrect ? 'Great choice!' : 'Not quite right'}</p>
+              <p class="text-gray-700 text-sm">${scenario.options[selectedIndex].feedback}</p>
+            </div>
+          </div>
+        </div>
+        <button id="next-btn" class="mt-4 w-full py-3 rounded-xl font-semibold text-white transition-all hover:opacity-90" style="background-color: ${config.accent_color};">
+          ${currentScenario < scenarios.length - 1 ? 'Next Scenario →' : 'See Results'}
+        </button>
+      `;
+      
+      document.getElementById('next-btn').addEventListener('click', () => {
+        if (currentScenario < scenarios.length - 1) {
+          currentScenario++;
+          loadScenario(currentScenario);
+        } else {
+          showResults();
+        }
+      });
+    }
+
+    function showResults() {
+      document.getElementById('scenario-container').classList.add('hidden');
+      document.getElementById('progress-container').classList.add('hidden');
+      document.getElementById('principles-card').classList.add('hidden');
+      
+      const resultsScreen = document.getElementById('results-screen');
+      resultsScreen.classList.remove('hidden');
+      
+      document.getElementById('results-score').textContent = `You scored ${score} out of ${scenarios.length}`;
+      document.getElementById('results-score').style.color = config.accent_color;
+      
+      document.getElementById('restart-btn').addEventListener('click', restartSimulation);
+    }
+
+    function restartSimulation() {
+      currentScenario = 0;
+      score = 0;
+      
+      document.getElementById('results-screen').classList.add('hidden');
+      document.getElementById('scenario-container').classList.remove('hidden');
+      document.getElementById('progress-container').classList.remove('hidden');
+      document.getElementById('principles-card').classList.remove('hidden');
+      
+      loadScenario(0);
+    }
+
+    async function onConfigChange(newConfig) {
+      config = { ...defaultConfig, ...newConfig };
+      
+      document.getElementById('main-title').textContent = config.main_title || defaultConfig.main_title;
+      document.getElementById('intro-text').textContent = config.intro_text || defaultConfig.intro_text;
+      
+      updateProgress();
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => { config.background_color = value; window.elementSdk.setConfig({ background_color: value }); }
+          },
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => { config.primary_color = value; window.elementSdk.setConfig({ primary_color: value }); }
+          },
+          {
+            get: () => config.accent_color || defaultConfig.accent_color,
+            set: (value) => { config.accent_color = value; window.elementSdk.setConfig({ accent_color: value }); }
+          },
+          {
+            get: () => config.success_color || defaultConfig.success_color,
+            set: (value) => { config.success_color = value; window.elementSdk.setConfig({ success_color: value }); }
+          },
+          {
+            get: () => config.highlight_color || defaultConfig.highlight_color,
+            set: (value) => { config.highlight_color = value; window.elementSdk.setConfig({ highlight_color: value }); }
+          }
+        ],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["main_title", config.main_title || defaultConfig.main_title],
+        ["intro_text", config.intro_text || defaultConfig.intro_text]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+
+    loadScenario(0);
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c29f296f40c205e',t:'MTc2OTE5OTE2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
