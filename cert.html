@@ -109,12 +109,12 @@
           </div>
          </div>
         </div>
+        <h1 id="cert-title" class="text-2xl sm:text-3xl font-bold mb-6" style="color: #002855;">Certificate of Completion</h1>
         <p class="text-sm tracking-[0.3em] uppercase mb-2" style="color: #46B1EF;">This is to certify that</p>
         <h2 id="recipient-name" class="elegant-name text-4xl sm:text-5xl my-4" style="color: #002855;">John Doe</h2>
         <div class="w-64 h-0.5 mx-auto my-4" style="background: linear-gradient(90deg, transparent, #0070F0, transparent);"></div>
-        <p class="text-gray-600 mb-4">has successfully completed</p>
-        <h1 id="cert-title" class="text-2xl sm:text-3xl font-bold mb-2" style="color: #002855;">Certificate of Completion</h1>
-        <div class="ribbon inline-block px-6 py-2 rounded-full text-white font-semibold my-4"><span id="cert-course">Peer Coach Intern New Hire Training</span>
+        <p class="text-gray-600 mb-2">has successfully completed</p>
+        <div class="ribbon inline-block px-6 py-2 rounded-full text-white font-semibold my-2"><span id="cert-course">Peer Coach Intern New Hire Training</span>
         </div>
         <p class="text-gray-500 text-sm mt-6" id="completion-date">Completed on January 1, 2024</p>
        </div>
@@ -216,7 +216,7 @@
 
     // Download certificate as image
     function downloadCertificate() {
-      downloadStatus.textContent = 'Generating your certificate...';
+      downloadStatus.textContent = 'Opening your certificate...';
       downloadStatus.classList.remove('hidden');
       downloadBtn.disabled = true;
       downloadBtn.style.opacity = '0.7';
@@ -316,74 +316,102 @@
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         
-        // Top text
+        // Certificate title at top
+        const certTitle = window.elementSdk?.config?.certificate_title || defaultConfig.certificate_title;
+        ctx.fillStyle = '#002855';
+        ctx.font = 'bold 32px Arial';
+        ctx.fillText(certTitle, 600, 250);
+        
+        // "This is to certify that" text
         ctx.fillStyle = '#46B1EF';
         ctx.font = '12px Arial';
-        ctx.fillText('T H I S   I S   T O   C E R T I F Y   T H A T', 600, 250);
+        ctx.fillText('T H I S   I S   T O   C E R T I F Y   T H A T', 600, 300);
         
         // Name
         ctx.fillStyle = '#002855';
         ctx.font = 'bold 64px Arial';
-        ctx.fillText(currentName, 600, 320);
+        ctx.fillText(currentName, 600, 370);
         
         // Line under name
-        const lineGradient = ctx.createLinearGradient(400, 335, 800, 335);
+        const lineGradient = ctx.createLinearGradient(400, 405, 800, 405);
         lineGradient.addColorStop(0, 'rgba(0,112,240,0)');
         lineGradient.addColorStop(0.5, '#0070F0');
         lineGradient.addColorStop(1, 'rgba(0,112,240,0)');
         ctx.fillStyle = lineGradient;
-        ctx.fillRect(400, 335, 400, 2);
+        ctx.fillRect(400, 405, 400, 2);
         
-        // Subtitle
+        // "has successfully completed" text
         ctx.fillStyle = '#666';
         ctx.font = '16px Arial';
-        ctx.fillText('has successfully completed', 600, 375);
-        
-        // Certificate title
-        const certTitle = window.elementSdk?.config?.certificate_title || defaultConfig.certificate_title;
-        ctx.fillStyle = '#002855';
-        ctx.font = 'bold 32px Arial';
-        ctx.fillText(certTitle, 600, 420);
+        ctx.fillText('has successfully completed', 600, 420);
         
         // Ribbon
-        const ribbonGradient = ctx.createLinearGradient(300, 445, 900, 495);
+        const ribbonGradient = ctx.createLinearGradient(300, 440, 900, 490);
         ribbonGradient.addColorStop(0, '#97E152');
         ribbonGradient.addColorStop(1, '#46B1EF');
         ctx.fillStyle = ribbonGradient;
-        ctx.fillRect(300, 445, 600, 50);
+        ctx.fillRect(300, 440, 600, 50);
         
         // Course name
         const courseName = window.elementSdk?.config?.course_name || defaultConfig.course_name;
         ctx.fillStyle = 'white';
         ctx.font = 'bold 18px Arial';
-        ctx.fillText(courseName, 600, 470);
+        ctx.fillText(courseName, 600, 465);
         
         // Date
         ctx.fillStyle = '#999';
         ctx.font = '14px Arial';
         ctx.fillText(completionDate.textContent, 600, 540);
         
-        // Convert to data URL and download immediately
+        // Convert to data URL
         const dataURL = canvas.toDataURL('image/png', 1.0);
-        const link = document.createElement('a');
-        link.download = `Certificate-${currentName.replace(/\s+/g, '-')}.png`;
-        link.href = dataURL;
-        link.click();
         
-        downloadStatus.textContent = '✓ Certificate downloaded successfully!';
-        downloadStatus.style.color = '#97E152';
+        // Open in new window - user can right-click and save
+        const newWindow = window.open('', '_blank');
+        if (newWindow) {
+          newWindow.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+              <title>Certificate - ${currentName}</title>
+              <style>
+                body { margin: 0; padding: 20px; background: #f0f0f0; display: flex; flex-direction: column; align-items: center; font-family: Arial, sans-serif; }
+                img { max-width: 100%; height: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+                .instructions { margin: 20px 0; padding: 15px; background: white; border-radius: 8px; text-align: center; }
+                .instructions h2 { color: #002855; margin: 0 0 10px 0; }
+                .instructions p { color: #666; margin: 5px 0; }
+              </style>
+            </head>
+            <body>
+              <div class="instructions">
+                <h2>Your Certificate is Ready!</h2>
+                <p>Right-click the image below and select "Save image as..." to download</p>
+                <p style="font-size: 14px; color: #999;">Or use Ctrl+S (Cmd+S on Mac) to save this page</p>
+              </div>
+              <img src="${dataURL}" alt="Certificate for ${currentName}" />
+            </body>
+            </html>
+          `);
+          newWindow.document.close();
+          
+          downloadStatus.textContent = '✓ Certificate opened in new tab! Right-click to save.';
+          downloadStatus.style.color = '#97E152';
+        } else {
+          downloadStatus.textContent = '⚠️ Please allow pop-ups to download your certificate';
+          downloadStatus.style.color = '#f59e0b';
+        }
         
         setTimeout(() => {
           downloadStatus.classList.add('hidden');
           downloadStatus.style.color = '';
-        }, 3000);
+        }, 5000);
         
         downloadBtn.disabled = false;
         downloadBtn.style.opacity = '1';
         
       } catch (error) {
         console.error('Download error:', error);
-        downloadStatus.textContent = 'Download failed: ' + error.message;
+        downloadStatus.textContent = 'Error: ' + error.message;
         downloadStatus.style.color = '#ef4444';
         downloadBtn.disabled = false;
         downloadBtn.style.opacity = '1';
@@ -404,5 +432,5 @@
     // Initial setup
     completionDate.textContent = `Completed on ${formatDate(new Date())}`;
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c2a045a8544205e',t:'MTc2OTE5OTg5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c2a0eb5a1bb205e',t:'MTc2OTIwMDMxNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
