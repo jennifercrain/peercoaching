@@ -1,0 +1,381 @@
+
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staged Questioning Timer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    @keyframes pulse-ring {
+      0% {
+        transform: scale(0.95);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.05);
+        opacity: 0.4;
+      }
+      100% {
+        transform: scale(0.95);
+        opacity: 0.8;
+      }
+    }
+    
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .pulse-animation {
+      animation: pulse-ring 2s ease-in-out infinite;
+    }
+    
+    .fade-in {
+      animation: fade-in 0.5s ease-out forwards;
+    }
+    
+    .timer-circle {
+      transition: stroke-dashoffset 0.5s linear;
+    }
+    
+    .stage-indicator {
+      transition: all 0.3s ease;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app-container" class="h-full w-full overflow-auto" style="background-color: #F1F1F1; font-family: Arial, sans-serif;">
+   <div class="min-h-full flex flex-col items-center justify-center p-6"><!-- Header -->
+    <div class="text-center mb-8 fade-in">
+     <h1 id="main-title" class="text-3xl font-bold mb-2" style="color: #002855;">Staged Questioning Timer</h1>
+     <p id="subtitle" class="text-lg" style="color: #0070F0;">Keep the thinking with the student</p>
+    </div><!-- Stage Indicators -->
+    <div class="flex gap-4 mb-8">
+     <div id="stage-1-indicator" class="stage-indicator flex items-center gap-2 px-4 py-2 rounded-full" style="background-color: #002855;"><span class="w-3 h-3 rounded-full" style="background-color: #97E152;"></span> <span class="text-white font-medium text-sm">Stage 1</span>
+     </div>
+     <div id="stage-2-indicator" class="stage-indicator flex items-center gap-2 px-4 py-2 rounded-full opacity-50" style="background-color: #e5e7eb;"><span class="w-3 h-3 rounded-full" style="background-color: #9ca3af;"></span> <span class="font-medium text-sm" style="color: #6b7280;">Stage 2</span>
+     </div>
+    </div><!-- Timer Display -->
+    <div class="relative mb-8">
+     <svg class="w-64 h-64 transform -rotate-90" viewbox="0 0 120 120"><!-- Background circle --> <circle cx="60" cy="60" r="54" fill="none" stroke="#e5e7eb" stroke-width="8" /> <!-- Progress circle --> <circle id="timer-progress" cx="60" cy="60" r="54" fill="none" stroke="#0070F0" stroke-width="8" stroke-linecap="round" class="timer-circle" stroke-dasharray="339.292" stroke-dashoffset="0" />
+     </svg><!-- Timer text overlay -->
+     <div class="absolute inset-0 flex flex-col items-center justify-center"><span id="timer-display" class="text-5xl font-bold" style="color: #002855;">20</span> <span id="timer-label" class="text-sm mt-1" style="color: #0070F0;">seconds</span>
+     </div><!-- Pulse ring when active -->
+     <div id="pulse-ring" class="absolute inset-0 rounded-full border-4 opacity-0" style="border-color: #46B1EF;"></div>
+    </div><!-- Question Card -->
+    <div id="question-card" class="w-full max-w-lg bg-white rounded-2xl shadow-lg p-6 mb-8 fade-in">
+     <div class="flex items-start gap-3 mb-4">
+      <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center" style="background-color: #002855;">
+       <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+       </svg>
+      </div>
+      <div>
+       <h2 id="stage-title" class="font-bold text-lg mb-1" style="color: #002855;">Ask &amp; Wait</h2>
+       <p id="stage-subtitle" class="text-sm" style="color: #46B1EF;">Give real thinking time</p>
+      </div>
+     </div>
+     <p id="question-text" class="text-lg leading-relaxed" style="color: #333;">After asking your question, what might the silence feel like for you as the coach — and what could that same silence mean for the student?</p>
+    </div><!-- Coaching Tip -->
+    <div id="coaching-tip" class="w-full max-w-lg bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-4 mb-8 border-l-4" style="border-color: #97E152;">
+     <div class="flex items-center gap-2 mb-2">
+      <svg class="w-5 h-5" style="color: #97E152;" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+      </svg><span class="font-semibold text-sm" style="color: #002855;">Coaching Tip</span>
+     </div>
+     <p id="tip-text" class="text-sm" style="color: #555;">Count slowly in your head: "One Mississippi, two Mississippi..." This helps you resist the urge to jump in too quickly.</p>
+    </div><!-- Control Buttons -->
+    <div class="flex gap-4"><button id="start-btn" onclick="toggleTimer()" class="px-8 py-3 rounded-full font-semibold text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200" style="background-color: #0070F0;"> Start Timer </button> <button id="reset-btn" onclick="resetTimer()" class="px-8 py-3 rounded-full font-semibold border-2 hover:bg-gray-100 transition-all duration-200" style="color: #002855; border-color: #002855;"> Reset </button>
+    </div><!-- Progress Summary -->
+    <div id="completion-message" class="hidden mt-8 text-center fade-in">
+     <div class="inline-flex items-center gap-2 px-6 py-3 rounded-full" style="background-color: #97E152;">
+      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg><span class="font-semibold text-white">Both stages complete! Great coaching patience.</span>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      stage_1_title: "Ask & Wait",
+      stage_1_question: "After asking your question, what might the silence feel like for you as the coach — and what could that same silence mean for the student?",
+      stage_2_title: "Rephrase & Wait",
+      stage_2_question: "If the student hasn't responded yet, how might you reframe your question to approach it from a different angle — without giving away the answer?",
+      background_color: "#F1F1F1",
+      primary_color: "#002855",
+      secondary_color: "#0070F0",
+      accent_color: "#97E152",
+      highlight_color: "#46B1EF",
+      font_family: "Arial"
+    };
+
+    const stages = [
+      { 
+        duration: 20, 
+        subtitle: "Give real thinking time",
+        tip: "Count slowly in your head: \"One Mississippi, two Mississippi...\" This helps you resist the urge to jump in too quickly."
+      },
+      { 
+        duration: 10, 
+        subtitle: "Approach from a different angle",
+        tip: "Watch for signs of thinking — eyes shifting, pausing, nodding. What feels like \"dead air\" is often active mental work."
+      }
+    ];
+
+    let currentStage = 0;
+    let timeRemaining = stages[0].duration;
+    let isRunning = false;
+    let timerInterval = null;
+    const circumference = 2 * Math.PI * 54;
+
+    function updateTimerDisplay() {
+      const timerDisplay = document.getElementById('timer-display');
+      const timerProgress = document.getElementById('timer-progress');
+      const pulseRing = document.getElementById('pulse-ring');
+      
+      timerDisplay.textContent = timeRemaining;
+      
+      const progress = timeRemaining / stages[currentStage].duration;
+      const offset = circumference * (1 - progress);
+      timerProgress.style.strokeDashoffset = offset;
+      
+      if (isRunning) {
+        pulseRing.classList.add('pulse-animation');
+        pulseRing.style.opacity = '1';
+      } else {
+        pulseRing.classList.remove('pulse-animation');
+        pulseRing.style.opacity = '0';
+      }
+    }
+
+    function updateStageDisplay(config) {
+      const stageTitle = document.getElementById('stage-title');
+      const stageSubtitle = document.getElementById('stage-subtitle');
+      const questionText = document.getElementById('question-text');
+      const tipText = document.getElementById('tip-text');
+      const stage1Indicator = document.getElementById('stage-1-indicator');
+      const stage2Indicator = document.getElementById('stage-2-indicator');
+      
+      if (currentStage === 0) {
+        stageTitle.textContent = config.stage_1_title || defaultConfig.stage_1_title;
+        questionText.textContent = config.stage_1_question || defaultConfig.stage_1_question;
+        stage1Indicator.style.backgroundColor = config.primary_color || defaultConfig.primary_color;
+        stage1Indicator.style.opacity = '1';
+        stage1Indicator.querySelector('span:first-child').style.backgroundColor = config.accent_color || defaultConfig.accent_color;
+        stage1Indicator.querySelector('span:last-child').className = 'text-white font-medium text-sm';
+        stage2Indicator.style.backgroundColor = '#e5e7eb';
+        stage2Indicator.style.opacity = '0.5';
+        stage2Indicator.querySelector('span:first-child').style.backgroundColor = '#9ca3af';
+        stage2Indicator.querySelector('span:last-child').className = 'font-medium text-sm';
+        stage2Indicator.querySelector('span:last-child').style.color = '#6b7280';
+      } else {
+        stageTitle.textContent = config.stage_2_title || defaultConfig.stage_2_title;
+        questionText.textContent = config.stage_2_question || defaultConfig.stage_2_question;
+        stage1Indicator.style.backgroundColor = config.accent_color || defaultConfig.accent_color;
+        stage1Indicator.style.opacity = '1';
+        stage1Indicator.querySelector('span:first-child').style.backgroundColor = '#ffffff';
+        stage1Indicator.querySelector('span:last-child').className = 'text-white font-medium text-sm';
+        stage2Indicator.style.backgroundColor = config.primary_color || defaultConfig.primary_color;
+        stage2Indicator.style.opacity = '1';
+        stage2Indicator.querySelector('span:first-child').style.backgroundColor = config.accent_color || defaultConfig.accent_color;
+        stage2Indicator.querySelector('span:last-child').className = 'text-white font-medium text-sm';
+      }
+      
+      stageSubtitle.textContent = stages[currentStage].subtitle;
+      tipText.textContent = stages[currentStage].tip;
+    }
+
+    function toggleTimer() {
+      const startBtn = document.getElementById('start-btn');
+      
+      if (isRunning) {
+        clearInterval(timerInterval);
+        isRunning = false;
+        startBtn.textContent = 'Resume';
+        startBtn.style.backgroundColor = window.elementSdk?.config?.accent_color || defaultConfig.accent_color;
+      } else {
+        isRunning = true;
+        startBtn.textContent = 'Pause';
+        startBtn.style.backgroundColor = window.elementSdk?.config?.highlight_color || defaultConfig.highlight_color;
+        
+        timerInterval = setInterval(() => {
+          timeRemaining--;
+          updateTimerDisplay();
+          
+          if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            
+            if (currentStage < stages.length - 1) {
+              currentStage++;
+              timeRemaining = stages[currentStage].duration;
+              updateStageDisplay(window.elementSdk?.config || defaultConfig);
+              updateTimerDisplay();
+              
+              timerInterval = setInterval(arguments.callee, 1000);
+            } else {
+              isRunning = false;
+              startBtn.textContent = 'Complete';
+              startBtn.disabled = true;
+              startBtn.style.backgroundColor = window.elementSdk?.config?.accent_color || defaultConfig.accent_color;
+              document.getElementById('completion-message').classList.remove('hidden');
+              document.getElementById('pulse-ring').classList.remove('pulse-animation');
+              document.getElementById('pulse-ring').style.opacity = '0';
+            }
+          }
+        }, 1000);
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      isRunning = false;
+      currentStage = 0;
+      timeRemaining = stages[0].duration;
+      
+      const startBtn = document.getElementById('start-btn');
+      startBtn.textContent = 'Start Timer';
+      startBtn.disabled = false;
+      startBtn.style.backgroundColor = window.elementSdk?.config?.secondary_color || defaultConfig.secondary_color;
+      
+      document.getElementById('completion-message').classList.add('hidden');
+      
+      updateTimerDisplay();
+      updateStageDisplay(window.elementSdk?.config || defaultConfig);
+    }
+
+    function applyColors(config) {
+      const appContainer = document.getElementById('app-container');
+      const mainTitle = document.getElementById('main-title');
+      const subtitle = document.getElementById('subtitle');
+      const timerDisplay = document.getElementById('timer-display');
+      const timerLabel = document.getElementById('timer-label');
+      const timerProgress = document.getElementById('timer-progress');
+      const pulseRing = document.getElementById('pulse-ring');
+      const stageTitle = document.getElementById('stage-title');
+      const stageSubtitle = document.getElementById('stage-subtitle');
+      const questionText = document.getElementById('question-text');
+      const coachingTip = document.getElementById('coaching-tip');
+      const startBtn = document.getElementById('start-btn');
+      const resetBtn = document.getElementById('reset-btn');
+      
+      appContainer.style.backgroundColor = config.background_color || defaultConfig.background_color;
+      appContainer.style.fontFamily = `${config.font_family || defaultConfig.font_family}, sans-serif`;
+      
+      mainTitle.style.color = config.primary_color || defaultConfig.primary_color;
+      subtitle.style.color = config.secondary_color || defaultConfig.secondary_color;
+      
+      timerDisplay.style.color = config.primary_color || defaultConfig.primary_color;
+      timerLabel.style.color = config.secondary_color || defaultConfig.secondary_color;
+      timerProgress.setAttribute('stroke', config.secondary_color || defaultConfig.secondary_color);
+      pulseRing.style.borderColor = config.highlight_color || defaultConfig.highlight_color;
+      
+      stageTitle.style.color = config.primary_color || defaultConfig.primary_color;
+      stageSubtitle.style.color = config.highlight_color || defaultConfig.highlight_color;
+      
+      coachingTip.style.borderColor = config.accent_color || defaultConfig.accent_color;
+      coachingTip.querySelector('svg').style.color = config.accent_color || defaultConfig.accent_color;
+      coachingTip.querySelector('span').style.color = config.primary_color || defaultConfig.primary_color;
+      
+      if (!isRunning) {
+        startBtn.style.backgroundColor = config.secondary_color || defaultConfig.secondary_color;
+      }
+      resetBtn.style.color = config.primary_color || defaultConfig.primary_color;
+      resetBtn.style.borderColor = config.primary_color || defaultConfig.primary_color;
+      
+      const questionIcon = document.querySelector('#question-card .flex-shrink-0');
+      if (questionIcon) {
+        questionIcon.style.backgroundColor = config.primary_color || defaultConfig.primary_color;
+      }
+    }
+
+    async function onConfigChange(config) {
+      applyColors(config);
+      updateStageDisplay(config);
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => {
+              config.primary_color = value;
+              window.elementSdk.setConfig({ primary_color: value });
+            }
+          },
+          {
+            get: () => config.secondary_color || defaultConfig.secondary_color,
+            set: (value) => {
+              config.secondary_color = value;
+              window.elementSdk.setConfig({ secondary_color: value });
+            }
+          },
+          {
+            get: () => config.accent_color || defaultConfig.accent_color,
+            set: (value) => {
+              config.accent_color = value;
+              window.elementSdk.setConfig({ accent_color: value });
+            }
+          },
+          {
+            get: () => config.highlight_color || defaultConfig.highlight_color,
+            set: (value) => {
+              config.highlight_color = value;
+              window.elementSdk.setConfig({ highlight_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["stage_1_title", config.stage_1_title || defaultConfig.stage_1_title],
+        ["stage_1_question", config.stage_1_question || defaultConfig.stage_1_question],
+        ["stage_2_title", config.stage_2_title || defaultConfig.stage_2_title],
+        ["stage_2_question", config.stage_2_question || defaultConfig.stage_2_question]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+
+    updateTimerDisplay();
+    updateStageDisplay(defaultConfig);
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c29e730231d1320',t:'MTc2OTE5ODY5Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
