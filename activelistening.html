@@ -1,0 +1,401 @@
+
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Active Listening Practice</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    * {
+      font-family: 'Nunito', Arial, sans-serif;
+    }
+    .scenario-card {
+      transition: all 0.3s ease;
+    }
+    .scenario-card:hover {
+      transform: translateY(-2px);
+    }
+    .option-btn {
+      transition: all 0.2s ease;
+    }
+    .option-btn:hover:not(:disabled) {
+      transform: scale(1.02);
+    }
+    .feedback-enter {
+      animation: slideIn 0.4s ease-out;
+    }
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .progress-fill {
+      transition: width 0.5s ease;
+    }
+    .pulse-ring {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full m-0 p-0" style="background-color: #F1F1F1;">
+  <div id="app-container" class="h-full w-full overflow-auto"><!-- Header -->
+   <header class="w-full py-6 px-4" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%);">
+    <div class="max-w-4xl mx-auto text-center">
+     <div class="flex items-center justify-center gap-3 mb-2">
+      <svg width="40" height="40" viewbox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="#97E152" stroke-width="3" fill="none" /> <path d="M12 20C12 15.58 15.58 12 20 12V20H28C28 24.42 24.42 28 20 28C15.58 28 12 24.42 12 20Z" fill="#97E152" /> <circle cx="20" cy="20" r="4" fill="white" />
+      </svg>
+      <h1 id="main-title" class="text-2xl md:text-3xl font-extrabold text-white">Active Listening in Peer Coaching</h1>
+     </div>
+     <p id="intro-text" class="text-white/90 text-sm md:text-base max-w-2xl mx-auto">Practice identifying effective active listening responses. Choose the best way to respond to each student scenario.</p>
+    </div>
+   </header><!-- Progress Bar -->
+   <div class="w-full px-4 py-3" style="background-color: #002855;">
+    <div class="max-w-4xl mx-auto">
+     <div class="flex items-center justify-between text-white text-sm mb-2"><span id="progress-label">Scenario 1 of 5</span> <span id="score-display">Score: 0/0</span>
+     </div>
+     <div class="w-full h-3 rounded-full bg-white/20 overflow-hidden">
+      <div id="progress-bar" class="h-full rounded-full progress-fill" style="width: 0%; background: linear-gradient(90deg, #97E152, #46B1EF);"></div>
+     </div>
+    </div>
+   </div><!-- Main Content -->
+   <main class="w-full px-4 py-8">
+    <div class="max-w-4xl mx-auto"><!-- Scenario Display -->
+     <div id="scenario-container" class="scenario-card rounded-2xl p-6 md:p-8 mb-6 shadow-lg" style="background-color: white; border-left: 6px solid #0070F0;">
+      <div class="flex items-start gap-4">
+       <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center" style="background-color: #46B1EF;">
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="white"><circle cx="12" cy="8" r="4" /> <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
+        </svg>
+       </div>
+       <div class="flex-1">
+        <p class="text-xs font-bold uppercase tracking-wide mb-2" style="color: #0070F0;">Student Says:</p>
+        <p id="student-statement" class="text-lg md:text-xl font-semibold" style="color: #002855;">"I've been studying accounting for weeks now, but nothing sticks. I watch the videos, I take notes, I do the practice problems, but when I sit down for the assessment, my mind just goes blank. I don't know what else to do."</p>
+       </div>
+      </div>
+     </div><!-- Response Options -->
+     <div id="options-container" class="space-y-3 mb-6">
+      <p class="text-sm font-bold uppercase tracking-wide mb-4" style="color: #002855;">Choose the best active listening response:</p><button id="option-1" class="option-btn w-full text-left p-4 rounded-xl border-2 font-medium" style="background-color: white; border-color: #E5E7EB; color: #002855;"> <span class="inline-flex items-center justify-center w-7 h-7 rounded-full text-white text-sm font-bold mr-3" style="background-color: #0070F0;">A</span> <span id="option-1-text">Have you tried using flashcards? They really helped me when I was studying.</span> </button> <button id="option-2" class="option-btn w-full text-left p-4 rounded-xl border-2 font-medium" style="background-color: white; border-color: #E5E7EB; color: #002855;"> <span class="inline-flex items-center justify-center w-7 h-7 rounded-full text-white text-sm font-bold mr-3" style="background-color: #0070F0;">B</span> <span id="option-2-text">It sounds like you're putting in real effort, but the knowledge isn't translating when it counts. That must be really frustrating.</span> </button> <button id="option-3" class="option-btn w-full text-left p-4 rounded-xl border-2 font-medium" style="background-color: white; border-color: #E5E7EB; color: #002855;"> <span class="inline-flex items-center justify-center w-7 h-7 rounded-full text-white text-sm font-bold mr-3" style="background-color: #0070F0;">C</span> <span id="option-3-text">Don't worry, everyone struggles with accounting at first. You'll get it eventually!</span> </button> <button id="option-4" class="option-btn w-full text-left p-4 rounded-xl border-2 font-medium" style="background-color: white; border-color: #E5E7EB; color: #002855;"> <span class="inline-flex items-center justify-center w-7 h-7 rounded-full text-white text-sm font-bold mr-3" style="background-color: #0070F0;">D</span> <span id="option-4-text">Which specific topics are you struggling with the most?</span> </button>
+     </div><!-- Feedback Area -->
+     <div id="feedback-container" class="hidden rounded-2xl p-6 mb-6 feedback-enter" style="background-color: white;">
+      <div class="flex items-start gap-4">
+       <div id="feedback-icon" class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center"><!-- Icon inserted by JS -->
+       </div>
+       <div class="flex-1">
+        <h3 id="feedback-title" class="text-lg font-bold mb-2"></h3>
+        <p id="feedback-text" class="mb-4" style="color: #444;"></p>
+        <div id="feedback-explanation" class="p-4 rounded-lg" style="background-color: #F1F1F1;">
+         <p class="text-sm font-semibold mb-1" style="color: #002855;">Why this matters:</p>
+         <p id="explanation-text" class="text-sm" style="color: #555;"></p>
+        </div>
+       </div>
+      </div>
+     </div><!-- Navigation Button -->
+     <div id="nav-container" class="hidden text-center"><button id="next-btn" class="px-8 py-3 rounded-full font-bold text-white text-lg shadow-lg hover:shadow-xl transition-all" style="background: linear-gradient(135deg, #0070F0, #46B1EF);"> Next Scenario → </button>
+     </div><!-- Results Screen -->
+     <div id="results-container" class="hidden text-center py-8">
+      <div class="rounded-2xl p-8 shadow-lg" style="background-color: white;">
+       <div class="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center" style="background: linear-gradient(135deg, #97E152, #46B1EF);">
+        <svg width="40" height="40" viewbox="0 0 40 40" fill="white"><path d="M16 20l4 4 8-8" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+       </div>
+       <h2 class="text-2xl md:text-3xl font-extrabold mb-2" style="color: #002855;">Activity Complete!</h2>
+       <p id="final-score" class="text-xl font-semibold mb-4" style="color: #0070F0;">You scored 4 out of 5</p>
+       <p id="final-message" class="mb-6" style="color: #555;">Great job practicing active listening skills!</p>
+       <div class="p-4 rounded-xl mb-6" style="background-color: #F1F1F1;">
+        <h3 class="font-bold mb-3" style="color: #002855;">Key Takeaways:</h3>
+        <ul class="text-left text-sm space-y-2" style="color: #444;">
+         <li class="flex items-start gap-2"><span style="color: #97E152;">✓</span> <span>Reflect what the student shared in your own words</span></li>
+         <li class="flex items-start gap-2"><span style="color: #97E152;">✓</span> <span>Validate their feelings before offering solutions</span></li>
+         <li class="flex items-start gap-2"><span style="color: #97E152;">✓</span> <span>Check for accuracy by inviting them to confirm or clarify</span></li>
+         <li class="flex items-start gap-2"><span style="color: #97E152;">✓</span> <span>Keep the student at the center of the conversation</span></li>
+        </ul>
+       </div><button id="restart-btn" class="px-8 py-3 rounded-full font-bold text-white text-lg shadow-lg hover:shadow-xl transition-all" style="background: linear-gradient(135deg, #002855, #0070F0);"> Try Again </button>
+      </div>
+     </div>
+    </div>
+   </main>
+  </div>
+  <script>
+    const defaultConfig = {
+      activity_title: "Active Listening in Peer Coaching",
+      intro_text: "Practice identifying effective active listening responses. Choose the best way to respond to each student scenario."
+    };
+
+    let config = { ...defaultConfig };
+
+    const scenarios = [
+      {
+        statement: "I've been studying accounting for weeks now, but nothing sticks. I watch the videos, I take notes, I do the practice problems, but when I sit down for the assessment, my mind just goes blank. I don't know what else to do.",
+        options: [
+          { text: "Have you tried using flashcards? They really helped me when I was studying.", correct: false },
+          { text: "It sounds like you're putting in real effort, but the knowledge isn't translating when it counts. That must be really frustrating.", correct: true },
+          { text: "Don't worry, everyone struggles with accounting at first. You'll get it eventually!", correct: false },
+          { text: "Which specific topics are you struggling with the most?", correct: false }
+        ],
+        correctIndex: 1,
+        explanation: "This response reflects the student's experience (effort not translating to results) and validates their frustration without jumping to solutions. The other options either offer premature advice, dismiss the concern with reassurance, or skip past understanding the emotional experience."
+      },
+      {
+        statement: "I keep mixing up the stages of design thinking. I study them, I think I know them, and then they all blend together in my head. It's like they don't have clear boundaries.",
+        options: [
+          { text: "The stages are: Empathize, Define, Ideate, Prototype, and Test. Do you want me to explain each one?", correct: false },
+          { text: "It sounds like the concepts feel too similar, making it hard to keep them distinct. Is that what's happening?", correct: true },
+          { text: "You should make a chart comparing each stage. Visual learners find that really helpful.", correct: false },
+          { text: "That's a common problem. Most students figure it out after more practice.", correct: false }
+        ],
+        correctIndex: 1,
+        explanation: "This response restates the core issue (stages blending together) and checks for accuracy by asking if that captures the experience. It keeps the student engaged in clarifying their own understanding rather than immediately providing information or dismissing the concern."
+      },
+      {
+        statement: "I get so nervous during OAs that my mind completely blanks. I know the material when I'm studying, but the second I start the test, it's like everything disappears.",
+        options: [
+          { text: "Try taking deep breaths before you start. That usually helps with test anxiety.", correct: false },
+          { text: "What you're describing sounds like the anxiety is overriding your memory in the moment. It's not that you don't know it—it's that the stress blocks access to it.", correct: true },
+          { text: "Have you talked to your instructor about getting extra time on assessments?", correct: false },
+          { text: "Everyone gets nervous on tests. Just try to relax and you'll do fine.", correct: false }
+        ],
+        correctIndex: 1,
+        explanation: "This response accurately reflects the experience (anxiety blocking memory access) and reframes it in a way that validates the student without minimizing the problem. It shows understanding before moving to solutions and acknowledges that the issue isn't lack of knowledge."
+      },
+      {
+        statement: "I always confuse IEPs and 504 plans. Every time I think I finally understand the difference, I second-guess myself. It's really embarrassing because I should know this by now.",
+        options: [
+          { text: "An IEP is for students who qualify under IDEA, while a 504 plan is for students who need accommodations under Section 504. Want me to break that down more?", correct: false },
+          { text: "Don't be embarrassed—these are confusing for a lot of people. You're not alone.", correct: false },
+          { text: "It sounds like you understand pieces of each, but when it comes time to distinguish them, the confidence slips away. Is that accurate?", correct: true },
+          { text: "Have you tried making comparison flashcards? That might help solidify the differences.", correct: false }
+        ],
+        correctIndex: 2,
+        explanation: "This response reflects both the cognitive challenge (understanding pieces but struggling to distinguish) and the emotional layer (confidence slipping) while checking for accuracy. It invites the student to confirm or correct the understanding, keeping them actively engaged."
+      },
+      {
+        statement: "The practice assessment questions felt manageable, but the actual OA questions seemed completely different. I felt like I studied the wrong things entirely.",
+        options: [
+          { text: "That disconnect between practice and the real thing sounds really disorienting. It's like the preparation didn't match what you actually faced.", correct: true },
+          { text: "The OA questions are designed to test deeper understanding. Did you review the competencies closely?", correct: false },
+          { text: "Maybe try different practice resources next time. Some students find the official study guides more aligned with the OA.", correct: false },
+          { text: "A lot of students feel that way. Just keep practicing and you'll start to see the patterns.", correct: false }
+        ],
+        correctIndex: 0,
+        explanation: "This response captures the core experience (disconnect between practice and exam) and validates how disorienting that must feel. It avoids jumping to problem-solving or implying the student did something wrong, creating space for them to elaborate on what happened."
+      }
+    ];
+
+    let currentScenario = 0;
+    let score = 0;
+    let answered = false;
+
+    const elements = {
+      mainTitle: document.getElementById('main-title'),
+      introText: document.getElementById('intro-text'),
+      progressLabel: document.getElementById('progress-label'),
+      scoreDisplay: document.getElementById('score-display'),
+      progressBar: document.getElementById('progress-bar'),
+      studentStatement: document.getElementById('student-statement'),
+      optionsContainer: document.getElementById('options-container'),
+      options: [
+        document.getElementById('option-1'),
+        document.getElementById('option-2'),
+        document.getElementById('option-3'),
+        document.getElementById('option-4')
+      ],
+      optionTexts: [
+        document.getElementById('option-1-text'),
+        document.getElementById('option-2-text'),
+        document.getElementById('option-3-text'),
+        document.getElementById('option-4-text')
+      ],
+      feedbackContainer: document.getElementById('feedback-container'),
+      feedbackIcon: document.getElementById('feedback-icon'),
+      feedbackTitle: document.getElementById('feedback-title'),
+      feedbackText: document.getElementById('feedback-text'),
+      explanationText: document.getElementById('explanation-text'),
+      navContainer: document.getElementById('nav-container'),
+      nextBtn: document.getElementById('next-btn'),
+      resultsContainer: document.getElementById('results-container'),
+      finalScore: document.getElementById('final-score'),
+      finalMessage: document.getElementById('final-message'),
+      restartBtn: document.getElementById('restart-btn'),
+      scenarioContainer: document.getElementById('scenario-container')
+    };
+
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
+    function loadScenario() {
+      answered = false;
+      const scenario = scenarios[currentScenario];
+      
+      elements.studentStatement.textContent = `"${scenario.statement}"`;
+      
+      const shuffledOptions = shuffleArray(scenario.options.map((opt, idx) => ({ ...opt, originalIndex: idx })));
+      
+      shuffledOptions.forEach((opt, idx) => {
+        elements.optionTexts[idx].textContent = opt.text;
+        elements.options[idx].dataset.correct = opt.correct;
+        elements.options[idx].style.borderColor = '#E5E7EB';
+        elements.options[idx].style.backgroundColor = 'white';
+        elements.options[idx].disabled = false;
+      });
+      
+      elements.progressLabel.textContent = `Scenario ${currentScenario + 1} of ${scenarios.length}`;
+      elements.scoreDisplay.textContent = `Score: ${score}/${currentScenario}`;
+      elements.progressBar.style.width = `${(currentScenario / scenarios.length) * 100}%`;
+      
+      elements.feedbackContainer.classList.add('hidden');
+      elements.navContainer.classList.add('hidden');
+      elements.scenarioContainer.classList.remove('hidden');
+      elements.optionsContainer.classList.remove('hidden');
+    }
+
+    function handleOptionClick(index) {
+      if (answered) return;
+      answered = true;
+      
+      const isCorrect = elements.options[index].dataset.correct === 'true';
+      const scenario = scenarios[currentScenario];
+      
+      if (isCorrect) {
+        score++;
+        elements.options[index].style.borderColor = '#97E152';
+        elements.options[index].style.backgroundColor = '#F0FDF4';
+        elements.feedbackIcon.style.backgroundColor = '#97E152';
+        elements.feedbackIcon.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>';
+        elements.feedbackTitle.textContent = 'Excellent! That\'s the best response.';
+        elements.feedbackTitle.style.color = '#166534';
+        elements.feedbackText.textContent = 'You correctly identified an active listening response that reflects the student\'s experience and validates their feelings.';
+      } else {
+        elements.options[index].style.borderColor = '#EF4444';
+        elements.options[index].style.backgroundColor = '#FEF2F2';
+        elements.feedbackIcon.style.backgroundColor = '#EF4444';
+        elements.feedbackIcon.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>';
+        elements.feedbackTitle.textContent = 'Not quite. Let\'s review.';
+        elements.feedbackTitle.style.color = '#DC2626';
+        elements.feedbackText.textContent = 'That response moves too quickly past understanding the student\'s experience. Active listening means reflecting and validating before advising.';
+        
+        elements.options.forEach((opt, idx) => {
+          if (opt.dataset.correct === 'true') {
+            opt.style.borderColor = '#97E152';
+            opt.style.backgroundColor = '#F0FDF4';
+          }
+        });
+      }
+      
+      elements.explanationText.textContent = scenario.explanation;
+      elements.feedbackContainer.classList.remove('hidden');
+      
+      elements.options.forEach(opt => opt.disabled = true);
+      
+      elements.scoreDisplay.textContent = `Score: ${score}/${currentScenario + 1}`;
+      
+      if (currentScenario < scenarios.length - 1) {
+        elements.nextBtn.textContent = 'Next Scenario →';
+      } else {
+        elements.nextBtn.textContent = 'See Results →';
+      }
+      elements.navContainer.classList.remove('hidden');
+    }
+
+    function showResults() {
+      elements.scenarioContainer.classList.add('hidden');
+      elements.optionsContainer.classList.add('hidden');
+      elements.feedbackContainer.classList.add('hidden');
+      elements.navContainer.classList.add('hidden');
+      elements.resultsContainer.classList.remove('hidden');
+      
+      elements.finalScore.textContent = `You scored ${score} out of ${scenarios.length}`;
+      elements.progressBar.style.width = '100%';
+      elements.progressLabel.textContent = 'Complete!';
+      
+      if (score === scenarios.length) {
+        elements.finalMessage.textContent = 'Outstanding! You demonstrated excellent active listening skills. You understand how to keep students at the center of coaching conversations.';
+      } else if (score >= scenarios.length * 0.6) {
+        elements.finalMessage.textContent = 'Good work! You\'re developing strong active listening skills. Remember to reflect and validate before offering advice or solutions.';
+      } else {
+        elements.finalMessage.textContent = 'Keep practicing! Active listening takes time to develop. Focus on reflecting what students share and validating their experience before moving forward.';
+      }
+    }
+
+    function restart() {
+      currentScenario = 0;
+      score = 0;
+      elements.resultsContainer.classList.add('hidden');
+      loadScenario();
+    }
+
+    elements.options.forEach((opt, idx) => {
+      opt.addEventListener('click', () => handleOptionClick(idx));
+    });
+
+    elements.nextBtn.addEventListener('click', () => {
+      currentScenario++;
+      if (currentScenario < scenarios.length) {
+        loadScenario();
+      } else {
+        showResults();
+      }
+    });
+
+    elements.restartBtn.addEventListener('click', restart);
+
+    async function onConfigChange(cfg) {
+      const title = cfg.activity_title || defaultConfig.activity_title;
+      const intro = cfg.intro_text || defaultConfig.intro_text;
+      
+      elements.mainTitle.textContent = title;
+      elements.introText.textContent = intro;
+    }
+
+    function mapToCapabilities(cfg) {
+      return {
+        recolorables: [],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(cfg) {
+      return new Map([
+        ["activity_title", cfg.activity_title || defaultConfig.activity_title],
+        ["intro_text", cfg.intro_text || defaultConfig.intro_text]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+
+    loadScenario();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c29cc11e21fe5c1',t:'MTc2OTE5NzU4Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
