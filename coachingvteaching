@@ -1,0 +1,532 @@
+
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Who Does the Student Need?</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+    
+    @keyframes celebrate {
+      0% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.1) rotate(-3deg); }
+      50% { transform: scale(1.1) rotate(3deg); }
+      75% { transform: scale(1.1) rotate(-3deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+    
+    .scenario-card {
+      animation: fadeIn 0.4s ease-out forwards;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+    }
+    
+    .scenario-card:active {
+      cursor: grabbing;
+    }
+    
+    .scenario-card.dragging {
+      opacity: 0.8;
+      transform: scale(1.05) rotate(2deg);
+      box-shadow: 0 20px 40px rgba(0, 40, 85, 0.3);
+      z-index: 1000;
+    }
+    
+    .drop-zone {
+      transition: all 0.3s ease;
+    }
+    
+    .drop-zone.drag-over {
+      transform: scale(1.02);
+      box-shadow: 0 0 0 3px #0070F0, 0 10px 30px rgba(0, 112, 240, 0.3);
+    }
+    
+    .drop-zone.correct {
+      animation: pulse 0.3s ease;
+    }
+    
+    .drop-zone.incorrect {
+      animation: shake 0.4s ease;
+    }
+    
+    .completed-card {
+      animation: celebrate 0.5s ease;
+    }
+    
+    .progress-fill {
+      transition: width 0.5s ease;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-[#F1F1F1] overflow-auto">
+  <div id="app-wrapper" class="w-full min-h-full p-6">
+   <div class="max-w-6xl mx-auto"><!-- Header -->
+    <header class="text-center mb-8">
+     <h1 id="activity-title" class="text-3xl font-bold text-[#002855] mb-3">Who Does the Student Need?</h1>
+     <p id="instructions-text" class="text-[#002855] text-lg max-w-2xl mx-auto">Drag each student scenario to the correct support role. Think about what the student is really asking for!</p>
+    </header><!-- Progress Bar -->
+    <div class="mb-8">
+     <div class="flex justify-between items-center mb-2"><span class="text-sm font-semibold text-[#002855]">Progress</span> <span id="progress-text" class="text-sm font-semibold text-[#002855]">0 / 6 completed</span>
+     </div>
+     <div class="w-full h-3 bg-white rounded-full overflow-hidden shadow-inner">
+      <div id="progress-bar" class="progress-fill h-full bg-[#97E152] rounded-full" style="width: 0%"></div>
+     </div>
+    </div><!-- Drop Zones -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8"><!-- Course Instructor Zone -->
+     <div class="drop-zone bg-white rounded-xl p-4 shadow-lg border-2 border-[#0070F0]" data-role="course-instructor">
+      <div class="flex items-center gap-3 mb-4 pb-3 border-b-2 border-[#0070F0]">
+       <div class="w-12 h-12 rounded-full bg-[#0070F0] flex items-center justify-center text-2xl">
+        📚
+       </div>
+       <div>
+        <h2 class="font-bold text-[#002855] text-lg">Course Instructor</h2>
+        <p class="text-xs text-[#002855] opacity-70">Academic &amp; content expert</p>
+       </div>
+      </div>
+      <div class="min-h-[120px] rounded-lg bg-[#F1F1F1] p-3 flex flex-col gap-2" id="ci-drop-area">
+       <p class="text-center text-sm text-[#002855] opacity-50 drop-hint">Drop scenarios here</p>
+      </div>
+     </div><!-- Program Mentor Zone -->
+     <div class="drop-zone bg-white rounded-xl p-4 shadow-lg border-2 border-[#97E152]" data-role="program-mentor">
+      <div class="flex items-center gap-3 mb-4 pb-3 border-b-2 border-[#97E152]">
+       <div class="w-12 h-12 rounded-full bg-[#97E152] flex items-center justify-center text-2xl">
+        🎯
+       </div>
+       <div>
+        <h2 class="font-bold text-[#002855] text-lg">Program Mentor</h2>
+        <p class="text-xs text-[#002855] opacity-70">Degree planning &amp; progress</p>
+       </div>
+      </div>
+      <div class="min-h-[120px] rounded-lg bg-[#F1F1F1] p-3 flex flex-col gap-2" id="pm-drop-area">
+       <p class="text-center text-sm text-[#002855] opacity-50 drop-hint">Drop scenarios here</p>
+      </div>
+     </div><!-- Peer Coach Zone -->
+     <div class="drop-zone bg-white rounded-xl p-4 shadow-lg border-2 border-[#002855]" data-role="peer-coach">
+      <div class="flex items-center gap-3 mb-4 pb-3 border-b-2 border-[#002855]">
+       <div class="w-12 h-12 rounded-full bg-[#002855] flex items-center justify-center text-2xl">
+        💡
+       </div>
+       <div>
+        <h2 class="font-bold text-[#002855] text-lg">Peer Coach</h2>
+        <p class="text-xs text-[#002855] opacity-70">Study strategies &amp; approach</p>
+       </div>
+      </div>
+      <div class="min-h-[120px] rounded-lg bg-[#F1F1F1] p-3 flex flex-col gap-2" id="pc-drop-area">
+       <p class="text-center text-sm text-[#002855] opacity-50 drop-hint">Drop scenarios here</p>
+      </div>
+     </div>
+    </div><!-- Scenario Cards Container -->
+    <div class="bg-white rounded-xl p-6 shadow-lg">
+     <h3 class="font-bold text-[#002855] mb-4 flex items-center gap-2"><span class="text-xl">📋</span> Student Scenarios</h3>
+     <div id="scenarios-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"><!-- Scenarios will be rendered here -->
+     </div>
+    </div><!-- Feedback Area -->
+    <div id="feedback-area" class="mt-6 hidden">
+     <div id="feedback-content" class="p-4 rounded-xl text-center font-semibold"></div>
+    </div><!-- Reset Button -->
+    <div class="mt-6 text-center"><button id="reset-btn" class="px-6 py-3 bg-[#002855] text-white rounded-lg font-semibold hover:bg-[#001a3d] transition-colors shadow-lg"> 🔄 Reset Activity </button>
+    </div>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      activity_title: "Who Does the Student Need?",
+      instructions_text: "Drag each student scenario to the correct support role. Think about what the student is really asking for!",
+      primary_color: "#002855",
+      secondary_color: "#0070F0",
+      accent_color: "#97E152",
+      background_color: "#F1F1F1",
+      text_color: "#002855",
+      font_family: "Arial",
+      font_size: 16
+    };
+    
+    let config = { ...defaultConfig };
+    
+    const scenarios = [
+      {
+        id: 1,
+        text: "\"I keep reading the chapter, but nothing sticks. I don't know how to study for this material.\"",
+        correctRole: "peer-coach",
+        feedback: "This student needs help with their study approach and strategies — perfect for a Peer Coach!"
+      },
+      {
+        id: 2,
+        text: "\"The rubric mentions 'sufficient analysis' but I'm not sure what level of detail they're looking for.\"",
+        correctRole: "course-instructor",
+        feedback: "Questions about rubric interpretation and assessment requirements go to the Course Instructor."
+      },
+      {
+        id: 3,
+        text: "\"I'm thinking about taking fewer courses next term. Can we look at how that affects my graduation date?\"",
+        correctRole: "program-mentor",
+        feedback: "Term planning and graduation pacing are handled by the Program Mentor."
+      },
+      {
+        id: 4,
+        text: "\"I have time blocked for studying but I keep getting distracted. How do other students stay focused?\"",
+        correctRole: "peer-coach",
+        feedback: "Focus strategies and study habits are coaching conversations — great fit for a Peer Coach!"
+      },
+      {
+        id: 5,
+        text: "\"My paper was returned and I don't understand why this section doesn't meet the competency.\"",
+        correctRole: "course-instructor",
+        feedback: "Academic feedback and understanding evaluation results belong with the Course Instructor."
+      },
+      {
+        id: 6,
+        text: "\"I'm struggling to balance work and school. I might need to adjust my course load.\"",
+        correctRole: "program-mentor",
+        feedback: "Workload adjustments and barriers to continuation are Program Mentor territory."
+      }
+    ];
+    
+    let completedScenarios = new Set();
+    let draggedElement = null;
+    
+    function renderScenarios() {
+      const container = document.getElementById('scenarios-container');
+      container.innerHTML = '';
+      
+      scenarios.forEach((scenario, index) => {
+        if (completedScenarios.has(scenario.id)) return;
+        
+        const card = document.createElement('div');
+        card.className = 'scenario-card bg-[#F1F1F1] p-4 rounded-lg shadow-md border-l-4 border-[#0070F0] hover:shadow-lg transition-shadow';
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.setAttribute('draggable', 'true');
+        card.setAttribute('data-id', scenario.id);
+        card.innerHTML = `
+          <p class="text-sm text-[#002855] italic leading-relaxed">${scenario.text}</p>
+        `;
+        
+        card.addEventListener('dragstart', handleDragStart);
+        card.addEventListener('dragend', handleDragEnd);
+        card.addEventListener('touchstart', handleTouchStart, { passive: false });
+        card.addEventListener('touchmove', handleTouchMove, { passive: false });
+        card.addEventListener('touchend', handleTouchEnd);
+        
+        container.appendChild(card);
+      });
+      
+      if (container.children.length === 0) {
+        container.innerHTML = '<p class="text-center text-[#002855] col-span-full py-8 text-lg">🎉 All scenarios sorted! Great job!</p>';
+      }
+    }
+    
+    function handleDragStart(e) {
+      draggedElement = e.target;
+      e.target.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', e.target.getAttribute('data-id'));
+    }
+    
+    function handleDragEnd(e) {
+      e.target.classList.remove('dragging');
+      draggedElement = null;
+      document.querySelectorAll('.drop-zone').forEach(zone => zone.classList.remove('drag-over'));
+    }
+    
+    let touchClone = null;
+    let touchStartX, touchStartY;
+    
+    function handleTouchStart(e) {
+      e.preventDefault();
+      draggedElement = e.target.closest('.scenario-card');
+      if (!draggedElement) return;
+      
+      const touch = e.touches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+      
+      touchClone = draggedElement.cloneNode(true);
+      touchClone.style.position = 'fixed';
+      touchClone.style.pointerEvents = 'none';
+      touchClone.style.zIndex = '9999';
+      touchClone.style.width = draggedElement.offsetWidth + 'px';
+      touchClone.style.opacity = '0.9';
+      touchClone.style.transform = 'rotate(3deg) scale(1.05)';
+      document.body.appendChild(touchClone);
+      
+      updateTouchClonePosition(touch);
+      draggedElement.style.opacity = '0.3';
+    }
+    
+    function handleTouchMove(e) {
+      e.preventDefault();
+      if (!touchClone) return;
+      
+      const touch = e.touches[0];
+      updateTouchClonePosition(touch);
+      
+      const dropZone = getDropZoneAtPoint(touch.clientX, touch.clientY);
+      document.querySelectorAll('.drop-zone').forEach(zone => zone.classList.remove('drag-over'));
+      if (dropZone) {
+        dropZone.classList.add('drag-over');
+      }
+    }
+    
+    function handleTouchEnd(e) {
+      if (!touchClone || !draggedElement) return;
+      
+      const touch = e.changedTouches[0];
+      const dropZone = getDropZoneAtPoint(touch.clientX, touch.clientY);
+      
+      if (dropZone) {
+        const role = dropZone.getAttribute('data-role');
+        const scenarioId = parseInt(draggedElement.getAttribute('data-id'));
+        handleDrop(scenarioId, role, dropZone);
+      }
+      
+      touchClone.remove();
+      touchClone = null;
+      draggedElement.style.opacity = '1';
+      draggedElement = null;
+      document.querySelectorAll('.drop-zone').forEach(zone => zone.classList.remove('drag-over'));
+    }
+    
+    function updateTouchClonePosition(touch) {
+      if (!touchClone) return;
+      touchClone.style.left = (touch.clientX - touchClone.offsetWidth / 2) + 'px';
+      touchClone.style.top = (touch.clientY - 30) + 'px';
+    }
+    
+    function getDropZoneAtPoint(x, y) {
+      const elements = document.elementsFromPoint(x, y);
+      return elements.find(el => el.classList.contains('drop-zone'));
+    }
+    
+    function setupDropZones() {
+      document.querySelectorAll('.drop-zone').forEach(zone => {
+        zone.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          zone.classList.add('drag-over');
+        });
+        
+        zone.addEventListener('dragleave', () => {
+          zone.classList.remove('drag-over');
+        });
+        
+        zone.addEventListener('drop', (e) => {
+          e.preventDefault();
+          zone.classList.remove('drag-over');
+          
+          const scenarioId = parseInt(e.dataTransfer.getData('text/plain'));
+          const role = zone.getAttribute('data-role');
+          handleDrop(scenarioId, role, zone);
+        });
+      });
+    }
+    
+    function handleDrop(scenarioId, role, zone) {
+      const scenario = scenarios.find(s => s.id === scenarioId);
+      if (!scenario) return;
+      
+      const isCorrect = scenario.correctRole === role;
+      const feedbackArea = document.getElementById('feedback-area');
+      const feedbackContent = document.getElementById('feedback-content');
+      
+      feedbackArea.classList.remove('hidden');
+      
+      if (isCorrect) {
+        zone.classList.add('correct');
+        setTimeout(() => zone.classList.remove('correct'), 300);
+        
+        feedbackContent.className = 'p-4 rounded-xl text-center font-semibold bg-[#97E152] text-[#002855]';
+        feedbackContent.innerHTML = `✅ Correct! ${scenario.feedback}`;
+        
+        completedScenarios.add(scenarioId);
+        addCompletedCard(scenario, zone);
+        renderScenarios();
+        updateProgress();
+      } else {
+        zone.classList.add('incorrect');
+        setTimeout(() => zone.classList.remove('incorrect'), 400);
+        
+        feedbackContent.className = 'p-4 rounded-xl text-center font-semibold bg-[#ff6b6b] text-white';
+        feedbackContent.innerHTML = `❌ Not quite! Think about what the student is really asking for. Try again!`;
+      }
+      
+      setTimeout(() => {
+        feedbackArea.classList.add('hidden');
+      }, 4000);
+    }
+    
+    function addCompletedCard(scenario, zone) {
+      const dropArea = zone.querySelector('[id$="-drop-area"]');
+      const hint = dropArea.querySelector('.drop-hint');
+      if (hint) hint.remove();
+      
+      const card = document.createElement('div');
+      card.className = 'completed-card bg-white p-2 rounded text-xs text-[#002855] shadow-sm border-l-2 border-[#97E152]';
+      card.innerHTML = scenario.text.substring(0, 50) + '...';
+      dropArea.appendChild(card);
+    }
+    
+    function updateProgress() {
+      const total = scenarios.length;
+      const completed = completedScenarios.size;
+      const percentage = (completed / total) * 100;
+      
+      document.getElementById('progress-bar').style.width = `${percentage}%`;
+      document.getElementById('progress-text').textContent = `${completed} / ${total} completed`;
+      
+      if (completed === total) {
+        showCompletionMessage();
+      }
+    }
+    
+    function showCompletionMessage() {
+      const feedbackArea = document.getElementById('feedback-area');
+      const feedbackContent = document.getElementById('feedback-content');
+      
+      feedbackArea.classList.remove('hidden');
+      feedbackContent.className = 'p-6 rounded-xl text-center font-semibold bg-gradient-to-r from-[#97E152] to-[#0070F0] text-white';
+      feedbackContent.innerHTML = `
+        <div class="text-2xl mb-2">🎉 Outstanding!</div>
+        <div>You've successfully sorted all scenarios! You now understand when to refer students to Course Instructors, Program Mentors, or provide Peer Coaching support.</div>
+      `;
+    }
+    
+    function resetActivity() {
+      completedScenarios.clear();
+      
+      document.querySelectorAll('[id$="-drop-area"]').forEach(area => {
+        area.innerHTML = '<p class="text-center text-sm text-[#002855] opacity-50 drop-hint">Drop scenarios here</p>';
+      });
+      
+      document.getElementById('feedback-area').classList.add('hidden');
+      
+      renderScenarios();
+      updateProgress();
+    }
+    
+    function applyConfig(cfg) {
+      document.getElementById('activity-title').textContent = cfg.activity_title || defaultConfig.activity_title;
+      document.getElementById('instructions-text').textContent = cfg.instructions_text || defaultConfig.instructions_text;
+      
+      const fontFamily = cfg.font_family || defaultConfig.font_family;
+      document.body.style.fontFamily = `${fontFamily}, sans-serif`;
+      
+      const fontSize = cfg.font_size || defaultConfig.font_size;
+      document.body.style.fontSize = `${fontSize}px`;
+      
+      document.body.style.backgroundColor = cfg.background_color || defaultConfig.background_color;
+      
+      document.querySelectorAll('.text-\\[\\#002855\\]').forEach(el => {
+        el.style.color = cfg.text_color || defaultConfig.text_color;
+      });
+    }
+    
+    async function onConfigChange(cfg) {
+      config = { ...defaultConfig, ...cfg };
+      applyConfig(config);
+    }
+    
+    function mapToCapabilities(cfg) {
+      return {
+        recolorables: [
+          {
+            get: () => cfg.background_color || defaultConfig.background_color,
+            set: (value) => {
+              cfg.background_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => cfg.text_color || defaultConfig.text_color,
+            set: (value) => {
+              cfg.text_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => cfg.primary_color || defaultConfig.primary_color,
+            set: (value) => {
+              cfg.primary_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ primary_color: value });
+            }
+          },
+          {
+            get: () => cfg.secondary_color || defaultConfig.secondary_color,
+            set: (value) => {
+              cfg.secondary_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ secondary_color: value });
+            }
+          },
+          {
+            get: () => cfg.accent_color || defaultConfig.accent_color,
+            set: (value) => {
+              cfg.accent_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ accent_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => cfg.font_family || defaultConfig.font_family,
+          set: (value) => {
+            cfg.font_family = value;
+            if (window.elementSdk) window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: {
+          get: () => cfg.font_size || defaultConfig.font_size,
+          set: (value) => {
+            cfg.font_size = value;
+            if (window.elementSdk) window.elementSdk.setConfig({ font_size: value });
+          }
+        }
+      };
+    }
+    
+    function mapToEditPanelValues(cfg) {
+      return new Map([
+        ["activity_title", cfg.activity_title || defaultConfig.activity_title],
+        ["instructions_text", cfg.instructions_text || defaultConfig.instructions_text]
+      ]);
+    }
+    
+    // Initialize
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+    
+    document.getElementById('reset-btn').addEventListener('click', resetActivity);
+    
+    renderScenarios();
+    setupDropZones();
+    applyConfig(config);
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c29a2caf37c3b2f',t:'MTc2OTE5NTg5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
