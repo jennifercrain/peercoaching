@@ -253,21 +253,41 @@
         ctx.lineWidth = 3;
         ctx.strokeRect(61, 61, 1078, 728);
         
-        // Corner accents
+        // Corner accents with curves
         ctx.strokeStyle = '#97E152';
         ctx.lineWidth = 3;
-        [
-          [[80, 120], [80, 80], [120, 80]],
-          [[1120, 80], [1080, 80], [1080, 120]],
-          [[80, 730], [80, 770], [120, 770]],
-          [[1120, 770], [1080, 770], [1080, 730]]
-        ].forEach(points => {
-          ctx.beginPath();
-          ctx.moveTo(points[0][0], points[0][1]);
-          ctx.lineTo(points[1][0], points[1][1]);
-          ctx.lineTo(points[2][0], points[2][1]);
-          ctx.stroke();
-        });
+        
+        // Top-left corner
+        ctx.beginPath();
+        ctx.moveTo(80, 120);
+        ctx.lineTo(80, 95);
+        ctx.quadraticCurveTo(80, 80, 95, 80);
+        ctx.lineTo(120, 80);
+        ctx.stroke();
+        
+        // Top-right corner
+        ctx.beginPath();
+        ctx.moveTo(1120, 120);
+        ctx.lineTo(1120, 95);
+        ctx.quadraticCurveTo(1120, 80, 1105, 80);
+        ctx.lineTo(1080, 80);
+        ctx.stroke();
+        
+        // Bottom-left corner
+        ctx.beginPath();
+        ctx.moveTo(80, 730);
+        ctx.lineTo(80, 755);
+        ctx.quadraticCurveTo(80, 770, 95, 770);
+        ctx.lineTo(120, 770);
+        ctx.stroke();
+        
+        // Bottom-right corner
+        ctx.beginPath();
+        ctx.moveTo(1120, 730);
+        ctx.lineTo(1120, 755);
+        ctx.quadraticCurveTo(1120, 770, 1105, 770);
+        ctx.lineTo(1080, 770);
+        ctx.stroke();
         
         // Corner dots
         ctx.fillStyle = '#0070F0';
@@ -319,49 +339,51 @@
         // Certificate title at top
         const certTitle = window.elementSdk?.config?.certificate_title || defaultConfig.certificate_title;
         ctx.fillStyle = '#002855';
-        ctx.font = 'bold 32px Arial';
-        ctx.fillText(certTitle, 600, 250);
+        ctx.font = 'bold 36px Arial';
+        ctx.fillText(certTitle, 600, 260);
         
         // "This is to certify that" text
         ctx.fillStyle = '#46B1EF';
-        ctx.font = '12px Arial';
-        ctx.fillText('T H I S   I S   T O   C E R T I F Y   T H A T', 600, 300);
+        ctx.font = '13px Arial';
+        ctx.fillText('T H I S   I S   T O   C E R T I F Y   T H A T', 600, 320);
         
         // Name
         ctx.fillStyle = '#002855';
-        ctx.font = 'bold 64px Arial';
-        ctx.fillText(currentName, 600, 370);
+        ctx.font = 'bold 60px Arial';
+        ctx.fillText(currentName, 600, 390);
         
         // Line under name
-        const lineGradient = ctx.createLinearGradient(400, 405, 800, 405);
+        const lineGradient = ctx.createLinearGradient(400, 425, 800, 425);
         lineGradient.addColorStop(0, 'rgba(0,112,240,0)');
         lineGradient.addColorStop(0.5, '#0070F0');
         lineGradient.addColorStop(1, 'rgba(0,112,240,0)');
         ctx.fillStyle = lineGradient;
-        ctx.fillRect(400, 405, 400, 2);
+        ctx.fillRect(400, 425, 400, 2);
         
         // "has successfully completed" text
         ctx.fillStyle = '#666';
-        ctx.font = '16px Arial';
-        ctx.fillText('has successfully completed', 600, 420);
+        ctx.font = '17px Arial';
+        ctx.fillText('has successfully completed', 600, 460);
         
-        // Ribbon
-        const ribbonGradient = ctx.createLinearGradient(300, 440, 900, 490);
+        // Ribbon (with rounded corners)
+        const ribbonGradient = ctx.createLinearGradient(280, 490, 920, 540);
         ribbonGradient.addColorStop(0, '#97E152');
         ribbonGradient.addColorStop(1, '#46B1EF');
         ctx.fillStyle = ribbonGradient;
-        ctx.fillRect(300, 440, 600, 50);
+        ctx.beginPath();
+        ctx.roundRect(280, 490, 640, 50, 25);
+        ctx.fill();
         
         // Course name
         const courseName = window.elementSdk?.config?.course_name || defaultConfig.course_name;
         ctx.fillStyle = 'white';
-        ctx.font = 'bold 18px Arial';
-        ctx.fillText(courseName, 600, 465);
+        ctx.font = 'bold 20px Arial';
+        ctx.fillText(courseName, 600, 515);
         
         // Date
         ctx.fillStyle = '#999';
-        ctx.font = '14px Arial';
-        ctx.fillText(completionDate.textContent, 600, 540);
+        ctx.font = '15px Arial';
+        ctx.fillText(completionDate.textContent, 600, 600);
         
         // Convert to data URL
         const dataURL = canvas.toDataURL('image/png', 1.0);
@@ -432,5 +454,5 @@
     // Initial setup
     completionDate.textContent = `Completed on ${formatDate(new Date())}`;
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c2a0eb5a1bb205e',t:'MTc2OTIwMDMxNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c2a143a3725205e',t:'MTc2OTIwMDU0MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
