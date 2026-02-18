@@ -1,0 +1,195 @@
+
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peer Coach Simulation</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .app-wrapper {
+      height: 100%;
+      width: 100%;
+      overflow: auto;
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body style="background-color: #F1F1F1;">
+  <div class="app-wrapper">
+   <div class="max-w-7xl mx-auto p-6"><!-- Header Banner -->
+    <div class="bg-[#002855] rounded-xl p-6 mb-6 shadow-lg">
+     <div class="flex items-center gap-4">
+      <div class="bg-white/10 p-3 rounded-full">
+       <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+       </svg>
+      </div>
+      <div>
+       <p class="text-white/70 text-sm uppercase tracking-wide mb-1">Student says:</p>
+       <h1 id="main-title" class="text-white text-2xl font-bold">"Do you know how I can use AI at WGU?"</h1>
+      </div>
+     </div>
+    </div><!-- Main Content Grid -->
+    <div class="grid lg:grid-cols-2 gap-6"><!-- Left Panel - Instructions -->
+     <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+      <div class="bg-[#0070F0] px-6 py-4">
+       <h2 class="text-white text-lg font-bold flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg> Response Guidelines</h2>
+      </div>
+      <div class="p-6 space-y-6"><!-- Response Approach Section -->
+       <div>
+        <h3 class="text-[#002855] font-bold text-lg mb-3 flex items-center gap-2"><span class="bg-[#97E152] w-2 h-2 rounded-full"></span> Response Approach</h3>
+        <ul class="space-y-3 text-gray-700">
+         <li class="flex gap-3"><span class="text-[#0070F0] mt-1">•</span> <span>Do not simply "tell" the student WGU policies.</span></li>
+         <li class="flex gap-3"><span class="text-[#0070F0] mt-1">•</span> <span>Redirect to resources in the Academic Coaching Center, ACC Knowledge Base, and Student Handbook.</span></li>
+        </ul>
+       </div><!-- Support Section -->
+       <div>
+        <h3 class="text-[#002855] font-bold text-lg mb-3 flex items-center gap-2"><span class="bg-[#97E152] w-2 h-2 rounded-full"></span> Support the Student By</h3>
+        <ul class="space-y-3 text-gray-700">
+         <li class="flex gap-3"><span class="text-[#0070F0] mt-1">•</span> <span>Modeling how to access the Student Handbook</span></li>
+         <li class="flex gap-3"><span class="text-[#0070F0] mt-1">•</span> <span>Demonstrating how to search the ACC &amp; Knowledge Base</span></li>
+         <li class="flex gap-3"><span class="text-[#0070F0] mt-1">•</span> <span>Encouraging them to ask their Course Instructor or Program Mentor for further guidance</span></li>
+        </ul>
+       </div><!-- Key Focus Box -->
+       <div class="bg-[#002855] rounded-lg p-4">
+        <p class="text-white text-sm"><strong class="text-[#97E152]">Key Focus:</strong> Empower students to find answers independently by directing them to resources rather than providing the information directly.</p>
+       </div>
+      </div>
+     </div><!-- Right Panel - Simulation -->
+     <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+      <div class="bg-[#97E152] px-6 py-4">
+       <h2 class="text-[#002855] text-lg font-bold flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        </svg> Practice Simulation</h2>
+      </div>
+      <div class="p-6">
+       <div id="simulation-container"><!-- Scenario Display -->
+        <div id="scenario-section">
+         <div class="bg-[#F1F1F1] rounded-lg p-4 mb-6">
+          <p class="text-sm text-gray-500 mb-2">The student says:</p>
+          <p class="text-[#002855] font-medium">"I'm worried that using AI might violate WGU's academic integrity policy. Can you just tell me if it's okay?"</p>
+         </div>
+         <p class="text-gray-700 font-medium mb-4">How would you respond?</p>
+         <div id="options-container" class="space-y-3"><button onclick="selectOption(0)" class="option-btn w-full text-left p-4 rounded-lg border-2 border-gray-200 hover:border-[#0070F0] hover:bg-blue-50 transition-all duration-200"> <span class="inline-block bg-[#0070F0] text-white text-sm font-bold w-6 h-6 rounded-full text-center leading-6 mr-3">A</span> <span class="text-gray-700">"Don't worry, using AI at WGU is fine. You can use it whenever you want."</span> </button> <button onclick="selectOption(1)" class="option-btn w-full text-left p-4 rounded-lg border-2 border-gray-200 hover:border-[#0070F0] hover:bg-blue-50 transition-all duration-200"> <span class="inline-block bg-[#0070F0] text-white text-sm font-bold w-6 h-6 rounded-full text-center leading-6 mr-3">B</span> <span class="text-gray-700">"Let me search the ACC Knowledge Base to see what resources are available on this topic."</span> </button> <button onclick="selectOption(2)" class="option-btn w-full text-left p-4 rounded-lg border-2 border-gray-200 hover:border-[#0070F0] hover:bg-blue-50 transition-all duration-200"> <span class="inline-block bg-[#0070F0] text-white text-sm font-bold w-6 h-6 rounded-full text-center leading-6 mr-3">C</span> <span class="text-gray-700">"AI is risky, so I'd avoid it altogether to be safe."</span> </button> <button onclick="selectOption(3)" class="option-btn w-full text-left p-4 rounded-lg border-2 border-gray-200 hover:border-[#0070F0] hover:bg-blue-50 transition-all duration-200"> <span class="inline-block bg-[#0070F0] text-white text-sm font-bold w-6 h-6 rounded-full text-center leading-6 mr-3">D</span> <span class="text-gray-700">"That's a really smart question to ask! Let me show you how to find WGU's specific policies in the Student Handbook. Your Course Instructor can also clarify how it applies to your assignment."</span> </button>
+         </div>
+        </div><!-- Feedback Section (hidden by default) -->
+        <div id="feedback-section" class="hidden">
+         <div id="feedback-box" class="rounded-lg p-5 mb-6">
+          <div class="flex items-start gap-3">
+           <div id="feedback-icon"></div>
+           <div>
+            <h4 id="feedback-title" class="font-bold mb-2"></h4>
+            <p id="feedback-text" class="text-sm"></p>
+           </div>
+          </div>
+         </div><button onclick="resetSimulation()" class="w-full bg-[#0070F0] hover:bg-[#005BC0] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg> Try Again </button>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: '"Do you know how I can use AI at WGU?"',
+      student_scenario: '"I\'m worried that using AI might violate WGU\'s academic integrity policy. Can you just tell me if it\'s okay?"'
+    };
+
+    const feedbackData = [
+      {
+        correct: false,
+        title: "Not Quite Right",
+        text: "By simply reassuring them, you're giving policy advice rather than directing them to resources. Guide them to find the answer in the Student Handbook or with their Course Instructor."
+      },
+      {
+        correct: true,
+        title: "Excellent Response!",
+        text: "Perfect! You validated their concern, showed them how to find the policy themselves (Student Handbook), and directed them to their Course Instructor for clarification. This builds independence and confidence."
+      },
+      {
+        correct: false,
+        title: "Not Quite Right",
+        text: "This response advises them without directing them to resources. Instead, help them find the information themselves in the Student Handbook or encourage them to speak with their Course Instructor."
+      },
+      {
+        correct: false,
+        title: "Not Quite Right",
+        text: "While suggesting ACC resources is good, this response alone doesn't show them the primary resource (Student Handbook) or encourage them to speak with their Course Instructor for context-specific guidance."
+      }
+    ];
+
+    function selectOption(index) {
+      const feedback = feedbackData[index];
+      const feedbackBox = document.getElementById('feedback-box');
+      const feedbackIcon = document.getElementById('feedback-icon');
+      const feedbackTitle = document.getElementById('feedback-title');
+      const feedbackText = document.getElementById('feedback-text');
+
+      if (feedback.correct) {
+        feedbackBox.className = 'rounded-lg p-5 mb-6 bg-green-50 border-2 border-[#97E152]';
+        feedbackIcon.innerHTML = '<svg class="w-8 h-8 text-[#97E152]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>';
+        feedbackTitle.className = 'font-bold mb-2 text-green-800';
+      } else {
+        feedbackBox.className = 'rounded-lg p-5 mb-6 bg-orange-50 border-2 border-orange-400';
+        feedbackIcon.innerHTML = '<svg class="w-8 h-8 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>';
+        feedbackTitle.className = 'font-bold mb-2 text-orange-800';
+      }
+
+      feedbackTitle.textContent = feedback.title;
+      feedbackText.textContent = feedback.text;
+
+      document.getElementById('scenario-section').classList.add('hidden');
+      document.getElementById('feedback-section').classList.remove('hidden');
+    }
+
+    function resetSimulation() {
+      document.getElementById('scenario-section').classList.remove('hidden');
+      document.getElementById('feedback-section').classList.add('hidden');
+    }
+
+    async function onConfigChange(config) {
+      const titleEl = document.getElementById('main-title');
+      if (titleEl) {
+        titleEl.textContent = config.main_title || defaultConfig.main_title;
+      }
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ['main_title', config.main_title || defaultConfig.main_title],
+        ['student_scenario', config.student_scenario || defaultConfig.student_scenario]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d0030d363ec393a',t:'MTc3MTQ0NTY2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
