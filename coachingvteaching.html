@@ -1,518 +1,464 @@
-
 <!doctype html>
 <html lang="en" class="h-full">
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Who Does the Student Need?</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Role Clarity Learning Check</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="/_sdk/element_sdk.js"></script>
   <style>
-    body {
-      box-sizing: border-box;
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-    }
-    
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      75% { transform: translateX(5px); }
-    }
-    
-    @keyframes celebrate {
-      0% { transform: scale(1) rotate(0deg); }
-      25% { transform: scale(1.1) rotate(-3deg); }
-      50% { transform: scale(1.1) rotate(3deg); }
-      75% { transform: scale(1.1) rotate(-3deg); }
-      100% { transform: scale(1) rotate(0deg); }
-    }
-    
-    .scenario-card {
-      animation: fadeIn 0.4s ease-out forwards;
-      cursor: grab;
-      user-select: none;
-      touch-action: none;
-    }
-    
-    .scenario-card:active {
-      cursor: grabbing;
-    }
-    
-    .scenario-card.dragging {
-      opacity: 0.8;
-      transform: scale(1.05) rotate(2deg);
-      box-shadow: 0 20px 40px rgba(0, 40, 85, 0.3);
-      z-index: 1000;
-    }
-    
-    .drop-zone {
-      transition: all 0.3s ease;
-    }
-    
-    .drop-zone.drag-over {
-      transform: scale(1.02);
-      box-shadow: 0 0 0 3px #0070F0, 0 10px 30px rgba(0, 112, 240, 0.3);
-    }
-    
-    .drop-zone.correct {
-      animation: pulse 0.3s ease;
-    }
-    
-    .drop-zone.incorrect {
-      animation: shake 0.4s ease;
-    }
-    
-    .completed-card {
-      animation: celebrate 0.5s ease;
-    }
-    
-    .progress-fill {
-      transition: width 0.5s ease;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
   </style>
-  <style>@view-transition { navigation: auto; }</style>
+  <style>body { box-sizing: border-box; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
- <body class="h-full bg-[#F1F1F1] overflow-auto">
-  <div id="app-wrapper" class="w-full min-h-full p-6">
-   <div class="max-w-6xl mx-auto"><!-- Header -->
-    <header class="text-center mb-8">
-     <h1 id="activity-title" class="text-3xl font-bold text-[#002855] mb-3">Who Does the Student Need?</h1>
-     <p id="instructions-text" class="text-[#002855] text-lg max-w-2xl mx-auto">Drag each student scenario to the correct support role. Think about what the student is really asking for!</p>
-    </header><!-- Progress Bar -->
-    <div class="mb-8">
-     <div class="flex justify-between items-center mb-2"><span class="text-sm font-semibold text-[#002855]">Progress</span> <span id="progress-text" class="text-sm font-semibold text-[#002855]">0 / 6 completed</span>
+ <body class="h-full">
+  <div id="app-wrapper" class="w-full h-full overflow-auto" style="background-color: #F1F1F1; font-family: Arial, sans-serif;">
+   <div class="max-w-3xl mx-auto px-6 py-8"><!-- Header -->
+    <div class="text-center mb-8">
+     <div class="inline-flex items-center gap-2 mb-4">
+      <svg class="w-10 h-10" viewbox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" fill="#002855" /> <path d="M14 20l4 4 8-8" stroke="#97E152" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
      </div>
-     <div class="w-full h-3 bg-white rounded-full overflow-hidden shadow-inner">
-      <div id="progress-bar" class="progress-fill h-full bg-[#97E152] rounded-full" style="width: 0%"></div>
+     <h1 id="quiz-title" class="text-2xl font-bold mb-2" style="color: #002855;">Role Clarity Learning Check</h1>
+     <p class="text-gray-600">Test your understanding of when to involve Course Instructors vs Peer Coaches</p>
+    </div><!-- Progress Bar -->
+    <div class="mb-6">
+     <div class="flex justify-between text-sm mb-2" style="color: #002855;"><span>Progress</span> <span id="progress-text">Question 1 of 6</span>
      </div>
-    </div><!-- Drop Zones -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8"><!-- Course Instructor Zone -->
-     <div class="drop-zone bg-white rounded-xl p-4 shadow-lg border-2 border-[#0070F0]" data-role="course-instructor">
-      <div class="flex items-center gap-3 mb-4 pb-3 border-b-2 border-[#0070F0]">
-       <div class="w-12 h-12 rounded-full bg-[#0070F0] flex items-center justify-center text-2xl">
-        📚
+     <div class="w-full h-3 rounded-full bg-white shadow-inner">
+      <div id="progress-bar" class="h-3 rounded-full transition-all duration-500" style="width: 0%; background: linear-gradient(90deg, #0070F0, #46B1EF);"></div>
+     </div>
+    </div><!-- Quiz Container -->
+    <div id="quiz-container" class="bg-white rounded-2xl shadow-lg p-6 mb-6"><!-- Scenario -->
+     <div id="scenario-container" class="mb-6">
+      <div class="flex items-start gap-3 mb-4">
+       <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style="background-color: #46B1EF;">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
        </div>
+       <div><span class="text-xs font-semibold uppercase tracking-wide" style="color: #0070F0;">Scenario</span>
+        <p id="scenario-text" class="text-lg text-gray-800 mt-1 leading-relaxed"></p>
+       </div>
+      </div>
+     </div><!-- Question 1: Who should help? -->
+     <div id="question-1" class="mb-6">
+      <h3 class="font-semibold mb-3" style="color: #002855;">Who is best suited to help this student?</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><button onclick="selectRole('ci')" id="btn-ci" class="role-btn p-4 rounded-xl border-2 border-gray-200 bg-gray-50 hover:border-blue-300 hover:bg-blue-50 transition-all text-left">
+        <div class="flex items-center gap-3">
+         <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background-color: #002855;">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+         </div>
+         <div><span class="font-semibold text-gray-800">Course Instructor</span>
+          <p class="text-xs text-gray-500">Subject-matter expert</p>
+         </div>
+        </div></button> <button onclick="selectRole('pc')" id="btn-pc" class="role-btn p-4 rounded-xl border-2 border-gray-200 bg-gray-50 hover:border-blue-300 hover:bg-blue-50 transition-all text-left">
+        <div class="flex items-center gap-3">
+         <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background-color: #97E152;">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+         </div>
+         <div><span class="font-semibold text-gray-800">Peer Coach</span>
+          <p class="text-xs text-gray-500">Learning process support</p>
+         </div>
+        </div></button>
+      </div>
+     </div><!-- Question 2: Coaching or Teaching? -->
+     <div id="question-2" class="hidden mb-6">
+      <h3 class="font-semibold mb-3" style="color: #002855;">What type of support does this student need?</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><button onclick="selectType('teaching')" id="btn-teaching" class="type-btn p-4 rounded-xl border-2 border-gray-200 bg-gray-50 hover:border-blue-300 hover:bg-blue-50 transition-all text-left">
+        <div class="flex items-center gap-3">
+         <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background-color: #0070F0;">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+          </svg>
+         </div>
+         <div><span class="font-semibold text-gray-800">Teaching</span>
+          <p class="text-xs text-gray-500">Content-focused, directive</p>
+         </div>
+        </div></button> <button onclick="selectType('coaching')" id="btn-coaching" class="type-btn p-4 rounded-xl border-2 border-gray-200 bg-gray-50 hover:border-blue-300 hover:bg-blue-50 transition-all text-left">
+        <div class="flex items-center gap-3">
+         <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background-color: #97E152;">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+         </div>
+         <div><span class="font-semibold text-gray-800">Coaching</span>
+          <p class="text-xs text-gray-500">Process-focused, guiding</p>
+         </div>
+        </div></button>
+      </div>
+     </div><!-- Feedback -->
+     <div id="feedback" class="hidden rounded-xl p-4 mb-4">
+      <div class="flex items-start gap-3">
+       <div id="feedback-icon" class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"></div>
        <div>
-        <h2 class="font-bold text-[#002855] text-lg">Course Instructor</h2>
-        <p class="text-xs text-[#002855] opacity-70">Academic &amp; content expert</p>
+        <p id="feedback-title" class="font-semibold"></p>
+        <p id="feedback-text" class="text-sm mt-1"></p>
        </div>
       </div>
-      <div class="min-h-[120px] rounded-lg bg-[#F1F1F1] p-3 flex flex-col gap-2" id="ci-drop-area">
-       <p class="text-center text-sm text-[#002855] opacity-50 drop-hint">Drop scenarios here</p>
+     </div><!-- Next Button --> <button id="next-btn" onclick="nextQuestion()" class="hidden w-full py-3 rounded-xl font-semibold text-white transition-all hover:opacity-90" style="background-color: #0070F0;"> Continue to Next Scenario </button>
+    </div><!-- Results Container -->
+    <div id="results-container" class="hidden bg-white rounded-2xl shadow-lg p-8 text-center">
+     <div class="mb-6">
+      <div class="w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-4" style="background-color: #97E152;">
+       <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+       </svg>
       </div>
-     </div><!-- Program Mentor Zone -->
-     <div class="drop-zone bg-white rounded-xl p-4 shadow-lg border-2 border-[#97E152]" data-role="program-mentor">
-      <div class="flex items-center gap-3 mb-4 pb-3 border-b-2 border-[#97E152]">
-       <div class="w-12 h-12 rounded-full bg-[#97E152] flex items-center justify-center text-2xl">
-        🎯
-       </div>
-       <div>
-        <h2 class="font-bold text-[#002855] text-lg">Program Mentor</h2>
-        <p class="text-xs text-[#002855] opacity-70">Degree planning &amp; progress</p>
-       </div>
+      <h2 class="text-2xl font-bold mb-2" style="color: #002855;">Learning Check Complete!</h2>
+      <p id="completion-msg" class="text-gray-600 mb-4">Great work understanding role clarity at WGU!</p>
+     </div>
+     <div class="bg-gray-50 rounded-xl p-6 mb-6">
+      <div class="text-4xl font-bold mb-2" style="color: #0070F0;">
+       <span id="score">0</span>/<span id="total">12</span>
       </div>
-      <div class="min-h-[120px] rounded-lg bg-[#F1F1F1] p-3 flex flex-col gap-2" id="pm-drop-area">
-       <p class="text-center text-sm text-[#002855] opacity-50 drop-hint">Drop scenarios here</p>
-      </div>
-     </div><!-- Peer Coach Zone -->
-     <div class="drop-zone bg-white rounded-xl p-4 shadow-lg border-2 border-[#002855]" data-role="peer-coach">
-      <div class="flex items-center gap-3 mb-4 pb-3 border-b-2 border-[#002855]">
-       <div class="w-12 h-12 rounded-full bg-[#002855] flex items-center justify-center text-2xl">
-        💡
-       </div>
-       <div>
-        <h2 class="font-bold text-[#002855] text-lg">Peer Coach</h2>
-        <p class="text-xs text-[#002855] opacity-70">Study strategies &amp; approach</p>
-       </div>
-      </div>
-      <div class="min-h-[120px] rounded-lg bg-[#F1F1F1] p-3 flex flex-col gap-2" id="pc-drop-area">
-       <p class="text-center text-sm text-[#002855] opacity-50 drop-hint">Drop scenarios here</p>
+      <p class="text-gray-600">Correct Answers</p>
+      <div class="mt-4 h-4 bg-gray-200 rounded-full overflow-hidden">
+       <div id="score-bar" class="h-full rounded-full transition-all duration-1000" style="background: linear-gradient(90deg, #97E152, #46B1EF);"></div>
       </div>
      </div>
-    </div><!-- Scenario Cards Container -->
-    <div class="bg-white rounded-xl p-6 shadow-lg">
-     <h3 class="font-bold text-[#002855] mb-4 flex items-center gap-2"><span class="text-xl">📋</span> Student Scenarios</h3>
-     <div id="scenarios-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"><!-- Scenarios will be rendered here -->
+     <div id="score-message" class="mb-6 p-4 rounded-xl"></div><button onclick="restartQuiz()" class="px-8 py-3 rounded-xl font-semibold text-white transition-all hover:opacity-90" style="background-color: #002855;"> Try Again </button>
+    </div><!-- Key Reminder -->
+    <div class="bg-white rounded-xl p-4 shadow-sm">
+     <div class="flex items-center gap-2 mb-2">
+      <svg class="w-5 h-5" style="color: #0070F0;" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg><span class="font-semibold text-sm" style="color: #002855;">Remember</span>
      </div>
-    </div><!-- Feedback Area -->
-    <div id="feedback-area" class="mt-6 hidden">
-     <div id="feedback-content" class="p-4 rounded-xl text-center font-semibold"></div>
-    </div><!-- Reset Button -->
-    <div class="mt-6 text-center"><button id="reset-btn" class="px-6 py-3 bg-[#002855] text-white rounded-lg font-semibold hover:bg-[#001a3d] transition-colors shadow-lg"> 🔄 Reset Activity </button>
+     <p class="text-sm text-gray-600"><strong>Peer Coaches</strong> focus on <em>how</em> students learn. <strong>Course Instructors</strong> focus on <em>what</em> students learn.</p>
     </div>
    </div>
   </div>
   <script>
     const defaultConfig = {
-      activity_title: "Who Does the Student Need?",
-      instructions_text: "Drag each student scenario to the correct support role. Think about what the student is really asking for!",
-      primary_color: "#002855",
-      secondary_color: "#0070F0",
-      accent_color: "#97E152",
+      quiz_title: "Role Clarity Learning Check",
+      completion_message: "Great work understanding role clarity at WGU!",
       background_color: "#F1F1F1",
-      text_color: "#002855",
+      primary_color: "#002855",
+      accent_color: "#0070F0",
+      success_color: "#97E152",
+      highlight_color: "#46B1EF",
       font_family: "Arial",
       font_size: 16
     };
-    
-    let config = { ...defaultConfig };
-    
+
     const scenarios = [
       {
-        id: 1,
-        text: "\"I keep reading the chapter, but nothing sticks. I don't know how to study for this material.\"",
-        correctRole: "peer-coach",
-        feedback: "This student needs help with their study approach and strategies — perfect for a Peer Coach!"
+        text: "A student messages you asking, \"Can you explain what the rubric means by 'analyze the organizational structure'? I don't understand what they're looking for.\"",
+        correctRole: "ci",
+        correctType: "teaching",
+        roleExplanation: "This student needs help interpreting rubric language and understanding assessment requirements. Course Instructors are the subject-matter experts who can clarify task directions and rubric expectations.",
+        typeExplanation: "Explaining what rubric criteria mean requires content expertise and directive instruction — this is teaching, which involves clarifying meaning and providing correct interpretations."
       },
       {
-        id: 2,
-        text: "\"The rubric mentions 'sufficient analysis' but I'm not sure what level of detail they're looking for.\"",
-        correctRole: "course-instructor",
-        feedback: "Questions about rubric interpretation and assessment requirements go to the Course Instructor."
+        text: "A student says, \"I've been staring at this chapter for two hours and nothing is sticking. I don't know how to study this material effectively.\"",
+        correctRole: "pc",
+        correctType: "coaching",
+        roleExplanation: "This student is struggling with their learning approach, not the content itself. Peer Coaches help students develop effective study strategies and analyze their learning process.",
+        typeExplanation: "This requires coaching — helping the student reflect on their approach, explore different strategies, and build independence in how they learn."
       },
       {
-        id: 3,
-        text: "\"I'm thinking about taking fewer courses next term. Can we look at how that affects my graduation date?\"",
-        correctRole: "program-mentor",
-        feedback: "Term planning and graduation pacing are handled by the Program Mentor."
+        text: "A student asks, \"Is my thesis statement correct for this paper? Does it meet the requirements?\"",
+        correctRole: "ci",
+        correctType: "teaching",
+        roleExplanation: "Evaluating whether academic work meets requirements is the role of Course Instructors. Peer Coaches don't evaluate or determine correctness of student work.",
+        typeExplanation: "Confirming or correcting understanding of whether work meets standards is teaching — it requires subject expertise and involves evaluating understanding."
       },
       {
-        id: 4,
-        text: "\"I have time blocked for studying but I keep getting distracted. How do other students stay focused?\"",
-        correctRole: "peer-coach",
-        feedback: "Focus strategies and study habits are coaching conversations — great fit for a Peer Coach!"
+        text: "A student shares, \"I keep procrastinating on this course. Every time I sit down to work on it, I find something else to do. I'm falling behind.\"",
+        correctRole: "pc",
+        correctType: "coaching",
+        roleExplanation: "This is about motivation, planning, and persisting through challenges — exactly what Peer Coaches support. The focus is on how the student approaches their learning, not course content.",
+        typeExplanation: "Coaching is the right approach here — asking questions to help the student understand their patterns, explore what's causing the avoidance, and develop strategies to move forward."
       },
       {
-        id: 5,
-        text: "\"My paper was returned and I don't understand why this section doesn't meet the competency.\"",
-        correctRole: "course-instructor",
-        feedback: "Academic feedback and understanding evaluation results belong with the Course Instructor."
+        text: "A student messages, \"I don't understand the difference between the two theories we're supposed to compare in this assignment. Can you explain them to me?\"",
+        correctRole: "ci",
+        correctType: "teaching",
+        roleExplanation: "Explaining course concepts and terminology is the role of Course Instructors as subject-matter experts. Peer Coaches don't provide content instruction or act as tutors.",
+        typeExplanation: "This is teaching — it involves explaining information and giving knowledge directly to someone. This requires content expertise."
       },
       {
-        id: 6,
-        text: "\"I'm struggling to balance work and school. I might need to adjust my course load.\"",
-        correctRole: "program-mentor",
-        feedback: "Workload adjustments and barriers to continuation are Program Mentor territory."
+        text: "A student says, \"I have three assessments due this week and I don't know where to start. I feel overwhelmed and can't figure out how to prioritize.\"",
+        correctRole: "pc",
+        correctType: "coaching",
+        roleExplanation: "This student needs help with planning, organization, and working through obstacles — core areas where Peer Coaches provide support.",
+        typeExplanation: "Coaching helps the student think through their situation, analyze options, and develop their own plan. The goal is building self-efficacy and independence."
       }
     ];
-    
-    let completedScenarios = new Set();
-    let draggedElement = null;
-    
-    function renderScenarios() {
-      const container = document.getElementById('scenarios-container');
-      container.innerHTML = '';
-      
-      scenarios.forEach((scenario, index) => {
-        if (completedScenarios.has(scenario.id)) return;
-        
-        const card = document.createElement('div');
-        card.className = 'scenario-card bg-[#F1F1F1] p-4 rounded-lg shadow-md border-l-4 border-[#0070F0] hover:shadow-lg transition-shadow';
-        card.style.animationDelay = `${index * 0.1}s`;
-        card.setAttribute('draggable', 'true');
-        card.setAttribute('data-id', scenario.id);
-        card.innerHTML = `
-          <p class="text-sm text-[#002855] italic leading-relaxed">${scenario.text}</p>
-        `;
-        
-        card.addEventListener('dragstart', handleDragStart);
-        card.addEventListener('dragend', handleDragEnd);
-        card.addEventListener('touchstart', handleTouchStart, { passive: false });
-        card.addEventListener('touchmove', handleTouchMove, { passive: false });
-        card.addEventListener('touchend', handleTouchEnd);
-        
-        container.appendChild(card);
+
+    let currentQuestion = 0;
+    let selectedRole = null;
+    let selectedType = null;
+    let score = 0;
+    let questionsAnswered = 0;
+
+    function selectRole(role) {
+      selectedRole = role;
+      document.querySelectorAll('.role-btn').forEach(btn => {
+        btn.classList.remove('ring-2');
+        btn.style.borderColor = '#e5e7eb';
+        btn.style.backgroundColor = '#f9fafb';
       });
       
-      if (container.children.length === 0) {
-        container.innerHTML = '<p class="text-center text-[#002855] col-span-full py-8 text-lg">🎉 All scenarios sorted! Great job!</p>';
-      }
-    }
-    
-    function handleDragStart(e) {
-      draggedElement = e.target;
-      e.target.classList.add('dragging');
-      e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('text/plain', e.target.getAttribute('data-id'));
-    }
-    
-    function handleDragEnd(e) {
-      e.target.classList.remove('dragging');
-      draggedElement = null;
-      document.querySelectorAll('.drop-zone').forEach(zone => zone.classList.remove('drag-over'));
-    }
-    
-    let touchClone = null;
-    let touchStartX, touchStartY;
-    
-    function handleTouchStart(e) {
-      e.preventDefault();
-      draggedElement = e.target.closest('.scenario-card');
-      if (!draggedElement) return;
+      const selectedBtn = document.getElementById(`btn-${role}`);
+      selectedBtn.classList.add('ring-2');
+      selectedBtn.style.borderColor = '#0070F0';
+      selectedBtn.style.backgroundColor = '#eff6ff';
       
-      const touch = e.touches[0];
-      touchStartX = touch.clientX;
-      touchStartY = touch.clientY;
-      
-      touchClone = draggedElement.cloneNode(true);
-      touchClone.style.position = 'fixed';
-      touchClone.style.pointerEvents = 'none';
-      touchClone.style.zIndex = '9999';
-      touchClone.style.width = draggedElement.offsetWidth + 'px';
-      touchClone.style.opacity = '0.9';
-      touchClone.style.transform = 'rotate(3deg) scale(1.05)';
-      document.body.appendChild(touchClone);
-      
-      updateTouchClonePosition(touch);
-      draggedElement.style.opacity = '0.3';
+      // Show question 2
+      document.getElementById('question-2').classList.remove('hidden');
+      document.getElementById('question-2').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
-    
-    function handleTouchMove(e) {
-      e.preventDefault();
-      if (!touchClone) return;
-      
-      const touch = e.touches[0];
-      updateTouchClonePosition(touch);
-      
-      const dropZone = getDropZoneAtPoint(touch.clientX, touch.clientY);
-      document.querySelectorAll('.drop-zone').forEach(zone => zone.classList.remove('drag-over'));
-      if (dropZone) {
-        dropZone.classList.add('drag-over');
-      }
-    }
-    
-    function handleTouchEnd(e) {
-      if (!touchClone || !draggedElement) return;
-      
-      const touch = e.changedTouches[0];
-      const dropZone = getDropZoneAtPoint(touch.clientX, touch.clientY);
-      
-      if (dropZone) {
-        const role = dropZone.getAttribute('data-role');
-        const scenarioId = parseInt(draggedElement.getAttribute('data-id'));
-        handleDrop(scenarioId, role, dropZone);
-      }
-      
-      touchClone.remove();
-      touchClone = null;
-      draggedElement.style.opacity = '1';
-      draggedElement = null;
-      document.querySelectorAll('.drop-zone').forEach(zone => zone.classList.remove('drag-over'));
-    }
-    
-    function updateTouchClonePosition(touch) {
-      if (!touchClone) return;
-      touchClone.style.left = (touch.clientX - touchClone.offsetWidth / 2) + 'px';
-      touchClone.style.top = (touch.clientY - 30) + 'px';
-    }
-    
-    function getDropZoneAtPoint(x, y) {
-      const elements = document.elementsFromPoint(x, y);
-      return elements.find(el => el.classList.contains('drop-zone'));
-    }
-    
-    function setupDropZones() {
-      document.querySelectorAll('.drop-zone').forEach(zone => {
-        zone.addEventListener('dragover', (e) => {
-          e.preventDefault();
-          zone.classList.add('drag-over');
-        });
-        
-        zone.addEventListener('dragleave', () => {
-          zone.classList.remove('drag-over');
-        });
-        
-        zone.addEventListener('drop', (e) => {
-          e.preventDefault();
-          zone.classList.remove('drag-over');
-          
-          const scenarioId = parseInt(e.dataTransfer.getData('text/plain'));
-          const role = zone.getAttribute('data-role');
-          handleDrop(scenarioId, role, zone);
-        });
+
+    function selectType(type) {
+      selectedType = type;
+      document.querySelectorAll('.type-btn').forEach(btn => {
+        btn.classList.remove('ring-2');
+        btn.style.borderColor = '#e5e7eb';
+        btn.style.backgroundColor = '#f9fafb';
       });
+      
+      const selectedBtn = document.getElementById(`btn-${type}`);
+      selectedBtn.classList.add('ring-2');
+      selectedBtn.style.borderColor = '#0070F0';
+      selectedBtn.style.backgroundColor = '#eff6ff';
+      
+      checkAnswers();
     }
-    
-    function handleDrop(scenarioId, role, zone) {
-      const scenario = scenarios.find(s => s.id === scenarioId);
-      if (!scenario) return;
+
+    function checkAnswers() {
+      const scenario = scenarios[currentQuestion];
+      const roleCorrect = selectedRole === scenario.correctRole;
+      const typeCorrect = selectedType === scenario.correctType;
       
-      const isCorrect = scenario.correctRole === role;
-      const feedbackArea = document.getElementById('feedback-area');
-      const feedbackContent = document.getElementById('feedback-content');
+      if (roleCorrect) score++;
+      if (typeCorrect) score++;
+      questionsAnswered += 2;
       
-      feedbackArea.classList.remove('hidden');
+      const feedback = document.getElementById('feedback');
+      const feedbackIcon = document.getElementById('feedback-icon');
+      const feedbackTitle = document.getElementById('feedback-title');
+      const feedbackText = document.getElementById('feedback-text');
       
-      if (isCorrect) {
-        zone.classList.add('correct');
-        setTimeout(() => zone.classList.remove('correct'), 300);
-        
-        feedbackContent.className = 'p-4 rounded-xl text-center font-semibold bg-[#97E152] text-[#002855]';
-        feedbackContent.innerHTML = `✅ Correct! ${scenario.feedback}`;
-        
-        completedScenarios.add(scenarioId);
-        addCompletedCard(scenario, zone);
-        renderScenarios();
-        updateProgress();
+      feedback.classList.remove('hidden');
+      
+      if (roleCorrect && typeCorrect) {
+        feedback.style.backgroundColor = '#f0fdf4';
+        feedback.style.borderLeft = '4px solid #97E152';
+        feedbackIcon.style.backgroundColor = '#97E152';
+        feedbackIcon.innerHTML = '<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
+        feedbackTitle.textContent = 'Excellent!';
+        feedbackTitle.style.color = '#166534';
+        feedbackText.textContent = scenario.roleExplanation;
+        feedbackText.style.color = '#166534';
+      } else if (roleCorrect || typeCorrect) {
+        feedback.style.backgroundColor = '#fefce8';
+        feedback.style.borderLeft = '4px solid #eab308';
+        feedbackIcon.style.backgroundColor = '#eab308';
+        feedbackIcon.innerHTML = '<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>';
+        feedbackTitle.textContent = 'Partially Correct';
+        feedbackTitle.style.color = '#854d0e';
+        feedbackText.textContent = !roleCorrect ? scenario.roleExplanation : scenario.typeExplanation;
+        feedbackText.style.color = '#854d0e';
       } else {
-        zone.classList.add('incorrect');
-        setTimeout(() => zone.classList.remove('incorrect'), 400);
-        
-        feedbackContent.className = 'p-4 rounded-xl text-center font-semibold bg-[#ff6b6b] text-white';
-        feedbackContent.innerHTML = `❌ Not quite! Think about what the student is really asking for. Try again!`;
+        feedback.style.backgroundColor = '#fef2f2';
+        feedback.style.borderLeft = '4px solid #ef4444';
+        feedbackIcon.style.backgroundColor = '#ef4444';
+        feedbackIcon.innerHTML = '<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>';
+        feedbackTitle.textContent = 'Not Quite';
+        feedbackTitle.style.color = '#991b1b';
+        feedbackText.textContent = scenario.roleExplanation + ' ' + scenario.typeExplanation;
+        feedbackText.style.color = '#991b1b';
       }
       
+      // Highlight correct answers
+      highlightCorrectAnswers(scenario);
+      
+      // Disable buttons
+      document.querySelectorAll('.role-btn, .type-btn').forEach(btn => {
+        btn.disabled = true;
+        btn.style.cursor = 'default';
+      });
+      
+      // Show next button
+      const nextBtn = document.getElementById('next-btn');
+      nextBtn.classList.remove('hidden');
+      nextBtn.textContent = currentQuestion < scenarios.length - 1 ? 'Continue to Next Scenario' : 'See Your Results';
+    }
+
+    function highlightCorrectAnswers(scenario) {
+      // Highlight correct role
+      const correctRoleBtn = document.getElementById(`btn-${scenario.correctRole}`);
+      correctRoleBtn.style.borderColor = '#97E152';
+      correctRoleBtn.style.backgroundColor = '#f0fdf4';
+      
+      // Highlight correct type
+      const correctTypeBtn = document.getElementById(`btn-${scenario.correctType}`);
+      correctTypeBtn.style.borderColor = '#97E152';
+      correctTypeBtn.style.backgroundColor = '#f0fdf4';
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      
+      if (currentQuestion >= scenarios.length) {
+        showResults();
+        return;
+      }
+      
+      // Reset state
+      selectedRole = null;
+      selectedType = null;
+      
+      // Update progress
+      const progress = ((currentQuestion) / scenarios.length) * 100;
+      document.getElementById('progress-bar').style.width = `${progress}%`;
+      document.getElementById('progress-text').textContent = `Question ${currentQuestion + 1} of ${scenarios.length}`;
+      
+      // Update scenario
+      document.getElementById('scenario-text').textContent = scenarios[currentQuestion].text;
+      
+      // Reset UI
+      document.getElementById('question-2').classList.add('hidden');
+      document.getElementById('feedback').classList.add('hidden');
+      document.getElementById('next-btn').classList.add('hidden');
+      
+      document.querySelectorAll('.role-btn, .type-btn').forEach(btn => {
+        btn.disabled = false;
+        btn.style.cursor = 'pointer';
+        btn.classList.remove('ring-2');
+        btn.style.borderColor = '#e5e7eb';
+        btn.style.backgroundColor = '#f9fafb';
+      });
+      
+      // Scroll to top
+      document.getElementById('quiz-container').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function showResults() {
+      document.getElementById('quiz-container').classList.add('hidden');
+      document.getElementById('results-container').classList.remove('hidden');
+      
+      const total = scenarios.length * 2;
+      document.getElementById('score').textContent = score;
+      document.getElementById('total').textContent = total;
+      
+      const percentage = (score / total) * 100;
       setTimeout(() => {
-        feedbackArea.classList.add('hidden');
-      }, 4000);
-    }
-    
-    function addCompletedCard(scenario, zone) {
-      const dropArea = zone.querySelector('[id$="-drop-area"]');
-      const hint = dropArea.querySelector('.drop-hint');
-      if (hint) hint.remove();
+        document.getElementById('score-bar').style.width = `${percentage}%`;
+      }, 100);
       
-      const card = document.createElement('div');
-      card.className = 'completed-card bg-white p-2 rounded text-xs text-[#002855] shadow-sm border-l-2 border-[#97E152]';
-      card.innerHTML = scenario.text.substring(0, 50) + '...';
-      dropArea.appendChild(card);
-    }
-    
-    function updateProgress() {
-      const total = scenarios.length;
-      const completed = completedScenarios.size;
-      const percentage = (completed / total) * 100;
-      
-      document.getElementById('progress-bar').style.width = `${percentage}%`;
-      document.getElementById('progress-text').textContent = `${completed} / ${total} completed`;
-      
-      if (completed === total) {
-        showCompletionMessage();
+      const scoreMessage = document.getElementById('score-message');
+      if (percentage >= 90) {
+        scoreMessage.style.backgroundColor = '#f0fdf4';
+        scoreMessage.style.color = '#166534';
+        scoreMessage.innerHTML = '<strong>Outstanding!</strong> You have a clear understanding of role boundaries and the difference between coaching and teaching.';
+      } else if (percentage >= 70) {
+        scoreMessage.style.backgroundColor = '#eff6ff';
+        scoreMessage.style.color = '#1e40af';
+        scoreMessage.innerHTML = '<strong>Good work!</strong> You understand most role distinctions. Review the scenarios you missed to strengthen your understanding.';
+      } else {
+        scoreMessage.style.backgroundColor = '#fefce8';
+        scoreMessage.style.color = '#854d0e';
+        scoreMessage.innerHTML = '<strong>Keep learning!</strong> Review the differences between coaching and teaching, and when each role is appropriate.';
       }
+      
+      document.getElementById('progress-bar').style.width = '100%';
+      document.getElementById('progress-text').textContent = 'Complete!';
     }
-    
-    function showCompletionMessage() {
-      const feedbackArea = document.getElementById('feedback-area');
-      const feedbackContent = document.getElementById('feedback-content');
+
+    function restartQuiz() {
+      currentQuestion = 0;
+      selectedRole = null;
+      selectedType = null;
+      score = 0;
+      questionsAnswered = 0;
       
-      feedbackArea.classList.remove('hidden');
-      feedbackContent.className = 'p-6 rounded-xl text-center font-semibold bg-gradient-to-r from-[#97E152] to-[#0070F0] text-white';
-      feedbackContent.innerHTML = `
-        <div class="text-2xl mb-2">🎉 Outstanding!</div>
-        <div>You've successfully sorted all scenarios! You now understand when to refer students to Course Instructors, Program Mentors, or provide Peer Coaching support.</div>
-      `;
-    }
-    
-    function resetActivity() {
-      completedScenarios.clear();
+      document.getElementById('results-container').classList.add('hidden');
+      document.getElementById('quiz-container').classList.remove('hidden');
       
-      document.querySelectorAll('[id$="-drop-area"]').forEach(area => {
-        area.innerHTML = '<p class="text-center text-sm text-[#002855] opacity-50 drop-hint">Drop scenarios here</p>';
-      });
+      document.getElementById('progress-bar').style.width = '0%';
+      document.getElementById('progress-text').textContent = 'Question 1 of 6';
+      document.getElementById('scenario-text').textContent = scenarios[0].text;
       
-      document.getElementById('feedback-area').classList.add('hidden');
+      document.getElementById('question-2').classList.add('hidden');
+      document.getElementById('feedback').classList.add('hidden');
+      document.getElementById('next-btn').classList.add('hidden');
       
-      renderScenarios();
-      updateProgress();
-    }
-    
-    function applyConfig(cfg) {
-      document.getElementById('activity-title').textContent = cfg.activity_title || defaultConfig.activity_title;
-      document.getElementById('instructions-text').textContent = cfg.instructions_text || defaultConfig.instructions_text;
-      
-      const fontFamily = cfg.font_family || defaultConfig.font_family;
-      document.body.style.fontFamily = `${fontFamily}, sans-serif`;
-      
-      const fontSize = cfg.font_size || defaultConfig.font_size;
-      document.body.style.fontSize = `${fontSize}px`;
-      
-      document.body.style.backgroundColor = cfg.background_color || defaultConfig.background_color;
-      
-      document.querySelectorAll('.text-\\[\\#002855\\]').forEach(el => {
-        el.style.color = cfg.text_color || defaultConfig.text_color;
+      document.querySelectorAll('.role-btn, .type-btn').forEach(btn => {
+        btn.disabled = false;
+        btn.style.cursor = 'pointer';
+        btn.classList.remove('ring-2');
+        btn.style.borderColor = '#e5e7eb';
+        btn.style.backgroundColor = '#f9fafb';
       });
     }
-    
-    async function onConfigChange(cfg) {
-      config = { ...defaultConfig, ...cfg };
-      applyConfig(config);
+
+    async function onConfigChange(config) {
+      const title = config.quiz_title || defaultConfig.quiz_title;
+      const completionMsg = config.completion_message || defaultConfig.completion_message;
+      const fontFamily = config.font_family || defaultConfig.font_family;
+      const fontSize = config.font_size || defaultConfig.font_size;
+      const bgColor = config.background_color || defaultConfig.background_color;
+      const primaryColor = config.primary_color || defaultConfig.primary_color;
+      const accentColor = config.accent_color || defaultConfig.accent_color;
+      const successColor = config.success_color || defaultConfig.success_color;
+      const highlightColor = config.highlight_color || defaultConfig.highlight_color;
+      
+      document.getElementById('quiz-title').textContent = title;
+      document.getElementById('completion-msg').textContent = completionMsg;
+      
+      const wrapper = document.getElementById('app-wrapper');
+      wrapper.style.fontFamily = `${fontFamily}, Arial, sans-serif`;
+      wrapper.style.backgroundColor = bgColor;
+      wrapper.style.fontSize = `${fontSize}px`;
     }
-    
-    function mapToCapabilities(cfg) {
+
+    function mapToCapabilities(config) {
       return {
         recolorables: [
           {
-            get: () => cfg.background_color || defaultConfig.background_color,
-            set: (value) => {
-              cfg.background_color = value;
-              if (window.elementSdk) window.elementSdk.setConfig({ background_color: value });
-            }
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => { config.background_color = value; window.elementSdk.setConfig({ background_color: value }); }
           },
           {
-            get: () => cfg.text_color || defaultConfig.text_color,
-            set: (value) => {
-              cfg.text_color = value;
-              if (window.elementSdk) window.elementSdk.setConfig({ text_color: value });
-            }
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => { config.primary_color = value; window.elementSdk.setConfig({ primary_color: value }); }
           },
           {
-            get: () => cfg.primary_color || defaultConfig.primary_color,
-            set: (value) => {
-              cfg.primary_color = value;
-              if (window.elementSdk) window.elementSdk.setConfig({ primary_color: value });
-            }
+            get: () => config.accent_color || defaultConfig.accent_color,
+            set: (value) => { config.accent_color = value; window.elementSdk.setConfig({ accent_color: value }); }
           },
           {
-            get: () => cfg.secondary_color || defaultConfig.secondary_color,
-            set: (value) => {
-              cfg.secondary_color = value;
-              if (window.elementSdk) window.elementSdk.setConfig({ secondary_color: value });
-            }
+            get: () => config.success_color || defaultConfig.success_color,
+            set: (value) => { config.success_color = value; window.elementSdk.setConfig({ success_color: value }); }
           },
           {
-            get: () => cfg.accent_color || defaultConfig.accent_color,
-            set: (value) => {
-              cfg.accent_color = value;
-              if (window.elementSdk) window.elementSdk.setConfig({ accent_color: value });
-            }
+            get: () => config.highlight_color || defaultConfig.highlight_color,
+            set: (value) => { config.highlight_color = value; window.elementSdk.setConfig({ highlight_color: value }); }
           }
         ],
         borderables: [],
         fontEditable: {
-          get: () => cfg.font_family || defaultConfig.font_family,
-          set: (value) => {
-            cfg.font_family = value;
-            if (window.elementSdk) window.elementSdk.setConfig({ font_family: value });
-          }
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => { config.font_family = value; window.elementSdk.setConfig({ font_family: value }); }
         },
         fontSizeable: {
-          get: () => cfg.font_size || defaultConfig.font_size,
-          set: (value) => {
-            cfg.font_size = value;
-            if (window.elementSdk) window.elementSdk.setConfig({ font_size: value });
-          }
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => { config.font_size = value; window.elementSdk.setConfig({ font_size: value }); }
         }
       };
     }
-    
-    function mapToEditPanelValues(cfg) {
+
+    function mapToEditPanelValues(config) {
       return new Map([
-        ["activity_title", cfg.activity_title || defaultConfig.activity_title],
-        ["instructions_text", cfg.instructions_text || defaultConfig.instructions_text]
+        ["quiz_title", config.quiz_title || defaultConfig.quiz_title],
+        ["completion_message", config.completion_message || defaultConfig.completion_message]
       ]);
     }
-    
+
     // Initialize
+    document.getElementById('scenario-text').textContent = scenarios[0].text;
+    
     if (window.elementSdk) {
       window.elementSdk.init({
         defaultConfig,
@@ -521,12 +467,6 @@
         mapToEditPanelValues
       });
     }
-    
-    document.getElementById('reset-btn').addEventListener('click', resetActivity);
-    
-    renderScenarios();
-    setupDropZones();
-    applyConfig(config);
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c29a2caf37c3b2f',t:'MTc2OTE5NTg5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d642181a67a3ad5',t:'MTc3MjQ5MzYxNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
