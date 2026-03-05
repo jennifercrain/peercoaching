@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting Questions</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    * { 
+      font-family: Arial, sans-serif;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: Arial, sans-serif;
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .section-divider {
+      height: 3px;
+      background: linear-gradient(90deg, #002855 0%, #0070F0 50%, #97E152 100%);
+      border-radius: 2px;
+    }
+
+    .draggable-item {
+      cursor: grab;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .draggable-item:active {
+      cursor: grabbing;
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+
+    .drop-zone {
+      min-height: 120px;
+      transition: all 0.2s ease;
+      border: 2px dashed transparent;
+      border-radius: 8px;
+    }
+
+    .drop-zone.drag-over {
+      background-color: rgba(151, 225, 82, 0.1);
+      border-color: #97E152;
+    }
+
+    .placed-item {
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app-wrapper" class="h-full w-full overflow-auto" style="background: #ffffff;">
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%);">
+    <div class="absolute inset-0 opacity-5">
+     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs>
+       <pattern id="hero-pattern" x="0" y="0" width="80" height="80" patternunits="userSpaceOnUse">
+        <circle cx="40" cy="40" r="1" fill="white" />
+       </pattern>
+      </defs> <rect width="100%" height="100%" fill="url(#hero-pattern)" />
+     </svg>
+    </div>
+    <div class="relative max-w-6xl mx-auto px-6 py-20 text-center">
+     <div class="fade-in" style="animation-delay: 0.1s;">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(151, 225, 82, 0.2);"><span class="w-2 h-2 rounded-full animate-pulse" style="background: #97E152;"></span> <span class="text-sm font-medium" style="color: #97E152;">Peer Coaching Mastery</span>
+      </div>
+     </div>
+     <h1 id="main-title" class="fade-in text-5xl md:text-6xl font-bold text-white mb-6" style="animation-delay: 0.2s;">Redirecting Questions</h1>
+     <p id="subtitle" class="fade-in text-xl max-w-3xl mx-auto" style="color: rgba(255,255,255,0.95); animation-delay: 0.3s;">Staying engaged while honoring role boundaries</p>
+    </div>
+    <svg class="w-full" viewbox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveaspectratio="none" style="display: block; margin-bottom: -1px;"><path d="M0 80V40C240 80 480 0 720 40C960 80 1200 0 1440 40V80H0Z" fill="#ffffff" />
+    </svg>
+   </header>
+   <main class="max-w-6xl mx-auto px-6">
+    <section class="py-16 fade-in" style="animation-delay: 0.5s;">
+     <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">What Redirecting Is (and Is Not)</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="grid md:grid-cols-2 gap-8">
+      <div class="bg-white rounded-2xl p-8 shadow-md border-l-4" style="border-left-color: #065f46;">
+       <h3 class="font-bold mb-4 text-lg" style="color: #065f46;">Redirecting IS:</h3>
+       <ul class="space-y-3 text-gray-700">
+        <li class="flex items-start gap-3"><span style="color: #065f46; font-weight: bold;">✓</span> <span>Remaining fully engaged with the student</span></li>
+        <li class="flex items-start gap-3"><span style="color: #065f46; font-weight: bold;">✓</span> <span>Helping them make sense of their confusion</span></li>
+        <li class="flex items-start gap-3"><span style="color: #065f46; font-weight: bold;">✓</span> <span>Coaching them on locating, interpreting, and using resources</span></li>
+        <li class="flex items-start gap-3"><span style="color: #065f46; font-weight: bold;">✓</span> <span>Supporting them in forming clear questions</span></li>
+       </ul>
+      </div>
+      <div class="bg-white rounded-2xl p-8 shadow-md border-l-4" style="border-left-color: #7f1d1d;">
+       <h3 class="font-bold mb-4 text-lg" style="color: #7f1d1d;">Redirecting IS NOT:</h3>
+       <ul class="space-y-3 text-gray-700">
+        <li class="flex items-start gap-3"><span style="color: #7f1d1d; font-weight: bold;">→</span> <span>Dismissing the question</span></li>
+        <li class="flex items-start gap-3"><span style="color: #7f1d1d; font-weight: bold;">→</span> <span>Avoiding the conversation</span></li>
+        <li class="flex items-start gap-3"><span style="color: #7f1d1d; font-weight: bold;">→</span> <span>Withdrawing support</span></li>
+        <li class="flex items-start gap-3"><span style="color: #7f1d1d; font-weight: bold;">→</span> <span>Treating the student as if they're in the wrong place</span></li>
+       </ul>
+      </div>
+     </div>
+    </section>
+    <section class="py-16 fade-in" style="animation-delay: 0.6s;">
+     <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">Deep Dive: Each Step</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="space-y-8">
+      <div class="bg-white rounded-2xl p-8 shadow-md border-l-4" style="border-left-color: #0070F0;">
+       <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white flex-shrink-0" style="background: #0070F0;">
+         1
+        </div>
+        <div>
+         <h3 class="text-2xl font-bold mb-4" style="color: #002855;">Step 1: Redirect to the Group (Live Events)</h3>
+         <p class="text-gray-700 mb-4">In live events, the first move is not to remove the question from the space, but to open it to shared thinking. This keeps the student supported and reduces isolation.</p>
+         <p class="text-gray-700 italic">"The peer coach stays present, facilitating — not disappearing."</p>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-8 shadow-md border-l-4" style="border-left-color: #46B1EF;">
+       <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white flex-shrink-0" style="background: #46B1EF;">
+         2
+        </div>
+        <div>
+         <h3 class="text-2xl font-bold mb-4" style="color: #002855;">Step 2: Redirect to Course Materials and Resources</h3>
+         <p class="text-gray-700 mb-4">If the answer lives in the course, the peer coach does not say, "That's in the material," and stop. Instead, you help the student locate the relevant section, identify what connects to their question, and decide how to re-engage more effectively.</p>
+         <p class="text-gray-700 italic">"You are still actively working with the student — just not supplying the content directly."</p>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-8 shadow-md border-l-4" style="border-left-color: #97E152;">
+       <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white flex-shrink-0" style="background: #97E152; color: #002855;">
+         3
+        </div>
+        <div>
+         <h3 class="text-2xl font-bold mb-4" style="color: #002855;">Step 3: Redirect to the Course Instructor (With Support)</h3>
+         <p class="text-gray-700 mb-4">When the question truly requires academic interpretation or confirmation, you help the student clarify their confusion, narrow the question, put it into clear language, and identify how they will reach out.</p>
+         <p class="text-gray-700 italic">"The student leaves with a plan, not a brush-off."</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+    <section class="py-16 fade-in" style="animation-delay: 0.7s;">
+     <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">Redirecting Flow by Context</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="grid md:grid-cols-2 gap-8"><!-- Live Events -->
+      <div class="bg-white rounded-2xl p-6 shadow-md">
+       <h3 class="font-bold text-xl mb-4" style="color: #002855;">Live Events</h3>
+       <div class="space-y-2">
+        <div class="flex items-center gap-3 py-3 px-4 bg-blue-50 rounded-lg border-l-4" style="border-left-color: #0070F0;"><span class="font-bold text-sm" style="color: #002855;">1</span> <span class="text-sm font-semibold" style="color: #002855;">Redirect to the Group</span>
+        </div>
+        <div class="text-center text-gray-400 text-sm">
+         ↓
+        </div>
+        <div class="flex items-center gap-3 py-3 px-4 bg-indigo-50 rounded-lg border-l-4" style="border-left-color: #46B1EF;"><span class="font-bold text-sm" style="color: #002855;">2</span> <span class="text-sm font-semibold" style="color: #002855;">Course Materials or Resources</span>
+        </div>
+        <div class="text-center text-gray-400 text-sm">
+         ↓
+        </div>
+        <div class="flex items-center gap-3 py-3 px-4 bg-green-50 rounded-lg border-l-4" style="border-left-color: #065f46;"><span class="font-bold text-sm" style="color: #002855;">3</span> <span class="text-sm font-semibold" style="color: #002855;">Course Instructor</span>
+        </div>
+       </div>
+      </div><!-- Appointments -->
+      <div class="bg-white rounded-2xl p-6 shadow-md">
+       <h3 class="font-bold text-xl mb-4" style="color: #002855;">Appointments</h3>
+       <div class="space-y-2">
+        <div class="flex items-center gap-3 py-3 px-4 bg-indigo-50 rounded-lg border-l-4" style="border-left-color: #46B1EF;"><span class="font-bold text-sm" style="color: #002855;">1</span> <span class="text-sm font-semibold" style="color: #002855;">Course Materials or Resources</span>
+        </div>
+        <div class="text-center text-gray-400 text-sm">
+         ↓
+        </div>
+        <div class="flex items-center gap-3 py-3 px-4 bg-green-50 rounded-lg border-l-4" style="border-left-color: #065f46;"><span class="font-bold text-sm" style="color: #002855;">2</span> <span class="text-sm font-semibold" style="color: #002855;">Course Instructor</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+    <section class="py-16 fade-in" style="animation-delay: 0.8s;">
+     <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">The Core Principle</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="max-w-3xl mx-auto bg-gradient-to-r from-indigo-50 to-blue-50 rounded-2xl p-8 border border-indigo-200">
+      <p class="text-center text-lg text-gray-800 mb-4"><strong style="color: #002855;">Peer coaches do not answer content questions.</strong></p>
+      <p class="text-center text-lg text-gray-800 mb-6"><strong style="color: #002855;">Peer coaches also do not abandon content questions.</strong></p>
+      <p class="text-center text-gray-700">They stay engaged by validating the confusion, supporting the thinking process, guiding effective resource use, and coaching question formation. <strong>Redirecting is active, not passive.</strong></p>
+     </div>
+    </section>
+   </main>
+   <footer class="mt-12 py-8" style="background: #002855;">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+     <div class="flex justify-center gap-4 mb-4">
+      <div class="w-3 h-3 rounded-full" style="background: #0070F0;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #46B1EF;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #97E152;"></div>
+     </div>
+     <p class="text-white opacity-80 text-sm">Mastering the Art of Redirecting Questions in Peer Coaching</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: "Redirecting Questions",
+      subtitle: "Staying engaged while honoring role boundaries",
+      primary_color: "#002855",
+      accent_color: "#0070F0",
+      highlight_color: "#97E152",
+      text_color: "#374151",
+      font_family: "Inter",
+      font_size: 16
+    };
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          const titleEl = document.getElementById('main-title');
+          if (titleEl) titleEl.textContent = config.main_title || defaultConfig.main_title;
+
+          const subtitleEl = document.getElementById('subtitle');
+          if (subtitleEl) subtitleEl.textContent = config.subtitle || defaultConfig.subtitle;
+
+          const baseSize = config.font_size || defaultConfig.font_size;
+          document.body.style.fontSize = `${baseSize}px`;
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => { config.primary_color = value; window.elementSdk.setConfig({ primary_color: value }); }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => { config.accent_color = value; window.elementSdk.setConfig({ accent_color: value }); }
+            },
+            {
+              get: () => config.highlight_color || defaultConfig.highlight_color,
+              set: (value) => { config.highlight_color = value; window.elementSdk.setConfig({ highlight_color: value }); }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => { config.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => { config.font_family = value; window.elementSdk.setConfig({ font_family: value }); }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => { config.font_size = value; window.elementSdk.setConfig({ font_size: value }); }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["main_title", config.main_title || defaultConfig.main_title],
+          ["subtitle", config.subtitle || defaultConfig.subtitle]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d7c12fd57d53ad5',t:'MTc3Mjc0NDY3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
