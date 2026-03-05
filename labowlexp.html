@@ -60,14 +60,16 @@
  </head>
  <body class="h-full">
   <div id="app-container" class="h-full w-full overflow-auto" style="background-color: #FFFFFF;">
-   <div class="min-h-full flex flex-col p-8"><!-- Title -->
+   <div class="min-h-full flex flex-col p-8">
+    <!-- Title -->
     <div class="mb-8">
      <h1 id="main-title" class="text-2xl font-bold text-center" style="color: #002855;">Click each letter to discover</h1>
     </div><!-- LAB OWL Letters -->
-    <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-8"><!-- L --> <button class="letter-btn pulse-hint w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #002855;" data-letter="L" aria-label="L - Locate the Block">L</button> <!-- A --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #0070F0;" data-letter="A" aria-label="A - Analyze What's Happening">A</button> <!-- B --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #97E152;" data-letter="B" aria-label="B - Break It Down">B</button> <!-- Spacer -->
-     <div class="w-4 md:w-8"></div><!-- O --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #46B1EF;" data-letter="O" aria-label="O - Observe the Pattern">O</button> <!-- W --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #002855;" data-letter="W" aria-label="W - Work the Hypothesis">W</button> <!-- L2 --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #0070F0;" data-letter="L2" aria-label="L - Lock in Learning">L</button>
+    <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-8">
+     <!-- L --> <button class="letter-btn pulse-hint w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #002855;" data-letter="L" aria-label="L - Locate the Block">L</button> <!-- A --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #0070F0;" data-letter="A" aria-label="A - Analyze What's Happening">A</button> <!-- B --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #97E152;" data-letter="B" aria-label="B - Break It Down">B</button> <!-- Spacer -->
+     <div class="w-4 md:w-8"></div><!-- O --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #46B1EF;" data-letter="O" aria-label="O - Observe the Pattern">O</button> <!-- W --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #002855;" data-letter="W" aria-label="W - Work the Hypothesis">W</button> <!-- L2 --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #0070F0;" data-letter="L2" aria-label="L - Link to Your Conclusion">L</button>
     </div><!-- Explanation Cards Container -->
-    <div id="explanation-container" class="flex gap-4 mb-8 w-full overflow-x-auto pb-4"></div><!-- Progress Dots - Below Cards -->
+    <div id="explanation-container" class="flex gap-4 mb-8 justify-center flex-wrap"></div><!-- Progress Dots - Below Cards -->
     <div class="flex justify-center gap-3">
      <div class="progress-dot w-3 h-3 rounded-full transition-colors duration-300" data-for="L" style="background-color: #ddd;"></div>
      <div class="progress-dot w-3 h-3 rounded-full transition-colors duration-300" data-for="A" style="background-color: #ddd;"></div>
@@ -116,8 +118,8 @@
         color: "#002855"
       },
       L2: {
-        title: "Link to Your Conclusion",
-        description: "Connect everything together. How does your solution relate back to the original problem? Reflect on what you learned.",
+        title: "Lock in Learning",
+        description: "Solidify your understanding. What did you learn? How will you use this next time? Lock it into your memory.",
         color: "#0070F0"
       }
     };
@@ -231,5 +233,5 @@
     
     onConfigChange(config);
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d7adadd24f5064a',t:'MTc3MjczMTg5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d7add46a1d7064a',t:'MTc3MjczMTk5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
