@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staged Questioning &amp; Wait Time</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    * { 
+      font-family: Arial, sans-serif;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: Arial, sans-serif;
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes pulse-ring {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 112, 240, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 40px rgba(0, 112, 240, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 112, 240, 0);
+      }
+    }
+    
+    .timer-circle {
+      width: 300px;
+      height: 300px;
+      animation: pulse-ring 2s infinite;
+    }
+    
+    .section-divider {
+      height: 3px;
+      background: linear-gradient(90deg, #002855 0%, #0070F0 50%, #97E152 100%);
+      border-radius: 2px;
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app-wrapper" class="h-full w-full overflow-auto" style="background: #ffffff;">
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%);">
+    <div class="absolute inset-0 opacity-5">
+     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+       <pattern id="hero-pattern" x="0" y="0" width="80" height="80" patternunits="userSpaceOnUse">
+        <circle cx="40" cy="40" r="1" fill="white" />
+       </pattern>
+      </defs> <rect width="100%" height="100%" fill="url(#hero-pattern)" />
+     </svg>
+    </div>
+    <div class="relative max-w-6xl mx-auto px-6 py-20 text-center">
+     <div class="fade-in" style="animation-delay: 0.1s;">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(151, 225, 82, 0.2);">
+       <span class="w-2 h-2 rounded-full animate-pulse" style="background: #97E152;"></span> <span class="text-sm font-medium" style="color: #97E152;">Peer Coaching Mastery</span>
+      </div>
+     </div>
+     <h1 id="main-title" class="fade-in text-5xl md:text-6xl font-bold text-white mb-6" style="animation-delay: 0.2s;">Staged Questioning &amp; Wait Time</h1>
+     <p id="subtitle" class="fade-in text-xl max-w-3xl mx-auto" style="color: rgba(255,255,255,0.95); animation-delay: 0.3s;">Two powerful skills that keep thinking with the student</p>
+    </div>
+    <svg class="w-full" viewbox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveaspectratio="none" style="display: block; margin-bottom: -1px;">
+     <path d="M0 80V40C240 80 480 0 720 40C960 80 1200 0 1440 40V80H0Z" fill="#ffffff" />
+    </svg>
+   </header>
+   <main class="max-w-6xl mx-auto px-6">
+    <section class="py-16 fade-in" style="animation-delay: 0.5s;">
+     <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">What Is Wait Time?</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+      <p class="text-lg text-gray-700 max-w-3xl mx-auto">Wait time is the intentional pause you give after asking a question. Instead of rushing to rephrase, explain, or rescue, you allow <strong>silence so the student can think.</strong></p>
+     </div>
+     <div class="grid md:grid-cols-2 gap-8 mb-8">
+      <div class="bg-white rounded-2xl p-8 shadow-md border-l-4" style="border-left-color: #7f1d1d;">
+       <h3 class="font-bold mb-4 text-lg" style="color: #7f1d1d;">For the Coach — What Silence Triggers</h3>
+       <ul class="space-y-3 text-gray-700">
+        <li class="flex items-start gap-3"><span style="color: #7f1d1d; font-weight: bold;">→</span> <span>"They didn't understand me."</span></li>
+        <li class="flex items-start gap-3"><span style="color: #7f1d1d; font-weight: bold;">→</span> <span>"I should say that another way."</span></li>
+        <li class="flex items-start gap-3"><span style="color: #7f1d1d; font-weight: bold;">→</span> <span>"They're stuck — I need to help."</span></li>
+        <li class="flex items-start gap-3"><span style="color: #7f1d1d; font-weight: bold;">→</span> <span>"This is awkward."</span></li>
+       </ul>
+      </div>
+      <div class="bg-white rounded-2xl p-8 shadow-md border-l-4" style="border-left-color: #065f46;">
+       <h3 class="font-bold mb-4 text-lg" style="color: #065f46;">For the Student — What Silence Enables</h3>
+       <ul class="space-y-3 text-gray-700">
+        <li class="flex items-start gap-3"><span style="color: #065f46; font-weight: bold;">✓</span> <span>Processing the question</span></li>
+        <li class="flex items-start gap-3"><span style="color: #065f46; font-weight: bold;">✓</span> <span>Searching their memory</span></li>
+        <li class="flex items-start gap-3"><span style="color: #065f46; font-weight: bold;">✓</span> <span>Organizing their thoughts</span></li>
+        <li class="flex items-start gap-3"><span style="color: #065f46; font-weight: bold;">✓</span> <span>Building the confidence to answer</span></li>
+        <li class="flex items-start gap-3"><span style="color: #065f46; font-weight: bold;">✓</span> <span>Actively trying to reason it out</span></li>
+       </ul>
+      </div>
+     </div>
+     <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-200">
+      <p class="text-center text-gray-800 text-lg"><strong>What feels like "dead air" to you is often active mental work for them.</strong></p>
+     </div>
+    </section>
+    <section class="py-16">
+     <div class="text-center mb-12 fade-in">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">What Is Staged Questioning?</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+      <p class="text-lg text-gray-700 max-w-3xl mx-auto">Staged questioning means you support the student's thinking in layers instead of jumping straight to the answer. <strong>The student remains the one doing the work at every stage.</strong></p>
+     </div>
+     <div class="space-y-6 fade-in" style="animation-delay: 0.2s;">
+      <div class="bg-white rounded-2xl p-8 shadow-md border-l-4 fade-in" style="border-left-color: #0070F0; animation-delay: 0.3s;">
+       <div class="flex items-start gap-4 mb-4">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white flex-shrink-0" style="background: #0070F0;">
+         1
+        </div>
+        <div>
+         <h3 class="text-2xl font-bold" style="color: #002855;">Stage 1 – Ask and Wait (15–20 seconds)</h3>
+         <p class="text-gray-700 mt-2">Ask the question clearly and give real thinking time. This is where most thinking happens, and most coaches jump in too quickly.</p>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-8 shadow-md border-l-4 fade-in" style="border-left-color: #46B1EF; animation-delay: 0.4s;">
+       <div class="flex items-start gap-4 mb-4">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white flex-shrink-0" style="background: #46B1EF;">
+         2
+        </div>
+        <div>
+         <h3 class="text-2xl font-bold" style="color: #002855;">Stage 2 – Rephrase or Invert and Wait (10 seconds)</h3>
+         <p class="text-gray-700 mt-2">If there is no response, restate the question in a different way or ask the opposite angle. You're helping them access the thinking from a new entry point, not doing it for them.</p>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-8 shadow-md border-l-4 fade-in" style="border-left-color: #97E152; animation-delay: 0.5s;">
+       <div class="flex items-start gap-4 mb-4">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0" style="background: #97E152; color: #002855;">
+         3
+        </div>
+        <div>
+         <h3 class="text-2xl font-bold" style="color: #002855;">Stage 3 – Narrow or Hint and Wait (5 seconds)</h3>
+         <p class="text-gray-700 mt-2">Only then do you gently narrow the focus or offer a small cue — still without giving the answer. You're narrowing the search space, not solving it.</p>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="bg-white rounded-3xl shadow-xl p-12 mt-12 fade-in">
+      <h3 class="text-2xl font-bold mb-8 text-center" style="color: #002855;">Practice: Try the Stages with Real Questions</h3>
+      <div class="flex flex-col items-center gap-8">
+       <div class="flex flex-col items-center">
+        <div class="timer-circle bg-gradient-to-br from-blue-50 to-indigo-50 rounded-full flex flex-col items-center justify-center p-6 mx-auto" id="timer-display" style="border: 4px solid #0070F0;">
+         <div class="text-center flex flex-col h-full justify-center">
+          <div class="text-5xl font-bold" id="timer-seconds" style="color: #002855;">
+           —
+          </div>
+         </div>
+        </div>
+        <div class="mt-6 flex flex-wrap justify-center gap-3 w-full max-w-2xl">
+         <button onclick="startTimer(1, 15)" class="px-4 py-3 rounded-lg font-bold text-white transition-all transform hover:scale-105 active:scale-95 flex-1 min-w-[200px]" style="background: #0070F0;">
+          <div class="text-sm">
+           Stage 1: Ask &amp; Wait (15s)
+          </div></button> <button onclick="startTimer(2, 10)" class="px-4 py-3 rounded-lg font-bold text-white transition-all transform hover:scale-105 active:scale-95 flex-1 min-w-[200px]" style="background: #46B1EF;">
+          <div class="text-sm">
+           Stage 2: Rephrase &amp; Wait (10s)
+          </div></button> <button onclick="startTimer(3, 5)" class="px-4 py-3 rounded-lg font-bold transition-all transform hover:scale-105 active:scale-95 flex-1 min-w-[200px]" style="background: #97E152; color: #002855;">
+          <div class="text-sm">
+           Stage 3: Narrow &amp; Wait (5s)
+          </div></button> <button onclick="resetTimer()" class="px-4 py-3 rounded-lg border-2 border-gray-300 text-gray-700 font-semibold transition-all hover:bg-gray-100 text-sm flex-1 min-w-[120px]">Reset</button>
+        </div>
+       </div>
+       <div class="flex flex-col gap-4 w-full max-w-2xl mx-auto">
+        <div id="stage-1-question" class="bg-blue-50 rounded-lg p-6 border-l-4 fade-in hidden" style="border-left-color: #0070F0;">
+         <p class="font-semibold text-sm" style="color: #0070F0;">Stage 1 – Ask &amp; Wait (15–20s)</p>
+         <p class="text-gray-700 mt-3 italic">What do you think will happen to the result if you change that variable?</p>
+        </div>
+        <div id="stage-2-question" class="bg-indigo-50 rounded-lg p-6 border-l-4 fade-in hidden" style="border-left-color: #46B1EF;">
+         <p class="font-semibold text-sm" style="color: #46B1EF;">Stage 2 – Rephrase &amp; Wait (10s)</p>
+         <p class="text-gray-700 mt-3 italic">If that variable got smaller, how would it affect your answer?</p>
+        </div>
+        <div id="stage-3-question" class="bg-green-50 rounded-lg p-6 border-l-4 fade-in hidden" style="border-left-color: #97E152;">
+         <p class="font-semibold text-sm" style="color: #065f46;">Stage 3 – Narrow &amp; Wait (5s)</p>
+         <p class="text-gray-700 mt-3 italic">Does a bigger number make it go up or down?</p>
+        </div>
+       </div>
+      </div>
+      <p class="text-center text-gray-600 text-sm italic mt-6">The peer coach is guiding without giving the answer away.</p>
+     </div>
+    </section>
+    <section class="py-16">
+     <div class="text-center mb-12 fade-in">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">Real Examples: Three Stages in Action</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="bg-white rounded-2xl p-8 shadow-md fade-in" style="animation-delay: 0.1s;">
+      <div id="example-container" class="mb-6">
+       <h3 class="text-2xl font-bold mb-6" style="color: #002855;">Example 1: Python (Programming)</h3>
+       <div class="space-y-4">
+        <div class="bg-blue-50 rounded-lg p-4 border-l-4" style="border-left-color: #0070F0;">
+         <p class="font-semibold" style="color: #0070F0;">Stage 1 – Initial Question (15–20s)</p>
+         <p class="text-gray-700 mt-2 italic">"How did you decide where to place that for loop in your code?"</p>
+        </div>
+        <div class="bg-indigo-50 rounded-lg p-4 border-l-4" style="border-left-color: #46B1EF;">
+         <p class="font-semibold" style="color: #46B1EF;">Stage 2 – Rephrase / Invert (10s)</p>
+         <p class="text-gray-700 mt-2 italic">"What do you think would happen if the loop were outside that block instead?"</p>
+        </div>
+        <div class="bg-green-50 rounded-lg p-4 border-l-4" style="border-left-color: #97E152;">
+         <p class="font-semibold" style="color: #065f46;">Stage 3 – Narrow / Hint (5s)</p>
+         <p class="text-gray-700 mt-2 italic">"Look at which lines are supposed to repeat — which part of the code controls that repetition?"</p>
+        </div>
+       </div>
+       <p class="text-gray-700 mt-6 italic text-sm border-t pt-4">The peer coach is not explaining syntax — they are guiding the student to examine their own logic and structure.</p>
+      </div>
+      <div class="flex justify-center"><button onclick="toggleExample()" class="px-6 py-3 rounded-lg font-semibold text-white transition-all hover:opacity-90" style="background: #0070F0;"> See Another Example → </button>
+      </div>
+     </div>
+    </section>
+    <section class="py-16">
+     <div class="text-center mb-12 fade-in">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">Why These Skills Matter</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="grid md:grid-cols-2 gap-6 fade-in">
+      <div class="bg-white rounded-xl p-6 shadow-md">
+       <div class="flex items-start gap-3 mb-2">
+        <span style="color: #0070F0; font-size: 24px;">✓</span>
+        <h4 class="font-bold text-lg" style="color: #002855;">Keep ownership of thinking with the student</h4>
+       </div>
+       <p class="text-gray-700 text-sm">When you don't jump in, students own their thinking process.</p>
+      </div>
+      <div class="bg-white rounded-xl p-6 shadow-md">
+       <div class="flex items-start gap-3 mb-2">
+        <span style="color: #0070F0; font-size: 24px;">✓</span>
+        <h4 class="font-bold text-lg" style="color: #002855;">Prevent over-explaining and "teaching mode"</h4>
+       </div>
+       <p class="text-gray-700 text-sm">You stay in coaching, where students do the cognitive work.</p>
+      </div>
+      <div class="bg-white rounded-xl p-6 shadow-md">
+       <div class="flex items-start gap-3 mb-2">
+        <span style="color: #0070F0; font-size: 24px;">✓</span>
+        <h4 class="font-bold text-lg" style="color: #002855;">Build students' confidence and independence</h4>
+       </div>
+       <p class="text-gray-700 text-sm">Success through their own thinking builds real confidence.</p>
+      </div>
+      <div class="bg-white rounded-xl p-6 shadow-md">
+       <div class="flex items-start gap-3 mb-2">
+        <span style="color: #0070F0; font-size: 24px;">✓</span>
+        <h4 class="font-bold text-lg" style="color: #002855;">Encourage deeper processing instead of quick answers</h4>
+       </div>
+       <p class="text-gray-700 text-sm">Deeper thinking creates stronger learning.</p>
+      </div>
+      <div class="bg-white rounded-xl p-6 shadow-md">
+       <div class="flex items-start gap-3 mb-2">
+        <span style="color: #0070F0; font-size: 24px;">✓</span>
+        <h4 class="font-bold text-lg" style="color: #002855;">Support metacognition</h4>
+       </div>
+       <p class="text-gray-700 text-sm">Students become aware of how they are thinking and learning.</p>
+      </div>
+      <div class="bg-white rounded-xl p-6 shadow-md">
+       <div class="flex items-start gap-3 mb-2">
+        <span style="color: #0070F0; font-size: 24px;">✓</span>
+        <h4 class="font-bold text-lg" style="color: #002855;">Normalize that thinking takes time</h4>
+       </div>
+       <p class="text-gray-700 text-sm">Multi-stage questioning shows that complex thinking is expected.</p>
+      </div>
+     </div>
+    </section>
+    <section class="py-16">
+     <div class="text-center mb-12 fade-in">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">Managing the Discomfort of Silence</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+      <p class="text-lg text-gray-700 max-w-3xl mx-auto">Silence can feel <strong>long to a peer coach.</strong> It can feel like you are "doing nothing." In reality, you are doing something very important: <strong>holding space for cognition.</strong></p>
+     </div>
+     <div class="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-2xl p-8 border border-indigo-200 fade-in">
+      <h3 class="text-2xl font-bold mb-6" style="color: #002855;">Helpful Techniques</h3>
+      <ul class="space-y-4">
+       <li class="flex items-start gap-4"><span style="color: #0070F0; font-size: 24px; line-height: 1.5;">✓</span>
+        <div>
+         <p class="font-semibold text-gray-800">Lightly tap your fingers and count slowly</p>
+         <p class="text-sm text-gray-700">(one Mississippi, two Mississippi...)</p>
+        </div></li>
+       <li class="flex items-start gap-4"><span style="color: #0070F0; font-size: 24px; line-height: 1.5;">✓</span>
+        <div>
+         <p class="font-semibold text-gray-800">Gently tap your foot to pace the seconds</p>
+        </div></li>
+       <li class="flex items-start gap-4"><span style="color: #0070F0; font-size: 24px; line-height: 1.5;">✓</span>
+        <div>
+         <p class="font-semibold text-gray-800">Slow your breathing and keep an open posture</p>
+         <p class="text-sm text-gray-700">Your calm signals to the student that silence is okay.</p>
+        </div></li>
+       <li class="flex items-start gap-4"><span style="color: #0070F0; font-size: 24px; line-height: 1.5;">✓</span>
+        <div>
+         <p class="font-semibold text-gray-800">Remind yourself: Processing is happening, even if it's quiet</p>
+        </div></li>
+      </ul>
+     </div>
+    </section>
+    <section class="py-16">
+     <div class="text-center mb-12 fade-in">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">In Summary</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="max-w-3xl mx-auto space-y-6 fade-in">
+      <div class="flex items-start gap-4">
+       <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white flex-shrink-0" style="background: #0070F0;">
+        1
+       </div>
+       <p class="text-lg text-gray-700">You ask and wait.</p>
+      </div>
+      <div class="flex items-start gap-4">
+       <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white flex-shrink-0" style="background: #0070F0;">
+        2
+       </div>
+       <p class="text-lg text-gray-700">You rephrase or invert and wait.</p>
+      </div>
+      <div class="flex items-start gap-4">
+       <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white flex-shrink-0" style="background: #0070F0;">
+        3
+       </div>
+       <p class="text-lg text-gray-700">You narrow or hint and wait.</p>
+      </div>
+     </div>
+     <div class="mt-12 pt-12 border-t border-gray-200">
+      <p class="text-xl text-center font-semibold text-gray-800">As a peer coach, your objective is to <strong style="color: #002855;">not rush, rescue, or resolve.</strong></p>
+      <p class="text-center mt-4 text-lg text-gray-700">By tolerating silence and scaffolding gradually, you allow students to do the real work of learning — thinking, connecting, and making meaning for themselves.</p>
+     </div>
+    </section>
+   </main>
+   <footer class="mt-12 py-8" style="background: #002855;">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+     <div class="flex justify-center gap-4 mb-4">
+      <div class="w-3 h-3 rounded-full" style="background: #0070F0;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #46B1EF;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #97E152;"></div>
+     </div>
+     <p class="text-white opacity-80 text-sm">Mastering Staged Questioning and Wait Time for Peer Coaching</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    let timerInterval = null;
+    let currentStage = null;
+    let currentExampleIndex = 0;
+
+    const examples = [
+      {
+        title: "Example 1: Python (Programming)",
+        stage1: "How did you decide where to place that for loop in your code?",
+        stage2: "What do you think would happen if the loop were outside that block instead?",
+        stage3: "Look at which lines are supposed to repeat — which part of the code controls that repetition?",
+        note: "The peer coach is not explaining syntax — they are guiding the student to examine their own logic and structure."
+      },
+      {
+        title: "Example 2: Krashen's Stages of Language Acquisition",
+        stage1: "How are you keeping the stages of language development straight when you study them?",
+        stage2: "Which two stages feel the most similar or easiest to mix up?",
+        stage3: "What features or behaviors are you using to tell one stage apart from the next?",
+        note: "The focus is not on naming the stages, but on how the student is organizing and distinguishing them mentally."
+      }
+    ];
+
+    function toggleExample() {
+      currentExampleIndex = (currentExampleIndex + 1) % examples.length;
+      const example = examples[currentExampleIndex];
+      
+      const container = document.getElementById('example-container');
+      container.innerHTML = `
+        <h3 class="text-2xl font-bold mb-6" style="color: #002855;">${example.title}</h3>
+        <div class="space-y-4">
+         <div class="bg-blue-50 rounded-lg p-4 border-l-4" style="border-left-color: #0070F0;">
+          <p class="font-semibold" style="color: #0070F0;">Stage 1 – Initial Question (15–20s)</p>
+          <p class="text-gray-700 mt-2 italic">"${example.stage1}"</p>
+         </div>
+         <div class="bg-indigo-50 rounded-lg p-4 border-l-4" style="border-left-color: #46B1EF;">
+          <p class="font-semibold" style="color: #46B1EF;">Stage 2 – Rephrase / Invert (10s)</p>
+          <p class="text-gray-700 mt-2 italic">"${example.stage2}"</p>
+         </div>
+         <div class="bg-green-50 rounded-lg p-4 border-l-4" style="border-left-color: #97E152;">
+          <p class="font-semibold" style="color: #065f46;">Stage 3 – Narrow / Hint (5s)</p>
+          <p class="text-gray-700 mt-2 italic">"${example.stage3}"</p>
+         </div>
+        </div>
+        <p class="text-gray-700 mt-6 italic text-sm border-t pt-4">${example.note}</p>
+      `;
+    }
+
+    const stageQuestions = {
+      1: "What do you think will happen to the result if you change that variable?",
+      2: "If that variable got smaller, how would it affect your answer?",
+      3: "Does a bigger number make it go up or down?"
+    };
+
+    function startTimer(stage, seconds) {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+      }
+
+      currentStage = stage;
+      let timeLeft = seconds;
+      
+      // Show questions up to the current stage, hide the rest
+      for (let i = 1; i <= 3; i++) {
+        const questionEl = document.getElementById(`stage-${i}-question`);
+        if (i <= stage) {
+          questionEl.classList.remove('hidden');
+        } else {
+          questionEl.classList.add('hidden');
+        }
+      }
+      
+      const timerDisplay = document.getElementById('timer-seconds');
+      
+      timerDisplay.textContent = timeLeft;
+      timerDisplay.style.color = '#002855';
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = timeLeft;
+
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          timerDisplay.textContent = '✓';
+          timerDisplay.style.color = '#065f46';
+        }
+      }, 1000);
+    }
+
+    function resetTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+      }
+      document.getElementById('timer-seconds').textContent = '—';
+      document.getElementById('timer-seconds').style.color = '#002855';
+      currentStage = null;
+      
+      // Hide all questions
+      document.getElementById('stage-1-question').classList.add('hidden');
+      document.getElementById('stage-2-question').classList.add('hidden');
+      document.getElementById('stage-3-question').classList.add('hidden');
+    }
+
+    const defaultConfig = {
+      main_title: "Staged Questioning & Wait Time",
+      subtitle: "Two powerful skills that keep thinking with the student",
+      primary_color: "#002855",
+      accent_color: "#0070F0",
+      highlight_color: "#97E152",
+      text_color: "#374151",
+      font_family: "Inter",
+      font_size: 16
+    };
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          const titleEl = document.getElementById('main-title');
+          if (titleEl) titleEl.textContent = config.main_title || defaultConfig.main_title;
+
+          const subtitleEl = document.getElementById('subtitle');
+          if (subtitleEl) subtitleEl.textContent = config.subtitle || defaultConfig.subtitle;
+
+          const baseSize = config.font_size || defaultConfig.font_size;
+          document.body.style.fontSize = `${baseSize}px`;
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => { config.primary_color = value; window.elementSdk.setConfig({ primary_color: value }); }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => { config.accent_color = value; window.elementSdk.setConfig({ accent_color: value }); }
+            },
+            {
+              get: () => config.highlight_color || defaultConfig.highlight_color,
+              set: (value) => { config.highlight_color = value; window.elementSdk.setConfig({ highlight_color: value }); }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => { config.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => { config.font_family = value; window.elementSdk.setConfig({ font_family: value }); }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => { config.font_size = value; window.elementSdk.setConfig({ font_size: value }); }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["main_title", config.main_title || defaultConfig.main_title],
+          ["subtitle", config.subtitle || defaultConfig.subtitle]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d7bff88717a7ff9',t:'MTc3Mjc0Mzg4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
