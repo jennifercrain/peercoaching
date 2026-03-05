@@ -25,12 +25,10 @@
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
  <body class="h-full bg-white">
-  <div id="app-container" class="h-full flex flex-col">
-   <!-- Header -->
+  <div id="app-container" class="h-full flex flex-col"><!-- Header -->
    <header class="bg-[#002855] text-white px-6 py-4 flex items-center gap-3">
     <div class="flex items-center gap-2">
-     <svg width="40" height="40" viewbox="0 0 40 40" fill="none">
-      <circle cx="20" cy="20" r="18" fill="#0070F0" /> <circle cx="14" cy="16" r="4" fill="white" /> <circle cx="26" cy="16" r="4" fill="white" /> <circle cx="14" cy="16" r="2" fill="#002855" /> <circle cx="26" cy="16" r="2" fill="#002855" /> <path d="M12 26 Q20 32 28 26" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" /> <path d="M8 8 Q12 4 16 8" stroke="#97E152" stroke-width="2" fill="none" /> <path d="M24 8 Q28 4 32 8" stroke="#97E152" stroke-width="2" fill="none" />
+     <svg width="40" height="40" viewbox="0 0 40 40" fill="none"><!-- Head --> <circle cx="20" cy="22" r="14" fill="#97E152" /> <!-- Left ear tuft --> <path d="M12 12 Q10 6 14 8" fill="#97E152" /> <!-- Right ear tuft --> <path d="M28 12 Q30 6 26 8" fill="#97E152" /> <!-- Left eye circle (large white) --> <circle cx="15" cy="20" r="5" fill="white" /> <!-- Right eye circle (large white) --> <circle cx="25" cy="20" r="5" fill="white" /> <!-- Left pupil --> <circle cx="15" cy="21" r="2.5" fill="#002855" /> <!-- Right pupil --> <circle cx="25" cy="21" r="2.5" fill="#002855" /> <!-- Left eye shine --> <circle cx="16" cy="19" r="1" fill="white" /> <!-- Right eye shine --> <circle cx="26" cy="19" r="1" fill="white" /> <!-- Beak --> <path d="M20 26 L18 31 L22 31 Z" fill="#FFB84D" /> <!-- Belly spot --> <ellipse cx="20" cy="28" rx="3" ry="4" fill="#ffffff" opacity="0.6" />
      </svg>
      <div>
       <h1 id="main-title" class="text-xl font-bold">Lab OWL</h1>
@@ -38,14 +36,11 @@
      </div>
     </div>
    </header><!-- Main Content -->
-   <div class="flex-1 flex overflow-hidden">
-    <!-- Left Sidebar - Stages -->
+   <div class="flex-1 flex overflow-hidden"><!-- Left Sidebar - Stages -->
     <nav class="w-72 bg-gray-50 border-r border-gray-200 p-4 overflow-y-auto">
      <h2 class="text-sm font-semibold text-[#002855] uppercase tracking-wide mb-4">Framework Stages</h2>
-     <div id="stage-buttons" class="space-y-2">
-      <button data-stage="locate" class="stage-btn active w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
-       <div class="flex items-center gap-3">
-        <span class="w-8 h-8 rounded-full bg-[#0070F0] text-white flex items-center justify-center font-bold text-sm">L</span>
+     <div id="stage-buttons" class="space-y-2"><button data-stage="locate" class="stage-btn active w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
+       <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-[#0070F0] text-white flex items-center justify-center font-bold text-sm">L</span>
         <div>
          <div class="font-semibold text-[#002855]">
           Locate the Block
@@ -55,8 +50,7 @@
          </div>
         </div>
        </div></button> <button data-stage="analyze" class="stage-btn w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
-       <div class="flex items-center gap-3">
-        <span class="w-8 h-8 rounded-full bg-[#46B1EF] text-white flex items-center justify-center font-bold text-sm">A</span>
+       <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-[#46B1EF] text-white flex items-center justify-center font-bold text-sm">A</span>
         <div>
          <div class="font-semibold text-[#002855]">
           Analyze What's Happening
@@ -66,8 +60,7 @@
          </div>
         </div>
        </div></button> <button data-stage="break" class="stage-btn w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
-       <div class="flex items-center gap-3">
-        <span class="w-8 h-8 rounded-full bg-[#97E152] text-[#002855] flex items-center justify-center font-bold text-sm">B</span>
+       <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-[#97E152] text-[#002855] flex items-center justify-center font-bold text-sm">B</span>
         <div>
          <div class="font-semibold text-[#002855]">
           Break It Down
@@ -77,8 +70,7 @@
          </div>
         </div>
        </div></button> <button data-stage="observe" class="stage-btn w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
-       <div class="flex items-center gap-3">
-        <span class="w-8 h-8 rounded-full bg-[#0070F0] text-white flex items-center justify-center font-bold text-sm">O</span>
+       <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-[#0070F0] text-white flex items-center justify-center font-bold text-sm">O</span>
         <div>
          <div class="font-semibold text-[#002855]">
           Observe the Pattern
@@ -88,8 +80,7 @@
          </div>
         </div>
        </div></button> <button data-stage="work" class="stage-btn w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
-       <div class="flex items-center gap-3">
-        <span class="w-8 h-8 rounded-full bg-[#46B1EF] text-white flex items-center justify-center font-bold text-sm">W</span>
+       <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-[#46B1EF] text-white flex items-center justify-center font-bold text-sm">W</span>
         <div>
          <div class="font-semibold text-[#002855]">
           Work the Hypothesis
@@ -99,8 +90,7 @@
          </div>
         </div>
        </div></button> <button data-stage="lock" class="stage-btn w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
-       <div class="flex items-center gap-3">
-        <span class="w-8 h-8 rounded-full bg-[#97E152] text-[#002855] flex items-center justify-center font-bold text-sm">L</span>
+       <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-[#97E152] text-[#002855] flex items-center justify-center font-bold text-sm">L</span>
         <div>
          <div class="font-semibold text-[#002855]">
           Lock in the Learning
@@ -123,8 +113,7 @@
       </div>
      </div>
     </nav><!-- Right Panel - Scenario -->
-    <main class="flex-1 flex flex-col overflow-hidden">
-     <!-- Scenario Header -->
+    <main class="flex-1 flex flex-col overflow-hidden"><!-- Scenario Header -->
      <div class="bg-[#EBF5FF] px-6 py-4 border-b border-[#46B1EF]">
       <div class="flex items-center justify-between">
        <div>
@@ -133,11 +122,9 @@
        </div><button id="reset-btn" class="px-4 py-2 bg-white border border-[#0070F0] text-[#0070F0] rounded-lg font-medium hover:bg-[#0070F0] hover:text-white transition-colors"> Reset Scenario </button>
       </div>
      </div><!-- Chat Area -->
-     <div id="chat-area" class="flex-1 overflow-y-auto p-6 space-y-4">
-      <!-- Messages will be inserted here -->
+     <div id="chat-area" class="flex-1 overflow-y-auto p-6 space-y-4"><!-- Messages will be inserted here -->
      </div><!-- Response Options -->
-     <div id="response-area" class="border-t border-gray-200 p-4 bg-gray-50">
-      <!-- Options will be inserted here -->
+     <div id="response-area" class="border-t border-gray-200 p-4 bg-gray-50"><!-- Options will be inserted here -->
      </div>
     </main>
    </div>
@@ -220,151 +207,133 @@
     const scenario = [
       {
         stage: 'locate',
-        student: {
-          name: 'Alex',
-          message: "Hey, I'm stuck on my zyBooks assignment. My function isn't working and I don't know what's wrong. Can you just tell me what to fix?"
-        },
-        question: "What do you ask Alex?",
+        dialogue: "Student: I'm stuck on my zyBooks assignment. My calculate_average function isn't working and I don't know where to start.\n\nYou: Let me help you figure this out. Can you tell me where exactly does it stop working? Which part feels most confusing?",
+        question: "How do you respond?",
         choices: [
           {
-            text: "Sure, let me see your code and I'll point out the error.",
-            correct: false,
-            feedback: "This approaches tutoring territory. As a Peer Coach, we want to guide students to find answers themselves."
-          },
-          {
-            text: "I can help you work through this! Where exactly does it stop working? Is there a specific part that feels most confusing?",
+            text: "That's exactly right—you've found the real block. Let's dig into that part.",
             correct: true,
-            feedback: "Great! You're using the 'Locate the Block' stage to help narrow the focus without giving direct answers."
+            feedback: "Perfect! You're narrowing the focus and confirming their thinking."
           },
           {
-            text: "Have you tried reading the textbook chapter again?",
+            text: "Show me your full code and I'll figure out what's wrong.",
             correct: false,
-            feedback: "While resources are helpful, this doesn't help the student engage with their specific problem right now."
+            feedback: "Taking over the investigation shifts from coaching to tutoring."
+          },
+          {
+            text: "Did you try debugging it with print statements yet?",
+            correct: false,
+            feedback: "That's a method suggestion, not coaching on what you just heard."
           }
         ]
       },
       {
         stage: 'analyze',
-        student: {
-          name: 'Alex',
-          message: "It's my calculate_average function. When I run it, I get a weird error about 'NoneType'. The function is supposed to take a list of numbers and return the average."
-        },
-        question: "How do you help Alex analyze what's happening?",
+        dialogue: "Student: It's the calculate_average function. When I run it, I get 'TypeError: unsupported operand type(s) for /: NoneType and int'. I expected it to return something like 85.5, but instead I'm getting None.\n\nCoach: So the error is about dividing by a NoneType. Before we fix anything, walk me through: what did you expect to happen versus what's actually happening?",
+        question: "What's your next move?",
         choices: [
           {
-            text: "You forgot to add a return statement. That's why it's returning None.",
-            correct: false,
-            feedback: "You identified the issue, but giving the answer directly doesn't help the student build debugging skills."
-          },
-          {
-            text: "Tell me what you expected the function to do, and what it's actually doing right now. What does the full error message say?",
+            text: "You're describing the real problem now. The calculation itself seems fine, but something's not going right. Keep going.",
             correct: true,
-            feedback: "Excellent! You're in the 'Analyze' stage - helping them describe expected vs. actual behavior."
+            feedback: "Great! You're helping them fully articulate the gap without solving it."
           },
           {
-            text: "NoneType errors are really common. Don't worry about it.",
+            text: "Ah, you forgot to initialize a variable. That's why it's NoneType.",
             correct: false,
-            feedback: "While reassuring, this dismisses the problem instead of helping them understand it."
+            feedback: "You're jumping to a solution. Let them explore the behavior first."
+          },
+          {
+            text: "Let me see the exact line where the error happens.",
+            correct: false,
+            feedback: "You're asking for code details before understanding their mental model."
           }
         ]
       },
       {
         stage: 'break',
-        student: {
-          name: 'Alex',
-          message: "Okay, so the error says 'TypeError: unsupported operand type(s) for /: NoneType and int'. I expected it to print the average, like 85.5, but it's crashing instead."
-        },
-        question: "How do you help Alex break down the problem?",
+        dialogue: "Student: The error says NoneType, which means the function is returning None instead of a number. But I have the formula right there: total / len(numbers). The math should work.\n\nCoach: Good observation. Let's isolate the smallest piece we can test. What if we add a print statement right after you calculate total, just to see if that variable is working?",
+        question: "How do you move forward?",
         choices: [
           {
-            text: "Let's break this down. What's the smallest piece we could test? What if we just look at what your function returns before doing any division?",
+            text: "Perfect—that's breaking it into a testable piece. Do that and tell me what you see.",
             correct: true,
-            feedback: "Perfect use of 'Break It Down'! You're helping them isolate the problem into manageable pieces."
+            feedback: "Excellent! You're guiding them toward systematic debugging, one small step."
           },
           {
-            text: "The issue is that your function returns None somewhere. Add a return statement.",
+            text: "Actually, the real issue is you need to add a return statement.",
             correct: false,
-            feedback: "You're giving the solution. Instead, guide them to discover this themselves."
+            feedback: "You just jumped to the solution when they were about to test something."
           },
           {
-            text: "Can you show me the whole code? I need to see everything to help.",
+            text: "Rewrite the whole function more carefully this time.",
             correct: false,
-            feedback: "Asking for more code can be overwhelming. Focus on isolating the specific problem area."
+            feedback: "That's too drastic. They're on the verge of discovering the real issue."
           }
         ]
       },
       {
         stage: 'observe',
-        student: {
-          name: 'Alex',
-          message: "Oh interesting! I added a print statement and the function is returning None. But I have 'total / len(numbers)' at the end... why wouldn't that return the average?"
-        },
-        question: "What pattern do you help Alex notice?",
+        dialogue: "Student: I added print statements and... oh! The function IS calculating the average correctly. But then at the end, it's returning None, not the actual number. That's weird. The math is right, but it's like the answer isn't going anywhere.\n\nCoach: You just noticed something really important. The calculation happens, but the result isn't making it out of the function. What does that tell you?",
+        question: "How do you help them see the pattern?",
         choices: [
           {
-            text: "Because you need the 'return' keyword before it.",
-            correct: false,
-            feedback: "That's the answer! But the student is so close to discovering it themselves."
-          },
-          {
-            text: "You're onto something! What pattern do you notice? The calculation is there, but the function returns None. What might be missing between the calculation and getting that value back?",
+            text: "Think about what you've learned: the calculation works fine, but nothing's actually *giving* that value back. What does Python need to do that?",
             correct: true,
-            feedback: "Great 'Observe the Pattern' response! You're guiding them to notice the gap themselves."
+            feedback: "Perfect! You're guiding them to the insight without just telling them the answer."
           },
           {
-            text: "That is strange. Python can be tricky sometimes.",
+            text: "You're missing a return statement. Add 'return' before the calculation.",
             correct: false,
-            feedback: "This doesn't help the student progress in their understanding."
+            feedback: "You told them the answer right when they were about to find it themselves."
+          },
+          {
+            text: "Maybe the issue is with your variable names?",
+            correct: false,
+            feedback: "That's a guess. They've already shown you the real issue."
           }
         ]
       },
       {
         stage: 'work',
-        student: {
-          name: 'Alex',
-          message: "Wait... I think I see it! The calculation happens but maybe it doesn't actually send the value back? Like, I need to tell it to return that value?"
-        },
-        question: "How do you help Alex test their hypothesis?",
+        dialogue: "Student: Wait... Python needs me to actually *return* the value, right? Like, I have to tell it to send the answer back out?\n\nCoach: Yes! That's your hypothesis. Before you make that change, what do you think will happen?",
+        question: "What do you ask?",
         choices: [
           {
-            text: "Exactly right! Add 'return' before your calculation.",
-            correct: false,
-            feedback: "They're so close! Let them confirm their own hypothesis first."
-          },
-          {
-            text: "That's a great hypothesis! What do you think will happen if you try that? How will you know if your theory is correct?",
+            text: "Will adding return before that calculation fix the TypeError and give you back the actual average?",
             correct: true,
-            feedback: "Excellent 'Work the Hypothesis' response! You're letting them test their own theory."
+            feedback: "Excellent! You're having them predict before testing—that's real learning."
           },
           {
-            text: "Yes, you need a return statement. Python functions always need them.",
+            text: "Yes, just add 'return' and it'll work. Trust me.",
             correct: false,
-            feedback: "While confirming, you're still providing the answer rather than letting them test their theory."
+            feedback: "Confirming the answer removes the power of them predicting and testing."
+          },
+          {
+            text: "Good thinking. Now go ahead and try it.",
+            correct: false,
+            feedback: "You're moving to action too fast. Let them articulate their prediction first."
           }
         ]
       },
       {
         stage: 'lock',
-        student: {
-          name: 'Alex',
-          message: "I added 'return' before the calculation and it works now! I can't believe I spent an hour on this and it was just one word missing. 😅"
-        },
-        question: "How do you lock in the learning?",
+        dialogue: "Student: I added 'return' before the calculation and... it works! The function returned 85.5. I can't believe I spent so long on that. Now I totally see it—the calculation isn't worth anything if I don't actually *return* it.\n\nCoach: You figured that out by testing methodically. Before we wrap up, I want you to think about something...",
+        question: "What's your closing coaching move?",
         choices: [
           {
-            text: "Great! Glad I could help. Good luck with the rest!",
-            correct: false,
-            feedback: "The code works, but there's an opportunity to reinforce the learning before ending."
-          },
-          {
-            text: "Nice work figuring that out! Before you go - what strategy helped you find the issue today? What will you try first next time something breaks?",
+            text: "What did you do today that actually helped you find the bug? That's the strategy to use next time something breaks.",
             correct: true,
-            feedback: "Perfect 'Lock in the Learning'! You're helping them build transferable debugging habits."
+            feedback: "Perfect! You're building their independent debugging process, not just fixing this problem."
           },
           {
-            text: "Yeah, missing return statements are a common mistake. Remember to always include them.",
+            text: "Make sure you always remember to add return statements in your functions.",
             correct: false,
-            feedback: "This gives advice but misses the chance to help them reflect on their process."
+            feedback: "That's advice-giving. They just learned it themselves—let that be the lesson."
+          },
+          {
+            text: "Great job! Do you have other assignments to work on?",
+            correct: false,
+            feedback: "Ending without reflection misses the chance to cement what they learned."
           }
         ]
       }
@@ -379,12 +348,8 @@
       const responseArea = document.getElementById('response-area');
       
       chatArea.innerHTML = `
-        <div class="chat-bubble flex gap-3">
-          <div class="w-10 h-10 rounded-full bg-[#46B1EF] flex items-center justify-center text-white font-bold flex-shrink-0">A</div>
-          <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-none px-4 py-3 max-w-lg shadow-sm">
-            <div class="font-semibold text-[#002855] text-sm mb-1">Alex (Student)</div>
-            <p class="text-gray-700">${scenario[0].student.message}</p>
-          </div>
+        <div class="chat-bubble p-4 bg-[#F0F4F8] rounded-lg border border-[#46B1EF]">
+          <p class="text-gray-700 whitespace-pre-line">${scenario[0].dialogue}</p>
         </div>
       `;
       
@@ -439,26 +404,13 @@
         }
       });
 
-      // Add coach response to chat
+      // Add feedback to chat
       const chatArea = document.getElementById('chat-area');
       
-      // Coach message
-      const coachBubble = document.createElement('div');
-      coachBubble.className = 'chat-bubble flex gap-3 justify-end';
-      coachBubble.innerHTML = `
-        <div class="bg-[#0070F0] text-white rounded-2xl rounded-tr-none px-4 py-3 max-w-lg shadow-sm">
-          <div class="font-semibold text-sm mb-1 text-[#97E152]">You (Coach)</div>
-          <p>${choice.text}</p>
-        </div>
-        <div class="w-10 h-10 rounded-full bg-[#002855] flex items-center justify-center text-white font-bold flex-shrink-0">C</div>
-      `;
-      chatArea.appendChild(coachBubble);
-
-      // Feedback
       const feedbackBubble = document.createElement('div');
-      feedbackBubble.className = 'chat-bubble';
+      feedbackBubble.className = 'chat-bubble mt-4';
       feedbackBubble.innerHTML = `
-        <div class="mx-auto max-w-lg p-4 rounded-lg ${choice.correct ? 'bg-[#E8F9D9] border border-[#97E152]' : 'bg-[#FFF4E5] border border-[#FFB84D]'}">
+        <div class="p-4 rounded-lg ${choice.correct ? 'bg-[#E8F9D9] border border-[#97E152]' : 'bg-[#FFF4E5] border border-[#FFB84D]'}">
           <div class="flex items-center gap-2 mb-2">
             <span class="text-lg">${choice.correct ? '✅' : '💡'}</span>
             <span class="font-semibold ${choice.correct ? 'text-[#2D5016]' : 'text-[#8B5A00]'}">${choice.correct ? 'Great coaching!' : 'Consider this'}</span>
@@ -481,17 +433,11 @@
           updateStageButtons();
           updateStageInfo();
           
-          // Add next student message
-          const studentBubble = document.createElement('div');
-          studentBubble.className = 'chat-bubble flex gap-3';
-          studentBubble.innerHTML = `
-            <div class="w-10 h-10 rounded-full bg-[#46B1EF] flex items-center justify-center text-white font-bold flex-shrink-0">A</div>
-            <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-none px-4 py-3 max-w-lg shadow-sm">
-              <div class="font-semibold text-[#002855] text-sm mb-1">Alex (Student)</div>
-              <p class="text-gray-700">${nextStep.student.message}</p>
-            </div>
-          `;
-          chatArea.appendChild(studentBubble);
+          // Add next scenario dialogue
+          const dialogueBubble = document.createElement('div');
+          dialogueBubble.className = 'chat-bubble p-4 bg-[#F0F4F8] rounded-lg border border-[#46B1EF]';
+          dialogueBubble.innerHTML = `<p class="text-gray-700 whitespace-pre-line">${nextStep.dialogue}</p>`;
+          chatArea.appendChild(dialogueBubble);
           chatArea.scrollTop = chatArea.scrollHeight;
         }
         renderChoices();
@@ -606,5 +552,5 @@
 
     initChat();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d759842156bdb71',t:'MTc3MjY3NjczNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d75a16a000d398b',t:'MTc3MjY3NzExMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
