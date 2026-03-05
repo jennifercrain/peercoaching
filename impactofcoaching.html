@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Impact of Coaching</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arial:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    * { font-family: Arial, sans-serif; }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .competency-card {
+      transition: all 0.3s ease;
+    }
+    
+    .competency-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 40, 85, 0.15);
+    }
+    
+    .competency-card.expanded .competency-content {
+      max-height: 200px;
+      opacity: 1;
+      padding-top: 12px;
+    }
+    
+    .competency-content {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .pulse-badge {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #002855 0%, #0070F0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .section-divider {
+      height: 4px;
+      background: linear-gradient(90deg, #002855 0%, #0070F0 50%, #97E152 100%);
+      border-radius: 2px;
+    }
+    
+    .stat-counter {
+      transition: all 0.3s ease;
+    }
+    
+    .icon-bounce:hover svg {
+      animation: bounce 0.5s ease;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app-wrapper" class="h-full w-full overflow-auto" style="background-color: #FFFFFF;"><!-- Hero Section -->
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%);">
+    <div class="absolute inset-0 opacity-10">
+     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs>
+       <pattern id="hero-pattern" x="0" y="0" width="60" height="60" patternunits="userSpaceOnUse">
+        <circle cx="30" cy="30" r="2" fill="white" />
+       </pattern>
+      </defs> <rect width="100%" height="100%" fill="url(#hero-pattern)" />
+     </svg>
+    </div>
+    <div class="relative max-w-6xl mx-auto px-6 py-16 text-center">
+     <div class="fade-in" style="animation-delay: 0.1s;">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(151, 225, 82, 0.2);"><span class="w-2 h-2 rounded-full animate-pulse" style="background: #97E152;"></span> <span class="text-sm font-medium" style="color: #97E152;">Empowering Student Success</span>
+      </div>
+     </div>
+     <h1 id="main-title" class="fade-in text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" style="animation-delay: 0.2s;">The Impact of Coaching</h1>
+     <p class="fade-in text-lg md:text-xl max-w-3xl mx-auto mb-8" style="color: rgba(255,255,255,0.9); animation-delay: 0.3s;">Empowering students to develop effective learning strategies and self-management skills for lifelong academic success.</p>
+     <div class="fade-in flex flex-wrap justify-center gap-4" style="animation-delay: 0.4s;"><button onclick="scrollToSection('competencies')" class="px-6 py-3 rounded-lg font-semibold transition-all hover:scale-105" style="background: #97E152; color: #002855;"> Explore Competencies </button> <button onclick="scrollToSection('why-peer')" class="px-6 py-3 rounded-lg font-semibold border-2 border-white text-white transition-all hover:bg-white hover:text-[#002855]"> Learn More </button>
+     </div>
+    </div><!-- Wave Divider -->
+    <svg class="w-full" viewbox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveaspectratio="none" style="display: block; margin-bottom: -1px;"><path d="M0 80V40C240 80 480 0 720 40C960 80 1200 0 1440 40V80H0Z" fill="#FFFFFF" />
+    </svg>
+   </header><!-- Main Content -->
+   <main class="max-w-6xl mx-auto px-6"><!-- Coaching Overview Section -->
+    <section class="py-12 fade-in" style="animation-delay: 0.5s;">
+     <div class="grid md:grid-cols-2 gap-8 items-center">
+      <div>
+       <h2 class="text-2xl md:text-3xl font-bold mb-4" style="color: #002855;">What is Peer Coaching?</h2>
+       <div class="section-divider w-20 mb-6"></div>
+       <p class="text-gray-700 leading-relaxed mb-4">Coaching focuses on <strong style="color: #0070F0;">empowering students</strong> to develop effective learning strategies and self-management skills. Peer coaches work with students to identify their learning challenges, set achievable goals, and overcome obstacles hindering academic success.</p>
+       <p class="text-gray-700 leading-relaxed">The emphasis is on building <strong style="color: #0070F0;">metacognitive skills</strong>, such as time management, organization, and study techniques, enabling students to become independent and self-directed learners.</p>
+      </div>
+      <div class="relative">
+       <div class="rounded-2xl p-8 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(0,112,240,0.1) 0%, rgba(151,225,82,0.1) 100%);">
+        <div class="absolute top-0 right-0 w-32 h-32 rounded-full opacity-20" style="background: #97E152; transform: translate(30%, -30%);"></div>
+        <div class="relative space-y-4">
+         <div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background: #002855;">
+           <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+           </svg>
+          </div>
+          <div>
+           <h4 class="font-semibold" style="color: #002855;">Facilitator Role</h4>
+           <p class="text-sm text-gray-600">Guiding students to discover solutions</p>
+          </div>
+         </div>
+         <div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background: #0070F0;">
+           <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+           </svg>
+          </div>
+          <div>
+           <h4 class="font-semibold" style="color: #002855;">Growth Mindset</h4>
+           <p class="text-sm text-gray-600">Fostering continuous improvement</p>
+          </div>
+         </div>
+         <div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background: #97E152;">
+           <svg class="w-6 h-6" style="color: #002855;" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+           </svg>
+          </div>
+          <div>
+           <h4 class="font-semibold" style="color: #002855;">Self-Directed Learning</h4>
+           <p class="text-sm text-gray-600">Building independent study skills</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Why Peer Coaching Section -->
+    <section id="why-peer" class="py-12">
+     <div class="text-center mb-12 fade-in">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4" style="color: #002855;">Why Peer Coaching?</h2>
+      <div class="section-divider w-20 mx-auto mb-6"></div>
+      <p class="text-gray-600 max-w-2xl mx-auto">Peer-to-peer support offers a powerful and often underutilized resource in academic settings.</p>
+     </div><!-- Research Cards -->
+     <div class="grid md:grid-cols-3 gap-6 mb-12">
+      <div class="research-card bg-white rounded-2xl p-6 shadow-lg border border-gray-100 fade-in hover:shadow-xl transition-shadow" style="animation-delay: 0.1s;">
+       <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%);">
+        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+       </div>
+       <h3 class="text-lg font-bold mb-2" style="color: #002855;">Academic Performance</h3>
+       <p class="text-gray-600 text-sm mb-4">Studies have demonstrated that peer tutoring significantly improves academic performance, with research indicating increased knowledge retention and deeper comprehension.</p>
+       <div class="flex items-center gap-2 text-xs" style="color: #0070F0;">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg><span class="font-medium">Topping, 2005</span>
+       </div>
+      </div>
+      <div class="research-card bg-white rounded-2xl p-6 shadow-lg border border-gray-100 fade-in hover:shadow-xl transition-shadow" style="animation-delay: 0.2s;">
+       <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #0070F0 0%, #46B1EF 100%);">
+        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+       </div>
+       <h3 class="text-lg font-bold mb-2" style="color: #002855;">Zone of Proximal Development</h3>
+       <p class="text-gray-600 text-sm mb-4">Vygotsky's ZPD highlights the importance of learning within a supportive social context, suggesting students achieve greater understanding when working with more knowledgeable peers.</p>
+       <div class="flex items-center gap-2 text-xs" style="color: #0070F0;">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg><span class="font-medium">Vygotsky, 1978</span>
+       </div>
+      </div>
+      <div class="research-card bg-white rounded-2xl p-6 shadow-lg border border-gray-100 fade-in hover:shadow-xl transition-shadow" style="animation-delay: 0.3s;">
+       <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #97E152 0%, #46B1EF 100%);">
+        <svg class="w-7 h-7" style="color: #002855;" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+       </div>
+       <h3 class="text-lg font-bold mb-2" style="color: #002855;">Self-Efficacy &amp; Motivation</h3>
+       <p class="text-gray-600 text-sm mb-4">Students who participate in peer-to-peer learning often have higher levels of self-efficacy and motivation as they witness peers succeeding and realize their own potential.</p>
+       <div class="flex items-center gap-2 text-xs" style="color: #0070F0;">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg><span class="font-medium">Bandura, 1997</span>
+       </div>
+      </div>
+     </div><!-- Benefits List -->
+     <div class="rounded-2xl p-8 fade-in" style="background: linear-gradient(135deg, rgba(0,40,85,0.05) 0%, rgba(0,112,240,0.05) 100%);">
+      <h3 class="text-xl font-bold mb-6 text-center" style="color: #002855;">Key Benefits of Peer Support</h3>
+      <div class="grid md:grid-cols-2 gap-4">
+       <div class="flex items-start gap-3">
+        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background: #97E152;">
+         <svg class="w-4 h-4" style="color: #002855;" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+         </svg>
+        </div>
+        <p class="text-gray-700">Access to diverse perspectives and explanations</p>
+       </div>
+       <div class="flex items-start gap-3">
+        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background: #97E152;">
+         <svg class="w-4 h-4" style="color: #002855;" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+         </svg>
+        </div>
+        <p class="text-gray-700">Promotes social and emotional development</p>
+       </div>
+       <div class="flex items-start gap-3">
+        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background: #97E152;">
+         <svg class="w-4 h-4" style="color: #002855;" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+         </svg>
+        </div>
+        <p class="text-gray-700">Builds communication skills and community</p>
+       </div>
+       <div class="flex items-start gap-3">
+        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background: #97E152;">
+         <svg class="w-4 h-4" style="color: #002855;" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+         </svg>
+        </div>
+        <p class="text-gray-700">Alleviates feelings of isolation and anxiety</p>
+       </div>
+       <div class="flex items-start gap-3">
+        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background: #97E152;">
+         <svg class="w-4 h-4" style="color: #002855;" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+         </svg>
+        </div>
+        <p class="text-gray-700">Creates inclusive and supportive learning environment</p>
+       </div>
+       <div class="flex items-start gap-3">
+        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background: #97E152;">
+         <svg class="w-4 h-4" style="color: #002855;" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+         </svg>
+        </div>
+        <p class="text-gray-700">Solidifies understanding through teaching</p>
+       </div>
+      </div>
+     </div><!-- Impact Callout -->
+     <div class="mt-12 text-center fade-in">
+      <div class="inline-block rounded-2xl p-8" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%);">
+       <p id="impact-callout" class="text-xl md:text-2xl font-bold text-white">As you can see, peer coaching can have a huge impact!</p>
+      </div>
+     </div>
+    </section><!-- Competencies Section -->
+    <section id="competencies" class="py-12">
+     <div class="text-center mb-12 fade-in">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4" style="color: #002855;">Peer Coach Competencies</h2>
+      <div class="section-divider w-20 mx-auto mb-6"></div>
+      <p class="text-gray-600 max-w-2xl mx-auto">The following are essential competencies that each peer coach must adhere to ensure positive and impactful interactions with students.</p>
+     </div>
+     <div class="grid md:grid-cols-2 gap-4" id="competencies-grid"><!-- Competency cards will be generated by JavaScript -->
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="mt-12 py-8" style="background: #002855;">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+     <div class="flex justify-center gap-4 mb-4">
+      <div class="w-3 h-3 rounded-full" style="background: #0070F0;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #46B1EF;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #97E152;"></div>
+     </div>
+     <p class="text-white opacity-80 text-sm">Empowering Students Through Peer Support</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const competencies = [
+      {
+        id: 1,
+        title: "Embody a Coaching Mindset",
+        description: "Approach every interaction with curiosity, openness, and a genuine desire to help students discover their own potential and solutions.",
+        icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>`,
+        color: "#002855"
+      },
+      {
+        id: 2,
+        title: "Engage Respectfully",
+        description: "Honor each student's unique background, experiences, and perspectives while maintaining professional boundaries and mutual respect.",
+        icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>`,
+        color: "#0070F0"
+      },
+      {
+        id: 3,
+        title: "Cultivate a Safe Learning Space",
+        description: "Create an environment where students feel comfortable taking risks, making mistakes, and expressing their challenges without judgment.",
+        icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>`,
+        color: "#46B1EF"
+      },
+      {
+        id: 4,
+        title: "Engage in Active Listening",
+        description: "Give full attention to students, listen to understand rather than respond, and reflect back what you hear to ensure clarity.",
+        icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>`,
+        color: "#97E152"
+      },
+      {
+        id: 5,
+        title: "Ask Powerful Questions",
+        description: "Use thought-provoking questions that encourage deeper reflection and help students uncover their own insights and solutions.",
+        icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+        color: "#002855"
+      },
+      {
+        id: 6,
+        title: "Give Competent Feedback",
+        description: "Provide constructive, specific, and actionable feedback that builds confidence and guides students toward improvement.",
+        icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+        color: "#0070F0"
+      },
+      {
+        id: 7,
+        title: "Provide Impactful Strategies",
+        description: "Share relevant tools, techniques, and insights that students can immediately apply to overcome their specific learning challenges.",
+        icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>`,
+        color: "#46B1EF"
+      },
+      {
+        id: 8,
+        title: "Empower Self-Growth",
+        description: "Foster independence by helping students develop their own problem-solving abilities and take ownership of their learning journey.",
+        icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
+        color: "#97E152"
+      }
+    ];
+
+    let allExpanded = false;
+
+    function renderCompetencies() {
+      const grid = document.getElementById('competencies-grid');
+      grid.innerHTML = competencies.map((comp, index) => `
+        <div class="competency-card bg-white rounded-xl p-5 shadow-md border border-gray-100 expanded fade-in" 
+             style="animation-delay: ${0.1 * index}s;" 
+             id="competency-${comp.id}">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 text-white" style="background: ${comp.color};">
+              ${comp.icon}
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold" style="color: #002855;">${comp.title}</h3>
+              <div class="competency-content">
+                <p class="text-gray-600 text-sm">${comp.description}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+
+
+    function scrollToSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Default configuration
+    const defaultConfig = {
+      main_title: "The Impact of Coaching",
+      impact_callout: "As you can see, peer coaching can have a huge impact! 🚀",
+      background_color: "#FFFFFF",
+      primary_color: "#002855",
+      accent_color: "#0070F0",
+      highlight_color: "#97E152",
+      text_color: "#374151",
+      font_family: "Arial",
+      font_size: 16
+    };
+
+    // Render competencies on load
+    renderCompetencies();
+
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          // Update main title
+          const titleEl = document.getElementById('main-title');
+          if (titleEl) titleEl.textContent = config.main_title || defaultConfig.main_title;
+
+          // Update impact callout
+          const calloutEl = document.getElementById('impact-callout');
+          if (calloutEl) calloutEl.textContent = config.impact_callout || defaultConfig.impact_callout;
+
+          // Update background color
+          const wrapper = document.getElementById('app-wrapper');
+          if (wrapper) wrapper.style.backgroundColor = config.background_color || defaultConfig.background_color;
+
+          // Update font
+          const font = config.font_family || defaultConfig.font_family;
+          document.body.style.fontFamily = `${font}, Arial, sans-serif`;
+
+          // Update font size
+          const baseSize = config.font_size || defaultConfig.font_size;
+          document.body.style.fontSize = `${baseSize}px`;
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => { config.background_color = value; window.elementSdk.setConfig({ background_color: value }); }
+            },
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => { config.primary_color = value; window.elementSdk.setConfig({ primary_color: value }); }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => { config.accent_color = value; window.elementSdk.setConfig({ accent_color: value }); }
+            },
+            {
+              get: () => config.highlight_color || defaultConfig.highlight_color,
+              set: (value) => { config.highlight_color = value; window.elementSdk.setConfig({ highlight_color: value }); }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => { config.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => { config.font_family = value; window.elementSdk.setConfig({ font_family: value }); }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => { config.font_size = value; window.elementSdk.setConfig({ font_size: value }); }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["main_title", config.main_title || defaultConfig.main_title],
+          ["impact_callout", config.impact_callout || defaultConfig.impact_callout]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d7bac70f6a637bf',t:'MTc3Mjc0MDQ3Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
