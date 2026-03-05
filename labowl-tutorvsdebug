@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programming Labs Comparison</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: '#002855',
+            blue: '#0070F0',
+            green: '#97E152',
+            sky: '#46B1EF'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    .chat-bubble-coach {
+      background: linear-gradient(135deg, #002855 0%, #0070F0 100%);
+    }
+    
+    .chat-bubble-student {
+      background: #f3f4f6;
+    }
+    
+    .comparison-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .comparison-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 40, 85, 0.15);
+    }
+    
+    .icon-badge {
+      animation: pulse-subtle 3s ease-in-out infinite;
+    }
+    
+    @keyframes pulse-subtle {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-white overflow-auto">
+  <div class="min-h-full w-full"><!-- Header Section -->
+   <div class="bg-gradient-to-r from-navy to-blue px-6 py-8 text-center">
+    <h1 id="main-title" class="text-3xl md:text-4xl font-bold text-white mb-3" style="font-family: Arial, sans-serif;">Two Approaches to Helping Students</h1>
+    <p id="intro-text" class="text-white/90 text-lg max-w-3xl mx-auto" style="font-family: Arial, sans-serif;">See the difference between traditional tutoring and debugging literacy coaching</p>
+   </div><!-- Context Banner -->
+   <div class="bg-sky/10 border-b border-sky/20 px-6 py-4">
+    <div class="max-w-6xl mx-auto flex items-start gap-3">
+     <div class="flex-shrink-0 w-10 h-10 bg-sky/20 rounded-full flex items-center justify-center">
+      <svg class="w-5 h-5 text-navy" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+     </div>
+     <div>
+      <p class="text-navy font-medium" style="font-family: Arial, sans-serif;">The Scenario</p>
+      <p class="text-navy/70 text-sm" style="font-family: Arial, sans-serif;">A student is working on a Python lab. Their code runs but produces the wrong output. They've been staring at it for 20 minutes and just changed three things at once without knowing which one might fix it.</p>
+     </div>
+    </div>
+   </div><!-- Comparison Section -->
+   <div class="px-6 py-10 max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-8"><!-- Traditional Tutoring Column -->
+     <div class="comparison-card bg-white rounded-2xl border-2 border-gray-200 overflow-hidden shadow-lg"><!-- Column Header -->
+      <div class="bg-gray-100 px-6 py-5 border-b border-gray-200">
+       <div class="flex items-center gap-3">
+        <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
+         <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+         </svg>
+        </div>
+        <div>
+         <h2 class="text-xl font-bold text-gray-700" style="font-family: Arial, sans-serif;">Traditional Tutoring</h2>
+         <p class="text-gray-500 text-sm" style="font-family: Arial, sans-serif;">Focus: Teaching the content</p>
+        </div>
+       </div>
+      </div><!-- Chat Conversation -->
+      <div class="p-6 space-y-4 bg-gray-50/50"><!-- Student message -->
+       <div class="flex gap-3">
+        <div class="flex-shrink-0 w-8 h-8 bg-blue rounded-full flex items-center justify-center text-white text-xs font-bold">
+         S
+        </div>
+        <div class="bg-blue/10 rounded-2xl rounded-tl-md px-4 py-3 max-w-[85%]">
+         <p class="text-navy text-sm" style="font-family: Arial, sans-serif;">"What's the problem with my code?"</p>
+        </div>
+       </div><!-- Tutor message -->
+       <div class="flex gap-3 justify-end">
+        <div class="chat-bubble-student rounded-2xl rounded-tr-md px-4 py-3 max-w-[85%]">
+         <p class="text-gray-700 text-sm" style="font-family: Arial, sans-serif;">"It's not giving the right answer."</p>
+        </div>
+        <div class="flex-shrink-0 w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center text-white text-xs font-bold">
+         T
+        </div>
+       </div><!-- Student message -->
+       <div class="flex gap-3">
+        <div class="flex-shrink-0 w-8 h-8 bg-blue rounded-full flex items-center justify-center text-white text-xs font-bold">
+         S
+        </div>
+        <div class="bg-blue/10 rounded-2xl rounded-tl-md px-4 py-3 max-w-[85%]">
+         <p class="text-navy text-sm" style="font-family: Arial, sans-serif;">"My loop is wrong, right?"</p>
+        </div>
+       </div><!-- Tutor message -->
+       <div class="flex gap-3 justify-end">
+        <div class="chat-bubble-student rounded-2xl rounded-tr-md px-4 py-3 max-w-[85%]">
+         <p class="text-gray-700 text-sm" style="font-family: Arial, sans-serif;">"Use <code class="bg-gray-200 px-1 rounded">range(len(list))</code> here and <code class="bg-gray-200 px-1 rounded">+=</code> on line 12."</p>
+        </div>
+        <div class="flex-shrink-0 w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center text-white text-xs font-bold">
+         T
+        </div>
+       </div><!-- Student message -->
+       <div class="flex gap-3">
+        <div class="flex-shrink-0 w-8 h-8 bg-blue rounded-full flex items-center justify-center text-white text-xs font-bold">
+         S
+        </div>
+        <div class="bg-blue/10 rounded-2xl rounded-tl-md px-4 py-3 max-w-[85%]">
+         <p class="text-navy text-sm" style="font-family: Arial, sans-serif;">"Okay, got it."</p>
+        </div>
+       </div>
+      </div><!-- Outcome Box -->
+      <div class="px-6 py-5 bg-gray-100 border-t border-gray-200">
+       <div class="flex items-start gap-3">
+        <div class="flex-shrink-0 w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+         <svg class="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+         </svg>
+        </div>
+        <div>
+         <p class="font-semibold text-gray-700 text-sm" style="font-family: Arial, sans-serif;">The Result</p>
+         <p class="text-gray-500 text-sm mt-1" style="font-family: Arial, sans-serif;">Code works, but the student didn't learn <em>why</em> it was broken or how to find similar issues next time.</p>
+        </div>
+       </div>
+      </div>
+     </div><!-- Debugging Literacy Column -->
+     <div class="comparison-card bg-white rounded-2xl border-2 border-green/50 overflow-hidden shadow-lg ring-2 ring-green/20"><!-- Column Header -->
+      <div class="bg-gradient-to-r from-navy to-blue px-6 py-5 border-b border-blue/20">
+       <div class="flex items-center gap-3">
+        <div class="icon-badge w-12 h-12 bg-green rounded-full flex items-center justify-center">
+         <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+         </svg>
+        </div>
+        <div>
+         <h2 class="text-xl font-bold text-white" style="font-family: Arial, sans-serif;">Debugging Literacy</h2>
+         <p class="text-white/80 text-sm" style="font-family: Arial, sans-serif;">Focus: Building thinking process</p>
+        </div>
+       </div>
+      </div><!-- Chat Conversation -->
+      <div class="p-6 space-y-4 bg-gradient-to-b from-green/5 to-white"><!-- Student message -->
+       <div class="flex gap-3">
+        <div class="flex-shrink-0 w-8 h-8 bg-blue rounded-full flex items-center justify-center text-white text-xs font-bold">
+         S
+        </div>
+        <div class="bg-sky/20 rounded-2xl rounded-tl-md px-4 py-3 max-w-[85%]">
+         <p class="text-navy text-sm" style="font-family: Arial, sans-serif;">"Before I change anything, what should my code do?"</p>
+        </div>
+       </div><!-- Coach message -->
+       <div class="flex gap-3 justify-end">
+        <div class="chat-bubble-coach rounded-2xl rounded-tr-md px-4 py-3 max-w-[85%]">
+         <p class="text-white text-sm" style="font-family: Arial, sans-serif;">"Good question! What do you <em>expect</em> it to do?"</p>
+        </div>
+        <div class="flex-shrink-0 w-8 h-8 bg-navy rounded-full flex items-center justify-center text-white text-xs font-bold">
+         C
+        </div>
+       </div><!-- Student message -->
+       <div class="flex gap-3">
+        <div class="flex-shrink-0 w-8 h-8 bg-blue rounded-full flex items-center justify-center text-white text-xs font-bold">
+         S
+        </div>
+        <div class="bg-sky/20 rounded-2xl rounded-tl-md px-4 py-3 max-w-[85%]">
+         <p class="text-navy text-sm" style="font-family: Arial, sans-serif;">"Add up all the numbers in the list."</p>
+        </div>
+       </div><!-- Coach message -->
+       <div class="flex gap-3 justify-end">
+        <div class="chat-bubble-coach rounded-2xl rounded-tr-md px-4 py-3 max-w-[85%]">
+         <p class="text-white text-sm" style="font-family: Arial, sans-serif;">"And what's it <em>actually</em> doing instead?"</p>
+        </div>
+        <div class="flex-shrink-0 w-8 h-8 bg-navy rounded-full flex items-center justify-center text-white text-xs font-bold">
+         C
+        </div>
+       </div><!-- Student message -->
+       <div class="flex gap-3">
+        <div class="flex-shrink-0 w-8 h-8 bg-blue rounded-full flex items-center justify-center text-white text-xs font-bold">
+         S
+        </div>
+        <div class="bg-sky/20 rounded-2xl rounded-tl-md px-4 py-3 max-w-[85%]">
+         <p class="text-navy text-sm" style="font-family: Arial, sans-serif;">"Only giving me the last number."</p>
+        </div>
+       </div><!-- Coach message -->
+       <div class="flex gap-3 justify-end">
+        <div class="chat-bubble-coach rounded-2xl rounded-tr-md px-4 py-3 max-w-[85%]">
+         <p class="text-white text-sm" style="font-family: Arial, sans-serif;">"Walk me through what happens each loop iteration—focus on the total variable."</p>
+        </div>
+        <div class="flex-shrink-0 w-8 h-8 bg-navy rounded-full flex items-center justify-center text-white text-xs font-bold">
+         C
+        </div>
+       </div><!-- Student message -->
+       <div class="flex gap-3">
+        <div class="flex-shrink-0 w-8 h-8 bg-blue rounded-full flex items-center justify-center text-white text-xs font-bold">
+         S
+        </div>
+        <div class="bg-sky/20 rounded-2xl rounded-tl-md px-4 py-3 max-w-[85%]">
+         <p class="text-navy text-sm" style="font-family: Arial, sans-serif;">"Oh! I'm using <code class="bg-sky/40 px-1 rounded">=</code> instead of <code class="bg-sky/40 px-1 rounded">+=</code>. It overwrites instead of adding!"</p>
+        </div>
+       </div>
+      </div><!-- Outcome Box -->
+      <div class="px-6 py-5 bg-green/10 border-t border-green/30">
+       <div class="flex items-start gap-3">
+        <div class="flex-shrink-0 w-8 h-8 bg-green rounded-full flex items-center justify-center">
+         <svg class="w-4 h-4 text-navy" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+         </svg>
+        </div>
+        <div>
+         <p class="font-semibold text-navy text-sm" style="font-family: Arial, sans-serif;">The Result</p>
+         <p class="text-navy/70 text-sm mt-1" style="font-family: Arial, sans-serif;">Student discovered the bug themselves and built a mental model for finding similar issues independently.</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div><!-- Key Insight Banner -->
+    <div class="mt-10 bg-gradient-to-r from-navy to-blue rounded-2xl p-6 md:p-8">
+     <div class="flex flex-col md:flex-row items-center gap-6">
+      <div class="flex-shrink-0 w-16 h-16 bg-green rounded-full flex items-center justify-center">
+       <svg class="w-8 h-8 text-navy" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+       </svg>
+      </div>
+      <div class="text-center md:text-left">
+       <h3 class="text-xl font-bold text-white mb-2" style="font-family: Arial, sans-serif;">The Key Difference</h3>
+       <p class="text-white/90" style="font-family: Arial, sans-serif;">Debugging literacy isn't about teaching Python—it's about teaching students to <strong>slow down, form hypotheses, and test systematically.</strong> The goal is to build a thinking process they can use every time something breaks.</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: "Two Approaches to Helping Students",
+      intro_text: "See the difference between traditional tutoring and debugging literacy coaching",
+      background_color: "#FFFFFF",
+      primary_color: "#002855",
+      secondary_color: "#0070F0",
+      accent_color: "#97E152",
+      text_color: "#002855",
+      font_family: "Arial"
+    };
+
+    async function onConfigChange(config) {
+      const title = document.getElementById('main-title');
+      const intro = document.getElementById('intro-text');
+      
+      if (title) title.textContent = config.main_title || defaultConfig.main_title;
+      if (intro) intro.textContent = config.intro_text || defaultConfig.intro_text;
+      
+      // Apply font family
+      const fontFamily = config.font_family || defaultConfig.font_family;
+      document.querySelectorAll('[style*="font-family"]').forEach(el => {
+        el.style.fontFamily = `${fontFamily}, sans-serif`;
+      });
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => {
+              config.primary_color = value;
+              window.elementSdk.setConfig({ primary_color: value });
+            }
+          },
+          {
+            get: () => config.accent_color || defaultConfig.accent_color,
+            set: (value) => {
+              config.accent_color = value;
+              window.elementSdk.setConfig({ accent_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["main_title", config.main_title || defaultConfig.main_title],
+        ["intro_text", config.intro_text || defaultConfig.intro_text]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d7a656e4364d687',t:'MTc3MjcyNzA4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
