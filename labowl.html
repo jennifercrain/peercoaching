@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab OWL Coaching Framework</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', Arial, sans-serif; }
+    .stage-btn { transition: all 0.2s ease; }
+    .stage-btn:hover { transform: translateX(4px); }
+    .stage-btn.active { border-left: 4px solid #0070F0; background: #EBF5FF; }
+    .chat-bubble { animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .choice-btn { transition: all 0.2s ease; }
+    .choice-btn:hover:not(:disabled) { transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,112,240,0.2); }
+    .choice-btn.correct { background: #97E152 !important; color: #002855 !important; }
+    .choice-btn.incorrect { background: #FFE4E4 !important; border-color: #FF6B6B !important; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-white">
+  <div id="app-container" class="h-full flex flex-col">
+   <!-- Header -->
+   <header class="bg-[#002855] text-white px-6 py-4 flex items-center gap-3">
+    <div class="flex items-center gap-2">
+     <svg width="40" height="40" viewbox="0 0 40 40" fill="none">
+      <circle cx="20" cy="20" r="18" fill="#0070F0" /> <circle cx="14" cy="16" r="4" fill="white" /> <circle cx="26" cy="16" r="4" fill="white" /> <circle cx="14" cy="16" r="2" fill="#002855" /> <circle cx="26" cy="16" r="2" fill="#002855" /> <path d="M12 26 Q20 32 28 26" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" /> <path d="M8 8 Q12 4 16 8" stroke="#97E152" stroke-width="2" fill="none" /> <path d="M24 8 Q28 4 32 8" stroke="#97E152" stroke-width="2" fill="none" />
+     </svg>
+     <div>
+      <h1 id="main-title" class="text-xl font-bold">Lab OWL</h1>
+      <p class="text-sm text-[#46B1EF]">Structured Coaching Framework</p>
+     </div>
+    </div>
+   </header><!-- Main Content -->
+   <div class="flex-1 flex overflow-hidden">
+    <!-- Left Sidebar - Stages -->
+    <nav class="w-72 bg-gray-50 border-r border-gray-200 p-4 overflow-y-auto">
+     <h2 class="text-sm font-semibold text-[#002855] uppercase tracking-wide mb-4">Framework Stages</h2>
+     <div id="stage-buttons" class="space-y-2">
+      <button data-stage="locate" class="stage-btn active w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
+       <div class="flex items-center gap-3">
+        <span class="w-8 h-8 rounded-full bg-[#0070F0] text-white flex items-center justify-center font-bold text-sm">L</span>
+        <div>
+         <div class="font-semibold text-[#002855]">
+          Locate the Block
+         </div>
+         <div class="text-xs text-gray-500">
+          Find where it stops working
+         </div>
+        </div>
+       </div></button> <button data-stage="analyze" class="stage-btn w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
+       <div class="flex items-center gap-3">
+        <span class="w-8 h-8 rounded-full bg-[#46B1EF] text-white flex items-center justify-center font-bold text-sm">A</span>
+        <div>
+         <div class="font-semibold text-[#002855]">
+          Analyze What's Happening
+         </div>
+         <div class="text-xs text-gray-500">
+          Describe the behavior
+         </div>
+        </div>
+       </div></button> <button data-stage="break" class="stage-btn w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
+       <div class="flex items-center gap-3">
+        <span class="w-8 h-8 rounded-full bg-[#97E152] text-[#002855] flex items-center justify-center font-bold text-sm">B</span>
+        <div>
+         <div class="font-semibold text-[#002855]">
+          Break It Down
+         </div>
+         <div class="text-xs text-gray-500">
+          Isolate smaller pieces
+         </div>
+        </div>
+       </div></button> <button data-stage="observe" class="stage-btn w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
+       <div class="flex items-center gap-3">
+        <span class="w-8 h-8 rounded-full bg-[#0070F0] text-white flex items-center justify-center font-bold text-sm">O</span>
+        <div>
+         <div class="font-semibold text-[#002855]">
+          Observe the Pattern
+         </div>
+         <div class="text-xs text-gray-500">
+          Notice what changes
+         </div>
+        </div>
+       </div></button> <button data-stage="work" class="stage-btn w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
+       <div class="flex items-center gap-3">
+        <span class="w-8 h-8 rounded-full bg-[#46B1EF] text-white flex items-center justify-center font-bold text-sm">W</span>
+        <div>
+         <div class="font-semibold text-[#002855]">
+          Work the Hypothesis
+         </div>
+         <div class="text-xs text-gray-500">
+          Make predictions
+         </div>
+        </div>
+       </div></button> <button data-stage="lock" class="stage-btn w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
+       <div class="flex items-center gap-3">
+        <span class="w-8 h-8 rounded-full bg-[#97E152] text-[#002855] flex items-center justify-center font-bold text-sm">L</span>
+        <div>
+         <div class="font-semibold text-[#002855]">
+          Lock in the Learning
+         </div>
+         <div class="text-xs text-gray-500">
+          Reflect on the process
+         </div>
+        </div>
+       </div></button>
+     </div><!-- Stage Info Panel -->
+     <div id="stage-info" class="mt-6 p-4 bg-white rounded-lg border border-[#46B1EF]">
+      <h3 class="font-semibold text-[#002855] mb-2">Locate the Block</h3>
+      <p class="text-sm text-gray-600 mb-3">Start by helping the student narrow the focus. When a student says "It's not working," help them identify exactly where the issue is happening.</p>
+      <div class="text-sm text-[#0070F0]">
+       <p class="font-medium mb-1">Sample Questions:</p>
+       <ul class="list-disc list-inside text-gray-600 space-y-1">
+        <li>Where exactly does it stop working?</li>
+        <li>Which section feels most confusing right now?</li>
+       </ul>
+      </div>
+     </div>
+    </nav><!-- Right Panel - Scenario -->
+    <main class="flex-1 flex flex-col overflow-hidden">
+     <!-- Scenario Header -->
+     <div class="bg-[#EBF5FF] px-6 py-4 border-b border-[#46B1EF]">
+      <div class="flex items-center justify-between">
+       <div>
+        <h2 id="scenario-title" class="text-lg font-bold text-[#002855]">zyBooks - Python Functions</h2>
+        <p class="text-sm text-gray-600">Practice coaching scenario</p>
+       </div><button id="reset-btn" class="px-4 py-2 bg-white border border-[#0070F0] text-[#0070F0] rounded-lg font-medium hover:bg-[#0070F0] hover:text-white transition-colors"> Reset Scenario </button>
+      </div>
+     </div><!-- Chat Area -->
+     <div id="chat-area" class="flex-1 overflow-y-auto p-6 space-y-4">
+      <!-- Messages will be inserted here -->
+     </div><!-- Response Options -->
+     <div id="response-area" class="border-t border-gray-200 p-4 bg-gray-50">
+      <!-- Options will be inserted here -->
+     </div>
+    </main>
+   </div>
+  </div>
+  <script>
+    // Configuration
+    const defaultConfig = {
+      main_title: 'Lab OWL',
+      scenario_title: 'zyBooks - Python Functions',
+      font_family: 'Inter',
+      font_size: 16,
+      primary_color: '#002855',
+      secondary_color: '#0070F0',
+      accent_color: '#97E152',
+      text_color: '#1f2937',
+      surface_color: '#f9fafb'
+    };
+
+    // Stage information
+    const stageInfo = {
+      locate: {
+        title: 'Locate the Block',
+        description: 'Start by helping the student narrow the focus. When a student says "It\'s not working," help them identify exactly where the issue is happening.',
+        questions: [
+          'Where exactly does it stop working?',
+          'Which section feels most confusing right now?',
+          'If you had to point to one area causing stress, what would it be?'
+        ]
+      },
+      analyze: {
+        title: 'Analyze What\'s Happening',
+        description: 'Encourage the student to describe what the program is doing while you observe.',
+        questions: [
+          'Tell me what you were expecting from this code.',
+          'What is it actually doing right now?',
+          'What does the error message say?',
+          'What changed between when it worked and now?'
+        ]
+      },
+      break: {
+        title: 'Break It Down',
+        description: 'Programming problems often feel overwhelming because students try to change everything at once. Help them isolate smaller pieces.',
+        questions: [
+          'What is the smallest piece we could test here?',
+          'What happens if we comment out everything except this section?',
+          'Which variable feels safest to test first?'
+        ]
+      },
+      observe: {
+        title: 'Observe the Pattern',
+        description: 'After testing something, pause and reflect. Encourage the student to notice patterns in the output.',
+        questions: [
+          'Is this happening every time or only sometimes?',
+          'What pattern do you notice?',
+          'What stayed the same?',
+          'What changed?'
+        ]
+      },
+      work: {
+        title: 'Work the Hypothesis',
+        description: 'Help the student make a prediction before running the program again. This turns trial and error into intentional experimentation.',
+        questions: [
+          'What do you think might be causing this?',
+          'If we change this part, what do you expect to happen?',
+          'How will we know if that theory is correct?'
+        ]
+      },
+      lock: {
+        title: 'Lock in the Learning',
+        description: 'Before ending the session, zoom out and reflect. Even if the code is not fully solved, the session can still be successful.',
+        questions: [
+          'What strategy worked well today?',
+          'What will you try first the next time something breaks?',
+          'What did you learn about your debugging process?'
+        ]
+      }
+    };
+
+    // Scenario data
+    const scenario = [
+      {
+        stage: 'locate',
+        student: {
+          name: 'Alex',
+          message: "Hey, I'm stuck on my zyBooks assignment. My function isn't working and I don't know what's wrong. Can you just tell me what to fix?"
+        },
+        question: "What do you ask Alex?",
+        choices: [
+          {
+            text: "Sure, let me see your code and I'll point out the error.",
+            correct: false,
+            feedback: "This approaches tutoring territory. As a Peer Coach, we want to guide students to find answers themselves."
+          },
+          {
+            text: "I can help you work through this! Where exactly does it stop working? Is there a specific part that feels most confusing?",
+            correct: true,
+            feedback: "Great! You're using the 'Locate the Block' stage to help narrow the focus without giving direct answers."
+          },
+          {
+            text: "Have you tried reading the textbook chapter again?",
+            correct: false,
+            feedback: "While resources are helpful, this doesn't help the student engage with their specific problem right now."
+          }
+        ]
+      },
+      {
+        stage: 'analyze',
+        student: {
+          name: 'Alex',
+          message: "It's my calculate_average function. When I run it, I get a weird error about 'NoneType'. The function is supposed to take a list of numbers and return the average."
+        },
+        question: "How do you help Alex analyze what's happening?",
+        choices: [
+          {
+            text: "You forgot to add a return statement. That's why it's returning None.",
+            correct: false,
+            feedback: "You identified the issue, but giving the answer directly doesn't help the student build debugging skills."
+          },
+          {
+            text: "Tell me what you expected the function to do, and what it's actually doing right now. What does the full error message say?",
+            correct: true,
+            feedback: "Excellent! You're in the 'Analyze' stage - helping them describe expected vs. actual behavior."
+          },
+          {
+            text: "NoneType errors are really common. Don't worry about it.",
+            correct: false,
+            feedback: "While reassuring, this dismisses the problem instead of helping them understand it."
+          }
+        ]
+      },
+      {
+        stage: 'break',
+        student: {
+          name: 'Alex',
+          message: "Okay, so the error says 'TypeError: unsupported operand type(s) for /: NoneType and int'. I expected it to print the average, like 85.5, but it's crashing instead."
+        },
+        question: "How do you help Alex break down the problem?",
+        choices: [
+          {
+            text: "Let's break this down. What's the smallest piece we could test? What if we just look at what your function returns before doing any division?",
+            correct: true,
+            feedback: "Perfect use of 'Break It Down'! You're helping them isolate the problem into manageable pieces."
+          },
+          {
+            text: "The issue is that your function returns None somewhere. Add a return statement.",
+            correct: false,
+            feedback: "You're giving the solution. Instead, guide them to discover this themselves."
+          },
+          {
+            text: "Can you show me the whole code? I need to see everything to help.",
+            correct: false,
+            feedback: "Asking for more code can be overwhelming. Focus on isolating the specific problem area."
+          }
+        ]
+      },
+      {
+        stage: 'observe',
+        student: {
+          name: 'Alex',
+          message: "Oh interesting! I added a print statement and the function is returning None. But I have 'total / len(numbers)' at the end... why wouldn't that return the average?"
+        },
+        question: "What pattern do you help Alex notice?",
+        choices: [
+          {
+            text: "Because you need the 'return' keyword before it.",
+            correct: false,
+            feedback: "That's the answer! But the student is so close to discovering it themselves."
+          },
+          {
+            text: "You're onto something! What pattern do you notice? The calculation is there, but the function returns None. What might be missing between the calculation and getting that value back?",
+            correct: true,
+            feedback: "Great 'Observe the Pattern' response! You're guiding them to notice the gap themselves."
+          },
+          {
+            text: "That is strange. Python can be tricky sometimes.",
+            correct: false,
+            feedback: "This doesn't help the student progress in their understanding."
+          }
+        ]
+      },
+      {
+        stage: 'work',
+        student: {
+          name: 'Alex',
+          message: "Wait... I think I see it! The calculation happens but maybe it doesn't actually send the value back? Like, I need to tell it to return that value?"
+        },
+        question: "How do you help Alex test their hypothesis?",
+        choices: [
+          {
+            text: "Exactly right! Add 'return' before your calculation.",
+            correct: false,
+            feedback: "They're so close! Let them confirm their own hypothesis first."
+          },
+          {
+            text: "That's a great hypothesis! What do you think will happen if you try that? How will you know if your theory is correct?",
+            correct: true,
+            feedback: "Excellent 'Work the Hypothesis' response! You're letting them test their own theory."
+          },
+          {
+            text: "Yes, you need a return statement. Python functions always need them.",
+            correct: false,
+            feedback: "While confirming, you're still providing the answer rather than letting them test their theory."
+          }
+        ]
+      },
+      {
+        stage: 'lock',
+        student: {
+          name: 'Alex',
+          message: "I added 'return' before the calculation and it works now! I can't believe I spent an hour on this and it was just one word missing. 😅"
+        },
+        question: "How do you lock in the learning?",
+        choices: [
+          {
+            text: "Great! Glad I could help. Good luck with the rest!",
+            correct: false,
+            feedback: "The code works, but there's an opportunity to reinforce the learning before ending."
+          },
+          {
+            text: "Nice work figuring that out! Before you go - what strategy helped you find the issue today? What will you try first next time something breaks?",
+            correct: true,
+            feedback: "Perfect 'Lock in the Learning'! You're helping them build transferable debugging habits."
+          },
+          {
+            text: "Yeah, missing return statements are a common mistake. Remember to always include them.",
+            correct: false,
+            feedback: "This gives advice but misses the chance to help them reflect on their process."
+          }
+        ]
+      }
+    ];
+
+    let currentStep = 0;
+    let currentStage = 'locate';
+
+    // Initialize chat
+    function initChat() {
+      const chatArea = document.getElementById('chat-area');
+      const responseArea = document.getElementById('response-area');
+      
+      chatArea.innerHTML = `
+        <div class="chat-bubble flex gap-3">
+          <div class="w-10 h-10 rounded-full bg-[#46B1EF] flex items-center justify-center text-white font-bold flex-shrink-0">A</div>
+          <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-none px-4 py-3 max-w-lg shadow-sm">
+            <div class="font-semibold text-[#002855] text-sm mb-1">Alex (Student)</div>
+            <p class="text-gray-700">${scenario[0].student.message}</p>
+          </div>
+        </div>
+      `;
+      
+      renderChoices();
+    }
+
+    function renderChoices() {
+      const responseArea = document.getElementById('response-area');
+      const step = scenario[currentStep];
+      
+      if (!step) {
+        responseArea.innerHTML = `
+          <div class="text-center py-6">
+            <div class="text-4xl mb-3">🎉</div>
+            <h3 class="text-lg font-bold text-[#002855] mb-2">Scenario Complete!</h3>
+            <p class="text-gray-600 mb-4">You've practiced all stages of the Lab OWL framework.</p>
+            <button onclick="resetScenario()" class="px-6 py-2 bg-[#0070F0] text-white rounded-lg font-medium hover:bg-[#002855] transition-colors">
+              Try Again
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      responseArea.innerHTML = `
+        <div class="mb-4">
+          <p class="text-sm font-medium text-[#002855] mb-2">${step.question}</p>
+        </div>
+        <div class="space-y-2">
+          ${step.choices.map((choice, idx) => `
+            <button onclick="selectChoice(${idx})" class="choice-btn w-full text-left px-4 py-3 bg-white border-2 border-gray-200 rounded-lg hover:border-[#0070F0] transition-all">
+              <span class="text-gray-700">${choice.text}</span>
+            </button>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function selectChoice(idx) {
+      const step = scenario[currentStep];
+      const choice = step.choices[idx];
+      const buttons = document.querySelectorAll('.choice-btn');
+      
+      // Disable all buttons
+      buttons.forEach((btn, i) => {
+        btn.disabled = true;
+        if (i === idx) {
+          btn.classList.add(choice.correct ? 'correct' : 'incorrect');
+        }
+        if (step.choices[i].correct && i !== idx) {
+          btn.classList.add('correct');
+        }
+      });
+
+      // Add coach response to chat
+      const chatArea = document.getElementById('chat-area');
+      
+      // Coach message
+      const coachBubble = document.createElement('div');
+      coachBubble.className = 'chat-bubble flex gap-3 justify-end';
+      coachBubble.innerHTML = `
+        <div class="bg-[#0070F0] text-white rounded-2xl rounded-tr-none px-4 py-3 max-w-lg shadow-sm">
+          <div class="font-semibold text-sm mb-1 text-[#97E152]">You (Coach)</div>
+          <p>${choice.text}</p>
+        </div>
+        <div class="w-10 h-10 rounded-full bg-[#002855] flex items-center justify-center text-white font-bold flex-shrink-0">C</div>
+      `;
+      chatArea.appendChild(coachBubble);
+
+      // Feedback
+      const feedbackBubble = document.createElement('div');
+      feedbackBubble.className = 'chat-bubble';
+      feedbackBubble.innerHTML = `
+        <div class="mx-auto max-w-lg p-4 rounded-lg ${choice.correct ? 'bg-[#E8F9D9] border border-[#97E152]' : 'bg-[#FFF4E5] border border-[#FFB84D]'}">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-lg">${choice.correct ? '✅' : '💡'}</span>
+            <span class="font-semibold ${choice.correct ? 'text-[#2D5016]' : 'text-[#8B5A00]'}">${choice.correct ? 'Great coaching!' : 'Consider this'}</span>
+          </div>
+          <p class="${choice.correct ? 'text-[#2D5016]' : 'text-[#8B5A00]'}">${choice.feedback}</p>
+        </div>
+      `;
+      chatArea.appendChild(feedbackBubble);
+
+      chatArea.scrollTop = chatArea.scrollHeight;
+
+      // Next step after delay
+      setTimeout(() => {
+        currentStep++;
+        if (currentStep < scenario.length) {
+          const nextStep = scenario[currentStep];
+          
+          // Update active stage
+          currentStage = nextStep.stage;
+          updateStageButtons();
+          updateStageInfo();
+          
+          // Add next student message
+          const studentBubble = document.createElement('div');
+          studentBubble.className = 'chat-bubble flex gap-3';
+          studentBubble.innerHTML = `
+            <div class="w-10 h-10 rounded-full bg-[#46B1EF] flex items-center justify-center text-white font-bold flex-shrink-0">A</div>
+            <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-none px-4 py-3 max-w-lg shadow-sm">
+              <div class="font-semibold text-[#002855] text-sm mb-1">Alex (Student)</div>
+              <p class="text-gray-700">${nextStep.student.message}</p>
+            </div>
+          `;
+          chatArea.appendChild(studentBubble);
+          chatArea.scrollTop = chatArea.scrollHeight;
+        }
+        renderChoices();
+      }, 1500);
+    }
+
+    function updateStageButtons() {
+      document.querySelectorAll('.stage-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.stage === currentStage) {
+          btn.classList.add('active');
+        }
+      });
+    }
+
+    function updateStageInfo() {
+      const info = stageInfo[currentStage];
+      const infoPanel = document.getElementById('stage-info');
+      infoPanel.innerHTML = `
+        <h3 class="font-semibold text-[#002855] mb-2">${info.title}</h3>
+        <p class="text-sm text-gray-600 mb-3">${info.description}</p>
+        <div class="text-sm text-[#0070F0]">
+          <p class="font-medium mb-1">Sample Questions:</p>
+          <ul class="list-disc list-inside text-gray-600 space-y-1">
+            ${info.questions.slice(0, 2).map(q => `<li>${q}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+    }
+
+    function resetScenario() {
+      currentStep = 0;
+      currentStage = 'locate';
+      updateStageButtons();
+      updateStageInfo();
+      initChat();
+    }
+
+    // Stage button click handlers
+    document.querySelectorAll('.stage-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentStage = btn.dataset.stage;
+        updateStageButtons();
+        updateStageInfo();
+      });
+    });
+
+    // Reset button
+    document.getElementById('reset-btn').addEventListener('click', resetScenario);
+
+    // Element SDK integration
+    async function onConfigChange(config) {
+      const mainTitle = document.getElementById('main-title');
+      const scenarioTitle = document.getElementById('scenario-title');
+      
+      if (mainTitle) mainTitle.textContent = config.main_title || defaultConfig.main_title;
+      if (scenarioTitle) scenarioTitle.textContent = config.scenario_title || defaultConfig.scenario_title;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.surface_color || defaultConfig.surface_color,
+            set: (value) => { config.surface_color = value; window.elementSdk.setConfig({ surface_color: value }); }
+          },
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => { config.primary_color = value; window.elementSdk.setConfig({ primary_color: value }); }
+          },
+          {
+            get: () => config.secondary_color || defaultConfig.secondary_color,
+            set: (value) => { config.secondary_color = value; window.elementSdk.setConfig({ secondary_color: value }); }
+          },
+          {
+            get: () => config.accent_color || defaultConfig.accent_color,
+            set: (value) => { config.accent_color = value; window.elementSdk.setConfig({ accent_color: value }); }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => { config.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => { config.font_family = value; window.elementSdk.setConfig({ font_family: value }); }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => { config.font_size = value; window.elementSdk.setConfig({ font_size: value }); }
+        }
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ['main_title', config.main_title || defaultConfig.main_title],
+        ['scenario_title', config.scenario_title || defaultConfig.scenario_title]
+      ]);
+    }
+
+    // Initialize
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+
+    initChat();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d759842156bdb71',t:'MTc3MjY3NjczNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
