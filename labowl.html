@@ -25,10 +25,12 @@
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
  <body class="h-full bg-white">
-  <div id="app-container" class="h-full flex flex-col"><!-- Header -->
+  <div id="app-container" class="h-full flex flex-col">
+   <!-- Header -->
    <header class="bg-[#002855] text-white px-6 py-4 flex items-center gap-3">
     <div class="flex items-center gap-2">
-     <svg width="40" height="40" viewbox="0 0 40 40" fill="none"><!-- Head --> <circle cx="20" cy="22" r="14" fill="#97E152" /> <!-- Left ear tuft --> <path d="M12 12 Q10 6 14 8" fill="#97E152" /> <!-- Right ear tuft --> <path d="M28 12 Q30 6 26 8" fill="#97E152" /> <!-- Left eye circle (large white) --> <circle cx="15" cy="20" r="5" fill="white" /> <!-- Right eye circle (large white) --> <circle cx="25" cy="20" r="5" fill="white" /> <!-- Left pupil --> <circle cx="15" cy="21" r="2.5" fill="#002855" /> <!-- Right pupil --> <circle cx="25" cy="21" r="2.5" fill="#002855" /> <!-- Left eye shine --> <circle cx="16" cy="19" r="1" fill="white" /> <!-- Right eye shine --> <circle cx="26" cy="19" r="1" fill="white" /> <!-- Beak --> <path d="M20 26 L18 31 L22 31 Z" fill="#FFB84D" /> <!-- Belly spot --> <ellipse cx="20" cy="28" rx="3" ry="4" fill="#ffffff" opacity="0.6" />
+     <svg width="40" height="40" viewbox="0 0 40 40" fill="none">
+      <!-- Head --> <circle cx="20" cy="22" r="14" fill="#97E152" /> <!-- Left ear tuft --> <path d="M12 12 Q10 6 14 8" fill="#97E152" /> <!-- Right ear tuft --> <path d="M28 12 Q30 6 26 8" fill="#97E152" /> <!-- Left eye circle (large white) --> <circle cx="15" cy="20" r="5" fill="white" /> <!-- Right eye circle (large white) --> <circle cx="25" cy="20" r="5" fill="white" /> <!-- Left pupil --> <circle cx="15" cy="21" r="2.5" fill="#002855" /> <!-- Right pupil --> <circle cx="25" cy="21" r="2.5" fill="#002855" /> <!-- Left eye shine --> <circle cx="16" cy="19" r="1" fill="white" /> <!-- Right eye shine --> <circle cx="26" cy="19" r="1" fill="white" /> <!-- Beak --> <path d="M20 26 L18 31 L22 31 Z" fill="#FFB84D" /> <!-- Belly spot --> <ellipse cx="20" cy="28" rx="3" ry="4" fill="#ffffff" opacity="0.6" />
      </svg>
      <div>
       <h1 id="main-title" class="text-xl font-bold">Lab OWL</h1>
@@ -36,11 +38,14 @@
      </div>
     </div>
    </header><!-- Main Content -->
-   <div class="flex-1 flex overflow-hidden"><!-- Left Sidebar - Stages -->
+   <div class="flex-1 flex overflow-hidden">
+    <!-- Left Sidebar - Stages -->
     <nav class="w-72 bg-gray-50 border-r border-gray-200 p-4 overflow-y-auto">
      <h2 class="text-sm font-semibold text-[#002855] uppercase tracking-wide mb-4">Framework Stages</h2>
-     <div id="stage-buttons" class="space-y-2"><button data-stage="locate" class="stage-btn active w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
-       <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-[#0070F0] text-white flex items-center justify-center font-bold text-sm">L</span>
+     <div id="stage-buttons" class="space-y-2">
+      <button data-stage="locate" class="stage-btn active w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
+       <div class="flex items-center gap-3">
+        <span class="w-8 h-8 rounded-full bg-[#0070F0] text-white flex items-center justify-center font-bold text-sm">L</span>
         <div>
          <div class="font-semibold text-[#002855]">
           Locate the Block
@@ -50,7 +55,8 @@
          </div>
         </div>
        </div></button> <button data-stage="analyze" class="stage-btn w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
-       <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-[#46B1EF] text-white flex items-center justify-center font-bold text-sm">A</span>
+       <div class="flex items-center gap-3">
+        <span class="w-8 h-8 rounded-full bg-[#46B1EF] text-white flex items-center justify-center font-bold text-sm">A</span>
         <div>
          <div class="font-semibold text-[#002855]">
           Analyze What's Happening
@@ -60,7 +66,8 @@
          </div>
         </div>
        </div></button> <button data-stage="break" class="stage-btn w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
-       <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-[#97E152] text-[#002855] flex items-center justify-center font-bold text-sm">B</span>
+       <div class="flex items-center gap-3">
+        <span class="w-8 h-8 rounded-full bg-[#97E152] text-[#002855] flex items-center justify-center font-bold text-sm">B</span>
         <div>
          <div class="font-semibold text-[#002855]">
           Break It Down
@@ -70,7 +77,8 @@
          </div>
         </div>
        </div></button> <button data-stage="observe" class="stage-btn w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
-       <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-[#0070F0] text-white flex items-center justify-center font-bold text-sm">O</span>
+       <div class="flex items-center gap-3">
+        <span class="w-8 h-8 rounded-full bg-[#0070F0] text-white flex items-center justify-center font-bold text-sm">O</span>
         <div>
          <div class="font-semibold text-[#002855]">
           Observe the Pattern
@@ -80,7 +88,8 @@
          </div>
         </div>
        </div></button> <button data-stage="work" class="stage-btn w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
-       <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-[#46B1EF] text-white flex items-center justify-center font-bold text-sm">W</span>
+       <div class="flex items-center gap-3">
+        <span class="w-8 h-8 rounded-full bg-[#46B1EF] text-white flex items-center justify-center font-bold text-sm">W</span>
         <div>
          <div class="font-semibold text-[#002855]">
           Work the Hypothesis
@@ -90,7 +99,8 @@
          </div>
         </div>
        </div></button> <button data-stage="lock" class="stage-btn w-full text-left px-4 py-3 rounded-lg bg-white border border-gray-200">
-       <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-[#97E152] text-[#002855] flex items-center justify-center font-bold text-sm">L</span>
+       <div class="flex items-center gap-3">
+        <span class="w-8 h-8 rounded-full bg-[#97E152] text-[#002855] flex items-center justify-center font-bold text-sm">L</span>
         <div>
          <div class="font-semibold text-[#002855]">
           Lock in the Learning
@@ -113,7 +123,8 @@
       </div>
      </div>
     </nav><!-- Right Panel - Scenario -->
-    <main class="flex-1 flex flex-col overflow-hidden"><!-- Scenario Header -->
+    <main class="flex-1 flex flex-col overflow-hidden">
+     <!-- Scenario Header -->
      <div class="bg-[#EBF5FF] px-6 py-4 border-b border-[#46B1EF]">
       <div class="flex items-center justify-between">
        <div>
@@ -122,9 +133,11 @@
        </div><button id="reset-btn" class="px-4 py-2 bg-white border border-[#0070F0] text-[#0070F0] rounded-lg font-medium hover:bg-[#0070F0] hover:text-white transition-colors"> Reset Scenario </button>
       </div>
      </div><!-- Chat Area -->
-     <div id="chat-area" class="flex-1 overflow-y-auto p-6 space-y-4"><!-- Messages will be inserted here -->
+     <div id="chat-area" class="flex-1 overflow-y-auto p-6 space-y-4">
+      <!-- Messages will be inserted here -->
      </div><!-- Response Options -->
-     <div id="response-area" class="border-t border-gray-200 p-4 bg-gray-50"><!-- Options will be inserted here -->
+     <div id="response-area" class="border-t border-gray-200 p-4 bg-gray-50">
+      <!-- Options will be inserted here -->
      </div>
     </main>
    </div>
@@ -207,8 +220,8 @@
     const scenario = [
       {
         stage: 'locate',
-        dialogue: "Student: I'm stuck on my zyBooks assignment. My calculate_average function isn't working and I don't know where to start.\n\nYou: Let me help you figure this out. Can you tell me where exactly does it stop working? Which part feels most confusing?",
-        question: "How do you respond?",
+        dialogue: "Student: I'm stuck on my zyBooks assignment. My calculate_average function isn't working and I don't know where to start.\n\nCoach: Let me help you figure this out. Can you tell me where exactly does it stop working? Which part feels most confusing?\n\nStudent: I think it's something in the function logic, but I'm not sure.",
+        coachFollowUp: "You respond:",
         choices: [
           {
             text: "That's exactly right—you've found the real block. Let's dig into that part.",
@@ -229,8 +242,8 @@
       },
       {
         stage: 'analyze',
-        dialogue: "Student: It's the calculate_average function. When I run it, I get 'TypeError: unsupported operand type(s) for /: NoneType and int'. I expected it to return something like 85.5, but instead I'm getting None.\n\nCoach: So the error is about dividing by a NoneType. Before we fix anything, walk me through: what did you expect to happen versus what's actually happening?",
-        question: "What's your next move?",
+        dialogue: "Student: It's the calculate_average function. When I run it, I get 'TypeError: unsupported operand type(s) for /: NoneType and int'. I expected it to return something like 85.5, but instead I'm getting None.\n\nCoach: So the error is about dividing by a NoneType. Before we fix anything, walk me through: what did you expect to happen versus what's actually happening?\n\nStudent: I expected the average to be 85.5 but I got None instead.",
+        coachFollowUp: "You respond:",
         choices: [
           {
             text: "You're describing the real problem now. The calculation itself seems fine, but something's not going right. Keep going.",
@@ -251,8 +264,8 @@
       },
       {
         stage: 'break',
-        dialogue: "Student: The error says NoneType, which means the function is returning None instead of a number. But I have the formula right there: total / len(numbers). The math should work.\n\nCoach: Good observation. Let's isolate the smallest piece we can test. What if we add a print statement right after you calculate total, just to see if that variable is working?",
-        question: "How do you move forward?",
+        dialogue: "Student: The error says NoneType, which means the function is returning None instead of a number. But I have the formula right there: total / len(numbers). The math should work.\n\nCoach: Good observation. Let's isolate the smallest piece we can test. What if we add a print statement right after you calculate total, just to see if that variable is working?\n\nStudent: Okay, I added it. The total calculated fine!",
+        coachFollowUp: "You respond:",
         choices: [
           {
             text: "Perfect—that's breaking it into a testable piece. Do that and tell me what you see.",
@@ -273,8 +286,8 @@
       },
       {
         stage: 'observe',
-        dialogue: "Student: I added print statements and... oh! The function IS calculating the average correctly. But then at the end, it's returning None, not the actual number. That's weird. The math is right, but it's like the answer isn't going anywhere.\n\nCoach: You just noticed something really important. The calculation happens, but the result isn't making it out of the function. What does that tell you?",
-        question: "How do you help them see the pattern?",
+        dialogue: "Student: I added print statements and... oh! The function IS calculating the average correctly. But then at the end, it's returning None, not the actual number. That's weird. The math is right, but it's like the answer isn't going anywhere.\n\nCoach: You just noticed something really important. The calculation happens, but the result isn't making it out of the function. What does that tell you?\n\nStudent: Hmm... the calculation works but the result isn't getting passed back?",
+        coachFollowUp: "You respond:",
         choices: [
           {
             text: "Think about what you've learned: the calculation works fine, but nothing's actually *giving* that value back. What does Python need to do that?",
@@ -295,30 +308,30 @@
       },
       {
         stage: 'work',
-        dialogue: "Student: Wait... Python needs me to actually *return* the value, right? Like, I have to tell it to send the answer back out?\n\nCoach: Yes! That's your hypothesis. Before you make that change, what do you think will happen?",
-        question: "What do you ask?",
+        dialogue: "Student: Wait... Python needs me to actually *return* the value, right? Like, I have to tell it to send the answer back out?\n\nCoach: Yes! That's your hypothesis. Before you make that change, what do you think will happen?\n\nStudent: If I add 'return' before the calculation, it should actually give me back the number instead of None?",
+        coachFollowUp: "You respond:",
         choices: [
           {
-            text: "Will adding return before that calculation fix the TypeError and give you back the actual average?",
+            text: "Exactly. So go ahead and try it. What happens?",
             correct: true,
-            feedback: "Excellent! You're having them predict before testing—that's real learning."
+            feedback: "Excellent! You're having them predict AND test—that's real learning."
           },
           {
             text: "Yes, just add 'return' and it'll work. Trust me.",
             correct: false,
-            feedback: "Confirming the answer removes the power of them predicting and testing."
+            feedback: "Confirming the answer removes the power of them testing their own prediction."
           },
           {
-            text: "Good thinking. Now go ahead and try it.",
+            text: "Good thinking. Now rewrite the whole function.",
             correct: false,
-            feedback: "You're moving to action too fast. Let them articulate their prediction first."
+            feedback: "You're overcomplicating it. They just need to test one small change."
           }
         ]
       },
       {
         stage: 'lock',
-        dialogue: "Student: I added 'return' before the calculation and... it works! The function returned 85.5. I can't believe I spent so long on that. Now I totally see it—the calculation isn't worth anything if I don't actually *return* it.\n\nCoach: You figured that out by testing methodically. Before we wrap up, I want you to think about something...",
-        question: "What's your closing coaching move?",
+        dialogue: "Student: I added 'return' before the calculation and... it works! The function returned 85.5. I can't believe I spent so long on that. Now I totally see it—the calculation isn't worth anything if I don't actually *return* it.\n\nCoach: You figured that out by testing methodically. Before we wrap up, I want you to think about something...\n\nStudent: Okay, I'm listening.",
+        coachFollowUp: "You respond:",
         choices: [
           {
             text: "What did you do today that actually helped you find the bug? That's the strategy to use next time something breaks.",
@@ -376,7 +389,7 @@
 
       responseArea.innerHTML = `
         <div class="mb-4">
-          <p class="text-sm font-medium text-[#002855] mb-2">${step.question}</p>
+          <p class="text-sm font-medium text-[#002855] mb-2">${step.coachFollowUp}</p>
         </div>
         <div class="space-y-2">
           ${step.choices.map((choice, idx) => `
@@ -552,5 +565,5 @@
 
     initChat();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d75a16a000d398b',t:'MTc3MjY3NzExMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d7aca0014cd064a',t:'MTc3MjczMTIwMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
