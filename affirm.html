@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFFIRM Peer Coaching</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap');
+    
+    * {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    .letter-btn {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      user-select: none;
+    }
+    
+    .letter-btn:hover {
+      transform: scale(1.05);
+    }
+    
+    .letter-btn.active {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .panel-content {
+      animation: fadeInSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    @keyframes fadeInSlide {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    .questions-modal {
+      animation: fadeInScale 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    .question-item {
+      padding: 10px;
+      border-left: 3px solid;
+      background-color: #F5F7FA;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      line-height: 1.4;
+    }
+    
+    .stage-card {
+      padding: 16px !important;
+      height: 96px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    
+    @media (min-width: 768px) {
+      .stage-card {
+        height: 112px;
+      }
+    }
+    
+    .stage-card .stage-title {
+      font-size: 1.125rem !important;
+      margin-bottom: 6px !important;
+      line-height: 1.2;
+    }
+    
+    .stage-card .stage-description {
+      font-size: 0.875rem !important;
+      margin-bottom: 0 !important;
+      line-height: 1.4;
+      flex: 1;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app-container" class="h-full w-full overflow-auto" style="background-color: #FFFFFF;">
+   <div class="flex flex-col h-full"><!-- Instructions -->
+    <div class="px-6 md:px-8 pt-6 md:pt-8 pb-4 flex-shrink-0" style="color: #4A5568;">
+     <p class="text-sm md:text-base"><span style="font-weight: bold;">1. Click a letter</span> to expand the description of that coaching stage</p>
+     <p class="text-sm md:text-base"><span style="font-weight: bold;">2. Click a stage card</span> to see example coaching questions and statements for that stage</p>
+    </div><!-- Main Content -->
+    <div class="min-h-full flex p-6 md:p-8 gap-6 flex-1">
+     <!-- Left Sidebar - Vertical AFFIRM Letters -->
+     <div class="flex flex-col gap-4 flex-shrink-0"><button class="letter-btn w-24 h-24 md:w-28 md:h-28 rounded-xl flex items-center justify-center text-5xl md:text-6xl font-bold text-white shadow-lg pulse-hint" style="background-color: #002855;" data-letter="A" aria-label="A - Achievement Orientation">A</button> <button class="letter-btn w-24 h-24 md:w-28 md:h-28 rounded-xl flex items-center justify-center text-5xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #0070F0;" data-letter="F" aria-label="F - Frame">F</button> <button class="letter-btn w-24 h-24 md:w-28 md:h-28 rounded-xl flex items-center justify-center text-5xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #97E152;" data-letter="F2" aria-label="F - Focus on the Strategy">F</button> <button class="letter-btn w-24 h-24 md:w-28 md:h-28 rounded-xl flex items-center justify-center text-5xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #46B1EF;" data-letter="I" aria-label="I - Intentional Practice">I</button> <button class="letter-btn w-24 h-24 md:w-28 md:h-28 rounded-xl flex items-center justify-center text-5xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #002855;" data-letter="R" aria-label="R - Reflect &amp; Review">R</button> <button class="letter-btn w-24 h-24 md:w-28 md:h-28 rounded-xl flex items-center justify-center text-5xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #0070F0;" data-letter="M" aria-label="M - Move Forward">M</button>
+     </div><!-- Middle Panel - Descriptions -->
+     <div id="cards-container" class="flex-1 max-w-2xl overflow-y-auto">
+      <div id="empty-state" class="text-center p-8" style="color: #4A5568;">
+       <p class="text-lg">Click a letter to build your coaching flow</p>
+      </div>
+      <div id="stages-flow" class="space-y-3"></div>
+     </div><!-- Right Panel - Questions for Active Stage -->
+     <div id="questions-panel" class="w-80 bg-white rounded-xl shadow-lg p-6 overflow-y-auto hidden">
+      <h3 id="questions-title" class="text-lg font-bold mb-4"></h3>
+      <div id="questions-container" class="space-y-2"></div>
+     </div>
+    </div>
+   </div>
+   <script>
+    const defaultConfig = {
+      main_title: "AFFIRM Peer Coaching",
+      background_color: "#FFFFFF",
+      primary_color: "#002855",
+      secondary_color: "#0070F0",
+      accent_color: "#97E152",
+      text_color: "#4A5568",
+      font_family: "Arial"
+    };
+    
+    const stageData = {
+      A: {
+        title: "Achievement Orientation",
+        description: "Start by understanding what the student wants to accomplish. Help them articulate their goals and reflect on their current progress and learning experiences.",
+        questions: [
+          "What is your goal for today (or this week)?",
+          "How do you feel about your progress in your courses right now?",
+          "What's working well for you in your learning/studying?",
+          "What's been your biggest struggle or challenge with your course(s) recently?",
+          "How do you typically approach challenges in your studies?",
+          "What's holding you back from trying a new approach?"
+        ],
+        color: "#002855"
+      },
+      F: {
+        title: "Frame",
+        description: "Help the student clearly articulate and understand their specific challenges. Work together to define the problem so you can move forward with targeted support.",
+        questions: [
+          "What is your goal for today (or this week)?",
+          "How do you feel about your progress in your courses right now?",
+          "What's working well for you in your learning/studying?",
+          "What's been your biggest struggle or challenge with your course(s) recently?",
+          "How do you typically approach challenges in your studies?",
+          "What's holding you back from trying a new approach?"
+        ],
+        color: "#0070F0"
+      },
+      F2: {
+        title: "Focus on the Strategy",
+        description: "Introduce and discuss targeted strategies or approaches. Demonstrate one strategy in action and explore alternatives together. Work collaboratively to build a game plan.",
+        questions: [
+          "Here is a strategy for what we're talking about. (Show/demonstrate) What is another option or approach?",
+          "After discussing no more than 2 strategies/tools/approaches, let's work on one of these strategies together or build a game plan for your next steps.",
+          "Is there anything unclear about this strategy?",
+          "Tell me more about what you mean.",
+          "What is an example of that?",
+          "How can we put that in our own words?"
+        ],
+        color: "#97E152"
+      },
+      I: {
+        title: "Intentional Practice",
+        description: "Support the student as they actively apply the strategy. Provide constructive feedback and help them work through challenges in real time.",
+        questions: [
+          "Let's work on this strategy together or build a game plan for your next steps. (Demonstrate/Collaborate)",
+          "Tell me more about what you mean.",
+          "What is an example of that?",
+          "How can we put that in our own words? (related to notetaking)",
+          "How can we break this into more manageable chunks?",
+          "How would you explain this to your best friend?"
+        ],
+        color: "#46B1EF"
+      },
+      R: {
+        title: "Reflect & Review",
+        description: "Help the student synthesize their learning and identify actionable next steps. Explore how this strategy builds their confidence and independence.",
+        questions: [
+          "How can this strategy or tool help you take more control over your learning experience?",
+          "What are your next steps with this strategy?",
+          "What are your goals for the next week?",
+          "What's one small step you can take today to make progress toward your goals?",
+          "What habits or routines can you develop to support your success?",
+          "How will you track your progress toward your goals?"
+        ],
+        color: "#002855"
+      },
+      M: {
+        title: "Move Forward",
+        description: "Encourage the student to identify their path ahead and celebrate their progress. Foster motivation and accountability for continued growth.",
+        questions: [
+          "What obstacles do you anticipate, and how will you address them?",
+          "How will you celebrate your progress?",
+          "What are your goals for the next week?",
+          "What's one small step you can take today to make progress toward your goals?",
+          "What habits or routines can you develop to support your success?",
+          "How will you track your progress toward your goals?"
+        ],
+        color: "#0070F0"
+      }
+    };
+    
+    let config = { ...defaultConfig };
+    const visibleStages = [];
+    
+    function onConfigChange(cfg) {
+      config = { ...defaultConfig, ...cfg };
+      
+      const titleEl = document.getElementById('main-title');
+      if (titleEl) {
+        titleEl.textContent = config.main_title;
+        titleEl.style.color = config.primary_color;
+        titleEl.style.fontFamily = `${config.font_family}, Arial, sans-serif`;
+      }
+      
+      const container = document.getElementById('app-container');
+      if (container) {
+        container.style.backgroundColor = config.background_color;
+      }
+      
+      document.querySelectorAll('.letter-btn, .stage-title, .stage-description, .question-item').forEach(el => {
+        el.style.fontFamily = `${config.font_family}, Arial, sans-serif`;
+      });
+    }
+    
+    function toggleQuestions(stage) {
+      const data = stageData[stage];
+      const questionsPanel = document.getElementById('questions-panel');
+      const questionsTitle = document.getElementById('questions-title');
+      const questionsContainer = document.getElementById('questions-container');
+      
+      // Clear and populate
+      questionsTitle.textContent = `${data.title} Questions`;
+      questionsTitle.style.color = data.color;
+      questionsContainer.innerHTML = '';
+      
+      data.questions.forEach(question => {
+        const qDiv = document.createElement('div');
+        qDiv.className = 'question-item';
+        qDiv.style.borderLeftColor = data.color;
+        qDiv.style.color = config.text_color;
+        qDiv.textContent = question;
+        questionsContainer.appendChild(qDiv);
+      });
+      
+      // Show panel
+      questionsPanel.classList.remove('hidden');
+    }
+    
+    function addStage(stage) {
+      const data = stageData[stage];
+      if (!data) return;
+      
+      // Check if stage already exists
+      if (document.getElementById(`card-${stage}`)) {
+        toggleQuestions(stage);
+        return;
+      }
+      
+      const stagesFlow = document.getElementById('stages-flow');
+      
+      // Hide empty state on first card
+      if (visibleStages.length === 0) {
+        document.getElementById('empty-state').classList.add('hidden');
+      }
+      
+      visibleStages.push(stage);
+      
+      // Create card
+      const card = document.createElement('div');
+      card.id = `card-${stage}`;
+      card.className = 'panel-content stage-card bg-white rounded-lg shadow-md p-4';
+      card.style.borderTop = `4px solid ${data.color}`;
+      card.style.cursor = 'pointer';
+      card.style.transition = 'all 0.2s ease';
+      
+      const titleEl = document.createElement('h2');
+      titleEl.className = 'stage-title font-bold';
+      titleEl.textContent = data.title;
+      titleEl.style.color = data.color;
+      
+      const descEl = document.createElement('p');
+      descEl.className = 'stage-description leading-relaxed';
+      descEl.style.color = config.text_color;
+      descEl.textContent = data.description;
+      
+      card.appendChild(titleEl);
+      card.appendChild(descEl);
+      
+      // Click to show questions
+      card.addEventListener('click', () => toggleQuestions(stage));
+      card.addEventListener('mouseenter', () => {
+        card.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+        card.style.transform = 'translateY(-2px)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+        card.style.transform = 'translateY(0)';
+      });
+      
+      stagesFlow.appendChild(card);
+      
+      // Show questions for first stage
+      toggleQuestions(stage);
+    }
+    
+    document.querySelectorAll('.letter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        addStage(btn.dataset.letter);
+      });
+    });
+    
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: (cfg) => ({
+          recolorables: [
+            {
+              get: () => cfg.background_color || defaultConfig.background_color,
+              set: (v) => { cfg.background_color = v; window.elementSdk.setConfig({ background_color: v }); }
+            },
+            {
+              get: () => cfg.primary_color || defaultConfig.primary_color,
+              set: (v) => { cfg.primary_color = v; window.elementSdk.setConfig({ primary_color: v }); }
+            },
+            {
+              get: () => cfg.text_color || defaultConfig.text_color,
+              set: (v) => { cfg.text_color = v; window.elementSdk.setConfig({ text_color: v }); }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => cfg.font_family || defaultConfig.font_family,
+            set: (v) => { cfg.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+          },
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (cfg) => new Map([
+          ["main_title", cfg.main_title || defaultConfig.main_title]
+        ])
+      });
+    }
+    
+    onConfigChange(config);
+  </script>
+  </div>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d7b3e62e47605cc',t:'MTc3MjczNTk2OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
