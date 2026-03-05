@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Tracing &amp; Execution Simulation Debugger</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+    .typing-indicator span {
+      animation: blink 1.4s infinite both;
+    }
+    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes blink {
+      0%, 80%, 100% { opacity: 0; }
+      40% { opacity: 1; }
+    }
+    .message-enter {
+      animation: slideUp 0.3s ease-out;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .code-block {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full m-0 p-0 overflow-hidden" style="background-color: #FFFFFF;">
+  <div id="app-container" class="h-full w-full flex flex-col overflow-auto" style="font-family: 'Inter', Arial, sans-serif;">
+   <!-- Header -->
+   <header class="flex-shrink-0 px-6 py-4 border-b" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%); border-color: #0070F0;">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+     <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background-color: #0070F0;"><span class="text-lg">🔬</span>
+      </div>
+      <div>
+       <h1 id="main-title" class="text-xl font-bold text-white">Code Tracing &amp; Execution Simulation Debugger</h1>
+       <p class="text-sm text-blue-200">Master step-by-step execution analysis</p>
+      </div>
+     </div>
+     <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full" style="background-color: rgba(151, 225, 82, 0.2);">
+      <div class="w-2 h-2 rounded-full" style="background-color: #97E152;"></div><span class="text-sm font-medium" style="color: #97E152;">Active Session</span>
+     </div>
+    </div>
+   </header><!-- Main Content -->
+   <main class="flex-1 overflow-auto">
+    <div class="max-w-4xl mx-auto p-6">
+     <!-- Welcome Section -->
+     <div id="welcome-section" class="mb-8">
+      <div class="rounded-2xl p-6 border" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border-color: #0070F0;">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style="background-color: #0070F0;">
+         <span class="text-2xl">🔍</span>
+        </div>
+        <div>
+         <h2 class="text-lg font-semibold mb-2" style="color: #002855;">Welcome to Code Tracing &amp; Execution Simulation!</h2>
+         <p id="welcome-message" class="mb-4" style="color: #334155;">Master the art of step-by-step execution analysis! <strong>Code Tracing</strong> helps you manually follow logic line by line, while <strong>Execution Simulation</strong> uses tables to visualize variable changes. Together, these techniques help you understand exactly what the computer is doing—making bugs obvious. Choose your strategy below to practice with a student who needs guidance tracking program execution.</p>
+         <p class="text-sm" style="color: #64748b;">Remember: Sometimes the best debugging tool is your brain, manually following what the code does step by step!</p>
+        </div>
+       </div>
+      </div>
+     </div><!-- Strategy Selection -->
+     <div id="strategy-selection" class="grid md:grid-cols-2 gap-4 mb-8">
+      <!-- Code Tracing Card --> <button onclick="startSimulation('tracing')" class="text-left p-5 rounded-xl border-2 transition-all duration-200 hover:shadow-lg hover:scale-[1.02] group" style="background-color: #FFFFFF; border-color: #e2e8f0;">
+       <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background-color: #0070F0;">
+         <span class="text-xl">🔍</span>
+        </div>
+        <h3 class="font-semibold" style="color: #002855;">Code Tracing</h3>
+       </div><p class="text-sm mb-3" style="color: #64748b;">Help a student manually follow program execution line by line.</p>
+       <div class="flex items-center gap-2 text-sm font-medium" style="color: #0070F0;">
+        <span>Start Practice</span>
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="currentColor" viewbox="0 0 20 20">
+         <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+       </div></button><!-- Execution Simulation Card --> <button onclick="startSimulation('simulation')" class="text-left p-5 rounded-xl border-2 transition-all duration-200 hover:shadow-lg hover:scale-[1.02] group" style="background-color: #FFFFFF; border-color: #e2e8f0;">
+       <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background-color: #0070F0;">
+         <span class="text-xl">📊</span>
+        </div>
+        <h3 class="font-semibold" style="color: #002855;">Execution Simulation</h3>
+       </div><p class="text-sm mb-3" style="color: #64748b;">Guide a student through creating a table to track variable changes.</p>
+       <div class="flex items-center gap-2 text-sm font-medium" style="color: #0070F0;">
+        <span>Start Practice</span>
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="currentColor" viewbox="0 0 20 20">
+         <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+       </div></button>
+     </div><!-- Simulation Area (Hidden initially) -->
+     <div id="simulation-area" class="hidden">
+      <!-- Strategy Info Banner -->
+      <div id="strategy-banner" class="mb-4 p-4 rounded-xl border" style="background-color: #f8fafc; border-color: #e2e8f0;">
+       <div class="flex items-center justify-between flex-wrap gap-3">
+        <div class="flex items-center gap-3">
+         <span id="strategy-icon" class="text-2xl">🔀</span>
+         <div>
+          <h3 id="strategy-title" class="font-semibold" style="color: #002855;">Divide and Conquer Debugging</h3>
+          <p id="strategy-hint" class="text-sm" style="color: #64748b;">Help student isolate and test code sections one at a time</p>
+         </div>
+        </div><button onclick="resetSimulation()" class="px-4 py-2 rounded-lg text-sm font-medium transition-colors" style="background-color: #e2e8f0; color: #475569;"> ← Back to Strategies </button>
+       </div>
+      </div><!-- Code Display -->
+      <div id="code-display" class="mb-4 rounded-xl overflow-hidden code-block">
+       <div class="flex items-center justify-between px-4 py-2 border-b border-slate-600">
+        <div class="flex items-center gap-2">
+         <div class="flex gap-1.5">
+          <div class="w-3 h-3 rounded-full bg-red-500"></div>
+          <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+          <div class="w-3 h-3 rounded-full bg-green-500"></div>
+         </div><span id="code-filename" class="text-sm text-slate-400 font-mono-code ml-2">student_code.py</span>
+        </div><span class="text-xs px-2 py-1 rounded bg-slate-700 text-slate-300">Python</span>
+       </div>
+       <pre id="code-content" class="p-4 text-sm overflow-x-auto font-mono-code text-slate-100"></pre>
+      </div><!-- Chat Interface -->
+      <div class="rounded-xl border overflow-hidden" style="border-color: #e2e8f0;">
+       <!-- Chat Messages -->
+       <div id="chat-messages" class="h-80 overflow-y-auto p-4 space-y-4" style="background-color: #f8fafc;">
+        <!-- Messages will be inserted here -->
+       </div><!-- Response Options -->
+       <div id="response-options" class="p-4 border-t space-y-3" style="background-color: #FFFFFF; border-color: #e2e8f0;">
+        <p class="text-sm font-medium" style="color: #64748b;">Choose your response as the Peer Coach:</p>
+        <div id="options-container" class="space-y-2">
+         <!-- Options will be inserted here -->
+        </div>
+       </div>
+      </div><!-- Feedback Panel -->
+      <div id="feedback-panel" class="hidden mt-4 p-5 rounded-xl border" style="border-color: #97E152; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);">
+       <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background-color: #97E152;">
+         <svg class="w-5 h-5" fill="#002855" viewbox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+         </svg>
+        </div>
+        <div>
+         <h4 class="font-semibold mb-1" style="color: #002855;">Great coaching!</h4>
+         <p id="feedback-text" class="text-sm" style="color: #334155;"></p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </main><!-- Footer -->
+   <footer class="flex-shrink-0 px-6 py-3 border-t text-center" style="background-color: #f8fafc; border-color: #e2e8f0;">
+    <p class="text-sm" style="color: #64748b;">Part of the <strong style="color: #002855;">Lab Owl</strong> debugging framework • Peer Coach Training</p>
+   </footer>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      main_title: 'Code Tracing & Execution Simulation Debugger',
+      welcome_message: 'Master the art of step-by-step execution analysis! Code Tracing helps you manually follow logic line by line, while Execution Simulation uses tables to visualize variable changes. Together, these techniques help you understand exactly what the computer is doing—making bugs obvious. Choose your strategy below to practice with a student who needs guidance tracking program execution.',
+      primary_color: '#002855',
+      secondary_color: '#0070F0',
+      accent_color: '#97E152',
+      highlight_color: '#46B1EF',
+      text_color: '#334155'
+    };
+
+    // Simulation data
+    const simulations = {
+      tracing: {
+        icon: '🔍',
+        title: 'Code Tracing',
+        hint: 'Help student manually follow program execution line by line',
+        filename: 'counter_loop.py',
+        code: `total = 0
+for i in range(1, 4):
+    total = total + i
+    print(f"After iteration {i}: total = {total}")
+
+print(f"Final total: {total}")
+
+# Output should be:
+# After iteration 1: total = 1
+# After iteration 2: total = 3
+# After iteration 3: total = 6
+# Final total: 6
+
+# But student gets: 3 (Final total)`,
+        conversation: [
+          {
+            speaker: 'student',
+            message: "I don't understand why my loop is only adding 1 + 2 = 3, when it should be 1 + 2 + 3 = 6. It's supposed to add numbers 1 through 3. The code looks right but the output is wrong!",
+            options: [
+              {
+                text: "Let's trace through this manually. What's the initial value of total before the loop starts?",
+                correct: true,
+                feedback: "Perfect! Code tracing starts with the beginning state. By walking through step by step, they'll spot what's happening."
+              },
+              {
+                text: "Change range(1, 4) to range(1, 5).",
+                correct: false,
+                feedback: "That would make it worse! Instead, help them trace through the execution. What does the loop actually do step by step?"
+              },
+              {
+                text: "Your loop logic is backwards.",
+                correct: false,
+                feedback: "Let's find out together by tracing it. Help them see what total equals at each step, starting with the initial value."
+              }
+            ]
+          },
+          {
+            speaker: 'student',
+            message: "total starts at 0. Then in the first iteration, i = 1, so total = 0 + 1 = 1. Got it so far.",
+            options: [
+              {
+                text: "Good! Now in iteration 2, i = 2. What does total equal after that line runs?",
+                correct: true,
+                feedback: "Excellent! You're guiding them through execution state by state. This is the power of code tracing."
+              },
+              {
+                text: "Right, and then the loop ends.",
+                correct: false,
+                feedback: "The loop doesn't end after one iteration! Continue tracing. What happens when i = 2? What's total then?"
+              },
+              {
+                text: "That's correct so far.",
+                correct: false,
+                feedback: "Keep going! Help them trace the next iteration. When i = 2, what does total become?"
+              }
+            ]
+          },
+          {
+            speaker: 'student',
+            message: "So if total was 1 after iteration 1, then in iteration 2: total = 1 + 2 = 3.",
+            options: [
+              {
+                text: "Perfect! Now iteration 3: i = 3. What is total after that line?",
+                correct: true,
+                feedback: "Great progress! They're building the full execution trace. One more step to see where the bug appears."
+              },
+              {
+                text: "Yes, then it stops.",
+                correct: false,
+                feedback: "No, there's one more iteration! The range goes 1, 2, 3. What happens when i = 3?"
+              },
+              {
+                text: "That's the final answer.",
+                correct: false,
+                feedback: "Wait, the range is 1 to 3, so there should be one more iteration with i = 3. What's total then?"
+              }
+            ]
+          },
+          {
+            speaker: 'student',
+            message: "Oh! When i = 3, total = 3 + 3 = 6. So the final total should be 6!",
+            options: [
+              {
+                text: "Exactly! So by tracing through step by step, you found the bug isn't in the code—it's in your expectation or the output. Run it again; it should actually give 6.",
+                correct: true,
+                feedback: "Perfect! By manually tracing execution, they discovered the code was correct all along. This is why tracing is so powerful—it helps find logic vs coding bugs."
+              },
+              {
+                text: "Now add i to the total.",
+                correct: false,
+                feedback: "That's what the code already does! By tracing through, they've shown the code should work correctly. Let them run it to verify."
+              },
+              {
+                text: "Your code should multiply instead.",
+                correct: false,
+                feedback: "No, the tracing shows the addition is working correctly. By step 3, total should indeed be 6. Have them run the code again."
+              }
+            ]
+          }
+        ]
+      },
+      simulation: {
+        icon: '📊',
+        title: 'Execution Simulation',
+        hint: 'Guide student through creating a table to track variable changes',
+        filename: 'processing_list.py',
+        code: `items = [2, 4, 6]
+total = 0
+for item in items:
+    total = total + item
+
+print(total)
+
+# Expected: 12
+# Got: (blank/error - student doesn't know what to expect)`,
+        conversation: [
+          {
+            speaker: 'student',
+            message: "I wrote this code to sum up the items in my list [2, 4, 6], but I can't tell if it's working right. How do I know what total should be at each step?",
+            options: [
+              {
+                text: "Great question! Let's create an execution table to track what happens. First, what's the starting state before the loop?",
+                correct: true,
+                feedback: "Perfect! An execution table makes the invisible process visible. This is exactly when execution simulation shines."
+              },
+              {
+                text: "Just add print statements inside the loop.",
+                correct: false,
+                feedback: "That works, but first help them visualize the process with a table. This builds deeper understanding before using debug tools."
+              },
+              {
+                text: "The answer should be 12.",
+                correct: false,
+                feedback: "That's the expected output, but help them create a table to verify each step. This teaches them to predict before running."
+              }
+            ]
+          },
+          {
+            speaker: 'student',
+            message: "OK, so before the loop: items = [2, 4, 6] and total = 0. Should I write that down?",
+            options: [
+              {
+                text: "Yes! Now make a table with columns for Step, item, and total. Put 'Start' as the first row with item = (none) and total = 0.",
+                correct: true,
+                feedback: "Excellent! Now they're building a visual record of execution. This is the power of execution simulation—making internal state visible."
+              },
+              {
+                text: "Good, now run the loop.",
+                correct: false,
+                feedback: "Before running it, help them build the full table manually. This way they predict what should happen, then verify it."
+              },
+              {
+                text: "Write that as row 1 of the table.",
+                correct: false,
+                feedback: "Perfect idea! But help them think about the column headers first. What variables should they track?"
+              }
+            ]
+          },
+          {
+            speaker: 'student',
+            message: "I made a table! Step | item | total. Now in the first iteration, item = 2, so total = 0 + 2 = 2. Should I add that as row 2?",
+            options: [
+              {
+                text: "Exactly! Add 'Iteration 1' in the Step column with item = 2 and total = 2. Now what happens in iteration 2?",
+                correct: true,
+                feedback: "Great! They're building the simulation table step by step. Now they can see the pattern emerging."
+              },
+              {
+                text: "Yes, keep going.",
+                correct: false,
+                feedback: "Good, but guide them more explicitly. Have them write out iteration 2: item = 4, so total = 2 + 4 = ?"
+              },
+              {
+                text: "That's correct.",
+                correct: false,
+                feedback: "Right! Now help them continue. What's the next row? Iteration 2: item = 4. What's the new total?"
+              }
+            ]
+          },
+          {
+            speaker: 'student',
+            message: "Iteration 2: item = 4, so total = 2 + 4 = 6. And then Iteration 3: item = 6, so total = 6 + 6 = 12!",
+            options: [
+              {
+                text: "Perfect! So your table predicts total should be 12 after the loop. Now run your code and see if it prints 12!",
+                correct: true,
+                feedback: "Excellent! They predicted the output by building the table, and now they can verify it matches. This is powerful—understand first, then confirm."
+              },
+              {
+                text: "Great, you're done.",
+                correct: false,
+                feedback: "Almost! They've predicted the answer (12). Now have them run the code to verify their table was correct."
+              },
+              {
+                text: "Your code looks good.",
+                correct: false,
+                feedback: "It does! But help them complete the learning by running the code and seeing if it matches their simulation table's prediction."
+              }
+            ]
+          },
+          {
+            speaker: 'student',
+            message: "I ran it and it printed 12! So the code works, and the execution table helped me understand exactly how! Each step was clear: starting at 0, then 2, then 6, then 12. I get it now!",
+            options: [
+              {
+                text: "That's exactly it! By simulating the execution in a table, you could see the full picture and verify your code works. This is how execution simulation helps debug!",
+                correct: true,
+                feedback: "Perfect! You helped them see that execution simulation makes the invisible process visible, giving confidence the code is correct or helping spot where it goes wrong."
+              },
+              {
+                text: "Great job!",
+                correct: false,
+                feedback: "Yes! But take this moment to reinforce why the table was so useful. This reflection helps them learn when to use execution simulation in the future."
+              },
+              {
+                text: "Now do it for more complex code.",
+                correct: false,
+                feedback: "Good idea for practice, but first celebrate that execution simulation helped them understand this one completely. They can apply it to harder code next!"
+              }
+            ]
+          }
+        ]
+      }
+    };
+
+    let currentSimulation = null;
+    let currentStep = 0;
+
+    function startSimulation(strategy) {
+      currentSimulation = strategy;
+      currentStep = 0;
+      
+      const sim = simulations[strategy];
+      
+      // Update UI
+      document.getElementById('strategy-selection').classList.add('hidden');
+      document.getElementById('welcome-section').classList.add('hidden');
+      document.getElementById('simulation-area').classList.remove('hidden');
+      document.getElementById('feedback-panel').classList.add('hidden');
+      
+      // Set strategy info
+      document.getElementById('strategy-icon').textContent = sim.icon;
+      document.getElementById('strategy-title').textContent = sim.title;
+      document.getElementById('strategy-hint').textContent = sim.hint;
+      document.getElementById('code-filename').textContent = sim.filename;
+      document.getElementById('code-content').textContent = sim.code;
+      
+      // Clear and start chat
+      document.getElementById('chat-messages').innerHTML = '';
+      showConversationStep();
+    }
+
+    function showConversationStep() {
+      const sim = simulations[currentSimulation];
+      const step = sim.conversation[currentStep];
+      
+      // Add student message
+      addMessage(step.speaker, step.message);
+      
+      // Show options after a delay
+      setTimeout(() => {
+        showOptions(step.options);
+      }, 500);
+    }
+
+    function addMessage(speaker, message) {
+      const chatMessages = document.getElementById('chat-messages');
+      const isStudent = speaker === 'student';
+      
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `flex items-start gap-3 message-enter ${isStudent ? '' : 'flex-row-reverse'}`;
+      
+      messageDiv.innerHTML = `
+        <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background-color: ${isStudent ? '#46B1EF' : '#0070F0'};">
+          <span class="text-sm">${isStudent ? '👤' : '🔬'}</span>
+        </div>
+        <div class="max-w-[80%] p-3 rounded-xl ${isStudent ? 'rounded-tl-none' : 'rounded-tr-none'}" style="background-color: ${isStudent ? '#FFFFFF' : '#002855'}; color: ${isStudent ? '#334155' : '#FFFFFF'}; ${isStudent ? 'border: 1px solid #e2e8f0;' : ''}">
+          <p class="text-sm font-medium mb-1" style="color: ${isStudent ? '#64748b' : '#97E152'};">${isStudent ? 'Student' : 'You (Peer Coach)'}</p>
+          <p class="text-sm">${message}</p>
+        </div>
+      `;
+      
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function showOptions(options) {
+      const container = document.getElementById('options-container');
+      container.innerHTML = '';
+      
+      options.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.className = 'w-full text-left p-3 rounded-lg border-2 transition-all duration-200 hover:shadow-md';
+        button.style.cssText = 'background-color: #FFFFFF; border-color: #e2e8f0; color: #334155;';
+        button.innerHTML = `
+          <span class="text-sm">${option.text}</span>
+        `;
+        
+        button.onmouseenter = () => {
+          button.style.borderColor = '#0070F0';
+          button.style.backgroundColor = '#f0f9ff';
+        };
+        button.onmouseleave = () => {
+          button.style.borderColor = '#e2e8f0';
+          button.style.backgroundColor = '#FFFFFF';
+        };
+        
+        button.onclick = () => selectOption(index, option);
+        container.appendChild(button);
+      });
+    }
+
+    function selectOption(index, option) {
+      // Disable all options
+      const buttons = document.querySelectorAll('#options-container button');
+      buttons.forEach(btn => {
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+        btn.style.cursor = 'default';
+      });
+      
+      // Highlight selected
+      buttons[index].style.opacity = '1';
+      buttons[index].style.borderColor = option.correct ? '#97E152' : '#ef4444';
+      buttons[index].style.backgroundColor = option.correct ? '#f0fdf4' : '#fef2f2';
+      
+      // Add coach message
+      setTimeout(() => {
+        addMessage('coach', option.text);
+        
+        // Show feedback
+        showFeedback(option.feedback, option.correct);
+        
+        // Continue or complete
+        setTimeout(() => {
+          if (option.correct && currentStep < simulations[currentSimulation].conversation.length - 1) {
+            currentStep++;
+            showConversationStep();
+            document.getElementById('feedback-panel').classList.add('hidden');
+          } else if (option.correct && currentStep >= simulations[currentSimulation].conversation.length - 1) {
+            showCompletionMessage();
+          }
+        }, 2000);
+      }, 300);
+    }
+
+    function showFeedback(text, isPositive) {
+      const panel = document.getElementById('feedback-panel');
+      const feedbackText = document.getElementById('feedback-text');
+      
+      panel.style.borderColor = isPositive ? '#97E152' : '#f59e0b';
+      panel.style.background = isPositive 
+        ? 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)'
+        : 'linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)';
+      
+      panel.querySelector('h4').textContent = isPositive ? 'Great coaching!' : 'Coaching tip:';
+      panel.querySelector('svg').parentElement.style.backgroundColor = isPositive ? '#97E152' : '#f59e0b';
+      
+      feedbackText.textContent = text;
+      panel.classList.remove('hidden');
+      
+      // Scroll to feedback
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function showCompletionMessage() {
+      const panel = document.getElementById('feedback-panel');
+      const feedbackText = document.getElementById('feedback-text');
+      
+      panel.style.borderColor = '#97E152';
+      panel.style.background = 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)';
+      panel.querySelector('h4').textContent = '🎉 Simulation Complete!';
+      panel.querySelector('svg').parentElement.innerHTML = '<span class="text-lg">⭐</span>';
+      
+      const strategyName = simulations[currentSimulation].title;
+      feedbackText.textContent = `Excellent work practicing ${strategyName}! You guided the student through execution step by step, making the invisible process visible. Whether tracing manually or building a simulation table, these techniques transform mysterious bugs into clear, understandable patterns. Great coaching!`;
+      
+      panel.classList.remove('hidden');
+      
+      // Update options to show completion
+      const container = document.getElementById('options-container');
+      container.innerHTML = `
+        <button onclick="resetSimulation()" class="w-full p-3 rounded-lg font-medium transition-all duration-200 hover:opacity-90" style="background-color: #0070F0; color: white;">
+          Practice Another Scenario
+        </button>
+      `;
+    }
+
+    function resetSimulation() {
+      currentSimulation = null;
+      currentStep = 0;
+      
+      document.getElementById('strategy-selection').classList.remove('hidden');
+      document.getElementById('welcome-section').classList.remove('hidden');
+      document.getElementById('simulation-area').classList.add('hidden');
+      document.getElementById('feedback-panel').classList.add('hidden');
+    }
+
+    // Element SDK integration
+    async function initializeSDK() {
+      if (window.elementSdk) {
+        await window.elementSdk.init({
+          defaultConfig,
+          onConfigChange: async (config) => {
+            // Update title
+            const title = document.getElementById('main-title');
+            if (title) title.textContent = config.main_title || defaultConfig.main_title;
+            
+            // Update welcome message
+            const welcomeMsg = document.getElementById('welcome-message');
+            if (welcomeMsg) {
+              welcomeMsg.innerHTML = config.welcome_message || defaultConfig.welcome_message;
+            }
+          },
+          mapToCapabilities: (config) => ({
+            recolorables: [],
+            borderables: [],
+            fontEditable: undefined,
+            fontSizeable: undefined
+          }),
+          mapToEditPanelValues: (config) => new Map([
+            ['main_title', config.main_title || defaultConfig.main_title],
+            ['welcome_message', config.welcome_message || defaultConfig.welcome_message]
+          ])
+        });
+      }
+    }
+
+    initializeSDK();
+  </script> // Simulation data const simulations = { divide: { icon: '🔀', title: 'Divide and Conquer Debugging', hint: 'Help student isolate and test code sections one at a time', filename: 'grade_calculator.py', code: `def calculate_grade(assignment, midterm, final): # Calculate weighted average avg = (assignment * 0.3 + midterm * 0.3 + final * 0.4) # Determine letter grade if avg &gt;= 90: return "A" elif avg &gt;= 80: return "B" elif avg &gt;= 7.0: # Bug: should be 70 return "C" else: return "F" # Test score1 = calculate_grade(95, 88, 92) score2 = calculate_grade(65, 70, 75) print(f"Score 1: {score1}, Score 2: {score2}") # Expected: Score 1: A, Score 2: C # Got: Score 1: A, Score 2: F`, conversation: [ { speaker: 'student', message: "Help! My grade calculator is broken. When I test with scores 65, 70, and 75, it shows an F, but that should definitely be a C. The first test with 95, 88, 92 works fine and shows an A. There's so much code here—calculation, conditions, I don't even know where to start!", options: [ { text: "That's overwhelming! Let's use Divide and Conquer. What's the smallest section we could test first to narrow things down?", correct: true, feedback: "Perfect! You're helping them break down the problem into manageable pieces. That's the core of Divide and Conquer debugging." }, { text: "Let me look at the whole function... I see several issues.", correct: false, feedback: "You're overwhelmed too! With Divide and Conquer, help them test individual sections first instead of trying to understand everything at once." }, { text: "Try adding print statements throughout the code.", correct: false, feedback: "While debugging tools help, Divide and Conquer means first identifying which section to isolate and test. What single piece controls the problematic output?" } ] }, { speaker: 'student', message: "The output is a letter grade, so that comes from the if-elif conditions. Should I focus on that part first?", options: [ { text: "Good thinking, but let's isolate even smaller first. Can you just test what the average calculation produces—without the if statements?", correct: true, feedback: "Excellent! You're dividing it further—separating the calculation from the grading logic. This is smart Divide and Conquer strategy." }, { text: "Yes, that's where the problem is.", correct: false, feedback: "You might be right, but go smaller first! The if-elif logic depends on the average value. Test just the calculation in isolation to see what it produces." }, { text: "Let's change each condition until one works.", correct: false, feedback: "Before changing code, help them test individual sections. What does just the raw average calculation produce for that failing test case?" } ] }, { speaker: 'student', message: "If I just calculate the average for 65, 70, and 75: 65 × 0.3 = 19.5, 70 × 0.3 = 21, 75 × 0.4 = 30. So 19.5 + 21 + 30 = 70.5. The calculation looks right!", options: [ { text: "Great! So the calculation is working correctly. Now let's test the grading logic separately. With 70.5, which condition should trigger and return C?", correct: true, feedback: "Perfect! You've isolated and verified the calculation. Now help them test the next section—the if-elif conditions—independently." }, { text: "Then the problem must be in the conditions.", correct: false, feedback: "Good instinct, but let them work through it. They should trace through the conditions with 70.5 to see what actually triggers. This is still isolating parts." }, { text: "The calculation is correct, so change the weights.", correct: false, feedback: "No need to change anything yet! Help them test the next section. With 70.5, trace which condition should execute and return a C." } ] }, { speaker: 'student', message: "Let's see... With 70.5: Is it &gt;= 90? No. Is it &gt;= 80? No. Is it &gt;= 70? YES! So it should return C. That part looks correct too!", options: [ { text: "Interesting! You've tested the calculation (correct) and the logic separately (correct too). So what if you test them together by actually running the function call?", correct: true, feedback: "Smart! You've isolated both pieces and they work separately. Now help them see what happens when they run together—this is how Divide and Conquer finds the real bug!" }, { text: "So the conditions are fine.", correct: false, feedback: "Looks like it! So now help them test what happens when the calculation and conditions work together. Call the actual function and trace what should happen." }, { text: "Something must be wrong with your &gt;= 70 condition.", correct: false, feedback: "Wait, they just traced through and &gt;= 70 should catch 70.5 correctly. Let them run the actual function to see what really happens!" } ] }, { speaker: 'student', message: "I ran it and the function returned F, not C! But I just proved the calculation gives 70.5 and the conditions should return C... Let me add a print statement inside the function to see what value is actually being compared.", options: [ { text: "Great idea! Add a debug print that shows the average value right before the if-elif conditions. What does it print?", correct: true, feedback: "Perfect! This is classic Divide and Conquer—you're helping them isolate exactly where the disconnect is. The debug line will reveal the truth!" }, { text: "Let me look at the conditions again instead.", correct: false, feedback: "A debug print is the smart move here. They've verified each piece works separately; now they need to see what the function actually calculates at runtime." }, { text: "The problem is definitely in the conditions.", correct: false, feedback: "They already traced the logic correctly. Use a debug print to see what value is actually being compared inside the function!" } ] }, { speaker: 'student', message: "I added the print statement and it shows the average is 70.5, which is correct. But wait... let me look at the conditions again in the code... OH! I see it! In line 7, I wrote &gt;= 7.0 instead of &gt;= 70! It says 7.0 not 70!", options: [ { text: "Fantastic! By dividing the problem into testable pieces—calculation, logic, and debug output—you found the typo! That's exactly why Divide and Conquer is so powerful.", correct: true, feedback: "Excellent! You guided them systematically: isolate the calculation, test the conditions separately, add debug output to find the disconnect. This methodical approach beats random searching every time!" }, { text: "Great catch! Fix that typo.", correct: false, feedback: "Yes! But use this moment to reinforce why this approach worked. By breaking the problem into sections and testing each one independently, they found the real bug methodically." }, { text: "Change it and move on.", correct: false, feedback: "They found it! Take a moment to help them see how Divide and Conquer—testing each section independently—led them to this discovery." } ] } ] } }; let currentSimulation = null; let currentStep = 0; function startSimulation(strategy) { currentSimulation = strategy; currentStep = 0; const sim = simulations[strategy]; // Update UI document.getElementById('strategy-selection').classList.add('hidden'); document.getElementById('welcome-section').classList.add('hidden'); document.getElementById('simulation-area').classList.remove('hidden'); document.getElementById('feedback-panel').classList.add('hidden'); // Set strategy info document.getElementById('strategy-icon').textContent = sim.icon; document.getElementById('strategy-title').textContent = sim.title; document.getElementById('strategy-hint').textContent = sim.hint; document.getElementById('code-filename').textContent = sim.filename; document.getElementById('code-content').textContent = sim.code; // Clear and start chat document.getElementById('chat-messages').innerHTML = ''; showConversationStep(); } function showConversationStep() { const sim = simulations[currentSimulation]; const step = sim.conversation[currentStep]; // Add student message addMessage(step.speaker, step.message); // Show options after a delay setTimeout(() =&gt; { showOptions(step.options); }, 500); } function addMessage(speaker, message) { const chatMessages = document.getElementById('chat-messages'); const isStudent = speaker === 'student'; const messageDiv = document.createElement('div'); messageDiv.className = `flex items-start gap-3 message-enter ${isStudent ? '' : 'flex-row-reverse'}`; messageDiv.innerHTML = ` 
+  <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background-color: ${isStudent ? '#46B1EF' : '#0070F0'};"><span class="text-sm">${isStudent ? '👤' : '🔬'}</span>
+  </div>
+  <div class="max-w-[80%] p-3 rounded-xl ${isStudent ? 'rounded-tl-none' : 'rounded-tr-none'}" style="background-color: ${isStudent ? '#FFFFFF' : '#002855'}; color: ${isStudent ? '#334155' : '#FFFFFF'}; ${isStudent ? 'border: 1px solid #e2e8f0;' : ''}">
+   <p class="text-sm font-medium mb-1" style="color: ${isStudent ? '#64748b' : '#97E152'};">${isStudent ? 'Student' : 'You (Peer Coach)'}</p>
+   <p class="text-sm">${message}</p>
+  </div> `; chatMessages.appendChild(messageDiv); chatMessages.scrollTop = chatMessages.scrollHeight; } function showOptions(options) { const container = document.getElementById('options-container'); container.innerHTML = ''; options.forEach((option, index) =&gt; { const button = document.createElement('button'); button.className = 'w-full text-left p-3 rounded-lg border-2 transition-all duration-200 hover:shadow-md'; button.style.cssText = 'background-color: #FFFFFF; border-color: #e2e8f0; color: #334155;'; button.innerHTML = ` <span class="text-sm">${option.text}</span> `; button.onmouseenter = () =&gt; { button.style.borderColor = '#0070F0'; button.style.backgroundColor = '#f0f9ff'; }; button.onmouseleave = () =&gt; { button.style.borderColor = '#e2e8f0'; button.style.backgroundColor = '#FFFFFF'; }; button.onclick = () =&gt; selectOption(index, option); container.appendChild(button); }); } function selectOption(index, option) { // Disable all options const buttons = document.querySelectorAll('#options-container button'); buttons.forEach(btn =&gt; { btn.disabled = true; btn.style.opacity = '0.5'; btn.style.cursor = 'default'; }); // Highlight selected buttons[index].style.opacity = '1'; buttons[index].style.borderColor = option.correct ? '#97E152' : '#ef4444'; buttons[index].style.backgroundColor = option.correct ? '#f0fdf4' : '#fef2f2'; // Add coach message setTimeout(() =&gt; { addMessage('coach', option.text); // Show feedback showFeedback(option.feedback, option.correct); // Continue or complete setTimeout(() =&gt; { if (option.correct &amp;&amp; currentStep &lt; simulations[currentSimulation].conversation.length - 1) { currentStep++; showConversationStep(); document.getElementById('feedback-panel').classList.add('hidden'); } else if (option.correct &amp;&amp; currentStep &gt;= simulations[currentSimulation].conversation.length - 1) { showCompletionMessage(); } }, 2000); }, 300); } function showFeedback(text, isPositive) { const panel = document.getElementById('feedback-panel'); const feedbackText = document.getElementById('feedback-text'); panel.style.borderColor = isPositive ? '#97E152' : '#f59e0b'; panel.style.background = isPositive ? 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)' : 'linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)'; panel.querySelector('h4').textContent = isPositive ? 'Great coaching!' : 'Coaching tip:'; panel.querySelector('svg').parentElement.style.backgroundColor = isPositive ? '#97E152' : '#f59e0b'; feedbackText.textContent = text; panel.classList.remove('hidden'); // Scroll to feedback panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } function showCompletionMessage() { const panel = document.getElementById('feedback-panel'); const feedbackText = document.getElementById('feedback-text'); panel.style.borderColor = '#97E152'; panel.style.background = 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)'; panel.querySelector('h4').textContent = '🎉 Simulation Complete!'; panel.querySelector('svg').parentElement.innerHTML = '<span class="text-lg">⭐</span>'; feedbackText.textContent = `Excellent work practicing ${simulations[currentSimulation].title}! You successfully guided the student through the process: isolate each section, test it independently, and verify it works before moving to the next. This divide-and-conquer approach transforms overwhelming bugs into manageable problems!`; panel.classList.remove('hidden'); // Update options to show completion const container = document.getElementById('options-container'); container.innerHTML = ` <button onclick="resetSimulation()" class="w-full p-3 rounded-lg font-medium transition-all duration-200 hover:opacity-90" style="background-color: #0070F0; color: white;"> Practice Another Scenario </button> `; } function resetSimulation() { currentSimulation = null; currentStep = 0; document.getElementById('strategy-selection').classList.remove('hidden'); document.getElementById('welcome-section').classList.remove('hidden'); document.getElementById('simulation-area').classList.add('hidden'); document.getElementById('feedback-panel').classList.add('hidden'); } // Element SDK integration async function initializeSDK() { if (window.elementSdk) { await window.elementSdk.init({ defaultConfig, onConfigChange: async (config) =&gt; { // Update title const title = document.getElementById('main-title'); if (title) title.textContent = config.main_title || defaultConfig.main_title; // Update welcome message const welcomeMsg = document.getElementById('welcome-message'); if (welcomeMsg) { welcomeMsg.innerHTML = config.welcome_message || defaultConfig.welcome_message; } }, mapToCapabilities: (config) =&gt; ({ recolorables: [], borderables: [], fontEditable: undefined, fontSizeable: undefined }), mapToEditPanelValues: (config) =&gt; new Map([ ['main_title', config.main_title || defaultConfig.main_title], ['welcome_message', config.welcome_message || defaultConfig.welcome_message] ]) }); } } initializeSDK(); 
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d7a522df1ce3ad5',t:'MTc3MjcyNjI5NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
