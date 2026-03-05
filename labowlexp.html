@@ -60,190 +60,176 @@
  </head>
  <body class="h-full">
   <div id="app-container" class="h-full w-full overflow-auto" style="background-color: #FFFFFF;">
-   <div class="min-h-full flex flex-col p-8"><!-- Title and Progress -->
-    <div class="flex items-center justify-between mb-8">
-     <h1 id="main-title" class="text-2xl font-bold" style="color: #002855;">Click each letter to discover</h1>
-     <div class="flex gap-2">
-      <div class="progress-dot w-3 h-3 rounded-full" data-for="L" style="background-color: #ddd;"></div>
-      <div class="progress-dot w-3 h-3 rounded-full" data-for="A" style="background-color: #ddd;"></div>
-      <div class="progress-dot w-3 h-3 rounded-full" data-for="B" style="background-color: #ddd;"></div>
-      <div class="progress-dot w-3 h-3 rounded-full" data-for="O" style="background-color: #ddd;"></div>
-      <div class="progress-dot w-3 h-3 rounded-full" data-for="W" style="background-color: #ddd;"></div>
-      <div class="progress-dot w-3 h-3 rounded-full" data-for="L2" style="background-color: #ddd;"></div>
-     </div>
+   <div class="min-h-full flex flex-col p-8"><!-- Title -->
+    <div class="mb-8">
+     <h1 id="main-title" class="text-2xl font-bold text-center" style="color: #002855;">Click each letter to discover</h1>
     </div><!-- LAB OWL Letters -->
-    <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-8"><!-- L --> <button class="letter-btn pulse-hint w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #002855;" data-letter="L" aria-label="L - Locate the Block"> L </button> <!-- A --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #0070F0;" data-letter="A" aria-label="A - Analyze What's Happening"> A </button> <!-- B --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #97E152;" data-letter="B" aria-label="B - Break It Down"> B </button> <!-- Spacer -->
-     <div class="w-4 md:w-8"></div><!-- O --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #46B1EF;" data-letter="O" aria-label="O - Observe the Pattern"> O </button> <!-- W --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #002855;" data-letter="W" aria-label="W - Work the Hypothesis"> W </button> <!-- L --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #0070F0;" data-letter="L2" aria-label="L - Lock in the Learning"> L </button>
+    <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-8"><!-- L --> <button class="letter-btn pulse-hint w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #002855;" data-letter="L" aria-label="L - Locate the Block">L</button> <!-- A --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #0070F0;" data-letter="A" aria-label="A - Analyze What's Happening">A</button> <!-- B --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #97E152;" data-letter="B" aria-label="B - Break It Down">B</button> <!-- Spacer -->
+     <div class="w-4 md:w-8"></div><!-- O --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #46B1EF;" data-letter="O" aria-label="O - Observe the Pattern">O</button> <!-- W --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #002855;" data-letter="W" aria-label="W - Work the Hypothesis">W</button> <!-- L2 --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #0070F0;" data-letter="L2" aria-label="L - Lock in Learning">L</button>
     </div><!-- Explanation Cards Container -->
-    <div id="explanation-container" class="w-full flex-1">
-     <div id="cards-grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
-      <!-- Cards will be generated here -->
-     </div>
+    <div id="explanation-container" class="flex gap-4 mb-8 w-full overflow-x-auto pb-4"></div><!-- Progress Dots - Below Cards -->
+    <div class="flex justify-center gap-3">
+     <div class="progress-dot w-3 h-3 rounded-full transition-colors duration-300" data-for="L" style="background-color: #ddd;"></div>
+     <div class="progress-dot w-3 h-3 rounded-full transition-colors duration-300" data-for="A" style="background-color: #ddd;"></div>
+     <div class="progress-dot w-3 h-3 rounded-full transition-colors duration-300" data-for="B" style="background-color: #ddd;"></div>
+     <div class="progress-dot w-3 h-3 rounded-full transition-colors duration-300" data-for="O" style="background-color: #ddd;"></div>
+     <div class="progress-dot w-3 h-3 rounded-full transition-colors duration-300" data-for="W" style="background-color: #ddd;"></div>
+     <div class="progress-dot w-3 h-3 rounded-full transition-colors duration-300" data-for="L2" style="background-color: #ddd;"></div>
     </div>
    </div>
   </div>
   <script>
     const defaultConfig = {
-      main_title: 'Click each letter to discover',
-      background_color: '#FFFFFF',
-      primary_color: '#002855',
-      secondary_color: '#0070F0',
-      accent_color: '#97E152',
-      highlight_color: '#46B1EF',
-      text_color: '#333333'
+      main_title: "Click each letter to discover",
+      background_color: "#FFFFFF",
+      primary_color: "#002855",
+      secondary_color: "#0070F0",
+      accent_color: "#97E152",
+      text_color: "#4A5568",
+      font_family: "Arial"
     };
-
+    
     const letterData = {
-      'L': {
-        title: 'Locate the Block',
-        description: 'Identify where you\'re stuck. Pinpoint the exact concept, problem, or step that\'s causing confusion. This is your starting point for understanding.',
-        color: '#002855'
+      L: {
+        title: "Locate the Block",
+        description: "Find where you're stuck. What step or idea is confusing? Pinpoint the exact spot where your understanding breaks down.",
+        color: "#002855"
       },
-      'A': {
-        title: 'Analyze What\'s Happening',
-        description: 'Examine the situation carefully. Look at what\'s working, what isn\'t, and gather information about the context surrounding the problem.',
-        color: '#0070F0'
+      A: {
+        title: "Analyze What's Happening",
+        description: "Look closely at the problem. What information do you have? What are you trying to find out? Gather all the clues.",
+        color: "#0070F0"
       },
-      'B': {
-        title: 'Break It Down',
-        description: 'Divide the complex problem into smaller, manageable pieces. Tackle each component one at a time to make the whole more approachable.',
-        color: '#97E152'
+      B: {
+        title: "Break It Down",
+        description: "Split the big problem into smaller, manageable pieces. Tackle one piece at a time to make progress easier.",
+        color: "#97E152"
       },
-      'O': {
-        title: 'Observe the Pattern',
-        description: 'Look for recurring themes, similarities, or connections. Patterns help reveal underlying principles and make future problems easier to solve.',
-        color: '#46B1EF'
+      O: {
+        title: "Observe the Pattern",
+        description: "Look for similarities to problems you've solved before. What strategies worked then? Can you spot any patterns or rules?",
+        color: "#46B1EF"
       },
-      'W': {
-        title: 'Work the Hypothesis',
-        description: 'Form an educated guess and test it. Try different approaches, experiment with solutions, and learn from what works and what doesn\'t.',
-        color: '#002855'
+      W: {
+        title: "Work the Hypothesis",
+        description: "Make an educated guess and test it out. Try your idea, see what happens, and adjust if needed. Learning comes from experimenting!",
+        color: "#002855"
       },
-      'L2': {
-        title: 'Lock in the Learning',
-        description: 'Consolidate what you\'ve discovered. Summarize key insights, make notes, and connect new knowledge to what you already know for lasting retention.',
-        color: '#0070F0'
+      L2: {
+        title: "Link to Your Conclusion",
+        description: "Connect everything together. How does your solution relate back to the original problem? Reflect on what you learned.",
+        color: "#0070F0"
       }
     };
-
+    
     let visitedLetters = new Set();
-    const displayedCards = new Map();
-
-    function showExplanation(letterKey) {
-      const data = letterData[letterKey];
-      const cardsGrid = document.getElementById('cards-grid');
-      const hint = document.getElementById('hint-text');
+    let config = { ...defaultConfig };
+    
+    function onConfigChange(cfg) {
+      config = { ...defaultConfig, ...cfg };
       
-      // Check if card already exists
-      if (displayedCards.has(letterKey)) {
-        return;
-      }
-
-      // Create card
-      const card = document.createElement('div');
-      card.className = 'explanation-card rounded-lg p-4 shadow-md border-t-4';
-      card.style.backgroundColor = '#f8fafc';
-      card.style.borderTopColor = data.color;
-      card.dataset.letter = letterKey;
-      
-      const displayLetter = letterKey === 'L2' ? 'L' : letterKey;
-      
-      card.innerHTML = `
-        <div class="flex flex-col items-center gap-2 text-center">
-          <div class="w-10 h-10 rounded-lg flex items-center justify-center text-2xl font-bold text-white" style="background-color: ${data.color};">
-            ${displayLetter}
-          </div>
-          <h2 class="text-sm font-bold" style="color: #002855;">${data.title}</h2>
-          <p class="text-xs leading-relaxed" style="color: #333;">${data.description}</p>
-        </div>
-      `;
-      
-      cardsGrid.appendChild(card);
-      displayedCards.set(letterKey, card);
-      
-      // Hide hint once first card is added
-      if (displayedCards.size === 1) {
-        const hint = document.getElementById('hint-text');
-        if (hint) hint.classList.add('hidden');
+      const titleEl = document.getElementById('main-title');
+      if (titleEl) {
+        titleEl.textContent = config.main_title;
+        titleEl.style.color = config.primary_color;
+        titleEl.style.fontFamily = `${config.font_family}, Arial, sans-serif`;
       }
       
-      // Update active states
-      document.querySelectorAll('.letter-btn').forEach(btn => {
-        btn.classList.remove('pulse-hint');
-        if (btn.dataset.letter === letterKey) {
-          btn.classList.add('active');
-        }
+      const container = document.getElementById('app-container');
+      if (container) {
+        container.style.backgroundColor = config.background_color;
+      }
+      
+      document.querySelectorAll('.letter-btn, #card-letter, #card-title, #completion-message span').forEach(el => {
+        el.style.fontFamily = `${config.font_family}, Arial, sans-serif`;
       });
-      
-      // Track visited
-      visitedLetters.add(letterKey);
-      updateProgress();
     }
-
+    
+    function showExplanation(letter) {
+      const data = letterData[letter];
+      if (!data) return;
+      
+      const container = document.getElementById('explanation-container');
+      
+      // Check if card for this letter already exists
+      let card = document.querySelector(`[data-letter-card="${letter}"]`);
+      
+      if (!card) {
+        // Create new card
+        card = document.createElement('div');
+        card.setAttribute('data-letter-card', letter);
+        card.className = 'explanation-card rounded-xl p-3 md:p-4 shadow-lg flex-shrink-0' ;
+        card.style.backgroundColor = '#F5F7FA';
+        card.style.width = '160px';
+        card.style.minWidth = '160px';
+        
+        card.innerHTML = `
+          <div>
+            <h2 class="card-title text-sm md:text-base font-bold mb-2" style="color: ${data.color};">${data.title}</h2>
+            <p class="card-description text-xs md:text-sm" style="color: ${config.text_color};">${data.description}</p>
+          </div>
+        `;
+        
+        container.appendChild(card);
+      }
+      
+      visitedLetters.add(letter);
+      updateProgress();
+      
+      document.querySelectorAll('.letter-btn').forEach(btn => {
+        btn.classList.remove('active', 'pulse-hint');
+      });
+      document.querySelector(`[data-letter="${letter}"]`).classList.add('active');
+    }
+    
     function updateProgress() {
       document.querySelectorAll('.progress-dot').forEach(dot => {
         const letter = dot.dataset.for;
         if (visitedLetters.has(letter)) {
           dot.style.backgroundColor = letterData[letter].color;
-          dot.style.transform = 'scale(1.2)';
-          dot.style.transition = 'all 0.3s ease';
         }
       });
     }
-
-    // Add click handlers
+    
     document.querySelectorAll('.letter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         showExplanation(btn.dataset.letter);
       });
     });
-
-    // Element SDK initialization
-    async function onConfigChange(config) {
-      const title = document.getElementById('main-title');
-      if (title) {
-        title.textContent = config.main_title || defaultConfig.main_title;
-      }
-    }
-
-    function mapToCapabilities(config) {
-      return {
-        recolorables: [
-          {
-            get: () => config.background_color || defaultConfig.background_color,
-            set: (value) => {
-              config.background_color = value;
-              window.elementSdk.setConfig({ background_color: value });
-            }
-          },
-          {
-            get: () => config.text_color || defaultConfig.text_color,
-            set: (value) => {
-              config.text_color = value;
-              window.elementSdk.setConfig({ text_color: value });
-            }
-          }
-        ],
-        borderables: [],
-        fontEditable: undefined,
-        fontSizeable: undefined
-      };
-    }
-
-    function mapToEditPanelValues(config) {
-      return new Map([
-        ['main_title', config.main_title || defaultConfig.main_title]
-      ]);
-    }
-
+    
     if (window.elementSdk) {
       window.elementSdk.init({
         defaultConfig,
         onConfigChange,
-        mapToCapabilities,
-        mapToEditPanelValues
+        mapToCapabilities: (cfg) => ({
+          recolorables: [
+            {
+              get: () => cfg.background_color || defaultConfig.background_color,
+              set: (v) => { cfg.background_color = v; window.elementSdk.setConfig({ background_color: v }); }
+            },
+            {
+              get: () => cfg.primary_color || defaultConfig.primary_color,
+              set: (v) => { cfg.primary_color = v; window.elementSdk.setConfig({ primary_color: v }); }
+            },
+            {
+              get: () => cfg.text_color || defaultConfig.text_color,
+              set: (v) => { cfg.text_color = v; window.elementSdk.setConfig({ text_color: v }); }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => cfg.font_family || defaultConfig.font_family,
+            set: (v) => { cfg.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+          },
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (cfg) => new Map([
+          ["main_title", cfg.main_title || defaultConfig.main_title]
+        ])
       });
     }
+    
+    onConfigChange(config);
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d7a8db4711d064a',t:'MTc3MjcyODczMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d7adadd24f5064a',t:'MTc3MjczMTg5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
