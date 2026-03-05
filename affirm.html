@@ -105,20 +105,16 @@
   <div id="app-container" class="h-full w-full overflow-auto" style="background-color: #FFFFFF;">
    <div class="flex flex-col h-full"><!-- Instructions -->
     <div class="px-6 md:px-8 pt-6 md:pt-8 pb-4 flex-shrink-0" style="color: #4A5568;">
-     <p class="text-sm md:text-base"><span style="font-weight: bold;">1. Click a letter</span> to expand the description of that coaching stage</p>
-     <p class="text-sm md:text-base"><span style="font-weight: bold;">2. Click a stage card</span> to see example coaching questions and statements for that stage</p>
+     <p class="text-sm md:text-base"><span style="font-weight: bold;">Click a stage card</span> to see example coaching questions and statements for that stage</p>
     </div><!-- Main Content -->
-    <div class="min-h-full flex p-6 md:p-8 gap-6 flex-1">
+    <div class="flex p-6 md:p-8 gap-6 flex-1">
      <!-- Left Sidebar - Vertical AFFIRM Letters -->
      <div class="flex flex-col gap-4 flex-shrink-0"><button class="letter-btn w-24 h-24 md:w-28 md:h-28 rounded-xl flex items-center justify-center text-5xl md:text-6xl font-bold text-white shadow-lg pulse-hint" style="background-color: #002855;" data-letter="A" aria-label="A - Achievement Orientation">A</button> <button class="letter-btn w-24 h-24 md:w-28 md:h-28 rounded-xl flex items-center justify-center text-5xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #0070F0;" data-letter="F" aria-label="F - Frame">F</button> <button class="letter-btn w-24 h-24 md:w-28 md:h-28 rounded-xl flex items-center justify-center text-5xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #97E152;" data-letter="F2" aria-label="F - Focus on the Strategy">F</button> <button class="letter-btn w-24 h-24 md:w-28 md:h-28 rounded-xl flex items-center justify-center text-5xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #46B1EF;" data-letter="I" aria-label="I - Intentional Practice">I</button> <button class="letter-btn w-24 h-24 md:w-28 md:h-28 rounded-xl flex items-center justify-center text-5xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #002855;" data-letter="R" aria-label="R - Reflect &amp; Review">R</button> <button class="letter-btn w-24 h-24 md:w-28 md:h-28 rounded-xl flex items-center justify-center text-5xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #0070F0;" data-letter="M" aria-label="M - Move Forward">M</button>
      </div><!-- Middle Panel - Descriptions -->
-     <div id="cards-container" class="flex-1 max-w-2xl overflow-y-auto">
-      <div id="empty-state" class="text-center p-8" style="color: #4A5568;">
-       <p class="text-lg"></p>
-      </div>
-      <div id="stages-flow" class="space-y-3"></div>
+     <div id="cards-container" class="flex-1 max-w-2xl">
+      <div id="stages-flow" class="space-y-4"></div>
      </div><!-- Right Panel - Questions for Active Stage -->
-     <div id="questions-panel" class="w-80 bg-white rounded-xl shadow-lg p-6 overflow-y-auto hidden">
+     <div id="questions-panel" class="w-80 bg-white rounded-xl shadow-lg p-6 hidden" style="height: fit-content;">
       <h3 id="questions-title" class="text-lg font-bold mb-4"></h3>
       <div id="questions-container" class="space-y-2"></div>
      </div>
@@ -274,12 +270,6 @@
       }
       
       const stagesFlow = document.getElementById('stages-flow');
-      
-      // Hide empty state on first card
-      if (visibleStages.length === 0) {
-        document.getElementById('empty-state').classList.add('hidden');
-      }
-      
       visibleStages.push(stage);
       
       // Create card
@@ -361,5 +351,5 @@
     onConfigChange(config);
   </script>
   </div>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d7b3e62e47605cc',t:'MTc3MjczNTk2OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d7b4bc8e5cc1770',t:'MTc3MjczNjUxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
