@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peer Coach Debugging Simulator</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+    .typing-indicator span {
+      animation: blink 1.4s infinite both;
+    }
+    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes blink {
+      0%, 80%, 100% { opacity: 0; }
+      40% { opacity: 1; }
+    }
+    .message-enter {
+      animation: slideUp 0.3s ease-out;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .code-block {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full m-0 p-0 overflow-hidden" style="background-color: #FFFFFF;">
+  <div id="app-container" class="h-full w-full flex flex-col overflow-auto" style="font-family: 'Inter', Arial, sans-serif;"><!-- Header -->
+   <header class="flex-shrink-0 px-6 py-4 border-b" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%); border-color: #0070F0;">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+     <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background-color: #97E152;">
+       <svg class="w-6 h-6" fill="#002855" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+       </svg>
+      </div>
+      <div>
+       <h1 id="main-title" class="text-xl font-bold text-white">Peer Coach Debugging Simulator</h1>
+       <p class="text-sm text-blue-200">Interactive debugging strategies practice</p>
+      </div>
+     </div>
+     <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full" style="background-color: rgba(151, 225, 82, 0.2);">
+      <div class="w-2 h-2 rounded-full" style="background-color: #97E152;"></div><span class="text-sm font-medium" style="color: #97E152;">Active Session</span>
+     </div>
+    </div>
+   </header><!-- Main Content -->
+   <main class="flex-1 overflow-auto">
+    <div class="max-w-4xl mx-auto p-6"><!-- Welcome Section -->
+     <div id="welcome-section" class="mb-8">
+      <div class="rounded-2xl p-6 border" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border-color: #46B1EF;">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style="background-color: #0070F0;"><span class="text-2xl">🦆</span>
+        </div>
+        <div>
+         <h2 class="text-lg font-semibold mb-2" style="color: #002855;">Welcome to Peer Coaching Practice!</h2>
+         <p id="welcome-message" class="mb-4" style="color: #334155;">Practice two powerful debugging strategies: <strong>Rubberduck Debugging</strong> and <strong>Pseudocode Reframing</strong>. Choose a scenario below to start an interactive simulation with a student who needs help debugging their Python code.</p>
+         <p class="text-sm" style="color: #64748b;">Remember: As a Peer Coach, you guide students to discover solutions themselves—you don't teach content directly!</p>
+        </div>
+       </div>
+      </div>
+     </div><!-- Strategy Selection -->
+     <div id="strategy-selection" class="grid md:grid-cols-2 gap-4 mb-8"><!-- Rubberduck Strategy Card --> <button onclick="startSimulation('rubberduck')" class="text-left p-5 rounded-xl border-2 transition-all duration-200 hover:shadow-lg hover:scale-[1.02] group" style="background-color: #FFFFFF; border-color: #e2e8f0;">
+       <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background-color: #97E152;"><span class="text-xl">🦆</span>
+        </div>
+        <h3 class="font-semibold" style="color: #002855;">Rubberduck Debugging</h3>
+       </div><p class="text-sm mb-3" style="color: #64748b;">Help a student explain their code line-by-line to discover the bug themselves.</p>
+       <div class="flex items-center gap-2 text-sm font-medium" style="color: #0070F0;"><span>Start Practice</span>
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+       </div></button> <!-- Pseudocode Strategy Card --> <button onclick="startSimulation('pseudocode')" class="text-left p-5 rounded-xl border-2 transition-all duration-200 hover:shadow-lg hover:scale-[1.02] group" style="background-color: #FFFFFF; border-color: #e2e8f0;">
+       <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background-color: #46B1EF;"><span class="text-xl">📝</span>
+        </div>
+        <h3 class="font-semibold" style="color: #002855;">Pseudocode Reframing</h3>
+       </div><p class="text-sm mb-3" style="color: #64748b;">Guide a student to describe their intended logic before examining the code.</p>
+       <div class="flex items-center gap-2 text-sm font-medium" style="color: #0070F0;"><span>Start Practice</span>
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+       </div></button>
+     </div><!-- Simulation Area (Hidden initially) -->
+     <div id="simulation-area" class="hidden"><!-- Strategy Info Banner -->
+      <div id="strategy-banner" class="mb-4 p-4 rounded-xl border" style="background-color: #f8fafc; border-color: #e2e8f0;">
+       <div class="flex items-center justify-between flex-wrap gap-3">
+        <div class="flex items-center gap-3"><span id="strategy-icon" class="text-2xl">🦆</span>
+         <div>
+          <h3 id="strategy-title" class="font-semibold" style="color: #002855;">Rubberduck Debugging</h3>
+          <p id="strategy-hint" class="text-sm" style="color: #64748b;">Ask the student to explain their code step-by-step</p>
+         </div>
+        </div><button onclick="resetSimulation()" class="px-4 py-2 rounded-lg text-sm font-medium transition-colors" style="background-color: #e2e8f0; color: #475569;"> ← Back to Strategies </button>
+       </div>
+      </div><!-- Code Display -->
+      <div id="code-display" class="mb-4 rounded-xl overflow-hidden code-block">
+       <div class="flex items-center justify-between px-4 py-2 border-b border-slate-600">
+        <div class="flex items-center gap-2">
+         <div class="flex gap-1.5">
+          <div class="w-3 h-3 rounded-full bg-red-500"></div>
+          <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+          <div class="w-3 h-3 rounded-full bg-green-500"></div>
+         </div><span id="code-filename" class="text-sm text-slate-400 font-mono-code ml-2">student_code.py</span>
+        </div><span class="text-xs px-2 py-1 rounded bg-slate-700 text-slate-300">Python</span>
+       </div>
+       <pre id="code-content" class="p-4 text-sm overflow-x-auto font-mono-code text-slate-100"></pre>
+      </div><!-- Chat Interface -->
+      <div class="rounded-xl border overflow-hidden" style="border-color: #e2e8f0;"><!-- Chat Messages -->
+       <div id="chat-messages" class="h-80 overflow-y-auto p-4 space-y-4" style="background-color: #f8fafc;"><!-- Messages will be inserted here -->
+       </div><!-- Response Options -->
+       <div id="response-options" class="p-4 border-t space-y-3" style="background-color: #FFFFFF; border-color: #e2e8f0;">
+        <p class="text-sm font-medium" style="color: #64748b;">Choose your response as the Peer Coach:</p>
+        <div id="options-container" class="space-y-2"><!-- Options will be inserted here -->
+        </div>
+       </div>
+      </div><!-- Feedback Panel -->
+      <div id="feedback-panel" class="hidden mt-4 p-5 rounded-xl border" style="border-color: #97E152; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);">
+       <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background-color: #97E152;">
+         <svg class="w-5 h-5" fill="#002855" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+         </svg>
+        </div>
+        <div>
+         <h4 class="font-semibold mb-1" style="color: #002855;">Great coaching!</h4>
+         <p id="feedback-text" class="text-sm" style="color: #334155;"></p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </main><!-- Footer -->
+   <footer class="flex-shrink-0 px-6 py-3 border-t text-center" style="background-color: #f8fafc; border-color: #e2e8f0;">
+    <p class="text-sm" style="color: #64748b;">Part of the <strong style="color: #002855;">Lab Owl</strong> debugging framework • Peer Coach Training</p>
+   </footer>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      main_title: 'Peer Coach Debugging Simulator',
+      welcome_message: 'Practice two powerful debugging strategies: Rubberduck Debugging and Pseudocode Reframing. Choose a scenario below to start an interactive simulation with a student who needs help debugging their Python code.',
+      primary_color: '#002855',
+      secondary_color: '#0070F0',
+      accent_color: '#97E152',
+      highlight_color: '#46B1EF',
+      text_color: '#334155'
+    };
+
+    // Simulation data
+    const simulations = {
+      rubberduck: {
+        icon: '🦆',
+        title: 'Rubberduck Debugging',
+        hint: 'Ask the student to explain their code step-by-step',
+        filename: 'calculate_average.py',
+        code: `def calculate_average(numbers):
+    total = 0
+    for num in numbers:
+        total = num  # Bug: should be total += num
+    average = total / len(numbers)
+    return average
+
+# Test
+grades = [85, 90, 78, 92, 88]
+result = calculate_average(grades)
+print(f"Average: {result}")  # Outputs 88 instead of 86.6`,
+        conversation: [
+          {
+            speaker: 'student',
+            message: "Hey, I'm stuck on this function. It's supposed to calculate the average of a list of grades, but it's giving me the wrong answer. It outputs 88 but should be 86.6.",
+            options: [
+              {
+                text: "Walk me through what this section of your code is supposed to do, starting with the for loop.",
+                correct: true,
+                feedback: "Excellent! This is classic rubberduck debugging—asking the student to verbalize their code's intended behavior."
+              },
+              {
+                text: "I see the bug! You wrote 'total = num' instead of 'total += num'.",
+                correct: false,
+                feedback: "Remember, as a Peer Coach you shouldn't directly teach or give away the answer. Guide the student to discover it themselves!"
+              },
+              {
+                text: "Have you tried using a different approach to calculate averages?",
+                correct: false,
+                feedback: "While this might help eventually, the rubberduck strategy focuses on having students explain their current code to find the bug."
+              }
+            ]
+          },
+          {
+            speaker: 'student',
+            message: "Okay, so the for loop goes through each number in the list. For each number, it... wait. It sets total to that number. Oh! It should be ADDING to total, not replacing it!",
+            options: [
+              {
+                text: "Great observation! What change would you make to fix that?",
+                correct: true,
+                feedback: "Perfect follow-up! You confirmed their discovery and prompted them to articulate the solution."
+              },
+              {
+                text: "Yes, you need to use += instead of =.",
+                correct: false,
+                feedback: "You're giving the answer directly. Let the student state the solution in their own words."
+              },
+              {
+                text: "Let's move on to the next part of the code.",
+                correct: false,
+                feedback: "The student just had a breakthrough! Acknowledge it and let them complete their thought."
+              }
+            ]
+          },
+          {
+            speaker: 'student',
+            message: "I need to change 'total = num' to 'total += num' so it adds each grade to the running total instead of replacing it!",
+            options: [
+              {
+                text: "Exactly! Try running it now with that change. How does explaining your code out loud help you debug?",
+                correct: true,
+                feedback: "Wonderful! You validated their solution and helped them reflect on the debugging process itself—building metacognitive skills!"
+              },
+              {
+                text: "Correct. The bug is fixed now.",
+                correct: false,
+                feedback: "While accurate, this misses an opportunity to reinforce the learning strategy and build debugging confidence."
+              },
+              {
+                text: "Are you sure that's the only bug?",
+                correct: false,
+                feedback: "Don't create unnecessary doubt. Celebrate their success and help them reflect on the process."
+              }
+            ]
+          }
+        ]
+      },
+      pseudocode: {
+        icon: '📝',
+        title: 'Pseudocode Reframing',
+        hint: 'Have the student describe their intended logic in plain language',
+        filename: 'find_largest.py',
+        code: `def find_largest(numbers):
+    largest = 0  # Bug: should initialize to first element or -infinity
+    for num in numbers:
+        if num > largest:
+            largest = num
+    return largest
+
+# Test
+temperatures = [-5, -12, -3, -8, -1]
+result = find_largest(temperatures)
+print(f"Highest temp: {result}")  # Outputs 0 instead of -1`,
+        conversation: [
+          {
+            speaker: 'student',
+            message: "My function is supposed to find the largest number in a list, but when I test it with negative temperatures, it returns 0 even though 0 isn't in my list!",
+            options: [
+              {
+                text: "Before we look at the code, if you were explaining this to a friend, what steps should the program follow to find the largest number?",
+                correct: true,
+                feedback: "Perfect pseudocode reframing! You're asking them to describe the logic in plain language before examining the code."
+              },
+              {
+                text: "The problem is that you initialized 'largest' to 0.",
+                correct: false,
+                feedback: "As a Peer Coach, avoid giving away the answer. Help them discover the issue through their own reasoning."
+              },
+              {
+                text: "Can you show me the line where you set the initial value?",
+                correct: false,
+                feedback: "This jumps straight to the code. Pseudocode reframing starts with understanding the intended logic first."
+              }
+            ]
+          },
+          {
+            speaker: 'student',
+            message: "Well, to find the largest... I would need to remember the biggest number I've seen so far. Then go through each number and if it's bigger than what I'm remembering, update what I'm remembering. At the end, whatever I'm remembering is the largest.",
+            options: [
+              {
+                text: "Great explanation! Now, what should you remember as 'the biggest seen so far' before you've looked at any numbers?",
+                correct: true,
+                feedback: "Excellent! You're guiding them to examine a key assumption in their logic using their own pseudocode description."
+              },
+              {
+                text: "That's correct. Now let's look at your code.",
+                correct: false,
+                feedback: "Don't rush past this moment. Their pseudocode reveals the key insight—help them explore it."
+              },
+              {
+                text: "You should initialize the variable to negative infinity or the first element.",
+                correct: false,
+                feedback: "You're teaching content directly. Let them work through the logic to discover this themselves."
+              }
+            ]
+          },
+          {
+            speaker: 'student',
+            message: "Hmm... before I've seen any numbers? I guess I can't assume it's 0 because... OH! If all my numbers are negative, then 0 would be bigger than all of them even though it's not in the list! I should start with the first number in the list instead!",
+            options: [
+              {
+                text: "Exactly! You compared your plain-language logic to your code and found where they didn't match. That's a powerful debugging technique. How would you change line 2?",
+                correct: true,
+                feedback: "Excellent coaching! You validated their discovery, named the strategy they used, and prompted them to implement the fix."
+              },
+              {
+                text: "Yes, change 'largest = 0' to 'largest = numbers[0]'.",
+                correct: false,
+                feedback: "Let the student articulate the solution. They've done the hard thinking—let them complete it!"
+              },
+              {
+                text: "Good job! You're done.",
+                correct: false,
+                feedback: "Take the opportunity to reinforce the strategy and have them verbalize the code change."
+              }
+            ]
+          }
+        ]
+      }
+    };
+
+    let currentSimulation = null;
+    let currentStep = 0;
+
+    function startSimulation(strategy) {
+      currentSimulation = strategy;
+      currentStep = 0;
+      
+      const sim = simulations[strategy];
+      
+      // Update UI
+      document.getElementById('strategy-selection').classList.add('hidden');
+      document.getElementById('welcome-section').classList.add('hidden');
+      document.getElementById('simulation-area').classList.remove('hidden');
+      document.getElementById('feedback-panel').classList.add('hidden');
+      
+      // Set strategy info
+      document.getElementById('strategy-icon').textContent = sim.icon;
+      document.getElementById('strategy-title').textContent = sim.title;
+      document.getElementById('strategy-hint').textContent = sim.hint;
+      document.getElementById('code-filename').textContent = sim.filename;
+      document.getElementById('code-content').textContent = sim.code;
+      
+      // Clear and start chat
+      document.getElementById('chat-messages').innerHTML = '';
+      showConversationStep();
+    }
+
+    function showConversationStep() {
+      const sim = simulations[currentSimulation];
+      const step = sim.conversation[currentStep];
+      
+      // Add student message
+      addMessage(step.speaker, step.message);
+      
+      // Show options after a delay
+      setTimeout(() => {
+        showOptions(step.options);
+      }, 500);
+    }
+
+    function addMessage(speaker, message) {
+      const chatMessages = document.getElementById('chat-messages');
+      const isStudent = speaker === 'student';
+      
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `flex items-start gap-3 message-enter ${isStudent ? '' : 'flex-row-reverse'}`;
+      
+      messageDiv.innerHTML = `
+        <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background-color: ${isStudent ? '#46B1EF' : '#97E152'};">
+          <span class="text-sm">${isStudent ? '👤' : '🎓'}</span>
+        </div>
+        <div class="max-w-[80%] p-3 rounded-xl ${isStudent ? 'rounded-tl-none' : 'rounded-tr-none'}" style="background-color: ${isStudent ? '#FFFFFF' : '#002855'}; color: ${isStudent ? '#334155' : '#FFFFFF'}; ${isStudent ? 'border: 1px solid #e2e8f0;' : ''}">
+          <p class="text-sm font-medium mb-1" style="color: ${isStudent ? '#64748b' : '#97E152'};">${isStudent ? 'Student' : 'You (Peer Coach)'}</p>
+          <p class="text-sm">${message}</p>
+        </div>
+      `;
+      
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function showOptions(options) {
+      const container = document.getElementById('options-container');
+      container.innerHTML = '';
+      
+      options.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.className = 'w-full text-left p-3 rounded-lg border-2 transition-all duration-200 hover:shadow-md';
+        button.style.cssText = 'background-color: #FFFFFF; border-color: #e2e8f0; color: #334155;';
+        button.innerHTML = `
+          <span class="text-sm">${option.text}</span>
+        `;
+        
+        button.onmouseenter = () => {
+          button.style.borderColor = '#0070F0';
+          button.style.backgroundColor = '#f0f9ff';
+        };
+        button.onmouseleave = () => {
+          button.style.borderColor = '#e2e8f0';
+          button.style.backgroundColor = '#FFFFFF';
+        };
+        
+        button.onclick = () => selectOption(index, option);
+        container.appendChild(button);
+      });
+    }
+
+    function selectOption(index, option) {
+      // Disable all options
+      const buttons = document.querySelectorAll('#options-container button');
+      buttons.forEach(btn => {
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+        btn.style.cursor = 'default';
+      });
+      
+      // Highlight selected
+      buttons[index].style.opacity = '1';
+      buttons[index].style.borderColor = option.correct ? '#97E152' : '#ef4444';
+      buttons[index].style.backgroundColor = option.correct ? '#f0fdf4' : '#fef2f2';
+      
+      // Add coach message
+      setTimeout(() => {
+        addMessage('coach', option.text);
+        
+        // Show feedback
+        showFeedback(option.feedback, option.correct);
+        
+        // Continue or complete
+        setTimeout(() => {
+          if (option.correct && currentStep < simulations[currentSimulation].conversation.length - 1) {
+            currentStep++;
+            showConversationStep();
+            document.getElementById('feedback-panel').classList.add('hidden');
+          } else if (option.correct && currentStep >= simulations[currentSimulation].conversation.length - 1) {
+            showCompletionMessage();
+          }
+        }, 2000);
+      }, 300);
+    }
+
+    function showFeedback(text, isPositive) {
+      const panel = document.getElementById('feedback-panel');
+      const feedbackText = document.getElementById('feedback-text');
+      
+      panel.style.borderColor = isPositive ? '#97E152' : '#f59e0b';
+      panel.style.background = isPositive 
+        ? 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)'
+        : 'linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)';
+      
+      panel.querySelector('h4').textContent = isPositive ? 'Great coaching!' : 'Coaching tip:';
+      panel.querySelector('svg').parentElement.style.backgroundColor = isPositive ? '#97E152' : '#f59e0b';
+      
+      feedbackText.textContent = text;
+      panel.classList.remove('hidden');
+      
+      // Scroll to feedback
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function showCompletionMessage() {
+      const panel = document.getElementById('feedback-panel');
+      const feedbackText = document.getElementById('feedback-text');
+      
+      panel.style.borderColor = '#97E152';
+      panel.style.background = 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)';
+      panel.querySelector('h4').textContent = '🎉 Simulation Complete!';
+      panel.querySelector('svg').parentElement.innerHTML = '<span class="text-lg">⭐</span>';
+      
+      feedbackText.textContent = `Excellent work practicing ${simulations[currentSimulation].title}! You successfully guided the student to discover the bug themselves. Try the other strategy to build your full coaching toolkit!`;
+      
+      panel.classList.remove('hidden');
+      
+      // Update options to show completion
+      const container = document.getElementById('options-container');
+      container.innerHTML = `
+        <button onclick="resetSimulation()" class="w-full p-3 rounded-lg font-medium transition-all duration-200 hover:opacity-90" style="background-color: #0070F0; color: white;">
+          Try Another Strategy
+        </button>
+      `;
+    }
+
+    function resetSimulation() {
+      currentSimulation = null;
+      currentStep = 0;
+      
+      document.getElementById('strategy-selection').classList.remove('hidden');
+      document.getElementById('welcome-section').classList.remove('hidden');
+      document.getElementById('simulation-area').classList.add('hidden');
+      document.getElementById('feedback-panel').classList.add('hidden');
+    }
+
+    // Element SDK integration
+    async function initializeSDK() {
+      if (window.elementSdk) {
+        await window.elementSdk.init({
+          defaultConfig,
+          onConfigChange: async (config) => {
+            // Update title
+            const title = document.getElementById('main-title');
+            if (title) title.textContent = config.main_title || defaultConfig.main_title;
+            
+            // Update welcome message
+            const welcomeMsg = document.getElementById('welcome-message');
+            if (welcomeMsg) {
+              welcomeMsg.innerHTML = config.welcome_message || defaultConfig.welcome_message;
+            }
+          },
+          mapToCapabilities: (config) => ({
+            recolorables: [],
+            borderables: [],
+            fontEditable: undefined,
+            fontSizeable: undefined
+          }),
+          mapToEditPanelValues: (config) => new Map([
+            ['main_title', config.main_title || defaultConfig.main_title],
+            ['welcome_message', config.welcome_message || defaultConfig.welcome_message]
+          ])
+        });
+      }
+    }
+
+    initializeSDK();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d7a3d29a24405cc',t:'MTc3MjcyNTQzMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
