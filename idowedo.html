@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Think Aloud Training Module</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    * {
+      font-family: Arial, sans-serif;
+    }
+    
+    .stage-card {
+      transition: all 0.3s ease;
+    }
+    
+    .stage-card:hover {
+      transform: translateY(-4px);
+    }
+    
+    .thought-bubble {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .think-aloud-item {
+      transition: all 0.2s ease;
+    }
+    
+    .think-aloud-item:hover {
+      background-color: #f0f9ff;
+    }
+    
+    .progress-step {
+      transition: all 0.3s ease;
+    }
+    
+    .drag-item {
+      cursor: grab;
+      transition: all 0.2s ease;
+    }
+    
+    .drag-item:active {
+      cursor: grabbing;
+    }
+    
+    .drag-item.dragging {
+      opacity: 0.5;
+      transform: scale(1.05);
+    }
+    
+    .drop-zone {
+      transition: all 0.2s ease;
+    }
+    
+    .drop-zone.drag-over {
+      background-color: #e0f2fe;
+      border-color: #0070F0;
+    }
+    
+    .correct {
+      background-color: #ecfdf5 !important;
+      border-color: #97E152 !important;
+    }
+    
+    .incorrect {
+      background-color: #fef2f2 !important;
+      border-color: #ef4444 !important;
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-white">
+  <div id="app-container" class="h-full overflow-auto">
+   <!-- Header -->
+   <header class="bg-gradient-to-r from-[#002855] to-[#0070F0] text-white py-6 px-4">
+    <div class="max-w-4xl mx-auto">
+     <h1 id="main-title" class="text-2xl md:text-3xl font-bold mb-2">Peer Coaching: The Think Aloud Method</h1>
+     <p class="text-blue-100">Master the I Do, We Do, You Do Framework</p>
+    </div>
+   </header><!-- Progress Bar -->
+   <div class="bg-gray-100 px-4 py-3 border-b border-gray-200">
+    <div class="max-w-4xl mx-auto">
+     <div class="flex items-center justify-between mb-2">
+      <span class="text-sm font-medium text-[#002855]">Your Progress</span> <span id="progress-text" class="text-sm text-gray-600">Section 1 of 4</span>
+     </div>
+     <div class="h-2 bg-gray-300 rounded-full overflow-hidden">
+      <div id="progress-bar" class="h-full bg-[#97E152] rounded-full transition-all duration-500" style="width: 25%"></div>
+     </div>
+    </div>
+   </div><!-- Main Content -->
+   <main class="max-w-4xl mx-auto px-4 py-8">
+    <!-- Section 1: Framework Overview -->
+    <section id="section-1" class="fade-in">
+     <div class="mb-8">
+      <div class="flex items-center gap-3 mb-4">
+       <div class="w-10 h-10 rounded-full bg-[#0070F0] flex items-center justify-center text-white font-bold">
+        1
+       </div>
+       <h2 class="text-xl font-bold text-[#002855]">Building Skills Through Stages</h2>
+      </div>
+      <p class="text-gray-700 mb-6">Effective learning happens in steps. Instead of jumping straight to independence, students benefit from watching, collaborating, and then practicing on their own.</p>
+     </div><!-- Three Stage Cards -->
+     <div class="grid md:grid-cols-3 gap-4 mb-8">
+      <div class="stage-card bg-gradient-to-br from-[#002855] to-[#003d7a] text-white p-6 rounded-xl shadow-lg">
+       <div class="text-3xl mb-3">
+        👤
+       </div>
+       <h3 class="text-lg font-bold mb-2">I Do</h3>
+       <p class="text-blue-100 text-sm">You demonstrate the strategy while narrating your decision-making. This is where students see your <strong>thinking process in action</strong>.</p>
+      </div>
+      <div class="stage-card bg-gradient-to-br from-[#0070F0] to-[#46B1EF] text-white p-6 rounded-xl shadow-lg">
+       <div class="text-3xl mb-3">
+        👥
+       </div>
+       <h3 class="text-lg font-bold mb-2">We Do</h3>
+       <p class="text-blue-100 text-sm">Work through the strategy together, with you providing <strong>guidance as the student participates</strong>. They're starting to take ownership.</p>
+      </div>
+      <div class="stage-card bg-gradient-to-br from-[#97E152] to-[#7bc142] text-white p-6 rounded-xl shadow-lg">
+       <div class="text-3xl mb-3">
+        🎯
+       </div>
+       <h3 class="text-lg font-bold mb-2 text-[#002855]">You Do</h3>
+       <p class="text-[#002855] text-sm">The student tackles the strategy solo. They've internalized the approach and are ready to <strong>handle it on their own</strong>.</p>
+      </div>
+     </div><!-- Key Insight Box -->
+     <div class="bg-blue-50 border-l-4 border-[#0070F0] p-4 rounded-r-lg mb-8">
+      <div class="flex items-start gap-3">
+       <span class="text-2xl">💡</span>
+       <div>
+        <h4 class="font-bold text-[#002855] mb-1">The Real Power of "I Do"</h4>
+        <p class="text-gray-700 text-sm">It's not about teaching the subject—it's about revealing your <strong>thinking behind the strategy</strong>. Students need to see how you decide what matters, what to skip, and how you organize information. They're learning your mental process, not just the outcome.</p>
+       </div>
+      </div>
+     </div><!-- Quick Check -->
+     <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+      <h4 class="font-bold text-[#002855] mb-4">✓ Quick Check</h4>
+      <p class="text-gray-700 mb-4">What is the main purpose of the "I Do" stage?</p>
+      <div id="quiz-1" class="space-y-3">
+       <button onclick="checkAnswer(1, 'a', false)" class="quiz-option w-full text-left p-3 rounded-lg border border-gray-300 hover:border-[#0070F0] hover:bg-blue-50 transition-all"> <span class="font-medium">A.</span> To teach the course content to the student </button> <button onclick="checkAnswer(1, 'b', true)" class="quiz-option w-full text-left p-3 rounded-lg border border-gray-300 hover:border-[#0070F0] hover:bg-blue-50 transition-all"> <span class="font-medium">B.</span> To show the thinking process behind using a strategy </button> <button onclick="checkAnswer(1, 'c', false)" class="quiz-option w-full text-left p-3 rounded-lg border border-gray-300 hover:border-[#0070F0] hover:bg-blue-50 transition-all"> <span class="font-medium">C.</span> To test the student's prior knowledge </button>
+      </div>
+      <div id="feedback-1" class="hidden mt-4 p-3 rounded-lg"></div>
+     </div><button onclick="goToSection(2)" class="mt-8 w-full md:w-auto px-6 py-3 bg-[#0070F0] hover:bg-[#005acc] text-white font-medium rounded-lg transition-all flex items-center justify-center gap-2"> Continue to Think Alouds <span>→</span> </button>
+    </section><!-- Section 2: What is a Think Aloud -->
+    <section id="section-2" class="hidden fade-in">
+     <div class="mb-8">
+      <div class="flex items-center gap-3 mb-4">
+       <div class="w-10 h-10 rounded-full bg-[#0070F0] flex items-center justify-center text-white font-bold">
+        2
+       </div>
+       <h2 class="text-xl font-bold text-[#002855]">Making Thinking Visible: Think Alouds</h2>
+      </div>
+     </div><!-- Definition Card -->
+     <div class="bg-gradient-to-r from-[#002855] to-[#0070F0] text-white p-6 rounded-xl mb-8">
+      <div class="flex items-start gap-4">
+       <div class="thought-bubble text-4xl">
+        🧠
+       </div>
+       <div>
+        <h3 class="text-lg font-bold mb-2">What's a Think Aloud?</h3>
+        <p class="text-blue-100">Imagine a student watching you work on a problem, but instead of just seeing the final answer, they get to hear every thought in your head. That's a think aloud. You're <strong>narrating your reasoning out loud</strong>—the decisions you make, what grabs your attention, what confuses you, and why you skip certain things.</p>
+       </div>
+      </div>
+     </div><!-- What You Verbalize -->
+     <h3 class="font-bold text-[#002855] mb-4">When you think aloud, you share:</h3>
+     <div class="grid md:grid-cols-2 gap-3 mb-8">
+      <div class="think-aloud-item flex items-center gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+       <span class="text-xl">👁️</span> <span class="text-gray-700">What <strong>stands out</strong> to you</span>
+      </div>
+      <div class="think-aloud-item flex items-center gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+       <span class="text-xl">⭐</span> <span class="text-gray-700">What seems <strong>worth paying attention to</strong></span>
+      </div>
+      <div class="think-aloud-item flex items-center gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+       <span class="text-xl">❓</span> <span class="text-gray-700">What <strong>feels confusing or unclear</strong></span>
+      </div>
+      <div class="think-aloud-item flex items-center gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+       <span class="text-xl">✂️</span> <span class="text-gray-700">Why you <strong>keep certain things and skip others</strong></span>
+      </div>
+      <div class="think-aloud-item flex items-center gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+       <span class="text-xl">📂</span> <span class="text-gray-700">How you <strong>structure and categorize</strong> ideas</span>
+      </div>
+      <div class="think-aloud-item flex items-center gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+       <span class="text-xl">✅</span> <span class="text-gray-700">How you <strong>test yourself</strong> to make sure you get it</span>
+      </div>
+     </div><!-- Why It Matters -->
+     <div class="bg-green-50 border-l-4 border-[#97E152] p-4 rounded-r-lg mb-8">
+      <h4 class="font-bold text-[#002855] mb-2">Why This Changes Everything</h4>
+      <p class="text-gray-700">When students only see your finished notes or final answer, they have no idea how you got there. A think aloud bridges that gap. It shows them your <strong>approach and strategy</strong>, not just the result. They can then copy your process, not just your output.</p>
+     </div><!-- Applications in Peer Coaching -->
+     <h3 class="font-bold text-[#002855] mb-4">Think alouds help you model:</h3>
+     <div class="space-y-2 mb-8">
+      <div class="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
+       <span class="text-[#0070F0] font-bold">→</span> <span class="text-gray-700">Tackling dense or unfamiliar material without freezing up</span>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
+       <span class="text-[#0070F0] font-bold">→</span> <span class="text-gray-700">Deciding what's worth writing down versus what's fluff</span>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
+       <span class="text-[#0070F0] font-bold">→</span> <span class="text-gray-700">Putting complex ideas into plain language you understand</span>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
+       <span class="text-[#0070F0] font-bold">→</span> <span class="text-gray-700">Breaking big concepts into smaller, manageable chunks</span>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
+       <span class="text-[#0070F0] font-bold">→</span> <span class="text-gray-700">Turning material into study formats like charts, cards, or concept maps</span>
+      </div>
+     </div>
+     <div class="flex gap-4">
+      <button onclick="goToSection(1)" class="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-all"> ← Back </button> <button onclick="goToSection(3)" class="flex-1 md:flex-none px-6 py-3 bg-[#0070F0] hover:bg-[#005acc] text-white font-medium rounded-lg transition-all flex items-center justify-center gap-2"> Continue to Setup Steps <span>→</span> </button>
+     </div>
+    </section><!-- Section 3: How to Set Up -->
+    <section id="section-3" class="hidden fade-in">
+     <div class="mb-8">
+      <div class="flex items-center gap-3 mb-4">
+       <div class="w-10 h-10 rounded-full bg-[#0070F0] flex items-center justify-center text-white font-bold">
+        3
+       </div>
+       <h2 class="text-xl font-bold text-[#002855]">Putting It Into Practice</h2>
+      </div>
+      <p class="text-gray-700">Ready to run your own think aloud session? Here's what you need to do to set one up effectively.</p>
+     </div><!-- Steps -->
+     <div class="space-y-4 mb-8">
+      <div class="flex gap-4 p-4 bg-white border border-gray-200 rounded-xl shadow-sm">
+       <div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#002855] text-white flex items-center justify-center font-bold">
+        1
+       </div>
+       <div>
+        <h4 class="font-bold text-[#002855] mb-1">Start with Real Material</h4>
+        <p class="text-gray-600 text-sm">Pick something your student actually needs to learn—a passage, a problem, a slide. Whatever they're actually struggling with.</p>
+       </div>
+      </div>
+      <div class="flex gap-4 p-4 bg-white border border-gray-200 rounded-xl shadow-sm">
+       <div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#002855] text-white flex items-center justify-center font-bold">
+        2
+       </div>
+       <div>
+        <h4 class="font-bold text-[#002855] mb-1">Have Your Strategy Tool Ready</h4>
+        <p class="text-gray-600 text-sm">Will they be taking notes? Making a chart? Creating flashcards? Have the template or blank page right there so they can see you fill it in as you think.</p>
+       </div>
+      </div>
+      <div class="flex gap-4 p-4 bg-white border border-gray-200 rounded-xl shadow-sm">
+       <div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#002855] text-white flex items-center justify-center font-bold">
+        3
+       </div>
+       <div>
+        <h4 class="font-bold text-[#002855] mb-1">Keep the Scope Tight</h4>
+        <p class="text-gray-600 text-sm">Don't try to model the entire chapter. A paragraph or small section is perfect. You want to showcase the <em>technique</em>, not overwhelm them with content.</p>
+       </div>
+      </div>
+      <div class="flex gap-4 p-4 bg-white border border-gray-200 rounded-xl shadow-sm">
+       <div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#002855] text-white flex items-center justify-center font-bold">
+        4
+       </div>
+       <div>
+        <h4 class="font-bold text-[#002855] mb-1">Work Out Loud (Really Out Loud!)</h4>
+        <p class="text-gray-600 text-sm">This is the core of it. As you work, narrate everything—what you're noticing, what you're skipping and why, how you're deciding what matters. Don't filter it.</p>
+       </div>
+      </div>
+      <div class="flex gap-4 p-4 bg-white border border-gray-200 rounded-xl shadow-sm">
+       <div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#002855] text-white flex items-center justify-center font-bold">
+        5
+       </div>
+       <div>
+        <h4 class="font-bold text-[#002855] mb-1">Show Your Translation Process</h4>
+        <p class="text-gray-600 text-sm">Explain why you're rewriting something, why you're grouping ideas that way, why you're leaving certain details out. Explain the reasoning behind your choices.</p>
+       </div>
+      </div>
+     </div><!-- Time Note -->
+     <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg mb-8">
+      <div class="flex items-center gap-2">
+       <span class="text-xl">⏱️</span>
+       <p class="text-gray-700">A good think aloud doesn't need to be long. <strong>A few minutes</strong> showing your approach is way more powerful than twenty minutes of explanation.</p>
+      </div>
+     </div>
+     <div class="flex gap-4">
+      <button onclick="goToSection(2)" class="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-all"> ← Back </button> <button onclick="goToSection(4)" class="flex-1 md:flex-none px-6 py-3 bg-[#0070F0] hover:bg-[#005acc] text-white font-medium rounded-lg transition-all flex items-center justify-center gap-2"> Practice Activity <span>→</span> </button>
+     </div>
+    </section><!-- Section 4: Interactive Activity -->
+    <section id="section-4" class="hidden fade-in">
+     <div class="mb-8">
+      <div class="flex items-center gap-3 mb-4">
+       <div class="w-10 h-10 rounded-full bg-[#97E152] flex items-center justify-center text-white font-bold">
+        ✓
+       </div>
+       <h2 class="text-xl font-bold text-[#002855]">Practice: Match the Framework Stage</h2>
+      </div>
+      <p class="text-gray-700">Drag each scenario to the correct framework stage.</p>
+     </div><!-- Drag and Drop Activity -->
+     <div class="grid md:grid-cols-3 gap-4 mb-6">
+      <div id="drop-ido" class="drop-zone min-h-[180px] p-4 bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl" data-stage="I Do" ondragover="handleDragOver(event)" ondrop="handleDrop(event)" ondragleave="handleDragLeave(event)">
+       <div class="text-center mb-3">
+        <span class="inline-block px-3 py-1 bg-[#002855] text-white text-sm font-bold rounded-full">I Do</span>
+       </div>
+       <div class="space-y-2" id="ido-items"></div>
+      </div>
+      <div id="drop-wedo" class="drop-zone min-h-[180px] p-4 bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl" data-stage="We Do" ondragover="handleDragOver(event)" ondrop="handleDrop(event)" ondragleave="handleDragLeave(event)">
+       <div class="text-center mb-3">
+        <span class="inline-block px-3 py-1 bg-[#0070F0] text-white text-sm font-bold rounded-full">We Do</span>
+       </div>
+       <div class="space-y-2" id="wedo-items"></div>
+      </div>
+      <div id="drop-youdo" class="drop-zone min-h-[180px] p-4 bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl" data-stage="You Do" ondragover="handleDragOver(event)" ondrop="handleDrop(event)" ondragleave="handleDragLeave(event)">
+       <div class="text-center mb-3">
+        <span class="inline-block px-3 py-1 bg-[#97E152] text-white text-sm font-bold rounded-full">You Do</span>
+       </div>
+       <div class="space-y-2" id="youdo-items"></div>
+      </div>
+     </div><!-- Draggable Items -->
+     <div id="drag-items" class="p-4 bg-blue-50 border border-blue-200 rounded-xl min-h-[100px]">
+      <p class="text-sm text-gray-600 mb-3 font-medium">Drag scenarios to the correct stage:</p>
+      <div class="flex flex-wrap gap-2" id="scenarios-container">
+       <div class="drag-item px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm cursor-grab shadow-sm" draggable="true" data-answer="I Do" ondragstart="handleDragStart(event)">
+        Peer coach narrates thinking while creating a concept map
+       </div>
+       <div class="drag-item px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm cursor-grab shadow-sm" draggable="true" data-answer="We Do" ondragstart="handleDragStart(event)">
+        Peer coach and student fill out Cornell notes together
+       </div>
+       <div class="drag-item px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm cursor-grab shadow-sm" draggable="true" data-answer="You Do" ondragstart="handleDragStart(event)">
+        Student creates flashcards on their own
+       </div>
+       <div class="drag-item px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm cursor-grab shadow-sm" draggable="true" data-answer="I Do" ondragstart="handleDragStart(event)">
+        Peer coach demonstrates how to identify key terms
+       </div>
+       <div class="drag-item px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm cursor-grab shadow-sm" draggable="true" data-answer="We Do" ondragstart="handleDragStart(event)">
+        Peer coach guides student through summarizing a paragraph
+       </div>
+       <div class="drag-item px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm cursor-grab shadow-sm" draggable="true" data-answer="You Do" ondragstart="handleDragStart(event)">
+        Student applies the strategy to new material alone
+       </div>
+      </div>
+     </div><!-- Check Button --> <button onclick="checkDragDrop()" class="mt-6 px-6 py-3 bg-[#97E152] hover:bg-[#7bc142] text-white font-medium rounded-lg transition-all"> Check My Answers </button>
+     <div id="drag-feedback" class="hidden mt-4 p-4 rounded-lg"></div><!-- Reset Button --> <button onclick="resetActivity()" class="mt-4 px-4 py-2 text-[#0070F0] hover:bg-blue-50 font-medium rounded-lg transition-all"> 🔄 Reset Activity </button>
+     <div class="flex gap-4 mt-8">
+      <button onclick="goToSection(3)" class="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-all"> ← Back </button>
+     </div><!-- Completion Message -->
+     <div id="completion-message" class="hidden mt-8 p-6 bg-gradient-to-r from-[#97E152] to-[#7bc142] text-white rounded-xl text-center">
+      <div class="text-4xl mb-3">
+       🎉
+      </div>
+      <h3 class="text-xl font-bold mb-2">Great Job!</h3>
+      <p>You've completed the Think Aloud Training Module. You're ready to use these techniques in your peer coaching sessions!</p>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="bg-gray-100 border-t border-gray-200 py-6 px-4 mt-auto">
+    <div class="max-w-4xl mx-auto text-center text-gray-600 text-sm">
+     <p>Peer Coaching Training Module • I Do, We Do, You Do Framework</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    // Configuration
+    const defaultConfig = {
+      main_title: "Peer Coaching: The Think Aloud Method",
+      primary_color: "#002855",
+      secondary_color: "#0070F0",
+      accent_color: "#97E152",
+      text_color: "#374151",
+      background_color: "#FFFFFF"
+    };
+
+    let currentSection = 1;
+    let draggedElement = null;
+
+    // Element SDK initialization
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          const title = document.getElementById('main-title');
+          if (title) {
+            title.textContent = config.main_title || defaultConfig.main_title;
+          }
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => {
+                config.primary_color = value;
+                window.elementSdk.setConfig({ primary_color: value });
+              }
+            },
+            {
+              get: () => config.secondary_color || defaultConfig.secondary_color,
+              set: (value) => {
+                config.secondary_color = value;
+                window.elementSdk.setConfig({ secondary_color: value });
+              }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => {
+                config.accent_color = value;
+                window.elementSdk.setConfig({ accent_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["main_title", config.main_title || defaultConfig.main_title]
+        ])
+      });
+    }
+
+    // Navigation
+    function goToSection(section) {
+      document.getElementById(`section-${currentSection}`).classList.add('hidden');
+      document.getElementById(`section-${section}`).classList.remove('hidden');
+      currentSection = section;
+      
+      // Update progress
+      const progress = (section / 4) * 100;
+      document.getElementById('progress-bar').style.width = `${progress}%`;
+      document.getElementById('progress-text').textContent = `Section ${section} of 4`;
+      
+      // Scroll to top
+      document.getElementById('app-container').scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Quiz functionality
+    function checkAnswer(quizNum, answer, isCorrect) {
+      const feedbackEl = document.getElementById(`feedback-${quizNum}`);
+      const options = document.querySelectorAll(`#quiz-${quizNum} .quiz-option`);
+      
+      options.forEach(opt => {
+        opt.disabled = true;
+        opt.classList.add('opacity-60');
+      });
+      
+      feedbackEl.classList.remove('hidden');
+      
+      if (isCorrect) {
+        feedbackEl.className = 'mt-4 p-3 rounded-lg bg-green-100 border border-[#97E152] text-green-800';
+        feedbackEl.innerHTML = '<strong>✓ Correct!</strong> The "I Do" stage is about making thinking visible, not teaching content.';
+      } else {
+        feedbackEl.className = 'mt-4 p-3 rounded-lg bg-red-100 border border-red-300 text-red-800';
+        feedbackEl.innerHTML = '<strong>✗ Not quite.</strong> The main purpose is to show the thinking process, not to teach content or test knowledge.';
+      }
+    }
+
+    // Drag and Drop
+    function handleDragStart(e) {
+      draggedElement = e.target;
+      e.target.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    }
+
+    function handleDragOver(e) {
+      e.preventDefault();
+      e.currentTarget.classList.add('drag-over');
+    }
+
+    function handleDragLeave(e) {
+      e.currentTarget.classList.remove('drag-over');
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('drag-over');
+      
+      if (draggedElement) {
+        const targetContainer = e.currentTarget.querySelector('[id$="-items"]') || e.currentTarget;
+        
+        // If dropping in the main container, check if it's a drop zone
+        if (targetContainer.id && targetContainer.id.endsWith('-items')) {
+          targetContainer.appendChild(draggedElement);
+        } else if (e.currentTarget.classList.contains('drop-zone')) {
+          const itemsContainer = e.currentTarget.querySelector('[id$="-items"]');
+          if (itemsContainer) {
+            itemsContainer.appendChild(draggedElement);
+          }
+        }
+        
+        draggedElement.classList.remove('dragging');
+        draggedElement = null;
+      }
+    }
+
+    function checkDragDrop() {
+      const dropZones = ['ido', 'wedo', 'youdo'];
+      const stageMap = {
+        'ido': 'I Do',
+        'wedo': 'We Do',
+        'youdo': 'You Do'
+      };
+      
+      let correct = 0;
+      let total = 0;
+      
+      dropZones.forEach(zone => {
+        const container = document.getElementById(`${zone}-items`);
+        const items = container.querySelectorAll('.drag-item');
+        
+        items.forEach(item => {
+          total++;
+          const correctAnswer = item.dataset.answer;
+          const currentZone = stageMap[zone];
+          
+          if (correctAnswer === currentZone) {
+            item.classList.add('correct');
+            item.classList.remove('incorrect');
+            correct++;
+          } else {
+            item.classList.add('incorrect');
+            item.classList.remove('correct');
+          }
+        });
+      });
+      
+      // Check items still in the source container
+      const sourceContainer = document.getElementById('scenarios-container');
+      const remainingItems = sourceContainer.querySelectorAll('.drag-item');
+      remainingItems.forEach(item => {
+        total++;
+        item.classList.add('incorrect');
+      });
+      
+      const feedbackEl = document.getElementById('drag-feedback');
+      feedbackEl.classList.remove('hidden');
+      
+      if (correct === 6) {
+        feedbackEl.className = 'mt-4 p-4 rounded-lg bg-green-100 border border-[#97E152] text-green-800';
+        feedbackEl.innerHTML = `<strong>🎉 Perfect!</strong> You correctly matched all ${correct} scenarios!`;
+        document.getElementById('completion-message').classList.remove('hidden');
+      } else if (correct >= 4) {
+        feedbackEl.className = 'mt-4 p-4 rounded-lg bg-yellow-100 border border-yellow-400 text-yellow-800';
+        feedbackEl.innerHTML = `<strong>Almost there!</strong> You got ${correct} out of 6 correct. Items marked in red are in the wrong zone.`;
+      } else {
+        feedbackEl.className = 'mt-4 p-4 rounded-lg bg-red-100 border border-red-300 text-red-800';
+        feedbackEl.innerHTML = `<strong>Keep trying!</strong> You got ${correct} out of 6 correct. Review the framework stages and try again.`;
+      }
+    }
+
+    function resetActivity() {
+      const sourceContainer = document.getElementById('scenarios-container');
+      const allItems = document.querySelectorAll('.drag-item');
+      
+      allItems.forEach(item => {
+        item.classList.remove('correct', 'incorrect', 'dragging');
+        sourceContainer.appendChild(item);
+      });
+      
+      document.getElementById('drag-feedback').classList.add('hidden');
+      document.getElementById('completion-message').classList.add('hidden');
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d7b7936d3062425',t:'MTc3MjczODM3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
