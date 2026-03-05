@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LAB OWL Interactive Learning</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap');
+    
+    * {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    .letter-btn {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      user-select: none;
+    }
+    
+    .letter-btn:hover {
+      transform: scale(1.1);
+    }
+    
+    .letter-btn.active {
+      transform: scale(1.15);
+    }
+    
+    .explanation-card {
+      animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(0, 112, 240, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 0 15px rgba(0, 112, 240, 0);
+      }
+    }
+    
+    .pulse-hint {
+      animation: pulse 2s infinite;
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app-container" class="h-full w-full overflow-auto" style="background-color: #FFFFFF;">
+   <div class="min-h-full flex flex-col items-center justify-center p-8">
+    <!-- Title -->
+    <h1 id="main-title" class="text-2xl font-bold mb-2" style="color: #002855;">Click each letter to discover</h1><!-- LAB OWL Letters -->
+    <div class="flex flex-wrap justify-center gap-3 md:gap-5 mb-8">
+     <!-- L --> <button class="letter-btn pulse-hint w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #002855;" data-letter="L" aria-label="L - Locate the Block"> L </button> <!-- A --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #0070F0;" data-letter="A" aria-label="A - Analyze What's Happening"> A </button> <!-- B --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #97E152;" data-letter="B" aria-label="B - Break It Down"> B </button> <!-- Spacer -->
+     <div class="w-4 md:w-8"></div><!-- O --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #46B1EF;" data-letter="O" aria-label="O - Observe the Pattern"> O </button> <!-- W --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #002855;" data-letter="W" aria-label="W - Work the Hypothesis"> W </button> <!-- L --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #0070F0;" data-letter="L2" aria-label="L - Lock in the Learning"> L </button>
+    </div><!-- Explanation Cards Container -->
+    <div id="explanation-container" class="w-full max-w-4xl">
+     <div id="cards-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6"><!-- Cards will be generated here -->
+     </div><!-- Initial hint -->
+     <div id="hint-text" class="text-center py-8">
+      <p class="text-lg" style="color: #666;">👆 Click any letter above to learn what it means!</p>
+     </div>
+    </div><!-- Progress indicator -->
+    <div class="mt-8 flex gap-2">
+     <div class="progress-dot w-3 h-3 rounded-full" data-for="L" style="background-color: #ddd;"></div>
+     <div class="progress-dot w-3 h-3 rounded-full" data-for="A" style="background-color: #ddd;"></div>
+     <div class="progress-dot w-3 h-3 rounded-full" data-for="B" style="background-color: #ddd;"></div>
+     <div class="progress-dot w-3 h-3 rounded-full" data-for="O" style="background-color: #ddd;"></div>
+     <div class="progress-dot w-3 h-3 rounded-full" data-for="W" style="background-color: #ddd;"></div>
+     <div class="progress-dot w-3 h-3 rounded-full" data-for="L2" style="background-color: #ddd;"></div>
+    </div>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: 'Click each letter to discover',
+      background_color: '#FFFFFF',
+      primary_color: '#002855',
+      secondary_color: '#0070F0',
+      accent_color: '#97E152',
+      highlight_color: '#46B1EF',
+      text_color: '#333333'
+    };
+
+    const letterData = {
+      'L': {
+        title: 'Locate the Block',
+        description: 'Identify where you\'re stuck. Pinpoint the exact concept, problem, or step that\'s causing confusion. This is your starting point for understanding.',
+        color: '#002855'
+      },
+      'A': {
+        title: 'Analyze What\'s Happening',
+        description: 'Examine the situation carefully. Look at what\'s working, what isn\'t, and gather information about the context surrounding the problem.',
+        color: '#0070F0'
+      },
+      'B': {
+        title: 'Break It Down',
+        description: 'Divide the complex problem into smaller, manageable pieces. Tackle each component one at a time to make the whole more approachable.',
+        color: '#97E152'
+      },
+      'O': {
+        title: 'Observe the Pattern',
+        description: 'Look for recurring themes, similarities, or connections. Patterns help reveal underlying principles and make future problems easier to solve.',
+        color: '#46B1EF'
+      },
+      'W': {
+        title: 'Work the Hypothesis',
+        description: 'Form an educated guess and test it. Try different approaches, experiment with solutions, and learn from what works and what doesn\'t.',
+        color: '#002855'
+      },
+      'L2': {
+        title: 'Lock in the Learning',
+        description: 'Consolidate what you\'ve discovered. Summarize key insights, make notes, and connect new knowledge to what you already know for lasting retention.',
+        color: '#0070F0'
+      }
+    };
+
+    let visitedLetters = new Set();
+    const displayedCards = new Map();
+
+    function showExplanation(letterKey) {
+      const data = letterData[letterKey];
+      const cardsGrid = document.getElementById('cards-grid');
+      const hint = document.getElementById('hint-text');
+      
+      // Check if card already exists
+      if (displayedCards.has(letterKey)) {
+        return;
+      }
+
+      // Create card
+      const card = document.createElement('div');
+      card.className = 'explanation-card rounded-2xl p-6 shadow-xl border-l-8';
+      card.style.backgroundColor = '#f8fafc';
+      card.style.borderLeftColor = data.color;
+      card.dataset.letter = letterKey;
+      
+      const displayLetter = letterKey === 'L2' ? 'L' : letterKey;
+      
+      card.innerHTML = `
+        <div class="flex items-start gap-4">
+          <div class="w-14 h-14 rounded-xl flex items-center justify-center text-3xl font-bold text-white flex-shrink-0" style="background-color: ${data.color};">
+            ${displayLetter}
+          </div>
+          <div class="flex-1">
+            <h2 class="text-xl font-bold mb-2" style="color: #002855;">${data.title}</h2>
+            <p class="text-base leading-relaxed" style="color: #333;">${data.description}</p>
+          </div>
+        </div>
+      `;
+      
+      cardsGrid.appendChild(card);
+      displayedCards.set(letterKey, card);
+      
+      // Hide hint once first card is added
+      if (displayedCards.size === 1) {
+        hint.classList.add('hidden');
+      }
+      
+      // Update active states
+      document.querySelectorAll('.letter-btn').forEach(btn => {
+        btn.classList.remove('pulse-hint');
+        if (btn.dataset.letter === letterKey) {
+          btn.classList.add('active');
+        }
+      });
+      
+      // Track visited
+      visitedLetters.add(letterKey);
+      updateProgress();
+    }
+
+    function updateProgress() {
+      document.querySelectorAll('.progress-dot').forEach(dot => {
+        const letter = dot.dataset.for;
+        if (visitedLetters.has(letter)) {
+          dot.style.backgroundColor = letterData[letter].color;
+          dot.style.transform = 'scale(1.2)';
+          dot.style.transition = 'all 0.3s ease';
+        }
+      });
+    }
+
+    // Add click handlers
+    document.querySelectorAll('.letter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        showExplanation(btn.dataset.letter);
+      });
+    });
+
+    // Element SDK initialization
+    async function onConfigChange(config) {
+      const title = document.getElementById('main-title');
+      if (title) {
+        title.textContent = config.main_title || defaultConfig.main_title;
+      }
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ['main_title', config.main_title || defaultConfig.main_title]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d7a722a73dc05cc',t:'MTc3MjcyNzYwNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
