@@ -60,16 +60,27 @@
  </head>
  <body class="h-full">
   <div id="app-container" class="h-full w-full overflow-auto" style="background-color: #FFFFFF;">
-   <div class="min-h-full flex flex-col p-8">
-    <!-- Title -->
+   <div class="min-h-full flex flex-col p-8"><!-- Title -->
     <div class="mb-8">
      <h1 id="main-title" class="text-2xl font-bold text-center" style="color: #002855;">Click each letter to discover</h1>
     </div><!-- LAB OWL Letters -->
-    <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-8">
-     <!-- L --> <button class="letter-btn pulse-hint w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #002855;" data-letter="L" aria-label="L - Locate the Block">L</button> <!-- A --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #0070F0;" data-letter="A" aria-label="A - Analyze What's Happening">A</button> <!-- B --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #97E152;" data-letter="B" aria-label="B - Break It Down">B</button> <!-- Spacer -->
+    <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-8"><!-- L --> <button class="letter-btn pulse-hint w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #002855;" data-letter="L" aria-label="L - Locate the Block">L</button> <!-- A --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #0070F0;" data-letter="A" aria-label="A - Analyze What's Happening">A</button> <!-- B --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #97E152;" data-letter="B" aria-label="B - Break It Down">B</button> <!-- Spacer -->
      <div class="w-4 md:w-8"></div><!-- O --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #46B1EF;" data-letter="O" aria-label="O - Observe the Pattern">O</button> <!-- W --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #002855;" data-letter="W" aria-label="W - Work the Hypothesis">W</button> <!-- L2 --> <button class="letter-btn w-16 h-16 md:w-24 md:h-24 rounded-2xl flex items-center justify-center text-4xl md:text-6xl font-bold text-white shadow-lg" style="background-color: #0070F0;" data-letter="L2" aria-label="L - Link to Your Conclusion">L</button>
     </div><!-- Explanation Cards Container -->
-    <div id="explanation-container" class="flex gap-4 mb-8 justify-center flex-wrap"></div><!-- Progress Dots - Below Cards -->
+    <div id="explanation-container" class="flex gap-4 mb-8 justify-center flex-wrap"></div><!-- Example Questions Message - Hidden until all cards show -->
+    <div id="all-cards-message" class="hidden text-center mb-8 p-4 rounded-lg" style="background-color: #E8F4F8; color: #002855;">
+     <p class="font-semibold">Click any card to see example questions for that stage!</p>
+    </div><!-- Example Questions Modal -->
+    <div id="examples-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+     <div class="bg-white rounded-xl max-w-2xl w-full max-h-96 overflow-y-auto">
+      <div class="p-6">
+       <div class="flex justify-between items-center mb-4">
+        <h2 id="modal-title" class="text-2xl font-bold" style="color: #002855;"></h2><button id="close-modal" class="text-2xl text-gray-500 hover:text-gray-700">×</button>
+       </div>
+       <div id="modal-questions" class="space-y-3"></div>
+      </div>
+     </div>
+    </div><!-- Progress Dots - Below Cards -->
     <div class="flex justify-center gap-3">
      <div class="progress-dot w-3 h-3 rounded-full transition-colors duration-300" data-for="L" style="background-color: #ddd;"></div>
      <div class="progress-dot w-3 h-3 rounded-full transition-colors duration-300" data-for="A" style="background-color: #ddd;"></div>
@@ -94,32 +105,64 @@
     const letterData = {
       L: {
         title: "Locate the Block",
-        description: "Find where you're stuck. What step or idea is confusing? Pinpoint the exact spot where your understanding breaks down.",
+        description: "Help the student narrow the focus. When they say 'It's not working,' help them identify exactly where the issue is happening.",
+        questions: [
+          "Where exactly does it stop working?",
+          "Which section feels most confusing right now?",
+          "If you had to point to one area causing stress, what would it be?"
+        ],
         color: "#002855"
       },
       A: {
         title: "Analyze What's Happening",
-        description: "Look closely at the problem. What information do you have? What are you trying to find out? Gather all the clues.",
+        description: "Encourage the student to describe what the program is doing while you observe. Listen carefully to understand their expectations.",
+        questions: [
+          "Tell me what you were expecting from this code.",
+          "What is it actually doing right now?",
+          "What does the error message say?",
+          "What changed between when it worked and now?"
+        ],
         color: "#0070F0"
       },
       B: {
         title: "Break It Down",
-        description: "Split the big problem into smaller, manageable pieces. Tackle one piece at a time to make progress easier.",
+        description: "Help them isolate smaller pieces. Programming problems feel overwhelming when students try to change everything at once.",
+        questions: [
+          "What is the smallest piece we could test here?",
+          "What happens if we comment out everything except this section?",
+          "Which variable feels safest to test first?"
+        ],
         color: "#97E152"
       },
       O: {
         title: "Observe the Pattern",
-        description: "Look for similarities to problems you've solved before. What strategies worked then? Can you spot any patterns or rules?",
+        description: "After testing, pause and reflect together. Encourage the student to notice patterns in the output and what stays consistent.",
+        questions: [
+          "Is this happening every time or only sometimes?",
+          "What pattern do you notice?",
+          "What stayed the same?",
+          "What changed?"
+        ],
         color: "#46B1EF"
       },
       W: {
         title: "Work the Hypothesis",
-        description: "Make an educated guess and test it out. Try your idea, see what happens, and adjust if needed. Learning comes from experimenting!",
+        description: "Help the student make a prediction before running the program again. This turns trial and error into intentional experimentation.",
+        questions: [
+          "What do you think might be causing this?",
+          "If we change this part, what do you expect to happen?",
+          "How will we know if that theory is correct?"
+        ],
         color: "#002855"
       },
       L2: {
-        title: "Lock in Learning",
-        description: "Solidify your understanding. What did you learn? How will you use this next time? Lock it into your memory.",
+        title: "Lock in the Learning",
+        description: "Before ending the session, zoom out and reflect. Even if the code isn't fully solved, the session succeeds if they leave with a clearer process.",
+        questions: [
+          "What strategy worked well today?",
+          "What will you try first the next time something breaks?",
+          "What did you learn about your debugging process?"
+        ],
         color: "#0070F0"
       }
     };
@@ -160,7 +203,7 @@
         // Create new card
         card = document.createElement('div');
         card.setAttribute('data-letter-card', letter);
-        card.className = 'explanation-card rounded-xl p-3 md:p-4 shadow-lg flex-shrink-0' ;
+        card.className = 'explanation-card rounded-xl p-3 md:p-4 shadow-lg flex-shrink-0 cursor-pointer transition-all hover:shadow-xl hover:scale-105' ;
         card.style.backgroundColor = '#F5F7FA';
         card.style.width = '160px';
         card.style.minWidth = '160px';
@@ -171,6 +214,10 @@
             <p class="card-description text-xs md:text-sm" style="color: ${config.text_color};">${data.description}</p>
           </div>
         `;
+        
+        card.addEventListener('click', () => {
+          showExampleQuestions(letter);
+        });
         
         container.appendChild(card);
       }
@@ -191,12 +238,53 @@
           dot.style.backgroundColor = letterData[letter].color;
         }
       });
+      
+      // Show message when all 6 cards are revealed
+      if (visitedLetters.size === 6) {
+        document.getElementById('all-cards-message').classList.remove('hidden');
+      }
     }
     
     document.querySelectorAll('.letter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         showExplanation(btn.dataset.letter);
       });
+    });
+
+    // Example Questions Modal functionality
+    const modal = document.getElementById('examples-modal');
+    const closeModal = document.getElementById('close-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalQuestions = document.getElementById('modal-questions');
+
+    function showExampleQuestions(letter) {
+      const data = letterData[letter];
+      if (!data || !data.questions) return;
+
+      modalTitle.textContent = data.title;
+      modalTitle.style.color = data.color;
+      
+      modalQuestions.innerHTML = '';
+      data.questions.forEach(question => {
+        const div = document.createElement('div');
+        div.className = 'p-3 rounded-lg';
+        div.style.backgroundColor = '#F5F7FA';
+        div.style.color = config.text_color;
+        div.textContent = question;
+        modalQuestions.appendChild(div);
+      });
+
+      modal.classList.remove('hidden');
+    }
+
+    closeModal.addEventListener('click', () => {
+      modal.classList.add('hidden');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+      }
     });
     
     if (window.elementSdk) {
@@ -233,5 +321,5 @@
     
     onConfigChange(config);
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d7add46a1d7064a',t:'MTc3MjczMTk5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d7afe5b74ae05cc',t:'MTc3MjczMzM0Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
