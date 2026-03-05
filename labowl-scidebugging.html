@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scientific Debugging Simulator</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+    .typing-indicator span {
+      animation: blink 1.4s infinite both;
+    }
+    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes blink {
+      0%, 80%, 100% { opacity: 0; }
+      40% { opacity: 1; }
+    }
+    .message-enter {
+      animation: slideUp 0.3s ease-out;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .code-block {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full m-0 p-0 overflow-hidden" style="background-color: #FFFFFF;">
+  <div id="app-container" class="h-full w-full flex flex-col overflow-auto" style="font-family: 'Inter', Arial, sans-serif;">
+   <!-- Header -->
+   <header class="flex-shrink-0 px-6 py-4 border-b" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%); border-color: #0070F0;">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+     <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background-color: #0070F0;"><span class="text-lg">🔬</span>
+      </div>
+      <div>
+       <h1 id="main-title" class="text-xl font-bold text-white">Scientific Debugging Simulator</h1>
+       <p class="text-sm text-blue-200">Learn to debug like a scientist</p>
+      </div>
+     </div>
+     <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full" style="background-color: rgba(151, 225, 82, 0.2);">
+      <div class="w-2 h-2 rounded-full" style="background-color: #97E152;"></div><span class="text-sm font-medium" style="color: #97E152;">Active Session</span>
+     </div>
+    </div>
+   </header><!-- Main Content -->
+   <main class="flex-1 overflow-auto">
+    <div class="max-w-4xl mx-auto p-6">
+     <!-- Welcome Section -->
+     <div id="welcome-section" class="mb-8">
+      <div class="rounded-2xl p-6 border" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border-color: #0070F0;">
+       <div class="flex items-start gap-4">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style="background-color: #0070F0;">
+         <span class="text-2xl">🔬</span>
+        </div>
+        <div>
+         <h2 class="text-lg font-semibold mb-2" style="color: #002855;">Welcome to Scientific Debugging!</h2>
+         <p id="welcome-message" class="mb-4" style="color: #334155;">Master the <strong>Scientific Debugging</strong> technique—treat coding problems like experiments! Form hypotheses, make predictions, and test your ideas systematically. Choose your scenario below to practice with a student who needs guidance to debug intentionally instead of randomly guessing.</p>
+         <p class="text-sm" style="color: #64748b;">Remember: Help students predict outcomes before running code and confirm their hypotheses through careful observation!</p>
+        </div>
+       </div>
+      </div>
+     </div><!-- Strategy Selection -->
+     <div id="strategy-selection" class="grid md:grid-cols-1 gap-4 mb-8">
+      <!-- Scientific Debugging Card --> <button onclick="startSimulation('scientific')" class="text-left p-5 rounded-xl border-2 transition-all duration-200 hover:shadow-lg hover:scale-[1.02] group" style="background-color: #FFFFFF; border-color: #e2e8f0;">
+       <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background-color: #0070F0;">
+         <span class="text-xl">🔬</span>
+        </div>
+        <h3 class="font-semibold" style="color: #002855;">Scientific Debugging</h3>
+       </div><p class="text-sm mb-3" style="color: #64748b;">Guide a student to form hypotheses, make predictions, and test their ideas systematically.</p>
+       <div class="flex items-center gap-2 text-sm font-medium" style="color: #0070F0;">
+        <span>Start Practice</span>
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="currentColor" viewbox="0 0 20 20">
+         <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+       </div></button>
+     </div><!-- Simulation Area (Hidden initially) -->
+     <div id="simulation-area" class="hidden">
+      <!-- Strategy Info Banner -->
+      <div id="strategy-banner" class="mb-4 p-4 rounded-xl border" style="background-color: #f8fafc; border-color: #e2e8f0;">
+       <div class="flex items-center justify-between flex-wrap gap-3">
+        <div class="flex items-center gap-3">
+         <span id="strategy-icon" class="text-2xl">🔬</span>
+         <div>
+          <h3 id="strategy-title" class="font-semibold" style="color: #002855;">Scientific Debugging</h3>
+          <p id="strategy-hint" class="text-sm" style="color: #64748b;">Help student form hypotheses and test them systematically</p>
+         </div>
+        </div><button onclick="resetSimulation()" class="px-4 py-2 rounded-lg text-sm font-medium transition-colors" style="background-color: #e2e8f0; color: #475569;"> ← Back to Strategies </button>
+       </div>
+      </div><!-- Code Display -->
+      <div id="code-display" class="mb-4 rounded-xl overflow-hidden code-block">
+       <div class="flex items-center justify-between px-4 py-2 border-b border-slate-600">
+        <div class="flex items-center gap-2">
+         <div class="flex gap-1.5">
+          <div class="w-3 h-3 rounded-full bg-red-500"></div>
+          <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+          <div class="w-3 h-3 rounded-full bg-green-500"></div>
+         </div><span id="code-filename" class="text-sm text-slate-400 font-mono-code ml-2">student_code.py</span>
+        </div><span class="text-xs px-2 py-1 rounded bg-slate-700 text-slate-300">Python</span>
+       </div>
+       <pre id="code-content" class="p-4 text-sm overflow-x-auto font-mono-code text-slate-100"></pre>
+      </div><!-- Chat Interface -->
+      <div class="rounded-xl border overflow-hidden" style="border-color: #e2e8f0;">
+       <!-- Chat Messages -->
+       <div id="chat-messages" class="h-80 overflow-y-auto p-4 space-y-4" style="background-color: #f8fafc;">
+        <!-- Messages will be inserted here -->
+       </div><!-- Response Options -->
+       <div id="response-options" class="p-4 border-t space-y-3" style="background-color: #FFFFFF; border-color: #e2e8f0;">
+        <p class="text-sm font-medium" style="color: #64748b;">Choose your response as the Peer Coach:</p>
+        <div id="options-container" class="space-y-2">
+         <!-- Options will be inserted here -->
+        </div>
+       </div>
+      </div><!-- Feedback Panel -->
+      <div id="feedback-panel" class="hidden mt-4 p-5 rounded-xl border" style="border-color: #97E152; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);">
+       <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background-color: #97E152;">
+         <svg class="w-5 h-5" fill="#002855" viewbox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+         </svg>
+        </div>
+        <div>
+         <h4 class="font-semibold mb-1" style="color: #002855;">Great coaching!</h4>
+         <p id="feedback-text" class="text-sm" style="color: #334155;"></p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </main><!-- Footer -->
+   <footer class="flex-shrink-0 px-6 py-3 border-t text-center" style="background-color: #f8fafc; border-color: #e2e8f0;">
+    <p class="text-sm" style="color: #64748b;">Part of the <strong style="color: #002855;">Lab Owl</strong> debugging framework • Peer Coach Training</p>
+   </footer>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      main_title: 'Scientific Debugging Simulator',
+      welcome_message: 'Master the Scientific Debugging technique—treat coding problems like experiments! Form hypotheses, make predictions, and test your ideas systematically. Choose your scenario below to practice with a student who needs guidance to debug intentionally instead of randomly guessing.',
+      primary_color: '#002855',
+      secondary_color: '#0070F0',
+      accent_color: '#97E152',
+      highlight_color: '#46B1EF',
+      text_color: '#334155'
+    };
+
+    // Simulation data
+    const simulations = {
+      scientific: {
+        icon: '🔬',
+        title: 'Scientific Debugging',
+        hint: 'Help student form hypotheses and test them systematically',
+        filename: 'user_validation.py',
+        code: `def validate_age(age):
+    if age >= 18:  # Bug: should be > not >=
+        return "Adult"
+    else:
+        return "Minor"
+
+# Test cases
+print(validate_age(17))  # Expected: "Minor", Got: "Minor" ✓
+print(validate_age(18))  # Expected: "Adult", Got: "Minor" ✗
+print(validate_age(19))  # Expected: "Adult", Got: "Adult" ✓`,
+        conversation: [
+          {
+            speaker: 'student',
+            message: "Hey! My age validation function is acting weird. When I test with 18, it says 'Minor' but 18-year-olds should be adults! The 17 and 19 cases work fine though.",
+            options: [
+              {
+                text: "What do you think might be causing this behavior? What's different about 18?",
+                correct: true,
+                feedback: "Perfect! You're asking them to form a hypothesis about what's causing the bug. This is the core of scientific debugging."
+              },
+              {
+                text: "The problem is your >= operator. It should be >.",
+                correct: false,
+                feedback: "You're giving away the answer directly. With scientific debugging, guide students to hypothesize first before revealing solutions."
+              },
+              {
+                text: "Let's add some print statements to debug this.",
+                correct: false,
+                feedback: "While debugging tools are useful, scientific debugging starts with forming hypotheses based on observations. What does the pattern tell them?"
+              }
+            ]
+          },
+          {
+            speaker: 'student',
+            message: "Hmm, well 18 works differently than 17 and 19... If all the other cases work, maybe something is wrong with how I'm checking 18 specifically? Or maybe my condition is off by one somehow?",
+            options: [
+              {
+                text: "Good thinking! What result would confirm if the condition is off by one?",
+                correct: true,
+                feedback: "Excellent! You're helping them predict what evidence would confirm their hypothesis—this is the testing phase of scientific debugging."
+              },
+              {
+                text: "Yes, look at line 2. Change >= to >.",
+                correct: false,
+                feedback: "Don't teach the fix yet. Let the student predict what would happen if the boundary condition (>= vs >) is the issue."
+              },
+              {
+                text: "You probably need a special case for 18.",
+                correct: false,
+                feedback: "This leads them toward an incorrect solution. Help them predict what would confirm their hypothesis about the boundary condition."
+              }
+            ]
+          },
+          {
+            speaker: 'student',
+            message: "Oh! If it's an off-by-one error with the >= operator... I could test what happens if I change it to >. If I use >, then 18 should return 'Adult' instead of 'Minor'!",
+            options: [
+              {
+                text: "Exactly! Make that change and test it. What happens?",
+                correct: true,
+                feedback: "Perfect! You guided them through hypothesis → prediction → testing. Now they execute the experiment to confirm their hypothesis."
+              },
+              {
+                text: "That's right, change >= to >.",
+                correct: false,
+                feedback: "You're confirming but not continuing to guide them through the full scientific process. Help them recognize they should test their prediction."
+              },
+              {
+                text: "Good hypothesis. Let's also check the else block.",
+                correct: false,
+                feedback: "Stay focused on their current hypothesis. Let them confirm it works before moving to other parts of the code."
+              }
+            ]
+          },
+          {
+            speaker: 'student',
+            message: "I changed it to > and... yes! Now all three test cases work! 17 is 'Minor', 18 is 'Adult', and 19 is 'Adult'. The boundary was wrong!",
+            options: [
+              {
+                text: "Fantastic! You formed a hypothesis, predicted the outcome, and confirmed it through testing. That's scientific debugging! Why was this approach better than random trial and error?",
+                correct: true,
+                feedback: "Excellent! You're helping them reflect on the method itself, building metacognitive awareness of this powerful debugging strategy."
+              },
+              {
+                text: "Great, you fixed it!",
+                correct: false,
+                feedback: "While accurate, this misses the opportunity to reinforce the scientific method and help them understand why this approach worked so well."
+              },
+              {
+                text: "Now test more edge cases.",
+                correct: false,
+                feedback: "Don't push them beyond their current success. Take a moment to reflect on the scientific debugging process they just used."
+              }
+            ]
+          }
+        ]
+      }
+    };
+
+    let currentSimulation = null;
+    let currentStep = 0;
+
+    function startSimulation(strategy) {
+      currentSimulation = strategy;
+      currentStep = 0;
+      
+      const sim = simulations[strategy];
+      
+      // Update UI
+      document.getElementById('strategy-selection').classList.add('hidden');
+      document.getElementById('welcome-section').classList.add('hidden');
+      document.getElementById('simulation-area').classList.remove('hidden');
+      document.getElementById('feedback-panel').classList.add('hidden');
+      
+      // Set strategy info
+      document.getElementById('strategy-icon').textContent = sim.icon;
+      document.getElementById('strategy-title').textContent = sim.title;
+      document.getElementById('strategy-hint').textContent = sim.hint;
+      document.getElementById('code-filename').textContent = sim.filename;
+      document.getElementById('code-content').textContent = sim.code;
+      
+      // Clear and start chat
+      document.getElementById('chat-messages').innerHTML = '';
+      showConversationStep();
+    }
+
+    function showConversationStep() {
+      const sim = simulations[currentSimulation];
+      const step = sim.conversation[currentStep];
+      
+      // Add student message
+      addMessage(step.speaker, step.message);
+      
+      // Show options after a delay
+      setTimeout(() => {
+        showOptions(step.options);
+      }, 500);
+    }
+
+    function addMessage(speaker, message) {
+      const chatMessages = document.getElementById('chat-messages');
+      const isStudent = speaker === 'student';
+      
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `flex items-start gap-3 message-enter ${isStudent ? '' : 'flex-row-reverse'}`;
+      
+      messageDiv.innerHTML = `
+        <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background-color: ${isStudent ? '#46B1EF' : '#0070F0'};">
+          <span class="text-sm">${isStudent ? '👤' : '🔬'}</span>
+        </div>
+        <div class="max-w-[80%] p-3 rounded-xl ${isStudent ? 'rounded-tl-none' : 'rounded-tr-none'}" style="background-color: ${isStudent ? '#FFFFFF' : '#002855'}; color: ${isStudent ? '#334155' : '#FFFFFF'}; ${isStudent ? 'border: 1px solid #e2e8f0;' : ''}">
+          <p class="text-sm font-medium mb-1" style="color: ${isStudent ? '#64748b' : '#97E152'};">${isStudent ? 'Student' : 'You (Peer Coach)'}</p>
+          <p class="text-sm">${message}</p>
+        </div>
+      `;
+      
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function showOptions(options) {
+      const container = document.getElementById('options-container');
+      container.innerHTML = '';
+      
+      options.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.className = 'w-full text-left p-3 rounded-lg border-2 transition-all duration-200 hover:shadow-md';
+        button.style.cssText = 'background-color: #FFFFFF; border-color: #e2e8f0; color: #334155;';
+        button.innerHTML = `
+          <span class="text-sm">${option.text}</span>
+        `;
+        
+        button.onmouseenter = () => {
+          button.style.borderColor = '#0070F0';
+          button.style.backgroundColor = '#f0f9ff';
+        };
+        button.onmouseleave = () => {
+          button.style.borderColor = '#e2e8f0';
+          button.style.backgroundColor = '#FFFFFF';
+        };
+        
+        button.onclick = () => selectOption(index, option);
+        container.appendChild(button);
+      });
+    }
+
+    function selectOption(index, option) {
+      // Disable all options
+      const buttons = document.querySelectorAll('#options-container button');
+      buttons.forEach(btn => {
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+        btn.style.cursor = 'default';
+      });
+      
+      // Highlight selected
+      buttons[index].style.opacity = '1';
+      buttons[index].style.borderColor = option.correct ? '#97E152' : '#ef4444';
+      buttons[index].style.backgroundColor = option.correct ? '#f0fdf4' : '#fef2f2';
+      
+      // Add coach message
+      setTimeout(() => {
+        addMessage('coach', option.text);
+        
+        // Show feedback
+        showFeedback(option.feedback, option.correct);
+        
+        // Continue or complete
+        setTimeout(() => {
+          if (option.correct && currentStep < simulations[currentSimulation].conversation.length - 1) {
+            currentStep++;
+            showConversationStep();
+            document.getElementById('feedback-panel').classList.add('hidden');
+          } else if (option.correct && currentStep >= simulations[currentSimulation].conversation.length - 1) {
+            showCompletionMessage();
+          }
+        }, 2000);
+      }, 300);
+    }
+
+    function showFeedback(text, isPositive) {
+      const panel = document.getElementById('feedback-panel');
+      const feedbackText = document.getElementById('feedback-text');
+      
+      panel.style.borderColor = isPositive ? '#97E152' : '#f59e0b';
+      panel.style.background = isPositive 
+        ? 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)'
+        : 'linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)';
+      
+      panel.querySelector('h4').textContent = isPositive ? 'Great coaching!' : 'Coaching tip:';
+      panel.querySelector('svg').parentElement.style.backgroundColor = isPositive ? '#97E152' : '#f59e0b';
+      
+      feedbackText.textContent = text;
+      panel.classList.remove('hidden');
+      
+      // Scroll to feedback
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function showCompletionMessage() {
+      const panel = document.getElementById('feedback-panel');
+      const feedbackText = document.getElementById('feedback-text');
+      
+      panel.style.borderColor = '#97E152';
+      panel.style.background = 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)';
+      panel.querySelector('h4').textContent = '🎉 Simulation Complete!';
+      panel.querySelector('svg').parentElement.innerHTML = '<span class="text-lg">⭐</span>';
+      
+      feedbackText.textContent = `Excellent work practicing ${simulations[currentSimulation].title}! You successfully guided the student through the scientific method: hypothesis → prediction → testing → confirmation. This structured approach transforms random debugging into intentional problem-solving!`;
+      
+      panel.classList.remove('hidden');
+      
+      // Update options to show completion
+      const container = document.getElementById('options-container');
+      container.innerHTML = `
+        <button onclick="resetSimulation()" class="w-full p-3 rounded-lg font-medium transition-all duration-200 hover:opacity-90" style="background-color: #0070F0; color: white;">
+          Practice Another Scenario
+        </button>
+      `;
+    }
+
+    function resetSimulation() {
+      currentSimulation = null;
+      currentStep = 0;
+      
+      document.getElementById('strategy-selection').classList.remove('hidden');
+      document.getElementById('welcome-section').classList.remove('hidden');
+      document.getElementById('simulation-area').classList.add('hidden');
+      document.getElementById('feedback-panel').classList.add('hidden');
+    }
+
+    // Element SDK integration
+    async function initializeSDK() {
+      if (window.elementSdk) {
+        await window.elementSdk.init({
+          defaultConfig,
+          onConfigChange: async (config) => {
+            // Update title
+            const title = document.getElementById('main-title');
+            if (title) title.textContent = config.main_title || defaultConfig.main_title;
+            
+            // Update welcome message
+            const welcomeMsg = document.getElementById('welcome-message');
+            if (welcomeMsg) {
+              welcomeMsg.innerHTML = config.welcome_message || defaultConfig.welcome_message;
+            }
+          },
+          mapToCapabilities: (config) => ({
+            recolorables: [],
+            borderables: [],
+            fontEditable: undefined,
+            fontSizeable: undefined
+          }),
+          mapToEditPanelValues: (config) => new Map([
+            ['main_title', config.main_title || defaultConfig.main_title],
+            ['welcome_message', config.welcome_message || defaultConfig.welcome_message]
+          ])
+        });
+      }
+    }
+
+    initializeSDK();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d7a4783773c3ad5',t:'MTc3MjcyNTg1Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
