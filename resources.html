@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Peer Coaching</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    * { 
+      font-family: Arial, sans-serif;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: Arial, sans-serif;
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .section-divider {
+      height: 3px;
+      background: linear-gradient(90deg, #002855 0%, #0070F0 50%, #97E152 100%);
+      border-radius: 2px;
+    }
+
+    .draggable-item {
+      cursor: grab;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .draggable-item:active {
+      cursor: grabbing;
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+
+    .drop-zone {
+      min-height: 120px;
+      transition: all 0.2s ease;
+      border: 2px dashed transparent;
+      border-radius: 8px;
+    }
+
+    .drop-zone.drag-over {
+      background-color: rgba(151, 225, 82, 0.1);
+      border-color: #97E152;
+    }
+
+    .placed-item {
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app-wrapper" class="h-full w-full overflow-auto" style="background: #ffffff;">
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%);">
+    <div class="absolute inset-0 opacity-5">
+     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs>
+       <pattern id="hero-pattern" x="0" y="0" width="80" height="80" patternunits="userSpaceOnUse">
+        <circle cx="40" cy="40" r="1" fill="white" />
+       </pattern>
+      </defs> <rect width="100%" height="100%" fill="url(#hero-pattern)" />
+     </svg>
+    </div>
+    <div class="relative max-w-6xl mx-auto px-6 py-20 text-center">
+     <div class="fade-in" style="animation-delay: 0.1s;">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(151, 225, 82, 0.2);"><span class="w-2 h-2 rounded-full animate-pulse" style="background: #97E152;"></span> <span class="text-sm font-medium" style="color: #97E152;">Peer Coaching Mastery</span>
+      </div>
+     </div>
+     <h1 id="main-title" class="fade-in text-5xl md:text-6xl font-bold text-white mb-6" style="animation-delay: 0.2s;">Course and WGU Resources</h1>
+     <p id="subtitle" class="fade-in text-xl max-w-3xl mx-auto" style="color: rgba(255,255,255,0.95); animation-delay: 0.3s;">Approved Materials &amp; Support Services for Student Success</p>
+    </div>
+    <svg class="w-full" viewbox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveaspectratio="none" style="display: block; margin-bottom: -1px;"><path d="M0 80V40C240 80 480 0 720 40C960 80 1200 0 1440 40V80H0Z" fill="#ffffff" />
+    </svg>
+   </header>
+   <main class="max-w-6xl mx-auto px-6">
+    <section class="py-16 fade-in" style="animation-delay: 0.5s;">
+     <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">WGU Resources Only</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="max-w-3xl mx-auto space-y-6">
+      <p class="text-lg text-gray-700 leading-relaxed">In Peer Coaching, you may only use and share resources that are approved and provided by WGU. Resources that are not part of WGU's official materials should not be introduced into coaching sessions. This means you should not bring in outside websites, videos, or communities, such as Google search results, YouTube videos, resources made by other students (such as external study guides or Quizlets), or Discord channels.</p>
+      <div class="bg-red-50 rounded-2xl p-8 border-l-4" style="border-left-color: #DC2626;">
+       <p class="text-lg text-gray-700"><strong style="color: #7F1D1D;">Core Principle:</strong> Only WGU-approved resources in coaching sessions. This ensures consistency, quality, and alignment with institutional standards.</p>
+      </div>
+     </div>
+    </section>
+    <section class="py-16 fade-in" style="animation-delay: 0.55s;">
+     <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">Course Resources</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="max-w-3xl mx-auto space-y-6">
+      <p class="text-lg text-gray-700 leading-relaxed">Demonstrating available course resources and how to use them is a key focus. It's important not only to highlight the resources but also to show students how to locate and apply them. This approach helps students become more resourceful and self-directed across all of their courses.</p>
+      <div class="bg-blue-50 rounded-2xl p-6 border-l-4" style="border-left-color: #0070F0;">
+       <p class="text-lg text-gray-700 leading-relaxed mb-3"><strong style="color: #003D82;">Pro Tip:</strong> Rather than simply screensharing a study guide, demonstrate how to access the WGU Connect community, navigate to the resource section, and open the materials. Remember, WGU Connect itself is a valuable resource!</p>
+      </div>
+      <div class="space-y-4">
+       <h3 class="text-2xl font-bold" style="color: #002855;">Show How Resources Support Success</h3>
+       <p class="text-lg text-gray-700 leading-relaxed">Consider the following questions when highlighting resources:</p>
+       <ul class="space-y-2 ml-4">
+        <li class="text-lg text-gray-700">• Does this resource help students break down and organize content?</li>
+        <li class="text-lg text-gray-700">• Does it highlight areas where students may need additional focus?</li>
+        <li class="text-lg text-gray-700">• Does it present information differently from the course material, such as through visuals or simplified explanations?</li>
+       </ul>
+      </div>
+      <div class="space-y-4">
+       <h3 class="text-2xl font-bold" style="color: #002855;">Encourage Student Participation</h3>
+       <p class="text-lg text-gray-700 leading-relaxed">Invite students to interact in simple ways, such as using emojis to indicate they've used a resource (in live events) or responding to powerful questions about how a specific type of resource has helped them previously. You can also foster engagement by asking broader questions, for example:</p>
+       <ul class="space-y-2 ml-4">
+        <li class="text-lg text-gray-700 italic">• "Would anyone like to share their experience with this study guide?"</li>
+        <li class="text-lg text-gray-700 italic">• "How have study guides helped you in the past?"</li>
+       </ul>
+      </div>
+      <div class="space-y-4">
+       <h3 class="text-2xl font-bold" style="color: #002855;">Don't Overlook Hidden Resources</h3>
+       <p class="text-lg text-gray-700 leading-relaxed">You might not initially think of items like Course Instructor cohorts, practice quizzes, or knowledge checks as "resources," but they absolutely are! Encourage students to give and reflect on their experiences.</p>
+       <ul class="space-y-3">
+        <li class="flex items-start gap-3"><span class="flex-shrink-0 w-2 h-2 mt-2 rounded-full" style="background: #0070F0;"></span> <span class="text-lg text-gray-700"><strong>Cohorts:</strong> Ask what insights they gained, what they learned, and how it helped their understanding.</span></li>
+        <li class="flex items-start gap-3"><span class="flex-shrink-0 w-2 h-2 mt-2 rounded-full" style="background: #0070F0;"></span> <span class="text-lg text-gray-700"><strong>Practice Quizzes &amp; Learning Checks:</strong> Show students how to review all answer choices—even incorrect ones—to develop deeper understanding.</span></li>
+       </ul>
+      </div>
+     </div>
+    </section>
+    <section class="py-16 fade-in" style="animation-delay: 0.6s;">
+     <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">Key Resource Hubs</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="max-w-5xl mx-auto space-y-8">
+      <div class="bg-white rounded-2xl overflow-hidden shadow-md border-t-4 p-8" style="border-top-color: #0070F0;">
+       <h3 class="text-2xl font-bold mb-4" style="color: #002855;">The Academic Coaching Center</h3>
+       <p class="text-lg text-gray-700 leading-relaxed mb-6">Home to Peer Coaching, this hub offers a wealth of resource articles on study strategies, Performance Assessments, and Objective Assessments. Articles include templates, guides, how-to instructions, dos and don'ts, and assessment interpretation support.</p>
+       <p class="text-lg text-gray-700 leading-relaxed mb-4"><strong>Key Resources:</strong></p>
+       <ul class="space-y-3 mb-6">
+        <li class="flex items-start gap-3"><span class="flex-shrink-0 text-green-600 font-bold">✓</span> <span class="text-gray-700">PA and OA support articles</span></li>
+        <li class="flex items-start gap-3"><span class="flex-shrink-0 text-green-600 font-bold">✓</span> <span class="text-gray-700">Study strategy guides</span></li>
+        <li class="flex items-start gap-3"><span class="flex-shrink-0 text-green-600 font-bold">✓</span> <span class="text-gray-700">Professional communication templates</span></li>
+        <li class="flex items-start gap-3"><span class="flex-shrink-0 text-green-600 font-bold">✓</span> <span class="text-gray-700">Power Skills: time management, burnout, and more</span></li>
+       </ul>
+       <p class="text-lg text-gray-700"><strong>Strategy:</strong> Consider what students find most challenging and their demographics. New first-term learners may need PA and similarity check guidance, while further-along students may benefit from Power Skills support.</p>
+      </div>
+      <div class="bg-white rounded-2xl overflow-hidden shadow-md border-t-4 p-8" style="border-top-color: #0070F0;">
+       <h3 class="text-2xl font-bold mb-4" style="color: #002855;">The Student Handbook</h3>
+       <p class="text-lg text-gray-700 leading-relaxed mb-6">Often overlooked and perceived as merely a list of rules, the Student Handbook is actually a comprehensive and valuable resource. It can answer many common student concerns about policies, procedures, and support.</p>
+       <p class="text-lg text-gray-700 leading-relaxed mb-4"><strong>Key Resources:</strong></p>
+       <ul class="space-y-3 mb-6">
+        <li class="flex items-start gap-3"><span class="flex-shrink-0 text-green-600 font-bold">✓</span> <span class="text-gray-700"><a href="https://cm.wgu.edu/t5/Information-Resources/Being-Successful-with-Online-Proctoring/ta-p/134">Being Successful with Online Proctoring</a></span></li>
+        <li class="flex items-start gap-3"><span class="flex-shrink-0 text-green-600 font-bold">✓</span> <span class="text-gray-700">Academic integrity and policies</span></li>
+        <li class="flex items-start gap-3"><span class="flex-shrink-0 text-green-600 font-bold">✓</span> <span class="text-gray-700">Support services and procedures</span></li>
+        <li class="flex items-start gap-3"><span class="flex-shrink-0 text-green-600 font-bold">✓</span> <span class="text-gray-700">Searchable content for student concerns</span></li>
+       </ul>
+       <p class="text-lg text-gray-700"><strong>Coaching Tip:</strong> Invite students to share a concern or worry they have, then practice using the search function together to find concrete answers. This alleviates fears while introducing them to resources they may not know about.</p>
+      </div>
+      <div class="bg-white rounded-2xl overflow-hidden shadow-md border-t-4 p-8" style="border-top-color: #0070F0;">
+       <h3 class="text-2xl font-bold mb-4" style="color: #002855;">Student Wellbeing &amp; Career Services</h3>
+       <p class="text-lg text-gray-700 leading-relaxed mb-6">Remember that peer coaches are not counselors. When students experience personal challenges impacting their wellbeing or career goals, refer them to the appropriate WGU resource.</p>
+       <ul class="space-y-4 mb-6">
+        <li><p class="text-lg font-bold text-gray-700 mb-2">Student Wellbeing Services</p><p class="text-gray-700">Provides free short-term counseling for mental health concerns, financial difficulties, relationship or home challenges, and more. Do not downplay its breadth—it's versatile and valuable.</p></li>
+        <li><p class="text-lg font-bold text-gray-700 mb-2">Career &amp; Professional Development Services</p><p class="text-gray-700">Assists with resumes, career support, and Handshake (the platform for career opportunities and Peer Coach applications).</p></li>
+       </ul>
+       <p class="text-lg text-gray-700"><strong>Important:</strong> Keep focus on relevance to the course while acknowledging broader applications. Connect these services back to students' course-related needs.</p>
+      </div>
+     </div>
+    </section>
+   </main>
+   <footer class="mt-12 py-8" style="background: #002855;">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+     <div class="flex justify-center gap-4 mb-4">
+      <div class="w-3 h-3 rounded-full" style="background: #0070F0;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #46B1EF;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #97E152;"></div>
+     </div>
+     <p class="text-white opacity-80 text-sm">Peer Coaching Policy &amp; Guidelines</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: "Course and WGU Resources",
+      subtitle: "Approved Materials & Support Services for Student Success",
+      primary_color: "#002855",
+      accent_color: "#0070F0",
+      highlight_color: "#97E152",
+      text_color: "#374151",
+      font_family: "Inter",
+      font_size: 16
+    };
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          const titleEl = document.getElementById('main-title');
+          if (titleEl) titleEl.textContent = config.main_title || defaultConfig.main_title;
+
+          const subtitleEl = document.getElementById('subtitle');
+          if (subtitleEl) subtitleEl.textContent = config.subtitle || defaultConfig.subtitle;
+
+          const baseSize = config.font_size || defaultConfig.font_size;
+          document.body.style.fontSize = `${baseSize}px`;
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => { config.primary_color = value; window.elementSdk.setConfig({ primary_color: value }); }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => { config.accent_color = value; window.elementSdk.setConfig({ accent_color: value }); }
+            },
+            {
+              get: () => config.highlight_color || defaultConfig.highlight_color,
+              set: (value) => { config.highlight_color = value; window.elementSdk.setConfig({ highlight_color: value }); }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => { config.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => { config.font_family = value; window.elementSdk.setConfig({ font_family: value }); }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => { config.font_size = value; window.elementSdk.setConfig({ font_size: value }); }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["main_title", config.main_title || defaultConfig.main_title],
+          ["subtitle", config.subtitle || defaultConfig.subtitle]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d93d897c3ec2425',t:'MTc3Mjk5Mzk0NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
