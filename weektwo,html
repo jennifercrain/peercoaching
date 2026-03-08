@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Peer Coaching</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    * { 
+      font-family: Arial, sans-serif;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: Arial, sans-serif;
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .section-divider {
+      height: 3px;
+      background: linear-gradient(90deg, #002855 0%, #0070F0 50%, #97E152 100%);
+      border-radius: 2px;
+    }
+
+    .draggable-item {
+      cursor: grab;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .draggable-item:active {
+      cursor: grabbing;
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+
+    .drop-zone {
+      min-height: 120px;
+      transition: all 0.2s ease;
+      border: 2px dashed transparent;
+      border-radius: 8px;
+    }
+
+    .drop-zone.drag-over {
+      background-color: rgba(151, 225, 82, 0.1);
+      border-color: #97E152;
+    }
+
+    .placed-item {
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app-wrapper" class="h-full w-full overflow-auto" style="background: #ffffff;">
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%);">
+    <div class="absolute inset-0 opacity-5">
+     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs>
+       <pattern id="hero-pattern" x="0" y="0" width="80" height="80" patternunits="userSpaceOnUse">
+        <circle cx="40" cy="40" r="1" fill="white" />
+       </pattern>
+      </defs> <rect width="100%" height="100%" fill="url(#hero-pattern)" />
+     </svg>
+    </div>
+    <div class="relative max-w-6xl mx-auto px-6 py-20 text-center">
+     <div class="fade-in" style="animation-delay: 0.1s;">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(151, 225, 82, 0.2);"><span class="w-2 h-2 rounded-full animate-pulse" style="background: #97E152;"></span> <span class="text-sm font-medium" style="color: #97E152;">Peer Coaching Mastery</span>
+      </div>
+     </div>
+     <h1 id="main-title" class="fade-in text-5xl md:text-6xl font-bold text-white mb-6" style="animation-delay: 0.2s;">Coaching Skills Week</h1>
+     <p id="subtitle" class="fade-in text-xl max-w-3xl mx-auto" style="color: rgba(255,255,255,0.95); animation-delay: 0.3s;">Master the Art and Science of Peer Coaching</p>
+    </div>
+    <svg class="w-full" viewbox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveaspectratio="none" style="display: block; margin-bottom: -1px;"><path d="M0 80V40C240 80 480 0 720 40C960 80 1200 0 1440 40V80H0Z" fill="#ffffff" />
+    </svg>
+   </header>
+   <main class="max-w-6xl mx-auto px-6">
+    <section class="py-16 fade-in" style="animation-delay: 0.5s;">
+     <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">Overview</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="max-w-3xl mx-auto space-y-6">
+      <p class="text-lg text-gray-700 leading-relaxed">This week, we're diving deep into the art and science of coaching, focused on growing skills that can transform your interactions and empower your peers. You'll learn how to ditch surface-level advice. Instead, we will explore the nuances of active listening, powerful questioning, wait time, redirection, and goal-setting that truly drive results. These coaching techniques will equip you with the tools to inspire, motivate, and unlock hidden potential in your peers.</p>
+      <p class="text-lg text-gray-700 leading-relaxed">As a reminder, please be fully present during training by limiting distractions and completing all pages in this module.</p>
+      <p class="text-lg text-gray-700 leading-relaxed">After completing the week's training, do not move forward to the next week. This sequential design allows for a focused understanding of specific aspects of your role. Please contact your Supervisor if you complete training early.</p>
+     </div>
+    </section>
+    <section class="py-16 fade-in" style="animation-delay: 0.55s;">
+     <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">Why This Matters</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="max-w-3xl mx-auto space-y-6">
+      <div class="bg-white rounded-2xl p-8 shadow-md border-l-4" style="border-left-color: #0070F0;">
+       <h3 class="text-2xl font-bold mb-4" style="color: #002855;">Peer Coaching is not about having the right answer. It is about helping students think.</h3>
+       <p class="text-lg text-gray-700 leading-relaxed mb-4">Many students come to sessions hoping someone will simply tell them what to do next. While that might solve the immediate problem, it does not build the skills students need to succeed independently. Coaching takes a different approach. Instead of solving the problem for the student, we help them slow down, think through their learning process, and identify their next step.</p>
+       <p class="text-lg text-gray-700 leading-relaxed">The techniques in this training are what make that possible.</p>
+      </div>
+      <div class="bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-8">
+       <p class="text-lg text-gray-700 leading-relaxed mb-4">Skills like active listening, powerful questioning, and purposeful wait time help students clarify their thinking. Structured approaches like AFFIRM and "I Do, We Do, You Do" give peer coaches a way to guide conversations without taking over the learning process. Understanding how to redirect questions, demonstrate study strategies, and guide students to the right resources ensures that coaching stays supportive, ethical, and aligned with WGU's expectations.</p>
+       <p class="text-lg font-semibold" style="color: #0070F0;">These are the skills that turn a conversation into a coaching experience.</p>
+      </div>
+     </div>
+    </section>
+    <section class="py-16 fade-in" style="animation-delay: 0.6s;">
+     <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">How This Week Works</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="max-w-3xl mx-auto bg-white rounded-2xl p-8 shadow-md border-l-4" style="border-left-color: #46B1EF;">
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">This week blends observation, reflection, and skill development so you can see coaching in action and begin building your own approach.</p>
+      <div class="space-y-4">
+       <div class="pl-6 border-l-2 border-gray-300">
+        <p class="text-lg text-gray-700 leading-relaxed"><strong style="color: #002855;">Explore Key Coaching Skills:</strong> Active listening, powerful questions, question stages, wait time, and strategies for redirecting questions. You will also learn how these techniques connect to WGU's AFFIRM Coaching Framework and how peer coaches model thinking using approaches like Think Alouds and "I Do, We Do, You Do."</p>
+       </div>
+       <div class="pl-6 border-l-2 border-gray-300">
+        <p class="text-lg text-gray-700 leading-relaxed"><strong style="color: #002855;">Observe Real Coaching:</strong> Watch real Peer Coaching interactions through live events or appointments. These observations give you the chance to notice how experienced peer coaches guide conversations, support student thinking, and apply the strategies you are learning.</p>
+       </div>
+       <div class="pl-6 border-l-2 border-gray-300">
+        <p class="text-lg text-gray-700 leading-relaxed"><strong style="color: #002855;">Review Expectations:</strong> Throughout the module, you will also review important expectations for peer coaches, including our AI policy and how to help students locate course and WGU resources appropriately.</p>
+       </div>
+      </div>
+      <p class="text-lg text-gray-700 leading-relaxed mt-6" style="font-style: italic; color: #666;">The goal is not to memorize techniques. The goal is to begin recognizing what effective coaching looks like and how these strategies help students move forward in their learning.</p>
+     </div>
+    </section>
+    <section class="py-16 fade-in" style="animation-delay: 0.65s;">
+     <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">What Success Looks Like This Week</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="max-w-3xl mx-auto space-y-6">
+      <p class="text-lg text-gray-700 leading-relaxed">By the end of this week, you should begin to see coaching conversations differently. Instead of feeling pressure to give advice or provide answers, you will start focusing on how to guide a student's thinking. You will notice opportunities to slow down conversations, listen more closely, and ask questions that help students clarify their own next steps.</p>
+      <div class="bg-white rounded-2xl p-8 shadow-md border-l-4" style="border-left-color: #97E152;">
+       <h3 class="text-xl font-bold mb-6" style="color: #002855;">Successful completion of this week means you can:</h3>
+       <ul class="space-y-3">
+        <li class="flex items-start gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-white text-sm font-bold" style="background: #97E152;">✓</span> <span class="text-lg text-gray-700">Recognize the difference between coaching and teaching during student interactions.</span></li>
+        <li class="flex items-start gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-white text-sm font-bold" style="background: #97E152;">✓</span> <span class="text-lg text-gray-700">Identify moments where active listening, wait time, or powerful questions could help a student move forward.</span></li>
+        <li class="flex items-start gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-white text-sm font-bold" style="background: #97E152;">✓</span> <span class="text-lg text-gray-700">Observe coaching sessions and spot strategies being used in real conversations.</span></li>
+        <li class="flex items-start gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-white text-sm font-bold" style="background: #97E152;">✓</span> <span class="text-lg text-gray-700">Understand how the AFFIRM Coaching Framework structures a coaching interaction.</span></li>
+        <li class="flex items-start gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-white text-sm font-bold" style="background: #97E152;">✓</span> <span class="text-lg text-gray-700">Recognize when to redirect content-focused questions and guide students toward appropriate resources.</span></li>
+        <li class="flex items-start gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-white text-sm font-bold" style="background: #97E152;">✓</span> <span class="text-lg text-gray-700">Demonstrate an awareness of Peer Coaching expectations and policies, including appropriate use of AI.</span></li>
+       </ul>
+       <div class="mt-8 pt-6 border-t-2 border-gray-200">
+        <p class="text-lg font-semibold" style="color: #002855;">Most importantly, success this week means beginning to shift your mindset from <em>"How do I help solve this problem?"</em> to <em>"How do I help the student think through this problem?"</em></p>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main>
+   <footer class="mt-12 py-8" style="background: #002855;">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+     <div class="flex justify-center gap-4 mb-4">
+      <div class="w-3 h-3 rounded-full" style="background: #0070F0;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #46B1EF;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #97E152;"></div>
+     </div>
+     <p class="text-white opacity-80 text-sm">Coaching Skills Week Training Module</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: "Coaching Skills Week",
+      subtitle: "Master the Art and Science of Peer Coaching",
+      primary_color: "#002855",
+      accent_color: "#0070F0",
+      highlight_color: "#97E152",
+      text_color: "#374151",
+      font_family: "Inter",
+      font_size: 16
+    };
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          const titleEl = document.getElementById('main-title');
+          if (titleEl) titleEl.textContent = config.main_title || defaultConfig.main_title;
+
+          const subtitleEl = document.getElementById('subtitle');
+          if (subtitleEl) subtitleEl.textContent = config.subtitle || defaultConfig.subtitle;
+
+          const baseSize = config.font_size || defaultConfig.font_size;
+          document.body.style.fontSize = `${baseSize}px`;
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => { config.primary_color = value; window.elementSdk.setConfig({ primary_color: value }); }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => { config.accent_color = value; window.elementSdk.setConfig({ accent_color: value }); }
+            },
+            {
+              get: () => config.highlight_color || defaultConfig.highlight_color,
+              set: (value) => { config.highlight_color = value; window.elementSdk.setConfig({ highlight_color: value }); }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => { config.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => { config.font_family = value; window.elementSdk.setConfig({ font_family: value }); }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => { config.font_size = value; window.elementSdk.setConfig({ font_size: value }); }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["main_title", config.main_title || defaultConfig.main_title],
+          ["subtitle", config.subtitle || defaultConfig.subtitle]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d93b77b4288d687',t:'MTc3Mjk5MjU4OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
