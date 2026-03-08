@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>We Do, You Do Framework</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    #app-wrapper {
+      height: 100%;
+      width: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: #ffffff;
+    }
+
+    .section-divider {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #0070F0, transparent);
+      margin: 32px 0;
+    }
+    
+    .framework-box {
+      background: linear-gradient(135deg, rgba(0, 40, 85, 0.05), rgba(0, 112, 240, 0.05));
+      border-left: 4px solid #002855;
+      padding: 16px;
+      border-radius: 6px;
+      margin: 16px 0;
+    }
+    
+    .framework-item {
+      margin: 12px 0;
+      font-weight: 500;
+      color: #002855;
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .check-item {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 32px;
+    }
+
+    .check-btn {
+      background: #0070F0;
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      margin-bottom: 8px;
+    }
+
+    .check-btn:hover {
+      background: #0056cc;
+      transform: translateY(-2px);
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app-wrapper">
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%);">
+    <div class="absolute inset-0 opacity-5">
+     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+       <pattern id="hero-pattern" x="0" y="0" width="80" height="80" patternunits="userSpaceOnUse">
+        <circle cx="40" cy="40" r="1" fill="white" />
+       </pattern>
+      </defs> <rect width="100%" height="100%" fill="url(#hero-pattern)" />
+     </svg>
+    </div>
+    <div class="relative max-w-6xl mx-auto px-6 py-20 text-center">
+     <div class="fade-in" style="animation-delay: 0.1s;">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(151, 225, 82, 0.2);">
+       <span class="w-2 h-2 rounded-full animate-pulse" style="background: #97E152;"></span> <span class="text-sm font-medium" style="color: #97E152;">We Do, You do for Intentional Practice</span>
+      </div>
+     </div>
+     <h1 id="main-title" class="fade-in text-5xl md:text-6xl font-bold text-white mb-6" style="animation-delay: 0.2s;">We Do, You Do</h1>
+     <p id="subtitle" class="fade-in text-xl text-white opacity-90" style="animation-delay: 0.3s;">Practicing and Transferring the Strategy</p>
+    </div>
+    <svg class="w-full" viewbox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveaspectratio="none" style="display: block; margin-bottom: -1px;">
+     <path d="M0 80V40C240 80 480 0 720 40C960 80 1200 0 1440 40V80H0Z" fill="#ffffff" />
+    </svg>
+   </header>
+   <main class="max-w-3xl mx-auto px-6">
+    <section class="py-8 fade-in" style="animation-delay: 0.5s;">
+     <p class="text-lg leading-relaxed text-gray-700 mb-6">After the peer coach has modeled a strategy in the "I Do" stage, the focus shifts to helping the student try the process themselves and, eventually, use it independently. This happens through the next two stages: We Do and You Do.</p>
+    </section>
+    <div class="section-divider"></div>
+    <section class="py-8 fade-in" style="animation-delay: 0.6s;">
+     <h2 class="text-3xl font-bold mb-6" style="color: #002855;">We Do: Guided Practice with Support</h2>
+     <p class="text-lg leading-relaxed text-gray-700 mb-6">The "We Do" stage is where the student begins applying the strategy, with the peer coach staying actively involved as a guide rather than as the person doing the work.</p>
+     <p class="text-lg leading-relaxed text-gray-700 mb-6">In this stage, the peer coach and student work through a small piece of material together. The student is doing the thinking and the writing, but the peer coach supports the process by:</p>
+     <ul class="space-y-3 mb-8">
+      <li class="flex gap-3"><span style="color: #0070F0; font-weight: bold;">•</span> <span class="text-gray-700">Using powerful, process-focused questions to help the student reflect on their approach</span></li>
+      <li class="flex gap-3"><span style="color: #0070F0; font-weight: bold;">•</span> <span class="text-gray-700">Allowing wait time so the student has space to think and respond</span></li>
+      <li class="flex gap-3"><span style="color: #0070F0; font-weight: bold;">•</span> <span class="text-gray-700">Using staged questioning to scaffold without taking over</span></li>
+      <li class="flex gap-3"><span style="color: #0070F0; font-weight: bold;">•</span> <span class="text-gray-700">Offering feedback on the student's use of the strategy (not on the correctness of content)</span></li>
+      <li class="flex gap-3"><span style="color: #0070F0; font-weight: bold;">•</span> <span class="text-gray-700">Checking for understanding and clarity along the way</span></li>
+     </ul>
+     <p class="text-lg leading-relaxed text-gray-700 mb-6">The peer coach does not evaluate the student's academic answers. Instead, feedback is focused on the process, such as:</p>
+     <ul class="space-y-3 mb-8">
+      <li class="flex gap-3"><span style="color: #97E152; font-weight: bold;">•</span> <span class="text-gray-700">How they selected key information</span></li>
+      <li class="flex gap-3"><span style="color: #97E152; font-weight: bold;">•</span> <span class="text-gray-700">How they organized or reworded it</span></li>
+      <li class="flex gap-3"><span style="color: #97E152; font-weight: bold;">•</span> <span class="text-gray-700">How they used the template or structure of the strategy</span></li>
+      <li class="flex gap-3"><span style="color: #97E152; font-weight: bold;">•</span> <span class="text-gray-700">How clearly their notes or plan would support later study</span></li>
+     </ul>
+     <p class="text-lg leading-relaxed text-gray-700 mb-6">The goal is to help the student notice what they are doing, adjust as needed, and gain confidence using the strategy while support is immediately available.</p>
+     <div class="framework-box">
+      <p class="text-gray-700"><em>"We do" should be thought of as a spectrum, where more and more of the responsibility is turned over to the student as the coaching session progresses, preparing them for independent practice.</em></p>
+     </div>
+    </section>
+    <div class="section-divider"></div>
+    <section class="py-8 fade-in" style="animation-delay: 0.7s;">
+     <h2 class="text-3xl font-bold mb-6" style="color: #002855;">You Do: Independent Application</h2>
+     <p class="text-lg leading-relaxed text-gray-700 mb-6">The "You Do" stage often represents what happens after the session. At this point, the student applies the strategy on their own, without the peer coach present. They use the same thinking processes and tools they witnessed and practiced during "I Do" and "We Do" to:</p>
+     <ul class="space-y-3 mb-8">
+      <li class="flex gap-3"><span style="color: #0070F0; font-weight: bold;">•</span> <span class="text-gray-700">Engage with new sections of the course</span></li>
+      <li class="flex gap-3"><span style="color: #0070F0; font-weight: bold;">•</span> <span class="text-gray-700">Create their own notes, tables, flashcards, or outlines</span></li>
+      <li class="flex gap-3"><span style="color: #0070F0; font-weight: bold;">•</span> <span class="text-gray-700">Plan their studying</span></li>
+      <li class="flex gap-3"><span style="color: #0070F0; font-weight: bold;">•</span> <span class="text-gray-700">Monitor their understanding</span></li>
+      <li class="flex gap-3"><span style="color: #0070F0; font-weight: bold;">•</span> <span class="text-gray-700">Prepare for assessments</span></li>
+     </ul>
+     <p class="text-lg leading-relaxed text-gray-700 mb-6">In "You Do," the responsibility fully shifts to the student. The role of the peer coach is to help them leave the session with:</p>
+     <ul class="space-y-3 mb-8">
+      <li class="flex gap-3"><span style="color: #97E152; font-weight: bold;">✓</span> <span class="text-gray-700">A clear understanding of the strategy</span></li>
+      <li class="flex gap-3"><span style="color: #97E152; font-weight: bold;">✓</span> <span class="text-gray-700">Confidence in how to use it</span></li>
+      <li class="flex gap-3"><span style="color: #97E152; font-weight: bold;">✓</span> <span class="text-gray-700">A plan for where and when they will apply it next</span></li>
+     </ul>
+    </section>
+    <div class="section-divider"></div>
+    <section class="py-8 fade-in" style="animation-delay: 0.8s;">
+     <h2 class="text-3xl font-bold mb-6" style="color: #002855;">How the Stages Work Together</h2>
+     <div class="framework-box">
+      <div class="framework-item">
+       <strong>I Do:</strong> The peer coach models the thinking and process.
+      </div>
+      <div class="framework-item" style="margin-top: 16px;">
+       <strong>We Do:</strong> The student practices with guidance, prompting, and feedback on strategy use.
+      </div>
+      <div class="framework-item" style="margin-top: 16px;">
+       <strong>You Do:</strong> The student carries the strategy forward independently.
+      </div>
+      <p class="text-gray-700 mt-6 mb-0"><em>Together, these stages support students in moving from observing a learning process, to practicing it with support, to using it on their own in their courses.</em></p>
+     </div>
+    </section>
+    <div class="section-divider"></div>
+    <section class="py-8 fade-in" style="animation-delay: 0.9s;">
+     <h2 class="text-3xl font-bold mb-6" style="color: #002855;">Interactive: Identifying Coach Strategies</h2>
+     <p class="text-lg leading-relaxed text-gray-700 mb-8">Below are scenarios showing different coaching approaches. Decide whether each response represents effective "We Do" guidance (supporting the student's thinking process) or ineffective coaching (taking over or focusing on content rather than strategy).</p>
+     <div class="check-item">
+      <h3 style="color: #002855; font-size: 1.125rem; font-weight: bold; margin: 0 0 12px 0;">Scenario 1: Recognizing Key Information</h3>
+      <div style="background: #f0f9ff; padding: 12px; border-radius: 6px; border-left: 4px solid #0070F0; margin-bottom: 16px;">
+       <p style="color: #374151; margin: 0 0 8px 0; font-style: italic;"><strong>Student is reading a dense paragraph and looks confused.</strong></p>
+       <p style="color: #374151; margin: 0; font-style: italic;"><strong>Peer coach says:</strong> "I can see you're working through this. What do you notice about how many ideas are packed into this paragraph? And which one feels like the main point to you?"</p>
+      </div><button onclick="checkAnswer(0, true)" class="check-btn"><span>→</span> This is effective guidance.</button> <button onclick="checkAnswer(0, false)" class="check-btn"><span>→</span> This is not effective guidance.</button>
+      <div id="feedback-0" style="display: none; margin-top: 12px; padding: 12px; border-radius: 6px;"></div>
+     </div>
+     <div class="check-item">
+      <h3 style="color: #002855; font-size: 1.125rem; font-weight: bold; margin: 0 0 12px 0;">Scenario 2: Content vs. Strategy Feedback</h3>
+      <div style="background: #f0f9ff; padding: 12px; border-radius: 6px; border-left: 4px solid #0070F0; margin-bottom: 16px;">
+       <p style="color: #374151; margin: 0 0 8px 0; font-style: italic;"><strong>Student has condensed a definition into their own words.</strong></p>
+       <p style="color: #374151; margin: 0; font-style: italic;"><strong>Peer coach says:</strong> "That's not quite right. The actual definition says X, not Y. You need to include all the key terms from the textbook."</p>
+      </div><button onclick="checkAnswer(1, true)" class="check-btn"><span>→</span> This is effective guidance.</button> <button onclick="checkAnswer(1, false)" class="check-btn"><span>→</span> This is not effective guidance.</button>
+      <div id="feedback-1" style="display: none; margin-top: 12px; padding: 12px; border-radius: 6px;"></div>
+     </div>
+     <div class="check-item">
+      <h3 style="color: #002855; font-size: 1.125rem; font-weight: bold; margin: 0 0 12px 0;">Scenario 3: Taking Over vs. Supporting</h3>
+      <div style="background: #f0f9ff; padding: 12px; border-radius: 6px; border-left: 4px solid #0070F0; margin-bottom: 16px;">
+       <p style="color: #374151; margin: 0 0 8px 0; font-style: italic;"><strong>Student is struggling to organize information into a table format.</strong></p>
+       <p style="color: #374151; margin: 0; font-style: italic;"><strong>Peer coach says:</strong> "Here, let me show you. I'll do the first row so you can see how it's done." (Coach takes the pen and fills in the table.)</p>
+      </div><button onclick="checkAnswer(2, true)" class="check-btn"><span>→</span> This is effective guidance.</button> <button onclick="checkAnswer(2, false)" class="check-btn"><span>→</span> This is not effective guidance.</button>
+      <div id="feedback-2" style="display: none; margin-top: 12px; padding: 12px; border-radius: 6px;"></div>
+     </div>
+     <div class="check-item">
+      <h3 style="color: #002855; font-size: 1.125rem; font-weight: bold; margin: 0 0 12px 0;">Scenario 4: Process-Focused Feedback</h3>
+      <div style="background: #f0f9ff; padding: 12px; border-radius: 6px; border-left: 4px solid #0070F0; margin-bottom: 16px;">
+       <p style="color: #374151; margin: 0 0 8px 0; font-style: italic;"><strong>Student has created flashcards but put too much information on each card.</strong></p>
+       <p style="color: #374151; margin: 0; font-style: italic;"><strong>Peer coach says:</strong> "I see you've written a lot on each card. Think about what you'll actually be able to recall quickly when you study. How might changing the amount of information on each card affect how well this works as a study tool?"</p>
+      </div><button onclick="checkAnswer(3, true)" class="check-btn"><span>→</span> This is effective guidance.</button> <button onclick="checkAnswer(3, false)" class="check-btn"><span>→</span> This is not effective guidance.</button>
+      <div id="feedback-3" style="display: none; margin-top: 12px; padding: 12px; border-radius: 6px;"></div>
+     </div>
+    </section>
+   </main>
+   <footer class="mt-12 py-8" style="background: #002855;">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+     <div class="flex justify-center gap-4 mb-4">
+      <div class="w-3 h-3 rounded-full" style="background: #0070F0;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #46B1EF;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #97E152;"></div>
+     </div>
+     <p class="text-white opacity-80 text-sm">Peer Coaching Strategy Guide</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const answers = [true, false, false, true];
+    const feedbackMessages = [
+      { correct: "Correct! This coach is asking guiding questions that help the student reflect on their own process without taking over. This is effective 'We Do' guidance.", incorrect: "Not quite. This coach IS using effective questioning—they prompt the student to notice the density and identify the main point themselves." },
+      { correct: "Correct! This coach is evaluating content (right or wrong) instead of focusing on strategy. Peer coaches should give feedback on process, not correctness.", incorrect: "Not quite. This coach is focusing on content accuracy rather than the student's strategic process." },
+      { correct: "Correct! By taking the pen and doing the work, the coach is taking over the 'We Do' stage. The student needs to do the work with support, not watch the coach do it.", incorrect: "Not quite. This coach IS taking over the task rather than supporting. In 'We Do,' the student should be doing the work." },
+      { correct: "Correct! This coach provides process-focused feedback that helps the student think critically about their strategy's effectiveness.", incorrect: "Not quite. This coach IS using effective 'We Do' guidance—asking the student to reflect and think about adjustments." }
+    ];
+
+    function checkAnswer(questionIndex, selectedAnswer) {
+      const isCorrect = selectedAnswer === answers[questionIndex];
+      const feedbackEl = document.getElementById(`feedback-${questionIndex}`);
+      
+      const feedback = isCorrect ? feedbackMessages[questionIndex].correct : feedbackMessages[questionIndex].incorrect;
+      const feedbackColor = isCorrect ? '#d1fae5' : '#fecaca';
+      const feedbackBorder = isCorrect ? '#10b981' : '#ef4444';
+      const textColor = isCorrect ? '#065f46' : '#7f1d1d';
+      
+      feedbackEl.innerHTML = `<div style="background: ${feedbackColor}; border-left: 4px solid ${feedbackBorder}; padding: 12px; border-radius: 4px; color: ${textColor}; font-weight: 500;">${feedback}</div>`;
+      feedbackEl.style.display = 'block';
+    }
+
+    const defaultConfig = {
+      main_title: "We Do, You Do",
+      subtitle: "Practicing and Transferring the Strategy"
+    };
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          const titleEl = document.getElementById('main-title');
+          if (titleEl) titleEl.textContent = config.main_title || defaultConfig.main_title;
+
+          const subtitleEl = document.getElementById('subtitle');
+          if (subtitleEl) subtitleEl.textContent = config.subtitle || defaultConfig.subtitle;
+        },
+        mapToCapabilities: () => ({
+          recolorables: [],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["main_title", config.main_title || defaultConfig.main_title],
+          ["subtitle", config.subtitle || defaultConfig.subtitle]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d9492d833fd398b',t:'MTc3MzAwMTU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
