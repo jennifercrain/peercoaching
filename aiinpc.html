@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Peer Coaching</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    * { 
+      font-family: Arial, sans-serif;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: Arial, sans-serif;
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .section-divider {
+      height: 3px;
+      background: linear-gradient(90deg, #002855 0%, #0070F0 50%, #97E152 100%);
+      border-radius: 2px;
+    }
+
+    .draggable-item {
+      cursor: grab;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .draggable-item:active {
+      cursor: grabbing;
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+
+    .drop-zone {
+      min-height: 120px;
+      transition: all 0.2s ease;
+      border: 2px dashed transparent;
+      border-radius: 8px;
+    }
+
+    .drop-zone.drag-over {
+      background-color: rgba(151, 225, 82, 0.1);
+      border-color: #97E152;
+    }
+
+    .placed-item {
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app-wrapper" class="h-full w-full overflow-auto" style="background: #ffffff;">
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%);">
+    <div class="absolute inset-0 opacity-5">
+     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs>
+       <pattern id="hero-pattern" x="0" y="0" width="80" height="80" patternunits="userSpaceOnUse">
+        <circle cx="40" cy="40" r="1" fill="white" />
+       </pattern>
+      </defs> <rect width="100%" height="100%" fill="url(#hero-pattern)" />
+     </svg>
+    </div>
+    <div class="relative max-w-6xl mx-auto px-6 py-20 text-center">
+     <div class="fade-in" style="animation-delay: 0.1s;">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(151, 225, 82, 0.2);"><span class="w-2 h-2 rounded-full animate-pulse" style="background: #97E152;"></span> <span class="text-sm font-medium" style="color: #97E152;">Peer Coaching Mastery</span>
+      </div>
+     </div>
+     <h1 id="main-title" class="fade-in text-5xl md:text-6xl font-bold text-white mb-6" style="animation-delay: 0.2s;">Peer Coaching Policy</h1>
+     <p id="subtitle" class="fade-in text-xl max-w-3xl mx-auto" style="color: rgba(255,255,255,0.95); animation-delay: 0.3s;">Understanding Our AI Boundary</p>
+    </div>
+    <svg class="w-full" viewbox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveaspectratio="none" style="display: block; margin-bottom: -1px;"><path d="M0 80V40C240 80 480 0 720 40C960 80 1200 0 1440 40V80H0Z" fill="#ffffff" />
+    </svg>
+   </header>
+   <main class="max-w-6xl mx-auto px-6">
+    <section class="py-16 fade-in" style="animation-delay: 0.5s;">
+     <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">Peer Coaching Policy</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="max-w-3xl mx-auto space-y-6">
+      <div class="bg-red-50 rounded-2xl p-8 border-l-4" style="border-left-color: #DC2626;">
+       <p class="text-lg font-semibold mb-4" style="color: #7F1D1D;">In Peer Coaching, we do not discuss, recommend, demonstrate, or engage with AI tools with students — period. This is not a gray area, and it is not a judgment call or "case-by-case" basis.</p>
+      </div>
+      <p class="text-lg text-gray-700 leading-relaxed">Peer Coaching exists to foster authentic student-to-student connection and skill development through human interaction. Introducing AI into coaching conversations undermines our goal by shifting learning away from the student's own thinking and problem-solving process and removing peer-to-peer connection. Simply put, AI is incompatible with our mission.</p>
+      <div class="bg-white rounded-2xl p-8 shadow-md border-l-4" style="border-left-color: #0070F0;">
+       <h3 class="text-xl font-bold mb-4" style="color: #002855;">The role of the peer coach is to:</h3>
+       <ul class="space-y-2">
+        <li class="flex items-start gap-3"><span class="flex-shrink-0 w-2 h-2 mt-2 rounded-full" style="background: #0070F0;"></span> <span class="text-lg text-gray-700">Support how students learn</span></li>
+        <li class="flex items-start gap-3"><span class="flex-shrink-0 w-2 h-2 mt-2 rounded-full" style="background: #0070F0;"></span> <span class="text-lg text-gray-700">Strengthen their skills and confidence</span></li>
+        <li class="flex items-start gap-3"><span class="flex-shrink-0 w-2 h-2 mt-2 rounded-full" style="background: #0070F0;"></span> <span class="text-lg text-gray-700">Preserve the integrity of their learning experience</span></li>
+       </ul>
+       <p class="text-lg text-gray-700 leading-relaxed mt-6">AI, by its nature, replaces or shortcuts those processes. Because of that, AI use with students is antithetical to the purpose of Peer Coaching. This boundary protects students, academic integrity, and the credibility and continued existence of the peer coach role.</p>
+      </div>
+      <div class="bg-yellow-50 rounded-2xl p-6 border-l-4" style="border-left-color: #FBBF24;">
+       <p class="text-sm font-semibold mb-2" style="color: #92400E;">IMPORTANT:</p>
+       <p class="text-lg text-gray-700">As AI continues to evolve, you may periodically receive AI-related communications or updates from the university. These updates do not override our Peer Coaching policy. Your Peer Coaching leaders will keep you informed of any changes.</p>
+      </div>
+     </div>
+    </section>
+    <section class="py-16 fade-in" style="animation-delay: 0.55s;">
+     <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">Why This Boundary Exists</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="max-w-3xl mx-auto space-y-6">
+      <p class="text-lg text-gray-700 leading-relaxed">Our policy directly aligns with WGU's academic integrity, privacy, and AI standards. As of February 2026, WGU policies make four expectations clear:</p>
+      <div class="space-y-3">
+       <div class="bg-white rounded-xl p-4 shadow-sm border-l-4" style="border-left-color: #0070F0;">
+        <p class="text-lg text-gray-700"><strong style="color: #002855;">Course materials and assessments are confidential.</strong></p>
+       </div>
+       <div class="bg-white rounded-xl p-4 shadow-sm border-l-4" style="border-left-color: #0070F0;">
+        <p class="text-lg text-gray-700"><strong style="color: #002855;">Student information must be protected.</strong></p>
+       </div>
+       <div class="bg-white rounded-xl p-4 shadow-sm border-l-4" style="border-left-color: #0070F0;">
+        <p class="text-lg text-gray-700"><strong style="color: #002855;">AI is a tool, but it must be used responsibly to protect academic integrity.</strong></p>
+       </div>
+       <div class="bg-white rounded-xl p-4 shadow-sm border-l-4" style="border-left-color: #0070F0;">
+        <p class="text-lg text-gray-700"><strong style="color: #002855;">AI must never replace a student's own thinking.</strong></p>
+       </div>
+      </div>
+      <div class="bg-red-50 rounded-2xl p-6 border-l-4" style="border-left-color: #DC2626;">
+       <p class="text-lg text-gray-700"><strong style="color: #7F1D1D;">Failure to uphold WGU's standards may result in corrective action or sanctions in accordance with university policy and employment expectations.</strong></p>
+      </div>
+     </div>
+    </section>
+    <section class="py-16 fade-in" style="animation-delay: 0.6s;">
+     <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">What Must Never Be Entered into AI Tools</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="max-w-3xl mx-auto">
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">The following must not be copied, pasted, uploaded, or summarized in any public or unapproved AI system.</p>
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+       <div class="bg-white rounded-2xl p-6 shadow-md border-t-4" style="border-top-color: #DC2626;">
+        <h3 class="text-xl font-bold mb-4" style="color: #002855;">WGU Course Materials</h3>
+        <ul class="space-y-2">
+         <li class="flex items-start gap-2"><span class="flex-shrink-0 text-red-600 font-bold">×</span> <span class="text-gray-700">Task and assessment prompts</span></li>
+         <li class="flex items-start gap-2"><span class="flex-shrink-0 text-red-600 font-bold">×</span> <span class="text-gray-700">Rubrics</span></li>
+         <li class="flex items-start gap-2"><span class="flex-shrink-0 text-red-600 font-bold">×</span> <span class="text-gray-700">Templates</span></li>
+         <li class="flex items-start gap-2"><span class="flex-shrink-0 text-red-600 font-bold">×</span> <span class="text-gray-700">Quizzes and pre-assessments</span></li>
+         <li class="flex items-start gap-2"><span class="flex-shrink-0 text-red-600 font-bold">×</span> <span class="text-gray-700">Course videos or transcripts</span></li>
+         <li class="flex items-start gap-2"><span class="flex-shrink-0 text-red-600 font-bold">×</span> <span class="text-gray-700">Course pages or instructional resources</span></li>
+        </ul>
+       </div>
+       <div class="bg-white rounded-2xl p-6 shadow-md border-t-4" style="border-top-color: #DC2626;">
+        <h3 class="text-xl font-bold mb-4" style="color: #002855;">Student Information</h3>
+        <ul class="space-y-2">
+         <li class="flex items-start gap-2"><span class="flex-shrink-0 text-red-600 font-bold">×</span> <span class="text-gray-700">Names</span></li>
+         <li class="flex items-start gap-2"><span class="flex-shrink-0 text-red-600 font-bold">×</span> <span class="text-gray-700">Email addresses</span></li>
+         <li class="flex items-start gap-2"><span class="flex-shrink-0 text-red-600 font-bold">×</span> <span class="text-gray-700">Student ID numbers</span></li>
+         <li class="flex items-start gap-2"><span class="flex-shrink-0 text-red-600 font-bold">×</span> <span class="text-gray-700">Phone numbers</span></li>
+         <li class="flex items-start gap-2"><span class="flex-shrink-0 text-red-600 font-bold">×</span> <span class="text-gray-700">Screenshots or recordings that show identifying information</span></li>
+        </ul>
+       </div>
+      </div>
+      <div class="bg-red-50 rounded-2xl p-6 border-l-4" style="border-left-color: #DC2626;">
+       <p class="text-lg font-semibold" style="color: #7F1D1D;">A simple rule to remember: If it came from WGU or identifies a student, it does not go into AI -- period.</p>
+      </div>
+     </div>
+    </section>
+    <section class="py-16 fade-in" style="animation-delay: 0.65s;">
+     <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">AI Outside of Coaching Sessions</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="max-w-3xl mx-auto">
+      <p class="text-lg text-gray-700 leading-relaxed mb-8">While AI is not used with students, limited internal use is permitted for professional development exercises and administrative support (not completion).</p>
+      <div class="grid md:grid-cols-2 gap-6">
+       <div class="bg-green-50 rounded-2xl p-6 shadow-md border-t-4" style="border-top-color: #97E152;">
+        <h3 class="text-xl font-bold mb-4" style="color: #002855;">AI May Be Used to:</h3>
+        <ul class="space-y-3">
+         <li class="flex items-start gap-2"><span class="flex-shrink-0 text-green-600 font-bold">✓</span> <span class="text-gray-700"><strong>Generate ideas or prompts:</strong> Find yourself struggling to ask good questions during a certain stage of AFFIRM? AI can help you come up with ideas that you can apply to your sessions later.</span></li>
+         <li class="flex items-start gap-2"><span class="flex-shrink-0 text-green-600 font-bold">✓</span> <span class="text-gray-700"><strong>Practice coaching skills:</strong> Did you have an appointment or live event that didn't go well? Without putting in sensitive or protected information, have AI be your student and practice how you might have approached the call differently.</span></li>
+         <li class="flex items-start gap-2"><span class="flex-shrink-0 text-green-600 font-bold">✓</span> <span class="text-gray-700"><strong>Check spelling and grammar:</strong> Have AI polish your thoughts in student-facing materials for better engagement.</span></li>
+        </ul>
+       </div>
+       <div class="bg-red-50 rounded-2xl p-6 shadow-md border-t-4" style="border-top-color: #DC2626;">
+        <h3 class="text-xl font-bold mb-4" style="color: #7F1D1D;">AI May Not Be Used to:</h3>
+        <ul class="space-y-3">
+         <li class="flex items-start gap-2"><span class="flex-shrink-0 text-red-600 font-bold">×</span> <span class="text-gray-700"><strong>Generate WGU Connect Community posts:</strong> Community posts should be thoughtfully written by you and focused on genuine engagement.</span></li>
+         <li class="flex items-start gap-2"><span class="flex-shrink-0 text-red-600 font-bold">×</span> <span class="text-gray-700"><strong>Generate or reply to student emails:</strong> Student emails must sound human, genuine, and personalized.</span></li>
+         <li class="flex items-start gap-2"><span class="flex-shrink-0 text-red-600 font-bold">×</span> <span class="text-gray-700"><strong>Complete Session Documentation:</strong> Student notes and Discussion Maps must be written directly by you.</span></li>
+        </ul>
+       </div>
+      </div>
+      <div class="mt-12 bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-10 border-l-8" style="border-left-color: #97E152;">
+       <p class="text-2xl md:text-3xl font-bold text-gray-900 leading-relaxed mb-4">Peer Coaching is built on peer interaction, lived experience, and intentional communication.</p>
+       <p class="text-2xl md:text-3xl font-bold" style="color: #002855;">AI may support your growth as a coach, but it must never replace you in the coaching relationship.</p>
+      </div>
+     </div>
+    </section>
+    <section class="py-16 fade-in" style="animation-delay: 0.7s;">
+     <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">What This Means in Practice</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="max-w-3xl mx-auto">
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">In Peer Coaching sessions and in internal work, peer coaches do not:</p>
+      <div class="space-y-3">
+       <div class="bg-white rounded-xl p-4 shadow-sm border-l-4" style="border-left-color: #DC2626;">
+        <p class="text-lg text-gray-700 flex items-center gap-2"><span class="text-red-600 font-bold">✗</span> Initiate AI-based discussions</p>
+       </div>
+       <div class="bg-white rounded-xl p-4 shadow-sm border-l-4" style="border-left-color: #DC2626;">
+        <p class="text-lg text-gray-700 flex items-center gap-2"><span class="text-red-600 font-bold">✗</span> Paste WGU course materials into AI tools</p>
+       </div>
+       <div class="bg-white rounded-xl p-4 shadow-sm border-l-4" style="border-left-color: #DC2626;">
+        <p class="text-lg text-gray-700 flex items-center gap-2"><span class="text-red-600 font-bold">✗</span> Ask students to place WGU content into AI systems</p>
+       </div>
+       <div class="bg-white rounded-xl p-4 shadow-sm border-l-4" style="border-left-color: #DC2626;">
+        <p class="text-lg text-gray-700 flex items-center gap-2"><span class="text-red-600 font-bold">✗</span> Store coaching session notes or student information in AI tools</p>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main>
+   <footer class="mt-12 py-8" style="background: #002855;">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+     <div class="flex justify-center gap-4 mb-4">
+      <div class="w-3 h-3 rounded-full" style="background: #0070F0;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #46B1EF;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #97E152;"></div>
+     </div>
+     <p class="text-white opacity-80 text-sm">Peer Coaching Policy &amp; Guidelines</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: "Peer Coaching Policy",
+      subtitle: "Understanding Our AI Boundary",
+      primary_color: "#002855",
+      accent_color: "#0070F0",
+      highlight_color: "#97E152",
+      text_color: "#374151",
+      font_family: "Inter",
+      font_size: 16
+    };
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          const titleEl = document.getElementById('main-title');
+          if (titleEl) titleEl.textContent = config.main_title || defaultConfig.main_title;
+
+          const subtitleEl = document.getElementById('subtitle');
+          if (subtitleEl) subtitleEl.textContent = config.subtitle || defaultConfig.subtitle;
+
+          const baseSize = config.font_size || defaultConfig.font_size;
+          document.body.style.fontSize = `${baseSize}px`;
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => { config.primary_color = value; window.elementSdk.setConfig({ primary_color: value }); }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => { config.accent_color = value; window.elementSdk.setConfig({ accent_color: value }); }
+            },
+            {
+              get: () => config.highlight_color || defaultConfig.highlight_color,
+              set: (value) => { config.highlight_color = value; window.elementSdk.setConfig({ highlight_color: value }); }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => { config.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => { config.font_family = value; window.elementSdk.setConfig({ font_family: value }); }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => { config.font_size = value; window.elementSdk.setConfig({ font_size: value }); }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["main_title", config.main_title || defaultConfig.main_title],
+          ["subtitle", config.subtitle || defaultConfig.subtitle]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d93c47fb7593ad5',t:'MTc3Mjk5MzEyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
