@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Peer Coaching</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    * { 
+      font-family: Arial, sans-serif;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: Arial, sans-serif;
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .section-divider {
+      height: 3px;
+      background: linear-gradient(90deg, #002855 0%, #0070F0 50%, #97E152 100%);
+      border-radius: 2px;
+    }
+
+    .draggable-item {
+      cursor: grab;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .draggable-item:active {
+      cursor: grabbing;
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+
+    .drop-zone {
+      min-height: 120px;
+      transition: all 0.2s ease;
+      border: 2px dashed transparent;
+      border-radius: 8px;
+    }
+
+    .drop-zone.drag-over {
+      background-color: rgba(151, 225, 82, 0.1);
+      border-color: #97E152;
+    }
+
+    .placed-item {
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app-wrapper" class="h-full w-full overflow-auto" style="background: #ffffff;">
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%);">
+    <div class="absolute inset-0 opacity-5">
+     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+       <pattern id="hero-pattern" x="0" y="0" width="80" height="80" patternunits="userSpaceOnUse">
+        <circle cx="40" cy="40" r="1" fill="white" />
+       </pattern>
+      </defs> <rect width="100%" height="100%" fill="url(#hero-pattern)" />
+     </svg>
+    </div>
+    <div class="relative max-w-6xl mx-auto px-6 py-20 text-center">
+     <div class="fade-in" style="animation-delay: 0.1s;">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(151, 225, 82, 0.2);">
+       <span class="w-2 h-2 rounded-full animate-pulse" style="background: #97E152;"></span> <span class="text-sm font-medium" style="color: #97E152;">Peer Coaching Mastery</span>
+      </div>
+     </div>
+     <h1 id="main-title" class="fade-in text-5xl md:text-6xl font-bold text-white mb-6" style="animation-delay: 0.2s;">Study Strategies Matter</h1>
+     <p id="subtitle" class="fade-in text-xl max-w-3xl mx-auto" style="color: rgba(255,255,255,0.95); animation-delay: 0.3s;">Learn how to help students build active learning skills</p>
+    </div>
+    <svg class="w-full" viewbox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveaspectratio="none" style="display: block; margin-bottom: -1px;">
+     <path d="M0 80V40C240 80 480 0 720 40C960 80 1200 0 1440 40V80H0Z" fill="#ffffff" />
+    </svg>
+   </header>
+   <main class="max-w-6xl mx-auto px-6">
+    <section class="py-16 fade-in" style="animation-delay: 0.5s;">
+     <div class="mb-12 max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6" style="color: #002855;">Why Study Strategies Matter</h2>
+      <p class="text-lg leading-relaxed text-gray-700 mb-6">Study strategies are the tools students use to learn, remember, and make sense of their course material. They involve actively working with information so it becomes clearer, more organized, and easier to recall later.</p>
+      <p class="text-lg leading-relaxed text-gray-700 mb-6">Peer coaches focus on helping students learn how to use these strategies so they can take ownership of their learning. Peer coaches do not coach students on course content itself. Instead, any discussion of course material happens only through the lens of a study strategy. The strategy comes first, and the content is used only as the practice material for applying that strategy. This keeps the focus on building learning skills while supporting students as they use those skills to understand their coursework. Content is not discussed in the absence of a strategy being applied.</p>
+     </div>
+     <div class="section-divider w-20 mx-auto my-12"></div>
+     <div class="mb-12 max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6" style="color: #002855;">How Strategies Help Students Learn</h2>
+      <p class="text-lg leading-relaxed text-gray-700 mb-6">When students use study strategies, they are not just reading or watching and hoping it sticks. They are actively doing something with the information. This helps them:</p>
+      <ul class="space-y-3 text-gray-700 text-lg mb-6 ml-6">
+       <li class="flex items-start"><span class="mr-3">•</span><span>Break large amounts of content into smaller, manageable parts</span></li>
+       <li class="flex items-start"><span class="mr-3">•</span><span>Put ideas into their own words</span></li>
+       <li class="flex items-start"><span class="mr-3">•</span><span>See how concepts connect to each other</span></li>
+       <li class="flex items-start"><span class="mr-3">•</span><span>Organize information in a way that makes sense to them</span></li>
+       <li class="flex items-start"><span class="mr-3">•</span><span>Remember what they studied when they need it on an assessment</span></li>
+      </ul>
+      <p class="text-lg leading-relaxed text-gray-700">Using strategies turns studying from something passive into something active. Instead of information just passing by, students are working with it, reshaping it, and checking their understanding.</p>
+     </div>
+     <div class="section-divider w-20 mx-auto my-12"></div>
+     <div class="mb-12 max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6" style="color: #002855;">Strategies Help Students Teach Themselves</h2>
+      <p class="text-lg leading-relaxed text-gray-700 mb-6">When students apply a strategy, they are essentially teaching themselves the material. They are deciding what the main ideas are, how to explain them in their own words, and how to organize them so they can be understood later.</p>
+      <p class="text-lg leading-relaxed text-gray-700 mb-6">This process helps students:</p>
+      <ul class="space-y-3 text-gray-700 text-lg mb-6 ml-6">
+       <li class="flex items-start"><span class="mr-3">•</span><span>Build real understanding instead of simply memorizing (low order thinking)</span></li>
+       <li class="flex items-start"><span class="mr-3">•</span><span>Notice and clarify what they do and do not understand</span></li>
+       <li class="flex items-start"><span class="mr-3">•</span><span>Catch confusion earlier</span></li>
+       <li class="flex items-start"><span class="mr-3">•</span><span>Make meaning out of complex or unfamiliar topics</span></li>
+       <li class="flex items-start"><span class="mr-3">•</span><span>Become more confident and independent learners</span></li>
+      </ul>
+      <p class="text-lg leading-relaxed text-gray-700">Peer coaches do not teach course content, but they support students in learning how to learn. By using strategies, students take an active role in building their own understanding rather than relying on someone else to explain everything to them.</p>
+     </div>
+     <div class="section-divider w-20 mx-auto my-12"></div>
+     <div class="mb-12 max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6" style="color: #002855;">Why This Matters in Peer Coaching</h2>
+      <p class="text-lg leading-relaxed text-gray-700 mb-6">Every course is different, but the skills students use to learn can carry across courses. When students learn how to use effective study strategies, they gain tools they can use again and again.</p>
+      <p class="text-lg leading-relaxed text-gray-700 mb-6">Study strategies help students:</p>
+      <ul class="space-y-3 text-gray-700 text-lg mb-6 ml-6">
+       <li class="flex items-start"><span class="mr-3">•</span><span>Learn more efficiently</span></li>
+       <li class="flex items-start"><span class="mr-3">•</span><span>Study with purpose instead of guessing what to do</span></li>
+       <li class="flex items-start"><span class="mr-3">•</span><span>Reduce overwhelm by having a clear approach</span></li>
+       <li class="flex items-start"><span class="mr-3">•</span><span>Prepare more effectively for assessments</span></li>
+       <li class="flex items-start"><span class="mr-3">•</span><span>Become more confident in their ability to figure things out</span></li>
+      </ul>
+      <p class="text-lg leading-relaxed text-gray-700">By focusing on strategies, peer coaches help students build skills that support not just one class, but their entire academic journey.</p>
+     </div>
+     <div class="section-divider w-20 mx-auto my-12"></div>
+     <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6" style="color: #002855;">Exploring the Peer Coaching Toolbox</h2>
+      <p class="text-lg leading-relaxed text-gray-700 mb-6">Peer coaches have access to more than 30 different study strategies, organized into areas like active recall, note-taking, graphic organizers, reading strategies, and more. These strategies are housed in the Peer Coaching Toolbox, where you can find templates, examples, and short demonstration videos that show what using each strategy can look like in practice.</p>
+      <p class="text-lg leading-relaxed text-gray-700 mb-8">Before moving on to the next quiz, you are encouraged to spend at least one hour exploring the toolbox. Take time to click through the different categories, review the strategy descriptions, look at the templates, and watch the demonstration videos. This will help you become familiar with the range of tools available and start building a sense of which strategies might fit different types of student challenges.</p>
+      <div class="text-center">
+       <a href="https://westerngovernorsuniversity.sharepoint.com/sites/SILeaderTeamSpace/SitePages/Peer-Coaching-Toolbox.aspx" target="_blank" rel="noopener noreferrer" class="inline-block px-12 py-4 rounded-lg font-semibold text-white transition-all hover:shadow-lg text-lg" style="background: #0070F0;">Explore the Peer Coaching Toolbox</a>
+      </div>
+     </div>
+    </section>
+   </main>
+   <footer class="mt-12 py-8" style="background: #002855;">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+     <div class="flex justify-center gap-4 mb-4">
+      <div class="w-3 h-3 rounded-full" style="background: #0070F0;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #46B1EF;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #97E152;"></div>
+     </div>
+     <p class="text-white opacity-80 text-sm">Peer Coaching Strategies for Success</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: "Study Strategies Matter",
+      subtitle: "Learn how to help students build active learning skills",
+      primary_color: "#002855",
+      accent_color: "#0070F0",
+      highlight_color: "#97E152",
+      text_color: "#374151",
+      font_family: "Inter",
+      font_size: 16
+    };
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          const titleEl = document.getElementById('main-title');
+          if (titleEl) titleEl.textContent = config.main_title || defaultConfig.main_title;
+
+          const subtitleEl = document.getElementById('subtitle');
+          if (subtitleEl) subtitleEl.textContent = config.subtitle || defaultConfig.subtitle;
+
+          const baseSize = config.font_size || defaultConfig.font_size;
+          document.body.style.fontSize = `${baseSize}px`;
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => { config.primary_color = value; window.elementSdk.setConfig({ primary_color: value }); }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => { config.accent_color = value; window.elementSdk.setConfig({ accent_color: value }); }
+            },
+            {
+              get: () => config.highlight_color || defaultConfig.highlight_color,
+              set: (value) => { config.highlight_color = value; window.elementSdk.setConfig({ highlight_color: value }); }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => { config.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => { config.font_family = value; window.elementSdk.setConfig({ font_family: value }); }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => { config.font_size = value; window.elementSdk.setConfig({ font_size: value }); }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["main_title", config.main_title || defaultConfig.main_title],
+          ["subtitle", config.subtitle || defaultConfig.subtitle]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d943551f1203ad5',t:'MTc3Mjk5Nzc0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
