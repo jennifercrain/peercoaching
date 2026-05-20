@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Peer Coaching</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    * { 
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      min-font-size: 10px;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+    }
+    
+    body {
+      font-size: 16px;
+    }
+    
+    p, div, span, li {
+      font-size: 16px;
+      min-font-size: 10px;
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .expandable-section {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .expandable-section.collapsed .content {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+    }
+    
+    .expandable-section.expanded .content {
+      max-height: 1000px;
+      opacity: 1;
+    }
+    
+    .expand-icon {
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+    
+    .expandable-section.collapsed .expand-icon {
+      transform: rotate(0deg);
+    }
+    
+    .expandable-section.expanded .expand-icon {
+      transform: rotate(180deg);
+    }
+    
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    
+    .note-option {
+      transition: all 0.2s ease;
+    }
+    
+    .note-option:hover {
+      transform: translateX(8px);
+    }
+    
+    @media (max-width: 768px) {
+      .pillar-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app-wrapper" class="h-full w-full overflow-auto" style="background: #ffffff;">
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%);">
+    <div class="absolute inset-0 opacity-5">
+     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs>
+       <pattern id="hero-pattern" x="0" y="0" width="80" height="80" patternunits="userSpaceOnUse">
+        <circle cx="40" cy="40" r="1" fill="white" />
+       </pattern>
+      </defs> <rect width="100%" height="100%" fill="url(#hero-pattern)" />
+     </svg>
+    </div>
+    <div class="relative max-w-6xl mx-auto px-6 py-20 text-center">
+     <div class="fade-in" style="animation-delay: 0.1s;">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(151, 225, 82, 0.2);"><span class="w-2 h-2 rounded-full animate-pulse" style="background: #97E152;"></span> <span class="text-sm font-medium" style="color: #97E152;">Peer Coaching Mastery</span>
+      </div>
+     </div>
+     <h1 id="main-title" class="fade-in text-5xl md:text-6xl font-bold text-white mb-6" style="animation-delay: 0.2s;">Student Notes</h1>
+     <p id="subtitle" class="fade-in text-xl max-w-3xl mx-auto" style="color: rgba(255,255,255,0.95); animation-delay: 0.3s;">Documenting student interactions and maintaining accurate records</p>
+    </div>
+    <svg class="w-full" viewbox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveaspectratio="none" style="display: block; margin-bottom: -1px;"><path d="M0,40 Q360,0 720,40 T1440,40 L1440,80 L0,80 Z" fill="#ffffff" />
+    </svg>
+   </header>
+   <main class="max-w-6xl mx-auto px-6">
+    <section class="py-16 fade-in" style="animation-delay: 0.5s;">
+     <div class="max-w-4xl mx-auto px-4">
+      <p class="text-base text-gray-700 leading-relaxed mb-8">Student Notes are a critical part of Peer Coaching. Documenting student interactions helps them maintain academic activity and creates a record of engagement for their Program Mentor and Course Instructor.</p><!-- Student Notes Requirements Section -->
+      <div class="mb-8 expandable-section expanded" style="background: #f0f4f8; border-radius: 8px; border-left: 4px solid #0070F0;">
+       <div class="p-6 cursor-pointer" onclick="this.closest('.expandable-section').classList.toggle('expanded'); this.closest('.expandable-section').classList.toggle('collapsed');">
+        <div class="flex justify-between items-center">
+         <h3 class="text-2xl font-bold" style="color: #002855;">Student Notes Requirements</h3><span class="expand-icon" style="color: #0070F0; font-size: 20px;">▼</span>
+        </div>
+       </div>
+       <div class="content px-6 pb-6" style="border-top: 1px solid rgba(0,112,240,0.1);">
+        <p class="text-base text-gray-700 mb-4 mt-4">All student note communication must be <span class="font-bold" style="color: #002855;">clear, complete, professional, and timely.</span></p>
+        <div class="mb-6 p-4 rounded" style="background: #002855; color: white;">
+         <p class="font-bold mb-2">⚠️ Critical Requirements</p>
+         <ul class="list-disc list-inside text-sm space-y-1">
+          <li>Following these requirements is <span class="font-bold">non-negotiable</span></li>
+          <li>Regular audits will provide feedback on your documentation</li>
+          <li>Failure to maintain accurate records can result in immediate end to internship</li>
+         </ul>
+        </div>
+        <p class="text-base font-bold mb-4" style="color: #002855;">The Four Pillars:</p>
+        <div class="pillar-grid mb-6">
+         <div class="p-4 rounded" style="background: white; border-left: 3px solid #0070F0;">
+          <p class="font-bold text-base mb-2" style="color: #0070F0;">Clear</p>
+          <p class="text-sm text-gray-700">Clearly summarize your interaction so others can easily understand the main points.</p>
+         </div>
+         <div class="p-4 rounded" style="background: white; border-left: 3px solid #97E152;">
+          <p class="font-bold text-base mb-2" style="color: #97E152;">Complete</p>
+          <p class="text-sm text-gray-700">Provide useful, relevant information including AFFIRM model description and next appointment date.</p>
+         </div>
+         <div class="p-4 rounded" style="background: white; border-left: 3px solid #0070F0;">
+          <p class="font-bold text-base mb-2" style="color: #0070F0;">Professional</p>
+          <p class="text-sm text-gray-700 mb-2"><span class="font-bold">DO NOT</span> document diagnoses, medical info, or personal details.</p>
+          <p class="text-xs italic text-gray-600">Instead of: "challenges with time management due to ADHD"<br>
+            Say: "history of challenges with time management"</p>
+         </div>
+         <div class="p-4 rounded" style="background: white; border-left: 3px solid #97E152;">
+          <p class="font-bold text-base mb-2" style="color: #97E152;">Timely</p>
+          <p class="text-sm text-gray-700">All documentation must be completed by end of shift the same day. Date cannot be changed.</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- Using the Student Note Form Section -->
+      <div class="mb-8 expandable-section expanded" style="background: #f0f4f8; border-radius: 8px; border-left: 4px solid #97E152;">
+       <div class="p-6 cursor-pointer" onclick="this.closest('.expandable-section').classList.toggle('expanded'); this.closest('.expandable-section').classList.toggle('collapsed');">
+        <div class="flex justify-between items-center">
+         <h3 class="text-2xl font-bold" style="color: #002855;">Using the Student Note Form</h3><span class="expand-icon" style="color: #97E152; font-size: 20px;">▼</span>
+        </div>
+       </div>
+       <div class="content px-6 pb-6" style="border-top: 1px solid rgba(151,225,82,0.1);">
+        <p class="text-base text-gray-700 mb-4 mt-4">The Student Note Form uploads interactions into Salesforce, allowing all WGU faculty and staff to see what support each student has received.</p>
+        <div class="mb-6 p-4 rounded" style="background: #97E152; color: #002855;">
+         <p class="font-bold mb-2">📌 Why Accurate Documentation Matters</p>
+         <p class="text-sm">A student on a "retake plan" needs Peer Coach support before CI approval. Without your note in Salesforce, the CI cannot approve the retake. Inaccurate notes prevent informed decisions about student support.</p>
+        </div>
+        <p class="text-base font-bold mb-4" style="color: #002855;">Note Form Options:</p>
+        <div class="space-y-3">
+         <div class="note-option p-4 rounded" style="background: white; border-left: 3px solid #0070F0;">
+          <p class="font-bold text-base mb-1">Live Call and Follow-up Email to Student</p>
+          <p class="text-sm text-gray-700">Phone call via Genesys Cloud (including Webex alongside). <span class="font-bold">This is chosen most of the time.</span></p>
+         </div>
+         <div class="note-option p-4 rounded" style="background: white; border-left: 3px solid #0070F0;">
+          <p class="font-bold text-base mb-1">Video Call and Follow-up Email to Student</p>
+          <p class="text-sm text-gray-700">Only Webex (for students with poor cell connectivity).</p>
+         </div>
+         <div class="note-option p-4 rounded" style="background: white; border-left: 3px solid #0070F0;">
+          <p class="font-bold text-base mb-1">Voicemail and Follow-up Email to Student</p>
+          <p class="text-sm text-gray-700">Used when student doesn't answer and you leave voicemail. All calls require student notes.</p>
+         </div>
+         <div class="note-option p-4 rounded" style="background: white; border-left: 3px solid #0070F0;">
+          <p class="font-bold text-base mb-1">Voicemail Full/Follow-up Email to Student</p>
+          <p class="text-sm text-gray-700">When voicemail inbox is full or not set up. All calls require student notes.</p>
+         </div>
+         <div class="note-option p-4 rounded" style="background: white; border-left: 3px solid #97E152;">
+          <p class="font-bold text-base mb-1">Email Exchange with Student</p>
+          <p class="text-sm text-gray-700">Student emails outside normal appointment process. All exchanges must be documented.</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- Key Takeaways Section -->
+      <div class="expandable-section expanded" style="background: #002855; border-radius: 8px; color: white; border-left: 4px solid #97E152;">
+       <div class="p-6 cursor-pointer" onclick="this.closest('.expandable-section').classList.toggle('expanded'); this.closest('.expandable-section').classList.toggle('collapsed');">
+        <div class="flex justify-between items-center">
+         <h3 class="text-2xl font-bold">Key Takeaways</h3><span class="expand-icon" style="color: #97E152; font-size: 20px;">▼</span>
+        </div>
+       </div>
+       <div class="content px-6 pb-6" style="border-top: 1px solid rgba(151,225,82,0.2);">
+        <ul class="list-disc list-inside text-base space-y-3 mt-4">
+         <li><span class="font-bold">Every interaction must be documented</span> — whether answered, voicemail, or email</li>
+         <li><span class="font-bold">Documentation same day</span> — complete before end of shift</li>
+         <li><span class="font-bold">Use professional language</span> — avoid diagnoses and personal details</li>
+         <li><span class="font-bold">Accurate notes support success</span> — helps PMs and CIs make informed decisions</li>
+         <li><span class="font-bold">This is non-negotiable</span> — essential to your role as Peer Coach</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main>
+   <footer class="mt-12 py-8" style="background: #002855;">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+     <div class="flex justify-center gap-4 mb-4">
+      <div class="w-3 h-3 rounded-full" style="background: #0070F0;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #46B1EF;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #97E152;"></div>
+     </div>
+     <p class="text-white opacity-80 text-sm">Welcome to Peer Coach Training at WGU</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: "Student Notes",
+      subtitle: "Documenting student interactions and maintaining accurate records",
+      primary_color: "#002855",
+      accent_color: "#0070F0",
+      highlight_color: "#97E152",
+      text_color: "#374151",
+      font_family: "Inter",
+      font_size: 16
+    };
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          const titleEl = document.getElementById('main-title');
+          if (titleEl) titleEl.textContent = config.main_title || defaultConfig.main_title;
+
+          const subtitleEl = document.getElementById('subtitle');
+          if (subtitleEl) subtitleEl.textContent = config.subtitle || defaultConfig.subtitle;
+
+          const baseSize = config.font_size || defaultConfig.font_size;
+          document.body.style.fontSize = `${baseSize}px`;
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => { config.primary_color = value; window.elementSdk.setConfig({ primary_color: value }); }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => { config.accent_color = value; window.elementSdk.setConfig({ accent_color: value }); }
+            },
+            {
+              get: () => config.highlight_color || defaultConfig.highlight_color,
+              set: (value) => { config.highlight_color = value; window.elementSdk.setConfig({ highlight_color: value }); }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => { config.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => { config.font_family = value; window.elementSdk.setConfig({ font_family: value }); }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => { config.font_size = value; window.elementSdk.setConfig({ font_size: value }); }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["main_title", config.main_title || defaultConfig.main_title],
+          ["subtitle", config.subtitle || defaultConfig.subtitle]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9fee691276a5b0a0',t:'MTc3OTMxMjI4OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
