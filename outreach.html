@@ -81,7 +81,8 @@
   <div id="app-wrapper" class="h-full w-full overflow-auto" style="background: #ffffff;">
    <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%);">
     <div class="absolute inset-0 opacity-5">
-     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs>
+     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
        <pattern id="hero-pattern" x="0" y="0" width="80" height="80" patternunits="userSpaceOnUse">
         <circle cx="40" cy="40" r="1" fill="white" />
        </pattern>
@@ -90,13 +91,15 @@
     </div>
     <div class="relative max-w-6xl mx-auto px-6 py-20 text-center">
      <div class="fade-in" style="animation-delay: 0.1s;">
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(151, 225, 82, 0.2);"><span class="w-2 h-2 rounded-full animate-pulse" style="background: #97E152;"></span> <span class="text-sm font-medium" style="color: #97E152;">Peer Coaching Mastery</span>
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(151, 225, 82, 0.2);">
+       <span class="w-2 h-2 rounded-full animate-pulse" style="background: #97E152;"></span> <span class="text-sm font-medium" style="color: #97E152;">Peer Coaching Mastery</span>
       </div>
      </div>
      <h1 id="main-title" class="fade-in text-5xl md:text-6xl font-bold text-white mb-6" style="animation-delay: 0.2s;">Outreach Calling</h1>
      <p id="subtitle" class="fade-in text-xl max-w-3xl mx-auto" style="color: rgba(255,255,255,0.95); animation-delay: 0.3s;">Proactively connect with students and build meaningful support relationships</p>
     </div>
-    <svg class="w-full" viewbox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveaspectratio="none" style="display: block; margin-bottom: -1px;"><path d="M0,40 Q360,0 720,40 T1440,40 L1440,80 L0,80 Z" fill="#ffffff" />
+    <svg class="w-full" viewbox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveaspectratio="none" style="display: block; margin-bottom: -1px;">
+     <path d="M0,40 Q360,0 720,40 T1440,40 L1440,80 L0,80 Z" fill="#ffffff" />
     </svg>
    </header>
    <main class="max-w-6xl mx-auto px-6">
@@ -106,53 +109,127 @@
       <div class="section-divider w-20 mx-auto mb-8"></div>
      </div>
      <div class="max-w-4xl mx-auto">
-      <p class="text-lg text-gray-700 leading-relaxed mb-12 text-center">Outreach calling is an opportunity to proactively connect with students, build rapport, and offer support before a student feels disengaged. The goal is to understand how students are doing, identify barriers, connect them to resources, and encourage continued engagement.</p>
+      <p class="text-lg text-gray-700 leading-relaxed mb-12 text-center">Outreach calling, sometimes referred to as care calling, is an opportunity to proactively connect with students, build rapport, and offer support before a student feels disengaged. Outreach calling is not scheduled by students and they may not be expecting a call. Because of this, Peer Coaches focus on creating a supportive, low-pressure conversation centered on curiosity, encouragement, and connection to helpful resources.</p>
+      <div class="mb-8 p-6 rounded-lg" style="background: rgba(0,40,85,0.05); border-left: 4px solid #0070F0;">
+       <p class="text-gray-700 font-semibold mb-3">With outreach, Peer Coaches aim to:</p>
+       <ul class="list-disc list-inside text-gray-700 space-y-2">
+        <li>Understand how the student is doing</li>
+        <li>Identify possible barriers or challenges</li>
+        <li>Connect the student to resources or strategies</li>
+        <li>Encourage continued engagement with their course and support systems</li>
+       </ul>
+      </div>
       <div class="space-y-8">
        <div class="bg-blue-50 p-8 rounded-lg border-l-4 border-blue-600">
         <h3 class="text-2xl font-bold mb-4" style="color: #002855;">Beginning the Call</h3>
-        <p class="text-gray-700 mb-4">Peer Coaches initiate outreach calls through Genesys Cloud using the Outreach Call List. If the student doesn't answer, leave a brief voicemail and follow up by email. If they answer, introduce yourself and ask if it's a good time to talk.</p>
-        <p class="text-gray-700 mb-4 font-semibold">Before discussing student information, verify identity by requesting:</p>
-        <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
+        <p class="text-gray-700 mb-4">Peer Coaches initiate outreach calls through Genesys Cloud using the Outreach Call List located on the appropriate course SharePoint.</p>
+        <p class="text-gray-700 mb-4 font-semibold">If the student does not answer:</p>
+        <p class="text-gray-700 mb-4">Leave a brief, professional voicemail and follow up by email.</p>
+        <div class="bg-white p-4 rounded-lg border-l-2 border-blue-400 italic text-gray-600 mb-6">
+         <p>"Hi, this is [Name] from WGU. I'm going to send a follow-up email, and I hope we can reconnect another time. Thank you!"</p>
+        </div>
+        <p class="text-gray-700 mb-4 font-semibold">If the student answers:</p>
+        <p class="text-gray-700 mb-4">Introduce yourself, explain your role, and ask whether it is a good time to talk.</p>
+        <div class="bg-white p-4 rounded-lg border-l-2 border-blue-400 italic text-gray-600 space-y-2 mb-6">
+         <p>"Hi [Student Name]! This is [Your Name], and I'm a Peer Coach at WGU. I was hoping we could chat for a few minutes. Is now a good time?"</p>
+         <p>"No problem! I'll send a follow-up email in hopes that we can connect another time. Have a great day!"</p>
+        </div>
+        <p class="text-gray-700 mb-4 font-semibold">Before discussing student information, verify the student's identity by requesting:</p>
+        <ul class="list-disc list-inside text-gray-700 space-y-2">
          <li>First and last name</li>
          <li>Program Mentor's name</li>
-         <li>Student ID number (or WGU username)</li>
+         <li>Student ID number (or WGU username if student doesn't have access to student ID)</li>
         </ul>
-        <div class="bg-white p-4 rounded-lg border-l-2 border-blue-400 italic text-gray-600">
-         <p>"Hi [Student Name]! This is [Your Name], and I'm a Peer Coach at WGU. I was hoping we could chat for a few minutes. Is now a good time?"</p>
-        </div>
        </div>
        <div class="bg-green-50 p-8 rounded-lg border-l-4" style="border-color: #97E152;">
         <h3 class="text-2xl font-bold mb-4" style="color: #002855;">Leading the Conversation</h3>
-        <p class="text-gray-700 mb-4">After verification, explain the purpose of the outreach call and explore the student's current experience. Focus on helping them reflect on challenges and identify where support may help.</p>
-        <div class="bg-white p-4 rounded-lg border-l-2 border-green-400 italic text-gray-600 space-y-2">
+        <p class="text-gray-700 mb-4">After verification, explain the purpose of the outreach call and begin exploring the student's current experience in the course. The goal is to help students reflect on their challenges and identify areas where support may be helpful or what they need to continue.</p>
+        <p class="text-gray-700 mb-4 font-semibold">Example questions:</p>
+        <div class="bg-white p-4 rounded-lg border-l-2 border-green-400 italic text-gray-600 space-y-2 mb-4">
          <p>• "How is [Course] going for you?"</p>
          <p>• "Is there anything in the course that's been feeling challenging lately?"</p>
          <p>• "What's been the hardest thing to juggle with school right now?"</p>
+         <p>• "Has anything surprised you about how this course is going?"</p>
          <p>• "What kind of support would make the biggest difference for you this week?"</p>
         </div>
+        <p class="text-gray-700 text-sm">Peer Coaches may briefly validate that a course can feel challenging while remaining focused on encouragement and problem-solving.</p>
        </div>
        <div class="bg-purple-50 p-8 rounded-lg border-l-4 border-purple-500">
         <h3 class="text-2xl font-bold mb-4" style="color: #002855;">Connecting Students to Support</h3>
-        <p class="text-gray-700 mb-4">Once a challenge is identified, introduce a relevant strategy, resource, or support service. Keep the conversation focused and approachable—outreach calls introduce support rather than provide in-depth coaching.</p>
+        <p class="text-gray-700 mb-4">Once a challenge or concern has been identified, introduce a relevant strategy, resource, or support service that may help the student move forward.</p>
         <p class="text-gray-700 mb-4 font-semibold">Resources may include:</p>
-        <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
+        <ul class="list-disc list-inside text-gray-700 space-y-2 mb-6">
          <li>Course resources or cohorts</li>
          <li>Academic Coaching Center articles or services</li>
-         <li>Live events and peer coaching appointments</li>
-         <li>Program Mentors and Student Services</li>
+         <li>Live events</li>
+         <li>Peer coaching appointments</li>
+         <li>Program Mentors</li>
+         <li>Student Services</li>
          <li>Student Wellbeing Services</li>
         </ul>
-        <p class="text-gray-700 text-sm italic">Briefly explain what the resource is, how it may help, and how to access it.</p>
+        <p class="text-gray-700 mb-4 font-semibold">Peer Coaches briefly explain:</p>
+        <ul class="list-disc list-inside text-gray-700 space-y-2 mb-6">
+         <li>What the resource is</li>
+         <li>How it may help</li>
+         <li>How the student can access it</li>
+        </ul>
+        <p class="text-gray-700 text-sm">If discussing a strategy, keep the conversation focused and approachable. Outreach calls are intended to introduce support and encourage engagement rather than provide in-depth coaching or lengthy instruction. If a student needs more detailed strategy support, encourage them to attend a live event or schedule an appointment for additional practice and guidance.</p>
        </div>
        <div class="bg-amber-50 p-8 rounded-lg border-l-4 border-amber-500">
-        <h3 class="text-2xl font-bold mb-4" style="color: #002855;">Closing the Call</h3>
-        <p class="text-gray-700 mb-4">Before ending, ask if the student has remaining questions or concerns. Close warmly and professionally while reinforcing continued support.</p>
-        <div class="bg-white p-4 rounded-lg border-l-2 border-amber-400 italic text-gray-600 space-y-2 mb-4">
-         <p>• "Before we wrap up, do you have any questions for me?"</p>
-         <p>• "Thank you so much for your time. It was really great talking with you."</p>
-         <p>• "If you need anything, feel free to reply to my email and we'll make sure you get connected to the right resources."</p>
+        <h3 class="text-2xl font-bold mb-4" style="color: #002855;">Inviting Students to Reconnect</h3>
+        <p class="text-gray-700 mb-4">Peer Coaches invite students to continue engaging with support services in a way that aligns with their role.</p>
+        <p class="text-gray-700 mb-3 font-semibold">For Appointment-Based Peer Coaches:</p>
+        <p class="text-gray-700 mb-4">Encourage students to schedule a future session for more individualized support.</p>
+        <div class="bg-white p-4 rounded-lg border-l-2 border-amber-400 italic text-gray-600 space-y-2 mb-6">
+         <p>"I also offer Peer Coaching appointments where we can walk through study strategies, explore resources together, or even just check in as accountability partners for this course."</p>
+         <p>"Would you be interested in scheduling time to reconnect?"</p>
         </div>
-        <p class="text-gray-700 text-sm"><span class="font-semibold">Follow-up:</span> Send a follow-up email containing relevant resources, scheduling links, and support information discussed. Log the call, complete documentation, and track interactions appropriately.</p>
+        <p class="text-gray-700 text-sm mb-4">If the student is interested, attempt to schedule the appointment during the call.</p>
+        <p class="text-gray-700 mb-3 font-semibold">For Live Event Coaches:</p>
+        <p class="text-gray-700 mb-4">Personally invite students to an upcoming live event and explain how the event may help support the student's goals or challenges.</p>
+        <div class="bg-white p-4 rounded-lg border-l-2 border-amber-400 italic text-gray-600 space-y-2 mb-4">
+         <p>"My next Live Event is coming up on [Date and Time], and we'll be talking about [Topic]."</p>
+         <p>"We're going to focus on [Strategy] and how it can help make that section of the course easier to break down."</p>
+        </div>
+        <p class="text-gray-700 text-sm">If the student cannot attend, provide a general appointment link or suggest alternative support options.</p>
+       </div>
+       <div class="bg-red-50 p-8 rounded-lg border-l-4 border-red-500">
+        <h3 class="text-2xl font-bold mb-4" style="color: #002855;">Closing the Call</h3>
+        <p class="text-gray-700 mb-4">Before ending the conversation, ask whether the student has any remaining questions or additional concerns.</p>
+        <div class="bg-white p-4 rounded-lg border-l-2 border-red-400 italic text-gray-600 space-y-2 mb-6">
+         <p>"Before we wrap up, do you have any questions for me?"</p>
+         <p>"Is there anything else I can help support you with today?"</p>
+        </div>
+        <p class="text-gray-700 mb-4">Close the call warmly and professionally while reinforcing continued support.</p>
+        <div class="bg-white p-4 rounded-lg border-l-2 border-red-400 italic text-gray-600 space-y-2 mb-6">
+         <p>"Thank you so much for your time. It was really great talking with you."</p>
+         <p>"If you need anything, feel free to reply to my email and we'll make sure you get connected to the right resources."</p>
+        </div>
+        <p class="text-gray-700 mb-3 font-semibold">Let students know they will receive a follow-up email containing:</p>
+        <ul class="list-disc list-inside text-gray-700 space-y-2">
+         <li>Relevant resources</li>
+         <li>Scheduling links or live event information</li>
+         <li>Additional support information discussed during the call</li>
+        </ul>
+       </div>
+       <div class="bg-indigo-50 p-8 rounded-lg border-l-4 border-indigo-500">
+        <h3 class="text-2xl font-bold mb-4" style="color: #002855;">Outreach Documentation and Procedures</h3>
+        <p class="text-gray-700 mb-4">After each outreach interaction, Peer Coaches complete the required documentation and follow-up tasks.</p>
+        <p class="text-gray-700 mb-4 font-semibold">This includes:</p>
+        <ul class="list-disc list-inside text-gray-700 space-y-2 mb-6">
+         <li>Logging the call start and end time on the Outreach Call List</li>
+         <li>Sending the follow-up email</li>
+         <li>BCC'ing their Supervisor and Manager</li>
+         <li>Completing the Outreach-Specific Student Note Form</li>
+         <li>Tracking outreach interactions appropriately on the Interaction Data Form</li>
+        </ul>
+        <p class="text-gray-700 mb-4 text-sm"><span class="font-semibold">Important:</span> Outreach interactions should be logged as Outreach interactions, not Email Exchanges. Email Exchanges are reserved for transactional back-and-forth email communication with students.</p>
+        <p class="text-gray-700 mb-3 font-semibold">All follow-up emails should be:</p>
+        <ul class="list-disc list-inside text-gray-700 space-y-2">
+         <li>Properly personalized</li>
+         <li>Professionally formatted</li>
+         <li>Aligned with expectations</li>
+        </ul>
        </div>
       </div>
      </div>
@@ -230,5 +307,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9fee4d5d12bc4f67',t:'MTc3OTMxMTE1NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9fee5213e0384f67',t:'MTc3OTMxMTM0Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
