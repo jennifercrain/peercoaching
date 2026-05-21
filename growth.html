@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Peer Coaching</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    * { 
+      font-family: Arial, sans-serif;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: Arial, sans-serif;
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .section-divider {
+      height: 3px;
+      background: linear-gradient(90deg, #002855 0%, #0070F0 50%, #97E152 100%);
+      border-radius: 2px;
+    }
+
+    .draggable-item {
+      cursor: grab;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .draggable-item:active {
+      cursor: grabbing;
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+
+    .drop-zone {
+      min-height: 120px;
+      transition: all 0.2s ease;
+      border: 2px dashed transparent;
+      border-radius: 8px;
+    }
+
+    .drop-zone.drag-over {
+      background-color: rgba(151, 225, 82, 0.1);
+      border-color: #97E152;
+    }
+
+    .placed-item {
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .technique-card {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .technique-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(0, 40, 85, 0.15);
+    }
+
+    .technique-card.expanded {
+      box-shadow: 0 12px 24px rgba(0, 40, 85, 0.15);
+    }
+
+    .technique-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+    }
+
+    .expand-icon {
+      transition: transform 0.3s ease;
+      width: 24px;
+      height: 24px;
+    }
+
+    .expand-icon.rotated {
+      transform: rotate(180deg);
+    }
+
+    .technique-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .technique-content.expanded {
+      max-height: 800px;
+      margin-top: 16px;
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app-wrapper" class="h-full w-full overflow-auto" style="background: #ffffff;">
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%);">
+    <div class="absolute inset-0 opacity-5">
+     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+       <pattern id="hero-pattern" x="0" y="0" width="80" height="80" patternunits="userSpaceOnUse">
+        <circle cx="40" cy="40" r="1" fill="white" />
+       </pattern>
+      </defs> <rect width="100%" height="100%" fill="url(#hero-pattern)" />
+     </svg>
+    </div>
+    <div class="relative max-w-6xl mx-auto px-6 py-16 text-center">
+     <div class="fade-in" style="animation-delay: 0.1s;">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-4" style="background: rgba(151, 225, 82, 0.2);">
+       <span class="w-2 h-2 rounded-full animate-pulse" style="background: #97E152;"></span> <span class="text-sm font-medium" style="color: #97E152;">Week Three Training</span>
+      </div>
+     </div>
+     <h1 id="main-title" class="fade-in text-5xl md:text-6xl font-bold text-white mb-4" style="animation-delay: 0.2s;">Feedback and Growth</h1>
+     <p id="subtitle" class="fade-in text-xl max-w-3xl mx-auto" style="color: rgba(255,255,255,0.95); animation-delay: 0.3s;">Embracing feedback as a foundation for continuous development</p>
+    </div>
+    <svg class="w-full" viewbox="0 0 1440 150" fill="none" xmlns="http://www.w3.org/2000/svg" preserveaspectratio="none" style="display: block; margin-bottom: -1px;">
+     <path d="M0,75 Q360,15 720,75 T1440,75 L1440,150 L0,150 Z" fill="#ffffff" />
+    </svg>
+   </header>
+   <main class="max-w-4xl mx-auto px-6">
+    <section class="py-12 fade-in" style="animation-delay: 0.5s;">
+     <div class="mb-12 text-center">
+      <h2 class="font-bold mb-4" style="color: #002855; font-size: 1.875rem;">What to Expect During Your Growth</h2>
+      <div class="section-divider w-24 mx-auto"></div>
+     </div>
+     <div class="bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-10">
+      <p class="text-gray-700 leading-relaxed mb-6" style="font-size: 1rem;">Internships are designed for development. They are an opportunity to build new skills, strengthen your practice, and grow both personally and professionally. Feedback is a key part of that process and will be provided regularly to support your continued development.</p>
+      <p class="text-gray-700 leading-relaxed mb-6" style="font-size: 1rem;">Feedback is intended to be constructive and respectful. It is centered on helping you refine your approach, build confidence, and develop into the strongest version of yourself in the Peer Coach role.</p>
+      <p class="text-gray-700 leading-relaxed mb-6" style="font-size: 1rem;">While training is designed to prepare you with essential skills to get started, it cannot cover every situation you may encounter. You may come across student interactions that feel unfamiliar or more challenging than what was covered in training. <strong>This is expected.</strong></p>
+      <p class="text-gray-700 leading-relaxed mb-6" style="font-size: 1rem;">When this happens, your leaders will provide feedback and coaching to help you adjust and prepare for similar situations in the future. The goal is not perfection coming out of training, but steady growth as you gain experience in the role.</p>
+      <p class="text-gray-700 leading-relaxed" style="font-size: 1rem;">Growth comes from trying, learning, and applying what you discover to improve your coaching skills over time.</p>
+     </div>
+    </section>
+    <section class="py-12 fade-in" style="animation-delay: 0.65s;">
+     <div class="mb-12 text-center">
+      <h2 class="font-bold mb-4" style="color: #002855; font-size: 1.875rem;">Having a Growth Mindset</h2>
+      <div class="section-divider w-24 mx-auto"></div>
+     </div>
+     <div class="bg-white rounded-xl p-10 mb-8">
+      <h3 class="font-bold mb-4" style="color: #002855; font-size: 1.25rem;">Understanding the Difference</h3>
+      <p class="text-gray-700 leading-relaxed mb-4" style="font-size: 1rem;">A fixed mindset tends to view feedback as criticism or a reflection of ability. In contrast, <strong>a growth mindset sees feedback as information that helps you improve over time.</strong></p>
+      <p class="text-gray-700 leading-relaxed mb-6" style="font-size: 1rem;">In this role, development is expected and ongoing, and feedback is a normal and valuable part of that process.</p>
+      <p class="text-gray-700 leading-relaxed mb-4" style="font-size: 1rem;"><strong style="color: #002855;">Example:</strong></p>
+      <div class="space-y-3 ml-4">
+       <div>
+        <p class="font-semibold text-gray-700 mb-1" style="font-size: 1rem;">❌ Fixed Mindset:</p>
+        <p class="text-gray-600 italic" style="font-size: 1rem;">"I'm just not good at handling that type of student interaction."</p>
+       </div>
+       <div>
+        <p class="font-semibold text-gray-700 mb-1" style="font-size: 1rem;">✅ Growth Mindset:</p>
+        <p class="text-gray-600 italic" style="font-size: 1rem;">"I haven't fully developed that skill yet, but I can improve it with practice and feedback."</p>
+       </div>
+      </div>
+     </div>
+     <div class="bg-blue-50 rounded-xl p-10">
+      <h3 class="font-bold mb-4" style="color: #002855; font-size: 1.25rem;">Taking Feedback Seriously</h3>
+      <p class="text-gray-700 leading-relaxed" style="font-size: 1rem;">There is an expectation that feedback is taken seriously and reasonably implemented. This does not mean perfection, but it does mean making a genuine effort to apply what is shared, adjust your approach, and show progress over time.</p>
+     </div>
+    </section>
+    <section class="py-12 fade-in" style="animation-delay: 0.8s;">
+     <div class="mb-12 text-center">
+      <h2 class="font-bold mb-4" style="color: #002855; font-size: 1.875rem;">Reflection and Reflective Practice</h2>
+      <div class="section-divider w-24 mx-auto"></div>
+     </div>
+     <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-10 mb-8">
+      <p class="text-gray-700 leading-relaxed mb-6" style="font-size: 1rem;">An important part of developing in this role is taking time to reflect on your experiences. Reflection helps you connect feedback, training, and real student interactions so you can continue to grow with intention.</p>
+      <p class="text-gray-700 leading-relaxed" style="font-size: 1rem;"><strong>Reflective practice</strong> means thinking through what went well, what was challenging, and what you might adjust moving forward. It is not about being overly critical of yourself, but about building awareness and improving your approach over time.</p>
+     </div>
+     <div class="grid md:grid-cols-3 gap-6 mb-8">
+      <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow">
+       <h3 class="font-bold mb-3" style="color: #002855; font-size: 1.125rem;">💭 What Went Well?</h3>
+       <p class="text-gray-700" style="font-size: 1rem;">Identify moments in a student interaction where you applied a strategy successfully or handled a situation with confidence.</p>
+      </div>
+      <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow">
+       <h3 class="font-bold mb-3" style="color: #002855; font-size: 1.125rem;">🔍 What Was Challenging?</h3>
+       <p class="text-gray-700" style="font-size: 1rem;">Notice areas where you felt uncertain or where you handled a situation differently than you might have hoped.</p>
+      </div>
+      <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow">
+       <h3 class="font-bold mb-3" style="color: #002855; font-size: 1.125rem;">📝 What Would You Adjust?</h3>
+       <p class="text-gray-700" style="font-size: 1rem;">Consider small changes or approaches that could improve similar situations in the future.</p>
+      </div>
+     </div>
+     <div class="bg-indigo-50 rounded-2xl p-10">
+      <h3 class="font-bold mb-4" style="color: #002855; font-size: 1.25rem;">The Feedback &amp; Reflection Cycle</h3>
+      <p class="text-gray-700 leading-relaxed" style="font-size: 1rem;">Reflection is also closely tied to feedback. When feedback is provided, taking time to reflect on it helps ensure it is understood and applied in a practical way. Over time, this cycle of feedback and reflection supports steady growth and stronger performance in the role.</p>
+     </div>
+    </section>
+   </main>
+   <footer class="mt-12 py-8" style="background: #002855;">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+     <div class="flex justify-center gap-4 mb-4">
+      <div class="w-3 h-3 rounded-full" style="background: #0070F0;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #46B1EF;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #97E152;"></div>
+     </div>
+     <p class="text-white opacity-80 text-sm">Welcome to Peer Coach Training at WGU</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: "Feedback and Growth",
+      subtitle: "Embracing feedback as a foundation for continuous development",
+      primary_color: "#002855",
+      accent_color: "#0070F0",
+      highlight_color: "#97E152",
+      text_color: "#374151",
+      font_family: "Inter",
+      font_size: 16
+    };
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          const titleEl = document.getElementById('main-title');
+          if (titleEl) titleEl.textContent = config.main_title || defaultConfig.main_title;
+
+          const subtitleEl = document.getElementById('subtitle');
+          if (subtitleEl) subtitleEl.textContent = config.subtitle || defaultConfig.subtitle;
+
+          const baseSize = config.font_size || defaultConfig.font_size;
+          document.body.style.fontSize = `${baseSize}px`;
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => { config.primary_color = value; window.elementSdk.setConfig({ primary_color: value }); }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => { config.accent_color = value; window.elementSdk.setConfig({ accent_color: value }); }
+            },
+            {
+              get: () => config.highlight_color || defaultConfig.highlight_color,
+              set: (value) => { config.highlight_color = value; window.elementSdk.setConfig({ highlight_color: value }); }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => { config.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => { config.font_family = value; window.elementSdk.setConfig({ font_family: value }); }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => { config.font_size = value; window.elementSdk.setConfig({ font_size: value }); }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["main_title", config.main_title || defaultConfig.main_title],
+          ["subtitle", config.subtitle || defaultConfig.subtitle]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ff53a09c4fc3767',t:'MTc3OTM4Mzc2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
