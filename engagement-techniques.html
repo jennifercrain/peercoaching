@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Peer Coaching</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    * { 
+      font-family: Arial, sans-serif;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: Arial, sans-serif;
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .section-divider {
+      height: 3px;
+      background: linear-gradient(90deg, #002855 0%, #0070F0 50%, #97E152 100%);
+      border-radius: 2px;
+    }
+
+    .draggable-item {
+      cursor: grab;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .draggable-item:active {
+      cursor: grabbing;
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+
+    .drop-zone {
+      min-height: 120px;
+      transition: all 0.2s ease;
+      border: 2px dashed transparent;
+      border-radius: 8px;
+    }
+
+    .drop-zone.drag-over {
+      background-color: rgba(151, 225, 82, 0.1);
+      border-color: #97E152;
+    }
+
+    .placed-item {
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app-wrapper" class="h-full w-full overflow-auto" style="background: #ffffff;">
+   <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%);">
+    <div class="absolute inset-0 opacity-5">
+     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs>
+       <pattern id="hero-pattern" x="0" y="0" width="80" height="80" patternunits="userSpaceOnUse">
+        <circle cx="40" cy="40" r="1" fill="white" />
+       </pattern>
+      </defs> <rect width="100%" height="100%" fill="url(#hero-pattern)" />
+     </svg>
+    </div>
+    <div class="relative max-w-6xl mx-auto px-6 py-20 text-center">
+     <div class="fade-in" style="animation-delay: 0.1s;">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(151, 225, 82, 0.2);"><span class="w-2 h-2 rounded-full animate-pulse" style="background: #97E152;"></span> <span class="text-sm font-medium" style="color: #97E152;">Week Three Training</span>
+      </div>
+     </div>
+     <h1 id="main-title" class="fade-in text-5xl md:text-6xl font-bold text-white mb-6" style="animation-delay: 0.2s;">Engagement Techniques</h1>
+     <p id="subtitle" class="fade-in text-xl max-w-3xl mx-auto" style="color: rgba(255,255,255,0.95); animation-delay: 0.3s;">Create interaction, encourage participation, and keep students actively involved</p>
+    </div>
+    <svg class="w-full" viewbox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg" preserveaspectratio="none" style="display: block; margin-bottom: -1px;"><path d="M0,50 Q360,10 720,50 T1440,50 L1440,100 L0,100 Z" fill="#ffffff" />
+    </svg>
+   </header>
+   <main class="max-w-6xl mx-auto px-6">
+    <section class="py-16 fade-in" style="animation-delay: 0.5s;">
+     <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">What Are Engagement Techniques?</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="max-w-3xl mx-auto space-y-6">
+      <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 border-l-4" style="border-left-color: #0070F0;">
+       <p class="text-lg text-gray-700 leading-relaxed mb-4">Engagement techniques help create interaction, encourage participation, and keep students actively involved during live sessions. While group discussion is important, Peer Coaches should vary engagement methods throughout the session rather than relying only on open discussion.</p>
+       <p class="text-lg font-semibold" style="color: #002855;">💡 Key Reminder: Always provide clear on-screen and verbal directions before asking students to participate.</p>
+      </div>
+     </div>
+    </section>
+    <section class="py-16 fade-in" style="animation-delay: 0.7s;">
+     <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4" style="color: #002855;">Engagement Techniques</h2>
+      <div class="section-divider w-20 mx-auto mb-8"></div>
+     </div>
+     <div class="grid md:grid-cols-1 gap-8 max-w-4xl mx-auto">
+      <div class="bg-white rounded-2xl p-8 shadow-md border-l-4" style="border-left-color: #0070F0;">
+       <h3 class="font-bold text-2xl mb-4" style="color: #002855;">Group Discussion</h3>
+       <div class="mb-6">
+        <h4 class="font-semibold text-lg mb-2" style="color: #0070F0;">What It Is</h4>
+        <p class="text-gray-700">An open discussion where students participate verbally on mic or through the chat.</p>
+       </div>
+       <div class="mb-6">
+        <h4 class="font-semibold text-lg mb-2" style="color: #0070F0;">What the Peer Coach Should Do</h4>
+        <ul class="list-disc list-inside text-gray-700 space-y-2 ml-2">
+         <li>Encourage students to join the conversation by unmuting or using the chat</li>
+         <li>Remind students they can use the hand raise feature if concerned about interrupting</li>
+         <li>Monitor participation and create opportunities for multiple students to contribute</li>
+         <li>Use follow-up questions and acknowledgements to keep discussion moving</li>
+        </ul>
+       </div>
+       <div>
+        <h4 class="font-semibold text-lg mb-2" style="color: #0070F0;">Why It Works</h4>
+        <p class="text-gray-700">Group discussion helps students feel connected to the session and encourages conversation between participants rather than only between the Peer Coach and students.</p>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-8 shadow-md border-l-4" style="border-left-color: #46B1EF;">
+       <h3 class="font-bold text-2xl mb-4" style="color: #002855;">Popcorn Responses</h3>
+       <div class="mb-6">
+        <h4 class="font-semibold text-lg mb-2" style="color: #46B1EF;">What It Is</h4>
+        <p class="text-gray-700">A fast-paced discussion technique where students all submit their responses at the same time in the chat.</p>
+       </div>
+       <div class="mb-6">
+        <h4 class="font-semibold text-lg mb-2" style="color: #46B1EF;">What the Peer Coach Should Do</h4>
+        <ul class="list-disc list-inside text-gray-700 space-y-2 ml-2">
+         <li>Ask students a question and have them type their response in the chat without pressing Enter yet</li>
+         <li>Once most students appear ready, give a clear signal such as "3…2…1…GO!" for everyone to submit at once</li>
+         <li>Review responses out loud and guide discussion based on common themes, differences, or strong examples</li>
+        </ul>
+       </div>
+       <div>
+        <h4 class="font-semibold text-lg mb-2" style="color: #46B1EF;">Why It Works</h4>
+        <p class="text-gray-700">This technique encourages broad participation, prevents students from copying earlier answers, and creates energy and anticipation in the session.</p>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-8 shadow-md border-l-4" style="border-left-color: #0070F0;">
+       <h3 class="font-bold text-2xl mb-4" style="color: #002855;">Participant Reactions ("Emoji Voting")</h3>
+       <div class="mb-6">
+        <h4 class="font-semibold text-lg mb-2" style="color: #0070F0;">What It Is</h4>
+        <p class="text-gray-700">A quick engagement strategy where students use reactions or emojis to respond to prompts, vote, or show agreement.</p>
+       </div>
+       <div class="mb-6">
+        <h4 class="font-semibold text-lg mb-2" style="color: #0070F0;">What the Peer Coach Should Do</h4>
+        <ul class="list-disc list-inside text-gray-700 space-y-2 ml-2">
+         <li>Show students where they can find the reaction feature in Webex</li>
+         <li>Ask a simple question or provide response options tied to specific emojis</li>
+         <li>Acknowledge the results verbally and use them to transition into discussion</li>
+        </ul>
+       </div>
+       <div>
+        <h4 class="font-semibold text-lg mb-2" style="color: #0070F0;">Why It Works</h4>
+        <p class="text-gray-700">Emoji voting provides a low-pressure way for students to participate and helps quickly gauge understanding, opinions, or energy levels.</p>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-8 shadow-md border-l-4" style="border-left-color: #46B1EF;">
+       <h3 class="font-bold text-2xl mb-4" style="color: #002855;">Polls</h3>
+       <div class="mb-6">
+        <h4 class="font-semibold text-lg mb-2" style="color: #46B1EF;">What It Is</h4>
+        <p class="text-gray-700">A structured way to collect student responses using a poll, survey, or chat-based question.</p>
+       </div>
+       <div class="mb-6">
+        <h4 class="font-semibold text-lg mb-2" style="color: #46B1EF;">What the Peer Coach Should Do</h4>
+        <ul class="list-disc list-inside text-gray-700 space-y-2 ml-2">
+         <li>Keep polls short and focused on one or two key questions</li>
+         <li>Use Webex polling tools or ask students to respond in the chat</li>
+         <li>Share the results with the group and facilitate discussion around the responses</li>
+        </ul>
+       </div>
+       <div>
+        <h4 class="font-semibold text-lg mb-2" style="color: #46B1EF;">Why It Works</h4>
+        <p class="text-gray-700">Polls increase interaction and help spark discussion, especially when questions do not have a single correct answer.</p>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-8 shadow-md border-l-4" style="border-left-color: #0070F0;">
+       <h3 class="font-bold text-2xl mb-4" style="color: #002855;">Round Robin</h3>
+       <div class="mb-6">
+        <h4 class="font-semibold text-lg mb-2" style="color: #0070F0;">What It Is</h4>
+        <p class="text-gray-700">A discussion technique where students take turns sharing ideas verbally or in the chat.</p>
+       </div>
+       <div class="mb-6">
+        <h4 class="font-semibold text-lg mb-2" style="color: #0070F0;">What the Peer Coach Should Do</h4>
+        <ul class="list-disc list-inside text-gray-700 space-y-2 ml-2">
+         <li>Explain participation expectations before beginning</li>
+         <li>Call on students one at a time to share their thoughts</li>
+         <li>Allow students the option to "pass" once if they are not ready to participate</li>
+         <li>Encourage respectful listening and acknowledge each response</li>
+        </ul>
+       </div>
+       <div>
+        <h4 class="font-semibold text-lg mb-2" style="color: #0070F0;">Why It Works</h4>
+        <p class="text-gray-700">Round Robin encourages balanced participation and ensures multiple voices are included in the conversation.</p>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main>
+   <footer class="mt-12 py-8" style="background: #002855;">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+     <div class="flex justify-center gap-4 mb-4">
+      <div class="w-3 h-3 rounded-full" style="background: #0070F0;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #46B1EF;"></div>
+      <div class="w-3 h-3 rounded-full" style="background: #97E152;"></div>
+     </div>
+     <p class="text-white opacity-80 text-sm">Welcome to Peer Coach Training at WGU</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: "Engagement Techniques",
+      subtitle: "Create interaction, encourage participation, and keep students actively involved",
+      primary_color: "#002855",
+      accent_color: "#0070F0",
+      highlight_color: "#97E152",
+      text_color: "#374151",
+      font_family: "Inter",
+      font_size: 16
+    };
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          const titleEl = document.getElementById('main-title');
+          if (titleEl) titleEl.textContent = config.main_title || defaultConfig.main_title;
+
+          const subtitleEl = document.getElementById('subtitle');
+          if (subtitleEl) subtitleEl.textContent = config.subtitle || defaultConfig.subtitle;
+
+          const baseSize = config.font_size || defaultConfig.font_size;
+          document.body.style.fontSize = `${baseSize}px`;
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => { config.primary_color = value; window.elementSdk.setConfig({ primary_color: value }); }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => { config.accent_color = value; window.elementSdk.setConfig({ accent_color: value }); }
+            },
+            {
+              get: () => config.highlight_color || defaultConfig.highlight_color,
+              set: (value) => { config.highlight_color = value; window.elementSdk.setConfig({ highlight_color: value }); }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => { config.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => { config.font_family = value; window.elementSdk.setConfig({ font_family: value }); }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => { config.font_size = value; window.elementSdk.setConfig({ font_size: value }); }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["main_title", config.main_title || defaultConfig.main_title],
+          ["subtitle", config.subtitle || defaultConfig.subtitle]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ff4ba3d40bdcefc',t:'MTc3OTM3ODUyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
