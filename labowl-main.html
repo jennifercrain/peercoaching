@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <style>
-    body { font-family: Arial, sans-serif; font-size: 14px; line-height: 1.8; }
+    body { font-family: Arial, sans-serif; font-size: 14px; line-height: 1.8; background: #f8fafc; }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -21,78 +21,68 @@
   <script src="/_sdk/resizing_sdk.js" type="text/javascript"></script>
  </head>
  <body data-template-id="__page-root" class="min-h-screen w-full">
-  <main class="max-w-5xl mx-auto px-6 py-10 space-y-12">
-   <!-- SECTION 1: Programming Labs -->
+  <main class="max-w-5xl mx-auto px-6 py-10 space-y-12"><!-- SECTION 1: Programming Labs -->
    <section class="anim-fade-up anim-d1">
     <div class="flex items-center gap-3 mb-5">
      <div class="w-1.5 h-10 rounded-full bg-[#0070F0]"></div>
-     <h1 data-template-id="main-heading" class="canva-text font-bold text-[#002855]">Programming Labs</h1>
+     <h1 class="font-bold text-[#002855] text-3xl">Programming Labs</h1>
     </div>
-    <p data-template-id="intro-text" class="canva-text text-[#333] mb-5">In many courses, traditional study strategies work well for helping students organize ideas and process information. Programming can feel different. When students are working inside platforms like zyBooks or another coding environment, the challenge often is not studying the material itself. The challenge is figuring out what to do when code does not behave the way they expected. In those moments, students are already in the middle of the task. They are trying to run code, interpret results, and understand what went wrong. Debugging is a real-time thinking process.</p>
+    <p class="text-[#333] mb-5">In many courses, traditional study strategies work well for helping students organize ideas and process information. Programming can feel different. When students are working inside platforms like zyBooks or another coding environment, the challenge often is not studying the material itself. The challenge is figuring out what to do when code does not behave the way they expected. In those moments, students are already in the middle of the task. They are trying to run code, interpret results, and understand what went wrong. Debugging is a real-time thinking process.</p>
     <div class="bg-[#f0f7ff] border-l-4 border-[#46B1EF] rounded-r-lg p-5 mb-4">
-     <h2 data-template-id="behaviors-heading" class="canva-text font-bold text-[#002855] mb-3">When Something Breaks</h2>
-     <p data-template-id="behaviors-intro" class="canva-text text-[#333] mb-3">When something breaks, students often begin reacting quickly instead of thinking through the situation. You may see students:</p>
+     <h2 class="font-bold text-[#002855] mb-3 text-base">When Something Breaks</h2>
+     <p class="text-[#333] mb-3">When something breaks, students often begin reacting quickly instead of thinking through the situation. You may see students:</p>
      <ul class="space-y-2 ml-1">
-      <li class="flex items-start gap-2"><i data-lucide="alert-circle" class="w-4 h-4 text-[#0070F0] shrink-0 mt-0.5"></i><span data-template-id="behavior-1" class="canva-text text-[#333]">Change several things at once</span></li>
-      <li class="flex items-start gap-2"><i data-lucide="alert-circle" class="w-4 h-4 text-[#0070F0] shrink-0 mt-0.5"></i><span data-template-id="behavior-2" class="canva-text text-[#333]">Run the program repeatedly without predicting what will happen</span></li>
-      <li class="flex items-start gap-2"><i data-lucide="alert-circle" class="w-4 h-4 text-[#0070F0] shrink-0 mt-0.5"></i><span data-template-id="behavior-3" class="canva-text text-[#333]">Skip reading the full error message</span></li>
-      <li class="flex items-start gap-2"><i data-lucide="alert-circle" class="w-4 h-4 text-[#0070F0] shrink-0 mt-0.5"></i><span data-template-id="behavior-4" class="canva-text text-[#333]">Lose track of what they have already tested</span></li>
+      <li class="flex items-start gap-2"><i data-lucide="alert-circle" class="w-4 h-4 text-[#0070F0] shrink-0 mt-0.5"></i><span class="text-[#333]">Change several things at once</span></li>
+      <li class="flex items-start gap-2"><i data-lucide="alert-circle" class="w-4 h-4 text-[#0070F0] shrink-0 mt-0.5"></i><span class="text-[#333]">Run the program repeatedly without predicting what will happen</span></li>
+      <li class="flex items-start gap-2"><i data-lucide="alert-circle" class="w-4 h-4 text-[#0070F0] shrink-0 mt-0.5"></i><span class="text-[#333]">Skip reading the full error message</span></li>
+      <li class="flex items-start gap-2"><i data-lucide="alert-circle" class="w-4 h-4 text-[#0070F0] shrink-0 mt-0.5"></i><span class="text-[#333]">Lose track of what they have already tested</span></li>
      </ul>
-     <p data-template-id="process-problem" class="canva-text text-[#333] mt-4 font-semibold">This suggests the issue is often not a study strategy problem, but a process problem.</p>
+     <p class="text-[#333] mt-4 font-semibold">This suggests the issue is often not a study strategy problem, but a process problem.</p>
     </div>
-    <p data-template-id="purpose-text" class="canva-text text-[#333]">Programming Labs exist to support students during these moments. These sessions give Peer Coaches a structured way to guide a student's thinking while they work through coding labs or assignments. Instead of focusing only on traditional study strategies, Programming Labs emphasize debugging literacy and intentional problem-solving.</p>
+    <p class="text-[#333]">Programming Labs exist to support students during these moments. These sessions give Peer Coaches a structured way to guide a student's thinking while they work through coding labs or assignments. Instead of focusing only on traditional study strategies, Programming Labs emphasize debugging literacy and intentional problem-solving.</p>
    </section><!-- SECTION 2: The Role of the Peer Coach -->
    <section class="anim-fade-up anim-d2">
-    <div data-template-id="role-banner" class="canva-section rounded-xl p-6 mb-5">
-     <h2 data-template-id="role-heading" class="canva-text font-bold text-white mb-2">The Role of the Peer Coach</h2>
-     <p data-template-id="role-text" class="canva-text text-white/90">Programming Labs still follow the philosophy of Peer Coaching. Peer Coaches are not teaching programming concepts, correcting syntax, rewriting code, or providing direct solutions. Instead, the role of the coach is to help students slow down, observe what is happening, and think through the problem step by step.</p>
+    <div class="rounded-xl p-6 mb-5" style="background: linear-gradient(135deg, #002855, #0070F0);">
+     <h2 class="font-bold text-white mb-2 text-2xl">The Role of the Peer Coach</h2>
+     <p class="text-white/90">Programming Labs still follow the philosophy of Peer Coaching. Peer Coaches are not teaching programming concepts, correcting syntax, rewriting code, or providing direct solutions. Instead, the role of the coach is to help students slow down, observe what is happening, and think through the problem step by step.</p>
     </div>
-    <p data-template-id="role-text-2" class="canva-text text-[#333] mb-5">Even if you immediately notice what might be wrong in the code, your role is not to provide the quick fix. Your role is to support the student's thinking process.</p>
+    <p class="text-[#333] mb-5">Even if you immediately notice what might be wrong in the code, your role is not to provide the quick fix. Your role is to support the student's thinking process.</p>
     <div class="grid sm:grid-cols-2 gap-3">
-     <div class="flex items-center gap-2 bg-white border border-[#46B1EF]/30 rounded-lg px-4 py-3">
-      <i data-lucide="check-circle" class="w-4 h-4 text-[#97E152] shrink-0"></i> <span data-template-id="helps-1" class="canva-text text-[#333]">Clarify the problem</span>
+     <div class="flex items-center gap-2 bg-white border border-[#46B1EF]/30 rounded-lg px-4 py-3"><i data-lucide="check-circle" class="w-4 h-4 text-[#97E152] shrink-0"></i> <span class="text-[#333]">Clarify the problem</span>
      </div>
-     <div class="flex items-center gap-2 bg-white border border-[#46B1EF]/30 rounded-lg px-4 py-3">
-      <i data-lucide="check-circle" class="w-4 h-4 text-[#97E152] shrink-0"></i> <span data-template-id="helps-2" class="canva-text text-[#333]">Interpret what they are seeing</span>
+     <div class="flex items-center gap-2 bg-white border border-[#46B1EF]/30 rounded-lg px-4 py-3"><i data-lucide="check-circle" class="w-4 h-4 text-[#97E152] shrink-0"></i> <span class="text-[#333]">Interpret what they are seeing</span>
      </div>
-     <div class="flex items-center gap-2 bg-white border border-[#46B1EF]/30 rounded-lg px-4 py-3">
-      <i data-lucide="check-circle" class="w-4 h-4 text-[#97E152] shrink-0"></i> <span data-template-id="helps-3" class="canva-text text-[#333]">Test ideas intentionally</span>
+     <div class="flex items-center gap-2 bg-white border border-[#46B1EF]/30 rounded-lg px-4 py-3"><i data-lucide="check-circle" class="w-4 h-4 text-[#97E152] shrink-0"></i> <span class="text-[#333]">Test ideas intentionally</span>
      </div>
-     <div class="flex items-center gap-2 bg-white border border-[#46B1EF]/30 rounded-lg px-4 py-3">
-      <i data-lucide="check-circle" class="w-4 h-4 text-[#97E152] shrink-0"></i> <span data-template-id="helps-4" class="canva-text text-[#333]">Reflect on what worked</span>
+     <div class="flex items-center gap-2 bg-white border border-[#46B1EF]/30 rounded-lg px-4 py-3"><i data-lucide="check-circle" class="w-4 h-4 text-[#97E152] shrink-0"></i> <span class="text-[#333]">Reflect on what worked</span>
      </div>
     </div>
-    <p data-template-id="role-closer" class="canva-text text-[#333] mt-5">This approach keeps sessions aligned with Peer Coaching's mission while still providing meaningful support in programming environments.</p>
+    <p class="text-[#333] mt-5">This approach keeps sessions aligned with Peer Coaching's mission while still providing meaningful support in programming environments.</p>
    </section><!-- SECTION 3: The Lab Owl Framework -->
    <section class="anim-fade-up anim-d3">
     <div class="flex items-center gap-3 mb-5">
      <div class="w-1.5 h-10 rounded-full bg-[#97E152]"></div>
-     <h2 data-template-id="framework-heading" class="canva-text font-bold text-[#002855]">The Lab Owl Framework</h2>
+     <h2 class="font-bold text-[#002855] text-2xl">The Lab Owl Framework</h2>
     </div>
-    <p data-template-id="framework-text" class="canva-text text-[#333] mb-3">To support Programming Lab sessions, we use a framework called Lab Owl. Lab Owl serves as a structured coaching guide that helps Peer Coaches facilitate debugging conversations without stepping into tutoring or direct instruction.</p>
-    <p data-template-id="framework-text-2" class="canva-text text-[#333] mb-3">Programming problems often feel overwhelming because students do not know where to start. Lab Owl gives both the Peer Coach and the student a clear direction for the conversation. It helps sessions remain structured, student-driven, focused on skill development, and aligned with Peer Coaching's mission.</p>
-    <p data-template-id="framework-text-3" class="canva-text text-[#333] mb-6">When you follow the Lab Owl process, you help students move from confusion to clarity while building stronger debugging habits. The framework slows down the student's process so they can clearly observe what is happening and make intentional decisions about what to test next.</p>
-    <h3 data-template-id="owl-helps-heading" class="canva-text font-bold text-[#002855] mb-4">Lab Owl Helps Students:</h3>
+    <p class="text-[#333] mb-3">To support Programming Lab sessions, we use a framework called Lab Owl. Lab Owl serves as a structured coaching guide that helps Peer Coaches facilitate debugging conversations without stepping into tutoring or direct instruction.</p>
+    <p class="text-[#333] mb-3">Programming problems often feel overwhelming because students do not know where to start. Lab Owl gives both the Peer Coach and the student a clear direction for the conversation. It helps sessions remain structured, student-driven, focused on skill development, and aligned with Peer Coaching's mission.</p>
+    <p class="text-[#333] mb-6">When you follow the Lab Owl process, you help students move from confusion to clarity while building stronger debugging habits. The framework slows down the student's process so they can clearly observe what is happening and make intentional decisions about what to test next.</p>
+    <h3 class="font-bold text-[#002855] mb-4 text-xl">Lab Owl Helps Students:</h3>
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-     <div data-template-id="owl-box-1" class="canva-card rounded-lg p-4 flex items-center gap-3" style="background: linear-gradient(135deg, #002855, #0070F0);">
-      <i data-lucide="search" class="w-5 h-5 text-[#97E152] shrink-0"></i> <span data-template-id="owl-helps-1" class="canva-text text-white font-medium">Identify where a problem begins</span>
+     <div class="rounded-lg p-4 flex items-center gap-3" style="background: linear-gradient(135deg, #002855, #0070F0);"><i data-lucide="search" class="w-5 h-5 text-[#97E152] shrink-0"></i> <span class="text-white font-medium">Identify where a problem begins</span>
      </div>
-     <div data-template-id="owl-box-2" class="canva-card rounded-lg p-4 flex items-center gap-3" style="background: linear-gradient(135deg, #002855, #0070F0);">
-      <i data-lucide="eye" class="w-5 h-5 text-[#97E152] shrink-0"></i> <span data-template-id="owl-helps-2" class="canva-text text-white font-medium">Observe what their program is doing</span>
+     <div class="rounded-lg p-4 flex items-center gap-3" style="background: linear-gradient(135deg, #002855, #0070F0);"><i data-lucide="eye" class="w-5 h-5 text-[#97E152] shrink-0"></i> <span class="text-white font-medium">Observe what their program is doing</span>
      </div>
-     <div data-template-id="owl-box-3" class="canva-card rounded-lg p-4 flex items-center gap-3" style="background: linear-gradient(135deg, #002855, #0070F0);">
-      <i data-lucide="flask-conical" class="w-5 h-5 text-[#97E152] shrink-0"></i> <span data-template-id="owl-helps-3" class="canva-text text-white font-medium">Isolate variables to test</span>
+     <div class="rounded-lg p-4 flex items-center gap-3" style="background: linear-gradient(135deg, #002855, #0070F0);"><i data-lucide="flask-conical" class="w-5 h-5 text-[#97E152] shrink-0"></i> <span class="text-white font-medium">Isolate variables to test</span>
      </div>
-     <div data-template-id="owl-box-4" class="canva-card rounded-lg p-4 flex items-center gap-3" style="background: linear-gradient(135deg, #002855, #0070F0);">
-      <i data-lucide="scan-line" class="w-5 h-5 text-[#97E152] shrink-0"></i> <span data-template-id="owl-helps-4" class="canva-text text-white font-medium">Recognize patterns in outputs</span>
+     <div class="rounded-lg p-4 flex items-center gap-3" style="background: linear-gradient(135deg, #002855, #0070F0);"><i data-lucide="scan-line" class="w-5 h-5 text-[#97E152] shrink-0"></i> <span class="text-white font-medium">Recognize patterns in outputs</span>
      </div>
-     <div data-template-id="owl-box-5" class="canva-card rounded-lg p-4 flex items-center gap-3" style="background: linear-gradient(135deg, #002855, #0070F0);">
-      <i data-lucide="rocket" class="w-5 h-5 text-[#97E152] shrink-0"></i> <span data-template-id="owl-helps-5" class="canva-text text-white font-medium">Build independent debugging habits</span>
+     <div class="rounded-lg p-4 flex items-center gap-3" style="background: linear-gradient(135deg, #002855, #0070F0);"><i data-lucide="rocket" class="w-5 h-5 text-[#97E152] shrink-0"></i> <span class="text-white font-medium">Build independent debugging habits</span>
      </div>
     </div>
    </section>
   </main>
   <script src="/_sdk/editing_sdk.js"></script>
   <script>lucide.createIcons();</script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a00ddb322f4a0f46',t:'MTc3OTY0MjAyMg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a00de36698c5ed71',t:'MTc3OTY0MjM1OA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
