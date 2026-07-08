@@ -7,96 +7,89 @@
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <style>
-  body { font-family: Arial, Helvetica, sans-serif; }
-  .flip-card { perspective: 1200px; background: transparent; border: none; padding: 0; cursor: pointer; }
-  .flip-inner {
-    position: relative; width: 100%; height: 100%;
-    transition: transform 0.6s cubic-bezier(.4,.2,.2,1);
-    transform-style: preserve-3d;
-  }
-  .flip-card.is-flipped .flip-inner { transform: rotateY(180deg); }
-  .flip-front, .flip-back {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    backface-visibility: hidden; -webkit-backface-visibility: hidden;
-    border-radius: 20px; overflow: hidden;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding: 1.5rem; box-shadow: 0 10px 30px rgba(0,40,85,0.12);
-  }
-  .flip-front { border: none; position: relative; background: var(--bg-color); }
-  .flip-front span { display: block; line-height: 1 !important; }
-  .flip-front[data-template-id="card-1-front"] { --bg-color: #0070F0; box-shadow: 0 8px 20px rgba(0,112,240,0.2), 0 0 30px rgba(0,112,240,0.1); }
-  .flip-front[data-template-id="card-2-front"] { --bg-color: #46B1EF; box-shadow: 0 8px 20px rgba(70,177,239,0.2), 0 0 30px rgba(70,177,239,0.1); }
-  .flip-front[data-template-id="card-3-front"] { --bg-color: #97E152; box-shadow: 0 8px 20px rgba(151,225,82,0.25), 0 0 30px rgba(151,225,82,0.15); }
-  .flip-front[data-template-id="card-4-front"] { --bg-color: #0070F0; box-shadow: 0 8px 20px rgba(0,112,240,0.2), 0 0 30px rgba(0,112,240,0.1); }
-  .flip-front[data-template-id="card-5-front"] { --bg-color: #46B1EF; box-shadow: 0 8px 20px rgba(70,177,239,0.2), 0 0 30px rgba(70,177,239,0.1); }
-  .flip-back { transform: rotateY(180deg); text-align: center; align-items: flex-start; justify-content: flex-start; display: flex; flex-direction: column; }
-  .flip-back-content { flex: 1; width: 100%; display: flex; flex-direction: column; align-items: center; }
-  .flip-back-icons { width: 100%; display: flex; justify-content: center; gap: 0.5rem; }
-  .flip-card:focus-visible .flip-inner { outline: 3px solid #002855; outline-offset: 4px; border-radius: 20px; }
-  .summary-hidden { opacity: 0; transform: translateY(20px); pointer-events: none; }
-  .summary-shown { opacity: 1; transform: translateY(0); transition: opacity .6s ease, transform .6s ease; }
-</style>
-  <script src="/_sdk/0179d719c431a79e.data_sdk.js" type="text/javascript" integrity="sha512-OsRvJkI5GkC3MJQcgotQYotpzrMSX415GiKKgvYdxQEEkzD/fdchShO2FMSy0PJr/tiINMXOk5Vl2zAgg6bUiA=="></script>
+    body { font-family: Arial, Helvetica, sans-serif; }
+    .flip-card { perspective: 1200px; background: transparent; border: none; padding: 0; cursor: pointer; }
+    .flip-inner {
+      position: relative; width: 100%; height: 100%;
+      transition: transform 0.6s cubic-bezier(.4,.2,.2,1);
+      transform-style: preserve-3d;
+    }
+    .flip-card.is-flipped .flip-inner { transform: rotateY(180deg); }
+    .flip-front, .flip-back {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      backface-visibility: hidden; -webkit-backface-visibility: hidden;
+      border-radius: 20px; overflow: hidden;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 1.5rem; box-shadow: 0 10px 30px rgba(0,40,85,0.12);
+    }
+    .flip-front { border: none; }
+    .flip-front span { display: block; line-height: 1 !important; }
+    .flip-back { transform: rotateY(180deg); text-align: center; align-items: flex-start; justify-content: flex-start; }
+    .flip-back-content { flex: 1; width: 100%; display: flex; flex-direction: column; align-items: center; }
+    .flip-back-icons { width: 100%; display: flex; justify-content: center; gap: 0.5rem; }
+    .flip-card:focus-visible .flip-inner { outline: 3px solid #002855; outline-offset: 4px; border-radius: 20px; }
+  </style>
   <script src="/_sdk/9432170dbd2ae0df.resizing_sdk.js" type="text/javascript" integrity="sha512-FeT+58sb1f9ejWPWFjCbJvTT+SDwGV+ngrHUnlO7TWEOoqwOLj6p256kO3vOL7DIWl1cIgrobiof8v2bOigwPg=="></script>
+  <script src="/_sdk/0179d719c431a79e.data_sdk.js" type="text/javascript" integrity="sha512-OsRvJkI5GkC3MJQcgotQYotpzrMSX415GiKKgvYdxQEEkzD/fdchShO2FMSy0PJr/tiINMXOk5Vl2zAgg6bUiA=="></script>
  </head>
  <body data-template-id="__page-root" class="min-h-screen w-full">
   <div class="w-full max-w-6xl mx-auto px-4 sm:px-6 py-10">
    <header data-template-id="header-section" class="canva-header text-center mb-10">
-    <h1 data-template-id="page-title" class="canva-text font-bold" style="color: #002855; font-weight: bold; font-size: 28px;">C.O.A.C.H. Ethical AI Framework</h1>
-    <p data-template-id="page-subtitle" class="canva-text mt-3 max-w-2xl mx-auto" style="color: #002855;">Click each letter card to reveal what it stands for.</p>
-   </header><!-- Flip cards -->
+    <h1 data-template-id="page-title" class="canva-text font-bold"></h1>
+    <p data-template-id="page-subtitle" class="canva-text mt-3 max-w-2xl mx-auto"></p>
+   </header>
    <main>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6"><!-- Card 1: C - Clarity --> <button type="button" class="flip-card" data-card="0" aria-pressed="false" style="aspect-ratio:3/4;">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6"><!-- Card 1: C - Clarity --> <button type="button" class="flip-card" aria-pressed="false" style="aspect-ratio:3/4;">
       <div class="flip-inner">
-       <div data-template-id="card-1-front" class="canva-card flip-front"><span data-template-id="card-1-letter" class="canva-text font-bold" style="font-size:72px;line-height:1;color: #ffffff;">C</span>
+       <div data-template-id="card-1-front" class="canva-card flip-front"><span data-template-id="card-1-letter" class="canva-text font-bold"></span>
        </div>
        <div data-template-id="card-1-back" class="canva-card flip-back">
-        <div class="flip-back-content"><span data-template-id="card-1-term" class="canva-text font-bold text-center w-full" style="font-size:1.75rem;color: #0070F0;">Clarity</span>
-         <p data-template-id="card-1-desc" class="canva-text mt-4 text-center" style="font-size:0.95rem;color: #002855;">Ensure inputs and outputs are clear, accurate, and understandable; avoid misleading or ambiguous information.</p>
+        <div class="flip-back-content"><span data-template-id="card-1-term" class="canva-text font-bold text-center w-full"></span>
+         <p data-template-id="card-1-desc" class="canva-text mt-4 text-center"></p>
         </div>
         <div class="flip-back-icons"><i data-lucide="lightbulb" style="width:32px;height:32px;color:#0070F0;"></i>
         </div>
        </div>
-      </div></button> <!-- Card 2: O - Ownership --> <button type="button" class="flip-card" data-card="1" aria-pressed="false" style="aspect-ratio:3/4;">
+      </div></button> <!-- Card 2: O - Ownership --> <button type="button" class="flip-card" aria-pressed="false" style="aspect-ratio:3/4;">
       <div class="flip-inner">
-       <div data-template-id="card-2-front" class="canva-card flip-front"><span data-template-id="card-2-letter" class="canva-text font-bold" style="font-size:72px;line-height:1;color: #ffffff;">O</span>
+       <div data-template-id="card-2-front" class="canva-card flip-front"><span data-template-id="card-2-letter" class="canva-text font-bold"></span>
        </div>
        <div data-template-id="card-2-back" class="canva-card flip-back">
-        <div class="flip-back-content"><span data-template-id="card-2-term" class="canva-text font-bold text-center w-full" style="font-size:1.75rem;color: #46B1EF;">Ownership</span>
-         <p data-template-id="card-2-desc" class="canva-text mt-4 text-center" style="font-size:0.95rem;color: #002855;">Take responsibility for how AI is used, including verifying results and being accountable for decisions.</p>
+        <div class="flip-back-content"><span data-template-id="card-2-term" class="canva-text font-bold text-center w-full"></span>
+         <p data-template-id="card-2-desc" class="canva-text mt-4 text-center"></p>
         </div>
         <div class="flip-back-icons"><i data-lucide="heart-handshake" style="width:32px;height:32px;color:#46B1EF;"></i>
         </div>
        </div>
-      </div></button> <!-- Card 3: A - Alignment --> <button type="button" class="flip-card" data-card="2" aria-pressed="false" style="aspect-ratio:3/4;">
+      </div></button> <!-- Card 3: A - Alignment --> <button type="button" class="flip-card" aria-pressed="false" style="aspect-ratio:3/4;">
       <div class="flip-inner">
-       <div data-template-id="card-3-front" class="canva-card flip-front"><span data-template-id="card-3-letter" class="canva-text font-bold" style="font-size:72px;line-height:1;color: #ffffff;">A</span>
+       <div data-template-id="card-3-front" class="canva-card flip-front"><span data-template-id="card-3-letter" class="canva-text font-bold"></span>
        </div>
        <div data-template-id="card-3-back" class="canva-card flip-back">
-        <div class="flip-back-content"><span data-template-id="card-3-term" class="canva-text font-bold text-center w-full" style="font-size:1.75rem;color: #97E152;">Alignment</span>
-         <p data-template-id="card-3-desc" class="canva-text mt-4 text-center" style="font-size:0.95rem;color: #002855;">Use AI in ways that align with ethical standards, institutional policies, and intended purposes.</p>
+        <div class="flip-back-content"><span data-template-id="card-3-term" class="canva-text font-bold text-center w-full"></span>
+         <p data-template-id="card-3-desc" class="canva-text mt-4 text-center"></p>
         </div>
         <div class="flip-back-icons"><i data-lucide="compass" style="width:32px;height:32px;color:#97E152;"></i>
         </div>
        </div>
-      </div></button> <!-- Card 4: C - Confidentiality --> <button type="button" class="flip-card" data-card="3" aria-pressed="false" style="aspect-ratio:3/4;">
+      </div></button> <!-- Card 4: C - Confidentiality --> <button type="button" class="flip-card" aria-pressed="false" style="aspect-ratio:3/4;">
       <div class="flip-inner">
-       <div data-template-id="card-4-front" class="canva-card flip-front"><span data-template-id="card-4-letter" class="canva-text font-bold" style="font-size:72px;line-height:1;color: #ffffff;">C</span>
+       <div data-template-id="card-4-front" class="canva-card flip-front"><span data-template-id="card-4-letter" class="canva-text font-bold"></span>
        </div>
        <div data-template-id="card-4-back" class="canva-card flip-back">
-        <div class="flip-back-content"><span data-template-id="card-4-term" class="canva-text font-bold text-center w-full" style="font-size:1.75rem;color: #0070F0;">Confidentiality</span>
-         <p data-template-id="card-4-desc" class="canva-text mt-4 text-center" style="font-size:0.95rem;color: #002855;">Protect sensitive data and privacy; never input or share restricted or personal information improperly.</p>
+        <div class="flip-back-content"><span data-template-id="card-4-term" class="canva-text font-bold text-center w-full"></span>
+         <p data-template-id="card-4-desc" class="canva-text mt-4 text-center"></p>
         </div>
         <div class="flip-back-icons"><i data-lucide="lock" style="width:32px;height:32px;color:#0070F0;"></i>
         </div>
        </div>
-      </div></button> <!-- Card 5: H - Human-Centeredness --> <button type="button" class="flip-card" data-card="4" aria-pressed="false" style="aspect-ratio:3/4;">
+      </div></button> <!-- Card 5: H - Human-Centeredness --> <button type="button" class="flip-card" aria-pressed="false" style="aspect-ratio:3/4;">
       <div class="flip-inner">
-       <div data-template-id="card-5-front" class="canva-card flip-front"><span data-template-id="card-5-letter" class="canva-text font-bold" style="font-size:72px;line-height:1;color: #ffffff;">H</span>
+       <div data-template-id="card-5-front" class="canva-card flip-front"><span data-template-id="card-5-letter" class="canva-text font-bold"></span>
        </div>
        <div data-template-id="card-5-back" class="canva-card flip-back">
-        <div class="flip-back-content"><span data-template-id="card-5-term" class="canva-text font-bold text-center w-full" style="font-size:1.75rem;color: #46B1EF;">Human-Centeredness</span>
-         <p data-template-id="card-5-desc" class="canva-text mt-4 text-center" style="font-size:0.95rem;color: #002855;">Prioritize human judgment, well-being, and fairness—AI supports decisions, not replaces responsibility.</p>
+        <div class="flip-back-content"><span data-template-id="card-5-term" class="canva-text font-bold text-center w-full"></span>
+         <p data-template-id="card-5-desc" class="canva-text mt-4 text-center"></p>
         </div>
         <div class="flip-back-icons"><i data-lucide="users" style="width:32px;height:32px;color:#46B1EF;"></i>
         </div>
@@ -109,14 +102,12 @@
   <script>
     lucide.createIcons();
 
-    const cards = document.querySelectorAll('.flip-card');
-
-    cards.forEach(card => {
+    document.querySelectorAll('.flip-card').forEach(card => {
       card.addEventListener('click', () => {
         const flipped = card.classList.toggle('is-flipped');
         card.setAttribute('aria-pressed', String(flipped));
       });
     });
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a17f4d9730058dfe',t:'MTc4MzUxNTk1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a17f5a24f3298dfe',t:'MTc4MzUxNjQ2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
