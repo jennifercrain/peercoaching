@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Coaching for Objective Assessments</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="/_sdk/element_sdk.js"></script>
+<style>
+    * {
+      font-family: Arial, sans-serif;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: Arial, sans-serif;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-divider {
+      height: 3px;
+      background: linear-gradient(90deg, #002855 0%, #0070F0 50%, #97E152 100%);
+      border-radius: 2px;
+    }
+
+    .draggable-item {
+      cursor: grab;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .draggable-item:active {
+      cursor: grabbing;
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+
+    .drop-zone {
+      min-height: 120px;
+      transition: all 0.2s ease;
+      border: 2px dashed transparent;
+      border-radius: 8px;
+    }
+
+    .drop-zone.drag-over {
+      background-color: rgba(151, 225, 82, 0.1);
+      border-color: #97E152;
+    }
+
+    .placed-item {
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+<style>body { box-sizing: border-box; }</style>
+<script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+</head>
+<body class="h-full">
+<div class="h-full w-full overflow-auto" id="app-wrapper" style="background: #ffffff;">
+<header class="relative overflow-hidden" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%);">
+<div class="absolute inset-0 opacity-5">
+<svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="80" id="hero-pattern" patternunits="userSpaceOnUse" width="80" x="0" y="0">
+<circle cx="40" cy="40" fill="white" r="1"></circle>
+</pattern>
+</defs>
+<rect fill="url(#hero-pattern)" height="100%" width="100%"></rect>
+</svg>
+</div>
+<div class="relative max-w-6xl mx-auto px-6 py-20 text-center">
+<div class="fade-in" style="animation-delay: 0.1s;">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(151, 225, 82, 0.2);">
+<span class="w-2 h-2 rounded-full animate-pulse" style="background: #97E152;"></span> <span class="text-sm font-medium" style="color: #97E152;">Week Two Training</span>
+</div>
+</div>
+<h1 class="fade-in text-5xl md:text-6xl font-bold text-white mb-6" id="main-title" style="animation-delay: 0.2s;">Coaching for Objective Assessments</h1>
+<p class="fade-in text-xl max-w-3xl mx-auto" id="subtitle" style="color: rgba(255,255,255,0.95); animation-delay: 0.3s;">Helping students prepare to show what they know</p>
+</div>
+<svg class="w-full" fill="none" preserveaspectratio="none" style="display: block; margin-bottom: -1px;" viewbox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 80V40C240 80 480 0 720 40C960 80 1200 0 1440 40V80H0Z" fill="#ffffff"></path>
+</svg>
+</header>
+<main class="max-w-6xl mx-auto px-6">
+<section class="py-16 fade-in" style="animation-delay: 0.5s;">
+<div class="mb-12 max-w-4xl mx-auto">
+<h2 class="text-3xl font-bold mb-6" style="color: #002855;">Coaching for OA Success</h2>
+<p class="text-lg leading-relaxed text-gray-700 mb-6">Students may come to Peer Coaches because they are nervous about an upcoming Objective Assessment, struggled on a previous attempt, feel thrown off by assessment questions, or simply want help preparing.</p>
+<p class="text-lg leading-relaxed text-gray-700 mb-6">Peer support does not focus on predicting what will be on the assessment or determining whether a student knows enough to pass. Instead, interns help students strengthen the <strong>process of preparing for and approaching an assessment.</strong></p>
+<p class="text-lg leading-relaxed text-gray-700 mb-4">This may include:</p>
+<ul class="space-y-3 text-gray-700 text-lg mb-6 ml-6">
+<li class="flex items-start"><span class="mr-3">•</span><span>Practicing test-taking strategies</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>Building confidence with unfamiliar or scenario-based questions</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>Using a whiteboard effectively</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>Identifying patterns that contribute to second-guessing or rushing</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>Practicing retrieval and application of course material</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>Connecting students to approved assessment and proctoring resources</span></li>
+</ul>
+<p class="text-lg leading-relaxed font-semibold" style="color: #002855;">The goal is not to prepare students for the questions they will see. The goal is to help students use what they know regardless of how a question is presented.</p>
+</div>
+<div class="section-divider w-20 mx-auto my-12"></div>
+<div class="mb-12 max-w-4xl mx-auto">
+<h2 class="text-3xl font-bold mb-6" style="color: #002855;">Look for Opportunities to Practice</h2>
+<p class="text-lg leading-relaxed text-gray-700 mb-6">OA strategies are most useful when students actually <strong>practice using them.</strong></p>
+<p class="text-lg leading-relaxed text-gray-700 mb-4">Avoid simply recommending a strategy and moving on.</p>
+<div class="rounded-lg p-6 mb-6" style="background: #f3f7fb; border-left: 4px solid #0070F0;">
+<p class="text-lg font-bold mb-2" style="color: #002855;">Instead of:</p>
+<p class="text-lg italic text-gray-700">“You should try using a whiteboard during your OA.”</p>
+</div>
+<div class="rounded-lg p-6 mb-6" style="background: rgba(151, 225, 82, 0.10); border-left: 4px solid #97E152;">
+<p class="text-lg font-bold mb-2" style="color: #002855;">Practice it:</p>
+<p class="text-lg leading-relaxed text-gray-700">Pull up a small section of course material and an interactive whiteboard, such as a Canva whiteboard. Help the student identify information they may want available quickly during an assessment and practice organizing or writing it from memory.</p>
+</div>
+<p class="text-lg leading-relaxed text-gray-700 mb-8">The student leaves having actually rehearsed the process instead of only hearing about it.</p>
+<h3 class="text-2xl font-bold mb-5" style="color: #002855;">Other Opportunities for Practice</h3>
+<div class="space-y-5">
+<div><p class="text-lg font-semibold text-gray-800 mb-1">“I always get stuck between two answers.”</p><p class="text-lg text-gray-700">→ Practice process of elimination with an approved practice question.</p></div>
+<div><p class="text-lg font-semibold text-gray-800 mb-1">“The questions are worded so weirdly.”</p><p class="text-lg text-gray-700">→ Practice slowing down, identifying keywords, noticing negatives or qualifiers, and rephrasing the question.</p></div>
+<div><p class="text-lg font-semibold text-gray-800 mb-1">“I know it until the test starts, and then I forget everything.”</p><p class="text-lg text-gray-700">→ Explore retrieval strategies such as brain dumping and practice what that process could look like.</p></div>
+<div><p class="text-lg font-semibold text-gray-800 mb-1">“Scenario questions throw me off.”</p><p class="text-lg text-gray-700">→ Practice identifying the underlying concept in an approved practice question and connecting it back to the course material.</p></div>
+</div>
+<p class="text-lg leading-relaxed font-semibold mt-8" style="color: #002855;">Whenever possible, move from talking about a strategy to practicing the strategy.</p>
+</div>
+<div class="section-divider w-20 mx-auto my-12"></div>
+<div class="mb-12 max-w-4xl mx-auto">
+<h2 class="text-3xl font-bold mb-6" style="color: #002855;">Coaching Students Who Feel Anxious About OAs</h2>
+<p class="text-lg leading-relaxed text-gray-700 mb-6">Students may describe freezing, going blank, second-guessing themselves, feeling panicked, or struggling to focus during an assessment.</p>
+<p class="text-lg leading-relaxed text-gray-700 mb-8">Your role is not to diagnose the student or determine whether they have “test anxiety.” Coach what the student is experiencing.</p>
+<h3 class="text-2xl font-bold mb-5" style="color: #002855;">Start with Listening and Exploration</h3>
+<p class="text-lg leading-relaxed text-gray-700 mb-4">Instead of immediately giving advice, help the student identify what is happening.</p>
+<p class="text-lg leading-relaxed text-gray-700 mb-4">Powerful questions might include:</p>
+<ul class="space-y-3 text-gray-700 text-lg mb-6 ml-6">
+<li class="flex items-start"><span class="mr-3">•</span><span><em>“What do you notice happening when you start to feel stuck?”</em></span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span><em>“At what point in the assessment does that usually start?”</em></span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span><em>“What tends to go through your mind when you aren't sure about an answer?”</em></span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span><em>“What have you tried so far when that happens?”</em></span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span><em>“What feels different when you're practicing compared with when you're actually taking the assessment?”</em></span></li>
+</ul>
+<p class="text-lg leading-relaxed text-gray-700 mb-8">Their answers may reveal a need related to preparation, pacing, question interpretation, confidence, recall, or another part of the testing process.</p>
+<h3 class="text-2xl font-bold mb-5" style="color: #002855;">Keep the Focus on the Student</h3>
+<p class="text-lg leading-relaxed text-gray-700 mb-6">Because you are also a WGU student, you may have your own experiences with difficult assessments. Personal experience can sometimes help normalize a student's feelings, but it should not take over the conversation.</p>
+<div class="rounded-lg p-6 mb-5" style="background: #f3f7fb; border-left: 4px solid #0070F0;">
+<p class="text-lg font-bold mb-2" style="color: #002855;">Avoid:</p>
+<p class="text-lg italic text-gray-700">“I had horrible test anxiety in this course too. Here's everything I did...”</p>
+</div>
+<div class="rounded-lg p-6 mb-5" style="background: rgba(151, 225, 82, 0.10); border-left: 4px solid #97E152;">
+<p class="text-lg font-bold mb-2" style="color: #002855;">Instead:</p>
+<p class="text-lg italic text-gray-700">“I've experienced that feeling of getting stuck on an assessment too. What do you notice helps you regain your focus when that happens?”</p>
+</div>
+<p class="text-lg leading-relaxed text-gray-700">If you share an experience, keep it <strong>brief, relevant, and followed by a coaching question</strong> that returns the focus to the student.</p>
+</div>
+<div class="section-divider w-20 mx-auto my-12"></div>
+<div class="mb-12 max-w-4xl mx-auto">
+<h2 class="text-3xl font-bold mb-6" style="color: #002855;">The Preassessment Is a Tool — Not the OA</h2>
+<p class="text-lg leading-relaxed text-gray-700 mb-4">Students sometimes say:</p>
+<p class="text-xl font-semibold italic mb-6" style="color: #002855;">“The Preassessment was nothing like the OA.”</p>
+<p class="text-lg leading-relaxed text-gray-700 mb-8">That does not necessarily mean something went wrong.</p>
+<h3 class="text-2xl font-bold mb-5" style="color: #002855;">The Preassessment and Objective Assessment are not intended to feel the same.</h3>
+<p class="text-lg leading-relaxed text-gray-700 mb-6">The Preassessment provides a sampling of course topics and gives students an opportunity to gauge their readiness. Questions may ask students to recall information or demonstrate basic understanding.</p>
+<p class="text-lg leading-relaxed text-gray-700 mb-6">Objective Assessments frequently require students to take that knowledge further by <strong>applying it</strong>, often through scenarios or unfamiliar situations.</p>
+<p class="text-lg leading-relaxed text-gray-700 mb-4">This means:</p>
+<ul class="space-y-3 text-gray-700 text-lg mb-6 ml-6">
+<li class="flex items-start"><span class="mr-3">•</span><span>A topic appearing on the Preassessment does not guarantee that exact topic will appear on the OA.</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>The number of Preassessment questions about a topic does not predict how many OA questions will address it.</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>Students should not expect Preassessment wording or questions to resemble the OA.</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>The Preassessment does not change, while students may encounter different versions of an Objective Assessment.</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>Preparing only from Preassessment questions can leave students unprepared to apply their knowledge in new ways.</span></li>
+</ul>
+<p class="text-lg leading-relaxed font-semibold mb-8" style="color: #002855;">Always encourage thorough engagement with and review of the course material.</p>
+<h3 class="text-2xl font-bold mb-5" style="color: #002855;">When the Difference Feels Smaller</h3>
+<p class="text-lg leading-relaxed text-gray-700 mb-6">As students develop a deeper and more flexible understanding of the material, unfamiliar questions may begin to feel less unfamiliar.</p>
+<p class="text-lg leading-relaxed text-gray-700 mb-6">The questions do not necessarily become more similar. Instead, the student becomes better able to <strong>recognize the underlying concept and apply what they know even when it is presented differently.</strong></p>
+<p class="text-lg leading-relaxed text-gray-700">That flexibility is what we want to help students build.</p>
+</div>
+<div class="section-divider w-20 mx-auto my-12"></div>
+<div class="mb-12 max-w-4xl mx-auto">
+<h2 class="text-3xl font-bold mb-6" style="color: #002855;">Using the Preassessment During Coaching</h2>
+<p class="text-lg leading-relaxed text-gray-700 mb-4">Students may ask:</p>
+<p class="text-xl font-semibold italic mb-6" style="color: #002855;">“Can we go over my Preassessment?”</p>
+<p class="text-lg leading-relaxed text-gray-700 mb-6">Peer interns do <strong>not</strong> review a Preassessment as an instructor, tutor, or evaluator.</p>
+<p class="text-lg leading-relaxed text-gray-700 mb-8">The Preassessment should only be used during a coaching session when it provides material for practicing a specific learning or test-taking strategy.</p>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="rounded-lg p-6" style="background: rgba(151, 225, 82, 0.08); border-top: 4px solid #97E152;">
+<h3 class="text-2xl font-bold mb-5" style="color: #002855;">Appropriate Uses</h3>
+<ul class="space-y-3 text-gray-700 text-lg">
+<li>✓ Practice process of elimination</li>
+<li>✓ Identify keywords, qualifiers, or double negatives</li>
+<li>✓ Practice slowing down and rephrasing a complicated question</li>
+<li>✓ Practice reasoning through scenario-based questions</li>
+<li>✓ Use a question to demonstrate an OA strategy from the Peer Coaching Toolbox</li>
+<li>✓ Use the Feynman Technique to help the student explain their thinking</li>
+<li>✓ Return to the course material so the student can verify their own reasoning</li>
+</ul>
+</div>
+<div class="rounded-lg p-6" style="background: #f8fafc; border-top: 4px solid #002855;">
+<h3 class="text-2xl font-bold mb-5" style="color: #002855;">Not Appropriate</h3>
+<ul class="space-y-3 text-gray-700 text-lg">
+<li>✗ Going through every missed question</li>
+<li>✗ Explaining why an answer is correct or incorrect</li>
+<li>✗ Evaluating whether the student understands the content</li>
+<li>✗ Telling the student whether they are ready for the OA</li>
+<li>✗ Using Preassessment questions to quiz the student</li>
+<li>✗ Treating the Preassessment as a study guide for what will appear on the OA</li>
+</ul>
+</div>
+</div>
+<p class="text-lg leading-relaxed font-semibold mt-8" style="color: #002855;">Peer interns do not quiz students.</p>
+</div>
+<div class="section-divider w-20 mx-auto my-12"></div>
+<div class="mb-12 max-w-4xl mx-auto">
+<h2 class="text-3xl font-bold mb-6" style="color: #002855;">Using Feynman Without Becoming the Evaluator</h2>
+<p class="text-lg leading-relaxed text-gray-700 mb-6">The Feynman Technique can be especially useful when practicing with an approved question because it keeps the thinking with the student.</p>
+<p class="text-lg leading-relaxed text-gray-700 mb-6">For example:</p>
+<div class="space-y-5 mb-6">
+<div><p class="text-lg font-bold" style="color: #002855;">1. Explain</p><p class="text-lg text-gray-700">Ask the student to explain the underlying concept or situation in their own words.</p></div>
+<div><p class="text-lg font-bold" style="color: #002855;">2. Connect</p><p class="text-lg text-gray-700">Have the student use their explanation to determine which answer choice best aligns with their current understanding.</p></div>
+<div><p class="text-lg font-bold" style="color: #002855;">3. Verify</p><p class="text-lg text-gray-700">Return to the course material together and have the student locate information that supports, challenges, or clarifies their reasoning.</p></div>
+<div><p class="text-lg font-bold" style="color: #002855;">4. Reflect</p><p class="text-lg text-gray-700">Ask what they noticed about their approach and what they might do when they encounter a similar situation on their own.</p></div>
+</div>
+<p class="text-lg leading-relaxed text-gray-700 mb-4">The peer intern does not determine whether the student's answer is correct.</p>
+<p class="text-lg leading-relaxed font-semibold" style="color: #002855;">The course material becomes the source of verification.</p>
+</div>
+<div class="section-divider w-20 mx-auto my-12"></div>
+<div class="mb-12 max-w-4xl mx-auto">
+<h2 class="text-3xl font-bold mb-6" style="color: #002855;">Practicing Under Test-Like Conditions</h2>
+<p class="text-lg leading-relaxed text-gray-700 mb-6">The Preassessment can also provide an opportunity for students to practice the <strong>experience of taking an assessment</strong>, not just the questions.</p>
+<p class="text-lg leading-relaxed text-gray-700 mb-4">Students might experiment with:</p>
+<ul class="space-y-3 text-gray-700 text-lg mb-6 ml-6">
+<li class="flex items-start"><span class="mr-3">•</span><span>Taking the Preassessment in a quiet environment</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>Limiting distractions</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>Practicing pacing</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>Using only tools that would be available during the OA</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>Practicing how they will use their whiteboard</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>Applying a test-taking strategy intentionally throughout the attempt</span></li>
+</ul>
+<p class="text-lg leading-relaxed text-gray-700 mb-6">Students may take the Preassessment more than once, but repeated attempts should not become an exercise in memorizing familiar questions.</p>
+<p class="text-lg leading-relaxed text-gray-700">The purpose is to strengthen assessment readiness and strategy use—not to learn the Preassessment itself.</p>
+</div>
+<div class="section-divider w-20 mx-auto my-12"></div>
+<div class="mb-12 max-w-4xl mx-auto">
+<h2 class="text-3xl font-bold mb-6" style="color: #002855;">OA Retakes and Success Plans</h2>
+<p class="text-lg leading-relaxed text-gray-700 mb-6">Students who have an unsuccessful OA attempt may come to Peer Coaches while completing a retake or success plan.</p>
+<p class="text-lg leading-relaxed text-gray-700 mb-8">Peer interns may provide coaching support, but <strong>retake requirements belong to the Course Instructor.</strong></p>
+<div class="grid md:grid-cols-2 gap-8 mb-8">
+<div class="rounded-lg p-6" style="background: rgba(151, 225, 82, 0.08); border-top: 4px solid #97E152;">
+<h3 class="text-2xl font-bold mb-5" style="color: #002855;">Peer Interns May:</h3>
+<ul class="space-y-3 text-gray-700 text-lg">
+<li>✓ Help students practice an approved study or assessment strategy</li>
+<li>✓ Support planning, organization, confidence, or accountability</li>
+<li>✓ Help students locate and use approved course resources</li>
+<li>✓ Coach students on how they are approaching their preparation</li>
+</ul>
+</div>
+<div class="rounded-lg p-6" style="background: #f8fafc; border-top: 4px solid #002855;">
+<h3 class="text-2xl font-bold mb-5" style="color: #002855;">Peer Interns May Not:</h3>
+<ul class="space-y-3 text-gray-700 text-lg">
+<li>✗ Administer a retake or success plan</li>
+<li>✗ Add, remove, waive, or modify its requirements</li>
+<li>✗ Decide whether a requirement has been completed satisfactorily</li>
+<li>✗ Approve another OA attempt</li>
+<li>✗ Perform Course Instructor evaluative activities</li>
+</ul>
+</div>
+</div>
+<h3 class="text-2xl font-bold mb-5" style="color: #002855;">A Note About “Teachbacks”</h3>
+<p class="text-lg leading-relaxed font-semibold text-gray-700 mb-5">Do not document that you completed a “Teachback” with a student.</p>
+<p class="text-lg leading-relaxed text-gray-700 mb-5">Teachbacks are Course Instructor activities and may represent specific instructional or evaluative requirements.</p>
+<p class="text-lg leading-relaxed text-gray-700 mb-5">Document what you <strong>actually coached</strong> instead.</p>
+<div class="rounded-lg p-6 mb-5" style="background: #f3f7fb; border-left: 4px solid #0070F0;">
+<p class="text-lg italic text-gray-700 mb-4">“Practiced the Feynman Technique using course material and supported the student in verifying their reasoning with approved resources.”</p>
+<p class="text-lg italic text-gray-700">“Practiced process of elimination and question interpretation using approved practice material.”</p>
+</div>
+<p class="text-lg leading-relaxed text-gray-700">The Course Instructor determines whether retake requirements have been satisfied.</p>
+</div>
+<div class="section-divider w-20 mx-auto my-12"></div>
+<div class="mb-12 max-w-4xl mx-auto">
+<h2 class="text-3xl font-bold mb-6" style="color: #002855;">OA Strategies and Resources</h2>
+<p class="text-lg leading-relaxed text-gray-700 mb-6">The Peer Coaching Toolbox contains dedicated OA/Test-Taking strategies, demonstrations, templates, and links to additional Academic Coaching Center resources.</p>
+<p class="text-lg leading-relaxed text-gray-700 mb-4">Resources are available for topics such as:</p>
+<ul class="space-y-3 text-gray-700 text-lg mb-6 ml-6">
+<li class="flex items-start"><span class="mr-3">•</span><span>Assessment fear and preparation</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>Preparing for a first Objective Assessment</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>Test-taking and multiple-choice strategies</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>Reducing assessment anxiety</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>Whiteboard use</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>Online proctoring</span></li>
+<li class="flex items-start"><span class="mr-3">•</span><span>Assessment policies and requirements</span></li>
+</ul>
+<p class="text-lg leading-relaxed text-gray-700 mb-6">You do not need to memorize every resource or explain every strategy during one session.</p>
+<p class="text-lg leading-relaxed font-semibold mb-8" style="color: #002855;">Identify the student's challenge, select the most relevant strategy or resource, and use it with them.</p>
+
+</div>
+<div class="section-divider w-20 mx-auto my-12"></div>
+<div class="max-w-4xl mx-auto">
+<h2 class="text-3xl font-bold mb-6" style="color: #002855;">Remember</h2>
+<div class="rounded-lg p-8 text-center" style="background: #f3f7fb; border-top: 4px solid #97E152;">
+<p class="text-2xl font-bold mb-6" style="color: #002855;">Do not predict. Do not quiz. Do not evaluate.</p>
+<p class="text-lg text-gray-700 mb-3">Help the student:</p>
+<p class="text-2xl font-bold mb-6" style="color: #0070F0;">Practice → Reflect → Verify → Apply</p>
+<p class="text-lg leading-relaxed text-gray-700">Effective OA coaching helps students become more confident in their ability to approach assessments independently—not more dependent on a peer to tell them whether their answers are right.</p>
+</div>
+</div>
+</section>
+</main>
+<footer class="mt-12 py-8" style="background: #002855;">
+<div class="max-w-6xl mx-auto px-6 text-center">
+<div class="flex justify-center gap-4 mb-4">
+<div class="w-3 h-3 rounded-full" style="background: #0070F0;"></div>
+<div class="w-3 h-3 rounded-full" style="background: #46B1EF;"></div>
+<div class="w-3 h-3 rounded-full" style="background: #97E152;"></div>
+</div>
+<p class="text-white opacity-80 text-sm">Week Two: Coaching Skills &amp; Strategies</p>
+</div>
+</footer>
+</div>
+<script>
+    const defaultConfig = {
+      main_title: "Coaching for Objective Assessments",
+      subtitle: "Helping students prepare to show what they know",
+      primary_color: "#002855",
+      accent_color: "#0070F0",
+      highlight_color: "#97E152",
+      text_color: "#374151",
+      font_family: "Inter",
+      font_size: 16
+    };
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          const titleEl = document.getElementById('main-title');
+          if (titleEl) titleEl.textContent = config.main_title || defaultConfig.main_title;
+
+          const subtitleEl = document.getElementById('subtitle');
+          if (subtitleEl) subtitleEl.textContent = config.subtitle || defaultConfig.subtitle;
+
+          const baseSize = config.font_size || defaultConfig.font_size;
+          document.body.style.fontSize = `${baseSize}px`;
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => { config.primary_color = value; window.elementSdk.setConfig({ primary_color: value }); }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => { config.accent_color = value; window.elementSdk.setConfig({ accent_color: value }); }
+            },
+            {
+              get: () => config.highlight_color || defaultConfig.highlight_color,
+              set: (value) => { config.highlight_color = value; window.elementSdk.setConfig({ highlight_color: value }); }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => { config.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => { config.font_family = value; window.elementSdk.setConfig({ font_family: value }); }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => { config.font_size = value; window.elementSdk.setConfig({ font_size: value }); }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["main_title", config.main_title || defaultConfig.main_title],
+          ["subtitle", config.subtitle || defaultConfig.subtitle]
+        ])
+      });
+    }
+  </script>
+</body>
+</html>
