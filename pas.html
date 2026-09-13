@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coaching for Performance Assessments</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <style>
+    * { font-family: Arial, sans-serif; }
+    body { box-sizing: border-box; }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeInUp 0.55s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-divider {
+      height: 4px;
+      background: linear-gradient(90deg, #002855 0%, #0070F0 50%, #97E152 100%);
+      border-radius: 2px;
+    }
+
+    .soft-panel {
+      background: linear-gradient(135deg, rgba(0,112,240,0.08) 0%, rgba(151,225,82,0.09) 100%);
+    }
+
+    .card {
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(0, 40, 85, 0.12);
+    }
+
+    .check-dot, .x-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      margin-top: 2px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .check-dot { background: #97E152; color: #002855; }
+    .x-dot { background: #eef2f7; color: #002855; }
+
+    .quote-card {
+      border-left: 4px solid #0070F0;
+      background: #fff;
+    }
+  </style>
+</head>
+<body class="h-full">
+  <div id="app-wrapper" class="h-full w-full overflow-auto" style="background-color:#FFFFFF;">
+
+    <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #002855 0%, #0070F0 100%);">
+      <div class="absolute inset-0 opacity-10">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="hero-pattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+              <circle cx="30" cy="30" r="2" fill="white" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#hero-pattern)" />
+        </svg>
+      </div>
+
+      <div class="relative max-w-6xl mx-auto px-6 py-16 text-center">
+        <div class="fade-in" style="animation-delay:.1s;">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(151,225,82,.2);">
+            <span class="w-2 h-2 rounded-full animate-pulse" style="background:#97E152;"></span>
+            <span class="text-sm font-medium" style="color:#97E152;">Week Two Training</span>
+          </div>
+        </div>
+        <h1 class="fade-in text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" style="animation-delay:.2s;">Coaching for Performance Assessments</h1>
+        <p class="fade-in text-lg md:text-xl max-w-3xl mx-auto" style="color:rgba(255,255,255,.92); animation-delay:.3s;">Helping students plan, organize, and move forward with their work</p>
+      </div>
+
+      <svg class="w-full" viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block; margin-bottom:-1px;">
+        <path d="M0 80V40C240 80 480 0 720 40C960 80 1200 0 1440 40V80H0Z" fill="#FFFFFF" />
+      </svg>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6">
+
+      <section class="py-12 fade-in" style="animation-delay:.45s;">
+        <div class="grid lg:grid-cols-2 gap-8 items-start">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-bold mb-4" style="color:#002855;">Coaching Through a Performance Assessment</h2>
+            <div class="section-divider w-20 mb-6"></div>
+            <p class="text-gray-700 leading-relaxed mb-4">Students may come to peer interns because they feel overwhelmed by a Performance Assessment, do not know where to begin, are struggling with their writing process, or feel stuck somewhere along the way.</p>
+            <p class="text-gray-700 leading-relaxed mb-5">Peer interns support the <strong style="color:#0070F0;">process of completing a Performance Assessment</strong>, not the Performance Assessment itself.</p>
+            <div class="rounded-2xl p-6" style="background:linear-gradient(135deg,#002855 0%,#0070F0 100%);">
+              <p class="text-white font-bold text-lg leading-relaxed">The goal is not to help the student complete the task. The goal is to help the student develop a process they can use to complete their own work independently.</p>
+            </div>
+          </div>
+
+          <div class="soft-panel rounded-2xl p-6 md:p-8 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-28 h-28 rounded-full opacity-20" style="background:#97E152; transform:translate(30%,-30%);"></div>
+            <h3 class="text-xl font-bold mb-5 relative" style="color:#002855;">This may include:</h3>
+            <div class="grid sm:grid-cols-2 gap-3 relative">
+              <div class="bg-white rounded-xl p-4 shadow-sm text-gray-700">Breaking a large project into manageable steps</div>
+              <div class="bg-white rounded-xl p-4 shadow-sm text-gray-700">Identifying a starting point</div>
+              <div class="bg-white rounded-xl p-4 shadow-sm text-gray-700">Using available templates and resources</div>
+              <div class="bg-white rounded-xl p-4 shadow-sm text-gray-700">Building a planning or brainstorming process</div>
+              <div class="bg-white rounded-xl p-4 shadow-sm text-gray-700">Developing strategies for self-review</div>
+              <div class="bg-white rounded-xl p-4 shadow-sm text-gray-700">Organizing time and workload</div>
+              <div class="bg-white rounded-xl p-4 shadow-sm text-gray-700 sm:col-span-2">Preparing questions for a Course Instructor, Writing Coach, Librarian, or other appropriate support person</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-10">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl md:text-3xl font-bold mb-4" style="color:#002855;">A Critical Boundary: We Do Not Evaluate Performance Assessments</h2>
+          <div class="section-divider w-20 mx-auto mb-6"></div>
+          <p class="text-gray-700 max-w-3xl mx-auto">Peer interns do <strong>not perform evaluative functions.</strong></p>
+        </div>
+
+        <div class="rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm">
+          <h3 class="text-lg font-bold mb-5" style="color:#002855;">This means you cannot:</h3>
+          <div class="grid md:grid-cols-2 gap-x-8 gap-y-3">
+            <div class="flex gap-3"><span class="x-dot">×</span><p class="text-gray-700"><strong>Review a student's Performance Assessment</strong></p></div>
+            <div class="flex gap-3"><span class="x-dot">×</span><p class="text-gray-700"><strong>Read through their work and provide feedback</strong></p></div>
+            <div class="flex gap-3"><span class="x-dot">×</span><p class="text-gray-700"><strong>Work on the Performance Assessment with the student</strong></p></div>
+            <div class="flex gap-3"><span class="x-dot">×</span><p class="text-gray-700"><strong>Tell the student what to write</strong></p></div>
+            <div class="flex gap-3"><span class="x-dot">×</span><p class="text-gray-700"><strong>Suggest ideas, examples, arguments, or content for their response</strong></p></div>
+            <div class="flex gap-3"><span class="x-dot">×</span><p class="text-gray-700"><strong>Explain what a rubric requirement or task prompt is asking for</strong></p></div>
+            <div class="flex gap-3"><span class="x-dot">×</span><p class="text-gray-700"><strong>Tell the student whether they have answered a prompt</strong></p></div>
+            <div class="flex gap-3"><span class="x-dot">×</span><p class="text-gray-700"><strong>Determine whether their response meets a rubric requirement</strong></p></div>
+            <div class="flex gap-3"><span class="x-dot">×</span><p class="text-gray-700"><strong>Tell the student whether something is correct, sufficient, or ready to submit</strong></p></div>
+            <div class="flex gap-3"><span class="x-dot">×</span><p class="text-gray-700"><strong>Predict whether the Performance Assessment will pass</strong></p></div>
+          </div>
+          <p class="text-gray-700 leading-relaxed mt-6">These responsibilities belong to the student, Course Instructor, and Evaluation faculty as appropriate.</p>
+          <div class="mt-5 rounded-xl p-5 soft-panel">
+            <p class="font-bold" style="color:#002855;">Peer support focuses on the student's learning and writing process—not judging, interpreting, correcting, or completing their work.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-10">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl md:text-3xl font-bold mb-4" style="color:#002855;">Start by Finding the Real Barrier</h2>
+          <div class="section-divider w-20 mx-auto mb-6"></div>
+          <p class="text-gray-700 max-w-3xl mx-auto">A student saying, <em>“I need help with my PA,”</em> does not yet tell you what kind of support they need. Use powerful questions to explore where they are in the process and what is getting in the way.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-6 mb-6">
+          <div class="soft-panel rounded-2xl p-6">
+            <h3 class="text-lg font-bold mb-4" style="color:#002855;">Questions might include:</h3>
+            <ul class="space-y-3 text-gray-700">
+              <li>• <em>“Where are you in the process right now?”</em></li>
+              <li>• <em>“What feels hardest about moving forward?”</em></li>
+              <li>• <em>“What have you tried so far?”</em></li>
+              <li>• <em>“What part of your process feels most manageable?”</em></li>
+              <li>• <em>“What resources have you used so far?”</em></li>
+              <li>• <em>“What would help you feel like you have a clearer next step?”</em></li>
+            </ul>
+          </div>
+          <div class="rounded-2xl p-6 border border-gray-100 shadow-sm">
+            <p class="text-gray-700 leading-relaxed">Their responses should guide the type of <strong style="color:#0070F0;">process-focused support</strong> you provide.</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="quote-card rounded-xl p-5 shadow-sm"><p class="font-bold mb-2" style="color:#002855;">“I don't even know where to start.”</p><p class="text-gray-700">→ Focus on planning, task management, or treating writing as a non-linear process.</p></div>
+          <div class="quote-card rounded-xl p-5 shadow-sm"><p class="font-bold mb-2" style="color:#002855;">“I have so many ideas that I don't know how to organize them.”</p><p class="text-gray-700">→ Practice brainstorming, outlining, or another pre-writing strategy.</p></div>
+          <div class="quote-card rounded-xl p-5 shadow-sm"><p class="font-bold mb-2" style="color:#002855;">“I don't understand what this requirement means.”</p><p class="text-gray-700">→ Help the student identify and write down the specific question they need to ask their Course Instructor.</p></div>
+          <div class="quote-card rounded-xl p-5 shadow-sm"><p class="font-bold mb-2" style="color:#002855;">“I don't understand the content well enough to answer this.”</p><p class="text-gray-700">→ Shift toward an appropriate study strategy or connect the student with their Course Instructor.</p></div>
+        </div>
+      </section>
+
+      <section class="py-10">
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div class="card rounded-2xl p-6 border border-gray-100 shadow-md">
+            <h2 class="text-2xl font-bold mb-4" style="color:#002855;">Students Do Not Have to Write in Order</h2>
+            <div class="section-divider w-16 mb-5"></div>
+            <p class="text-gray-700 leading-relaxed mb-4">Students sometimes assume they must complete a Performance Assessment from beginning to end in the exact order it appears.</p>
+            <p class="text-gray-700 leading-relaxed mb-4">If a student feels stuck, you can coach them in thinking about their <strong>writing process</strong> differently.</p>
+            <div class="space-y-3 text-gray-700 mb-5">
+              <p><em>“Which part of the work feels most approachable right now?”</em></p>
+              <p><em>“What would help you build some momentum?”</em></p>
+              <p><em>“Would starting somewhere other than the beginning make this feel more manageable?”</em></p>
+            </div>
+            <p class="text-gray-700 mb-4">The student determines where they begin and what they write.</p>
+            <p class="font-bold" style="color:#0070F0;">Writing does not have to be a linear process.</p>
+          </div>
+
+          <div class="card rounded-2xl p-6 border border-gray-100 shadow-md">
+            <h2 class="text-2xl font-bold mb-4" style="color:#002855;">Using the Rubric as an Organizational Tool</h2>
+            <div class="section-divider w-16 mb-5"></div>
+            <p class="text-gray-700 leading-relaxed mb-4">A rubric can help students see how a Performance Assessment is structured.</p>
+            <p class="text-gray-700 leading-relaxed mb-4">If an approved task template already exists within the course, encourage the student to use that resource first.</p>
+            <p class="text-gray-700 leading-relaxed mb-4">If one is not available, students may use the visible structure of the rubric to help organize their own document.</p>
+            <p class="text-gray-700 leading-relaxed">For example, rubric headings may help a student create sections so the task feels less overwhelming.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-10">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl md:text-3xl font-bold mb-4" style="color:#002855;">Keep the Rubric Boundary Clear</h2>
+          <div class="section-divider w-20 mx-auto mb-6"></div>
+          <p class="text-gray-700 max-w-3xl mx-auto">You may help a student recognize that the rubric can be used as an <strong>organizational structure</strong>.</p>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div class="rounded-2xl p-6 soft-panel">
+            <h3 class="text-lg font-bold mb-4" style="color:#002855;">You may not:</h3>
+            <ul class="space-y-3 text-gray-700">
+              <li>• Explain what a rubric item means</li>
+              <li>• Reword a rubric requirement for the student</li>
+              <li>• Tell the student what information belongs under a rubric item</li>
+              <li>• Review what the student wrote under a section</li>
+              <li>• Determine whether they addressed the requirement</li>
+              <li>• Tell them whether their response meets expectations</li>
+            </ul>
+          </div>
+          <div class="rounded-2xl p-6 border border-gray-100 shadow-sm">
+            <h3 class="text-lg font-bold mb-4" style="color:#002855;">If the student asks:</h3>
+            <div class="grid sm:grid-cols-2 gap-3 mb-5">
+              <div class="quote-card rounded-lg p-4"><em>“Did I answer this correctly?”</em></div>
+              <div class="quote-card rounded-lg p-4"><em>“Is this what they're asking for?”</em></div>
+              <div class="quote-card rounded-lg p-4"><em>“Do I have enough here?”</em></div>
+              <div class="quote-card rounded-lg p-4"><em>“Can you look at what I wrote?”</em></div>
+            </div>
+            <p class="text-gray-700 leading-relaxed mb-4">Those are evaluative questions and should be directed to the appropriate Course Instructor.</p>
+            <p class="font-bold" style="color:#002855;">Organization is coaching. Interpretation and evaluation are not.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-10">
+        <div class="grid lg:grid-cols-2 gap-6 items-stretch">
+          <div class="rounded-2xl p-6 border border-gray-100 shadow-sm">
+            <h2 class="text-2xl font-bold mb-4" style="color:#002855;">When Students Don't Understand a Task Prompt</h2>
+            <div class="section-divider w-16 mb-5"></div>
+            <p class="text-gray-700 leading-relaxed mb-4">Students may sometimes become stuck because they do not understand what a task or rubric requirement is asking.</p>
+            <p class="text-gray-700 leading-relaxed mb-4">Peer interns should not interpret the requirement for them. Instead, help the student recognize and articulate the uncertainty.</p>
+            <div class="space-y-3 text-gray-700 mb-4">
+              <p><em>“What part of the prompt feels unclear to you?”</em></p>
+              <p><em>“What specifically would you want clarified before you continue?”</em></p>
+              <p><em>“How could you phrase that question for your Course Instructor?”</em></p>
+            </div>
+            <p class="text-gray-700 leading-relaxed mb-4">Students may also use approved WGU resources, such as resources explaining common directive terms used in Performance Assessments, to strengthen their general understanding of academic language.</p>
+            <p class="text-gray-700 leading-relaxed">However, those resources should not be used by the peer intern to determine or explain what a <strong>specific task requirement</strong> means.</p>
+          </div>
+
+          <div class="soft-panel rounded-2xl p-6">
+            <h2 class="text-2xl font-bold mb-4" style="color:#002855;">Prepare the Student to Ask</h2>
+            <div class="section-divider w-16 mb-5"></div>
+            <div class="grid gap-4">
+              <div class="bg-white rounded-xl p-5 shadow-sm">
+                <p class="text-sm font-bold uppercase tracking-wide mb-2" style="color:#0070F0;">Instead of</p>
+                <p class="text-gray-700 italic">“I think this prompt wants you to...”</p>
+              </div>
+              <div class="bg-white rounded-xl p-5 shadow-sm">
+                <p class="text-sm font-bold uppercase tracking-wide mb-2" style="color:#0070F0;">Try</p>
+                <p class="text-gray-700 italic">“Let's identify exactly what feels unclear so you can take that question to your Course Instructor.”</p>
+              </div>
+            </div>
+            <p class="text-gray-700 leading-relaxed mt-5">An Appointment Planning document or similar tool can help students capture those questions.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-10">
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div class="card rounded-2xl p-6 border border-gray-100 shadow-md">
+            <h2 class="text-2xl font-bold mb-4" style="color:#002855;">Brainstorm the Process — Not the Student's Answer</h2>
+            <div class="section-divider w-16 mb-5"></div>
+            <p class="text-gray-700 leading-relaxed mb-4">Pre-writing strategies can help students organize their thoughts before drafting.</p>
+            <div class="grid grid-cols-2 gap-3 mb-5">
+              <div class="soft-panel rounded-lg p-3 text-gray-700">Brainstorming</div>
+              <div class="soft-panel rounded-lg p-3 text-gray-700">Outlining</div>
+              <div class="soft-panel rounded-lg p-3 text-gray-700">Mind mapping</div>
+              <div class="soft-panel rounded-lg p-3 text-gray-700">Questioning</div>
+              <div class="soft-panel rounded-lg p-3 text-gray-700 col-span-2">Graphic organizers</div>
+            </div>
+            <p class="text-gray-700 leading-relaxed mb-4">Peer interns can teach or demonstrate <strong>how the strategy works</strong>, but should not use the strategy to generate the student's PA content with them.</p>
+            <p class="text-gray-700 leading-relaxed mb-4">For example, you might demonstrate how someone could create an outline structure or brainstorming space using neutral material. Then ask the student to apply that process independently to their own work.</p>
+            <div class="space-y-2 text-gray-700 mb-5">
+              <p><em>“What type of planning method usually helps you organize your ideas?”</em></p>
+              <p><em>“How could you structure a brainstorming space before you begin drafting?”</em></p>
+              <p><em>“What information or resources do you still need before you're ready to write?”</em></p>
+              <p><em>“What questions do you need answered before you can move forward?”</em></p>
+            </div>
+            <p class="font-bold" style="color:#002855;">The student generates the ideas. The student writes the response. The peer intern supports the process.</p>
+          </div>
+
+          <div class="card rounded-2xl p-6 border border-gray-100 shadow-md">
+            <h2 class="text-2xl font-bold mb-4" style="color:#002855;">Use Course Resources Before Creating New Solutions</h2>
+            <div class="section-divider w-16 mb-5"></div>
+            <p class="text-gray-700 leading-relaxed mb-4">Students may overlook resources already available within the course.</p>
+            <div class="grid sm:grid-cols-2 gap-3 mb-5 text-gray-700">
+              <div class="soft-panel rounded-lg p-3">Task templates</div>
+              <div class="soft-panel rounded-lg p-3">Task guides</div>
+              <div class="soft-panel rounded-lg p-3">Task instruction videos</div>
+              <div class="soft-panel rounded-lg p-3">Course Instructor cohorts</div>
+              <div class="soft-panel rounded-lg p-3">Course tips or FAQs</div>
+              <div class="soft-panel rounded-lg p-3">Writing and citation resources</div>
+            </div>
+            <p class="text-gray-700 leading-relaxed mb-4">Peer interns can help students <strong>locate and access</strong> these resources.</p>
+            <p class="text-gray-700 leading-relaxed mb-4">Do more than simply point to a link. Ask students to reflect on how the resource could support their process.</p>
+            <div class="space-y-2 text-gray-700 mb-4">
+              <p><em>“How could this resource fit into your plan for completing the task?”</em></p>
+              <p><em>“Which part of your current challenge might this help with?”</em></p>
+              <p><em>“When could you use this resource as you continue working?”</em></p>
+            </div>
+            <p class="text-gray-700 leading-relaxed">If the resource raises questions about the actual task requirements, those questions should go to the Course Instructor.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-10">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl md:text-3xl font-bold mb-4" style="color:#002855;">Research, Citations, and Writing Support</h2>
+          <div class="section-divider w-20 mx-auto mb-6"></div>
+          <p class="text-gray-700 max-w-3xl mx-auto">Peer interns can help students locate appropriate WGU resources, but they are not Librarians, Writing Coaches, Course Instructors, or Evaluators.</p>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div class="rounded-2xl p-6 soft-panel">
+            <h3 class="text-xl font-bold mb-5" style="color:#002855;">Peer Interns Can</h3>
+            <div class="space-y-3">
+              <div class="flex gap-3"><span class="check-dot">✓</span><p class="text-gray-700">Show students where the WGU Library and writing resources are located</p></div>
+              <div class="flex gap-3"><span class="check-dot">✓</span><p class="text-gray-700">Connect students with approved citation and paraphrasing resources</p></div>
+              <div class="flex gap-3"><span class="check-dot">✓</span><p class="text-gray-700">Introduce general planning, organizing, and writing strategies</p></div>
+              <div class="flex gap-3"><span class="check-dot">✓</span><p class="text-gray-700">Help students identify questions they want to ask a Librarian or Writing Coach</p></div>
+              <div class="flex gap-3"><span class="check-dot">✓</span><p class="text-gray-700">Encourage students to use appropriate WGU support services</p></div>
+            </div>
+          </div>
+          <div class="rounded-2xl p-6 border border-gray-100 shadow-sm">
+            <h3 class="text-xl font-bold mb-5" style="color:#002855;">Peer Interns Do Not</h3>
+            <div class="space-y-3">
+              <div class="flex gap-3"><span class="x-dot">×</span><p class="text-gray-700">Select sources for the student's task</p></div>
+              <div class="flex gap-3"><span class="x-dot">×</span><p class="text-gray-700">Determine whether a source is appropriate for the task</p></div>
+              <div class="flex gap-3"><span class="x-dot">×</span><p class="text-gray-700">Correct citations or reference pages</p></div>
+              <div class="flex gap-3"><span class="x-dot">×</span><p class="text-gray-700">Proofread or edit the Performance Assessment</p></div>
+              <div class="flex gap-3"><span class="x-dot">×</span><p class="text-gray-700">Rewrite student work</p></div>
+              <div class="flex gap-3"><span class="x-dot">×</span><p class="text-gray-700">Review portions of the student's submission</p></div>
+              <div class="flex gap-3"><span class="x-dot">×</span><p class="text-gray-700">Provide sentences, examples, ideas, or content for the student to submit</p></div>
+            </div>
+          </div>
+        </div>
+        <p class="text-gray-700 leading-relaxed mt-5 text-center">If a student needs specialized support, remain engaged by helping them identify what they need and connect with the appropriate resource.</p>
+      </section>
+
+      <section class="py-10">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl md:text-3xl font-bold mb-4" style="color:#002855;">Professional Communication and Self-Review</h2>
+          <div class="section-divider w-20 mx-auto mb-6"></div>
+          <p class="text-gray-700 max-w-3xl mx-auto">Students may also struggle with organization, clarity, grammar, punctuation, or other elements of professional communication. Peer interns should <strong>not proofread the student's Performance Assessment.</strong> Instead, coach the student in strategies they can use to review their own work.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-5 mb-6">
+          <div class="card bg-white rounded-2xl p-6 shadow-md border border-gray-100">
+            <h3 class="text-lg font-bold mb-3" style="color:#002855;">Read Aloud</h3>
+            <p class="text-gray-700">Students can read their own writing aloud to notice areas that sound unclear or awkward.</p>
+          </div>
+          <div class="card bg-white rounded-2xl p-6 shadow-md border border-gray-100">
+            <h3 class="text-lg font-bold mb-3" style="color:#002855;">Review in Chunks</h3>
+            <p class="text-gray-700 mb-3">Rather than reviewing everything at once, students can focus on one element at a time:</p>
+            <p class="text-gray-600">Sentence clarity · Grammar · Spelling · Punctuation · Organization</p>
+          </div>
+          <div class="card bg-white rounded-2xl p-6 shadow-md border border-gray-100">
+            <h3 class="text-lg font-bold mb-3" style="color:#002855;">Use a Time Delay</h3>
+            <p class="text-gray-700">Students may benefit from taking a break from their writing before returning to review it with fresh eyes.</p>
+          </div>
+        </div>
+
+        <div class="soft-panel rounded-2xl p-6 text-center">
+          <p class="text-gray-700 leading-relaxed mb-3">A peer intern can explain or demonstrate these strategies, but the student performs the review independently.</p>
+          <p class="font-bold" style="color:#002855;">Do not ask the student to share their writing so you can identify errors for them.</p>
+        </div>
+      </section>
+
+      <section class="py-10">
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div class="rounded-2xl p-6 border border-gray-100 shadow-sm">
+            <h2 class="text-2xl font-bold mb-4" style="color:#002855;">Similarity and Academic Authenticity</h2>
+            <div class="section-divider w-16 mb-5"></div>
+            <p class="text-gray-700 leading-relaxed mb-4">Students may have questions or concerns about similarity in their Performance Assessments.</p>
+            <p class="text-gray-700 leading-relaxed mb-5">Peers can help students explore their <strong>writing process</strong> and connect them with approved WGU resources on academic authenticity, paraphrasing, citation, and similarity.</p>
+            <div class="space-y-3 text-gray-700">
+              <p><em>“How are you keeping track of your sources as you write?”</em></p>
+              <p><em>“What process are you using to put source information into your own words?”</em></p>
+              <p><em>“How are you distinguishing your ideas from information that came from a source?”</em></p>
+              <p><em>“What part of paraphrasing feels most challenging?”</em></p>
+            </div>
+          </div>
+
+          <div class="soft-panel rounded-2xl p-6">
+            <h2 class="text-2xl font-bold mb-4" style="color:#002855;">Maintain the Boundary</h2>
+            <div class="section-divider w-16 mb-5"></div>
+            <p class="text-gray-700 mb-4">Peer interns do not:</p>
+            <ul class="space-y-3 text-gray-700">
+              <li>• Review the student's paper for plagiarism</li>
+              <li>• Review highlighted similarity matches</li>
+              <li>• Determine whether writing is sufficiently original</li>
+              <li>• Rewrite passages to reduce similarity</li>
+              <li>• Tell the student what wording to use</li>
+              <li>• Interpret academic integrity decisions</li>
+            </ul>
+            <p class="text-gray-700 leading-relaxed mt-5">Help students strengthen their process and connect them with the appropriate WGU resource when additional support is needed.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-10">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl md:text-3xl font-bold mb-4" style="color:#002855;">When a Course Instructor Is Needed</h2>
+          <div class="section-divider w-20 mx-auto mb-6"></div>
+          <p class="text-gray-700 max-w-3xl mx-auto">Some PA questions belong with a Course Instructor.</p>
+        </div>
+
+        <div class="soft-panel rounded-2xl p-6 md:p-8 mb-6">
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-gray-700">
+            <div class="bg-white rounded-xl p-4 shadow-sm">What a task prompt means</div>
+            <div class="bg-white rounded-xl p-4 shadow-sm">What a rubric requirement is asking</div>
+            <div class="bg-white rounded-xl p-4 shadow-sm">What content should be included</div>
+            <div class="bg-white rounded-xl p-4 shadow-sm">Whether the student answered the question</div>
+            <div class="bg-white rounded-xl p-4 shadow-sm">Whether their response meets the rubric</div>
+            <div class="bg-white rounded-xl p-4 shadow-sm">Whether something is correct or sufficient</div>
+            <div class="bg-white rounded-xl p-4 shadow-sm sm:col-span-2 lg:col-span-1">Evaluator feedback requiring academic clarification</div>
+            <div class="bg-white rounded-xl p-4 shadow-sm sm:col-span-2">Course-specific expectations</div>
+          </div>
+        </div>
+
+        <p class="text-gray-700 text-center mb-6">Redirecting does not mean ending the conversation. Before referring the student, help them clarify what they are confused about and formulate a useful question.</p>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="quote-card rounded-xl p-5 shadow-sm">
+            <p class="text-sm font-bold uppercase tracking-wide mb-2" style="color:#0070F0;">Instead of</p>
+            <p class="text-gray-700 italic">“You'll need to ask your CI.”</p>
+          </div>
+          <div class="quote-card rounded-xl p-5 shadow-sm">
+            <p class="text-sm font-bold uppercase tracking-wide mb-2" style="color:#0070F0;">Try</p>
+            <p class="text-gray-700 italic">“Let's identify exactly what you're unsure about so you have a clear question to take to your Course Instructor.”</p>
+          </div>
+        </div>
+        <p class="text-gray-700 text-center mt-5">An Appointment Planning document can be used to capture those questions and help the student prepare for the conversation.</p>
+      </section>
+
+      <section class="py-12">
+        <div class="rounded-2xl p-8 md:p-10 text-center relative overflow-hidden" style="background:linear-gradient(135deg,#002855 0%,#0070F0 100%);">
+          <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full opacity-15" style="background:#97E152;"></div>
+          <div class="relative">
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-5">Remember</h2>
+            <p class="text-white text-lg mb-6">When coaching around Performance Assessments:</p>
+            <p class="text-white font-bold text-xl md:text-2xl mb-7">Do not review. Do not write. Do not interpret. Do not evaluate.</p>
+            <p class="text-sm uppercase tracking-widest font-bold mb-3" style="color:#97E152;">Help the student</p>
+            <p class="text-white font-bold text-xl md:text-2xl mb-7">Plan → Organize → Practice a Process → Reflect → Connect</p>
+            <p class="text-white/90 max-w-4xl mx-auto leading-relaxed mb-4">Students should leave the session with something they can <strong>do next</strong>—a planning strategy, a clearer workflow, a resource located, or a specific question prepared for the appropriate WGU support person.</p>
+            <p class="font-bold text-lg" style="color:#97E152;">The Performance Assessment always remains the student's work.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="mt-12 py-8" style="background:#002855;">
+      <div class="max-w-6xl mx-auto px-6 text-center">
+        <div class="flex justify-center gap-4 mb-4">
+          <div class="w-3 h-3 rounded-full" style="background:#0070F0;"></div>
+          <div class="w-3 h-3 rounded-full" style="background:#46B1EF;"></div>
+          <div class="w-3 h-3 rounded-full" style="background:#97E152;"></div>
+        </div>
+        <p class="text-white opacity-80 text-sm">Week Two: Coaching Skills &amp; Strategies</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
